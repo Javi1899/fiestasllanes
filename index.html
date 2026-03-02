@@ -3,592 +3,433 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLANES // AGENDA CULTURAL</title>
+<title>LLANES // AGENDA</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cyan: #00f5ff;
-    --magenta: #ff00aa;
-    --dark: #020b14;
-    --grid: rgba(0,245,255,0.04);
-    --glow: 0 0 20px rgba(0,245,255,0.5);
-    --glow-strong: 0 0 40px rgba(0,245,255,0.8), 0 0 80px rgba(0,245,255,0.3);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--dark);
-    color: #c0e8f0;
-    font-family: 'Rajdhani', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  body::before {
-    content:'';
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 60px 60px;
-    z-index:0; pointer-events:none;
-  }
-  body::after {
-    content:'';
-    position:fixed; inset:0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
-    z-index:0; pointer-events:none;
-  }
-  .container { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:40px 20px; }
+:root{--c:#00f5ff;--m:#ff00aa;--dark:#020b14;--grid:rgba(0,245,255,0.04);--glow:0 0 20px rgba(0,245,255,.5);--glow2:0 0 40px rgba(0,245,255,.8),0 0 80px rgba(0,245,255,.3)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--dark);color:#c0e8f0;font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 20px}
 
-  header { text-align:center; margin-bottom:50px; }
-  .header-badge {
-    font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:4px;
-    color:var(--magenta); margin-bottom:12px; opacity:0.8;
-    animation: blink 4s infinite;
-  }
-  @keyframes blink { 0%,92%,100%{opacity:.8} 96%{opacity:.15} }
-  h1 {
-    font-family:'Orbitron',sans-serif;
-    font-size: clamp(36px,7vw,80px);
-    font-weight:900; color:var(--cyan);
-    text-shadow: var(--glow-strong);
-    letter-spacing:10px; line-height:1; margin-bottom:6px;
-    animation: glitch 9s infinite;
-  }
-  @keyframes glitch {
-    0%,91%,100%{text-shadow:var(--glow-strong);transform:none}
-    93%{text-shadow:-3px 0 var(--magenta),3px 0 var(--cyan);transform:skewX(-1deg)}
-    94%{text-shadow:3px 0 var(--magenta),-3px 0 var(--cyan);transform:skewX(1deg)}
-    95%{text-shadow:var(--glow-strong);transform:none}
-  }
-  .subtitle { font-family:'Orbitron',sans-serif; font-size:clamp(9px,1.5vw,13px); letter-spacing:5px; color:rgba(192,232,240,.45); }
-  .deco-line { display:flex; align-items:center; gap:16px; margin:28px 0; justify-content:center; }
-  .deco-line::before,.deco-line::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); max-width:340px; }
-  .deco-diamond { width:8px; height:8px; border:1px solid var(--cyan); transform:rotate(45deg); box-shadow:0 0 10px var(--cyan); }
+/* HEADER */
+header{text-align:center;margin-bottom:48px}
+.badge{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--m);margin-bottom:12px;opacity:.8;animation:blink 4s infinite}
+@keyframes blink{0%,92%,100%{opacity:.8}96%{opacity:.1}}
+h1{font-family:'Orbitron',sans-serif;font-size:clamp(36px,7vw,78px);font-weight:900;color:var(--c);text-shadow:var(--glow2);letter-spacing:10px;line-height:1;margin-bottom:6px;animation:glitch 9s infinite}
+@keyframes glitch{0%,91%,100%{text-shadow:var(--glow2);transform:none}93%{text-shadow:-3px 0 var(--m),3px 0 var(--c);transform:skewX(-1deg)}94%{text-shadow:3px 0 var(--m),-3px 0 var(--c);transform:skewX(1deg)}95%{text-shadow:var(--glow2);transform:none}}
+.sub{font-family:'Orbitron',sans-serif;font-size:clamp(9px,1.5vw,13px);letter-spacing:5px;color:rgba(192,232,240,.4)}
+.deco{display:flex;align-items:center;gap:16px;margin:26px 0;justify-content:center}
+.deco::before,.deco::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);max-width:340px}
+.diamond{width:8px;height:8px;border:1px solid var(--c);transform:rotate(45deg);box-shadow:0 0 10px var(--c)}
 
-  .status-bar {
-    display:flex; justify-content:space-between; align-items:center;
-    border:1px solid rgba(0,245,255,.15); background:rgba(0,245,255,.03);
-    padding:12px 20px; margin-bottom:36px;
-    font-family:'Share Tech Mono',monospace; font-size:12px;
-    flex-wrap:wrap; gap:10px;
-  }
-  .status-item { display:flex; align-items:center; gap:8px; color:rgba(192,232,240,.6); }
-  .status-dot { width:6px; height:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan); animation:pulse 2s infinite; }
-  .status-dot.loading { background:var(--magenta); box-shadow:0 0 8px var(--magenta); }
-  .status-dot.error { background:#ff4444; box-shadow:0 0 8px #ff4444; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+/* STATUS */
+.sbar{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(0,245,255,.15);background:rgba(0,245,255,.03);padding:12px 20px;margin-bottom:30px;font-family:'Share Tech Mono',monospace;font-size:12px;flex-wrap:wrap;gap:10px}
+.si{display:flex;align-items:center;gap:8px;color:rgba(192,232,240,.6)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);animation:pulse 2s infinite}
+.dot.spin{background:var(--m);box-shadow:0 0 8px var(--m)}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.btn{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;color:var(--c);background:transparent;border:1px solid rgba(0,245,255,.4);padding:8px 20px;cursor:pointer;text-transform:uppercase;transition:all .3s;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:rgba(0,245,255,.08);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.btn:hover::before{transform:scaleX(1)}
+.btn:hover{box-shadow:var(--glow)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
 
-  .btn-refresh {
-    font-family:'Orbitron',sans-serif; font-size:11px; letter-spacing:2px;
-    color:var(--cyan); background:transparent; border:1px solid rgba(0,245,255,.4);
-    padding:8px 20px; cursor:pointer; text-transform:uppercase; transition:all .3s;
-    position:relative; overflow:hidden;
-  }
-  .btn-refresh::before { content:''; position:absolute; inset:0; background:rgba(0,245,255,.08); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
-  .btn-refresh:hover::before { transform:scaleX(1); }
-  .btn-refresh:hover { box-shadow:var(--glow); }
-  .btn-refresh:disabled { opacity:.4; cursor:not-allowed; }
+/* FILTER BAR */
+.filterbar{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.filter-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(192,232,240,.4);letter-spacing:2px;margin-right:4px}
+.ftag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(192,232,240,.5);background:transparent;border:1px solid rgba(0,245,255,.12);padding:5px 14px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.ftag:hover{border-color:rgba(0,245,255,.4);color:var(--c)}
+.ftag.active{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.07);box-shadow:var(--glow)}
 
-  .tabs { display:flex; gap:4px; margin-bottom:30px; flex-wrap:wrap; }
-  .tab {
-    font-family:'Orbitron',sans-serif; font-size:10px; letter-spacing:2px;
-    color:rgba(192,232,240,.5); background:transparent; border:1px solid rgba(0,245,255,.12);
-    padding:8px 18px; cursor:pointer; transition:all .2s; text-transform:uppercase;
-  }
-  .tab:hover { border-color:rgba(0,245,255,.4); color:var(--cyan); }
-  .tab.active { border-color:var(--cyan); color:var(--cyan); background:rgba(0,245,255,.06); box-shadow:var(--glow); }
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:24px;flex-wrap:wrap}
+.tab{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:rgba(192,232,240,.5);background:transparent;border:1px solid rgba(0,245,255,.12);padding:8px 18px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.tab:hover{border-color:rgba(0,245,255,.4);color:var(--c)}
+.tab.on{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.06);box-shadow:var(--glow)}
 
-  .section-title {
-    font-family:'Orbitron',sans-serif; font-size:11px; letter-spacing:4px;
-    color:rgba(192,232,240,.4); margin-bottom:24px;
-    display:flex; align-items:center; gap:12px;
-  }
-  .section-title::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,rgba(0,245,255,.3),transparent); }
+/* SECTION TITLE */
+.stitle{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:4px;color:rgba(192,232,240,.4);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.stitle::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,245,255,.3),transparent)}
 
-  .events-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; }
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
 
-  .event-card {
-    border:1px solid rgba(0,245,255,.12); background:rgba(0,245,255,.02);
-    padding:22px; position:relative; overflow:hidden; transition:all .3s;
-    animation:fadeInUp .5s both;
-  }
-  @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  .event-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:linear-gradient(180deg,var(--cyan),var(--magenta)); }
-  .event-card::after { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--cyan),transparent); opacity:.6; }
-  .event-card:hover { border-color:rgba(0,245,255,.35); background:rgba(0,245,255,.05); box-shadow:0 0 30px rgba(0,245,255,.1); transform:translateY(-2px); }
-  .event-card.today-card { border-color:rgba(255,0,170,.35); background:rgba(255,0,170,.04); }
-  .event-card.today-card::before { background:linear-gradient(180deg,var(--magenta),var(--cyan)); }
-  .event-card.today-card::after { background:linear-gradient(90deg,var(--magenta),transparent); }
+/* CARD */
+.card{border:1px solid rgba(0,245,255,.12);background:rgba(0,245,255,.02);padding:22px;position:relative;overflow:hidden;transition:all .3s;animation:fadeUp .5s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--c),var(--m))}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--c),transparent);opacity:.6}
+.card:hover{border-color:rgba(0,245,255,.35);background:rgba(0,245,255,.05);box-shadow:0 0 30px rgba(0,245,255,.1);transform:translateY(-2px)}
+.card.hoy{border-color:rgba(255,0,170,.35);background:rgba(255,0,170,.04)}
+.card.hoy::before{background:linear-gradient(180deg,var(--m),var(--c))}
+.card.hoy::after{background:linear-gradient(90deg,var(--m),transparent)}
+.card.past{opacity:.5}
 
-  .event-date { font-family:'Orbitron',sans-serif; font-size:11px; letter-spacing:3px; color:var(--magenta); text-shadow:0 0 10px var(--magenta); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-  .event-date::before { content:'◈'; font-size:8px; color:var(--cyan); }
-  .event-title { font-family:'Rajdhani',sans-serif; font-size:19px; font-weight:700; color:#e0f4ff; margin-bottom:10px; line-height:1.3; }
-  .event-desc { font-size:13px; color:rgba(192,232,240,.55); line-height:1.6; font-weight:300; }
-  .event-meta { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; align-items:center; }
-  .event-tag { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(0,245,255,.7); border:1px solid rgba(0,245,255,.2); padding:3px 10px; text-transform:uppercase; }
-  .event-link { font-family:'Share Tech Mono',monospace; font-size:10px; color:rgba(0,245,255,.5); text-decoration:none; letter-spacing:1px; transition:color .2s; }
-  .event-link:hover { color:var(--cyan); }
-  .card-number { position:absolute; top:12px; right:16px; font-family:'Share Tech Mono',monospace; font-size:10px; color:rgba(0,245,255,.2); }
+.edate{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--m);text-shadow:0 0 10px var(--m);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.edate::before{content:'◈';font-size:8px;color:var(--c)}
+.etitle{font-size:19px;font-weight:700;color:#e0f4ff;margin-bottom:10px;line-height:1.3}
+.edesc{font-size:13px;color:rgba(192,232,240,.55);line-height:1.6;font-weight:300}
+.emeta{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.etag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;border:1px solid;padding:3px 10px;text-transform:uppercase}
+.elink{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.5);text-decoration:none;letter-spacing:1px;transition:color .2s}
+.elink:hover{color:var(--c)}
+.cardnum{position:absolute;top:12px;right:16px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.2)}
 
-  #loader { text-align:center; padding:80px 20px; }
-  .loader-ring { width:60px; height:60px; border:2px solid rgba(0,245,255,.1); border-top-color:var(--cyan); border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 20px; }
-  @keyframes spin { to{transform:rotate(360deg)} }
-  .loader-text { font-family:'Share Tech Mono',monospace; color:rgba(192,232,240,.6); font-size:13px; letter-spacing:2px; }
+/* LOADER */
+#loader{text-align:center;padding:80px 20px}
+.ring{width:60px;height:60px;border:2px solid rgba(0,245,255,.1);border-top-color:var(--c);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltext{font-family:'Share Tech Mono',monospace;color:rgba(192,232,240,.6);font-size:13px;letter-spacing:2px}
 
-  .no-events { text-align:center; padding:60px 20px; font-family:'Share Tech Mono',monospace; color:rgba(192,232,240,.35); font-size:13px; }
+.none{text-align:center;padding:60px;font-family:'Share Tech Mono',monospace;color:rgba(192,232,240,.3);font-size:13px}
 
-  .corner { position:fixed; width:50px; height:50px; z-index:2; pointer-events:none; }
-  .corner-tl{top:16px;left:16px;border-top:1px solid var(--cyan);border-left:1px solid var(--cyan);opacity:.35}
-  .corner-tr{top:16px;right:16px;border-top:1px solid var(--cyan);border-right:1px solid var(--cyan);opacity:.35}
-  .corner-bl{bottom:16px;left:16px;border-bottom:1px solid var(--cyan);border-left:1px solid var(--cyan);opacity:.35}
-  .corner-br{bottom:16px;right:16px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan);opacity:.35}
+/* CORNERS */
+.c{position:fixed;width:50px;height:50px;z-index:2;pointer-events:none}
+.tl{top:16px;left:16px;border-top:1px solid var(--c);border-left:1px solid var(--c);opacity:.3}
+.tr{top:16px;right:16px;border-top:1px solid var(--c);border-right:1px solid var(--c);opacity:.3}
+.bl{bottom:16px;left:16px;border-bottom:1px solid var(--c);border-left:1px solid var(--c);opacity:.3}
+.br{bottom:16px;right:16px;border-bottom:1px solid var(--c);border-right:1px solid var(--c);opacity:.3}
 
-  .particles { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
-  .particle { position:absolute; width:1px; height:1px; background:var(--cyan); border-radius:50%; opacity:0; animation:float linear infinite; }
-  @keyframes float { 0%{transform:translateY(100vh);opacity:0} 10%{opacity:.5} 90%{opacity:.15} 100%{transform:translateY(-5vh) translateX(40px);opacity:0} }
+.pts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.pt{position:absolute;width:1px;height:1px;border-radius:50%;opacity:0;animation:fl linear infinite}
+@keyframes fl{0%{transform:translateY(100vh);opacity:0}10%{opacity:.5}90%{opacity:.1}100%{transform:translateY(-5vh) translateX(30px);opacity:0}}
 
-  footer { margin-top:60px; text-align:center; font-family:'Share Tech Mono',monospace; font-size:11px; color:rgba(192,232,240,.2); letter-spacing:2px; padding-bottom:40px; }
-  footer a { color:rgba(0,245,255,.4); text-decoration:none; }
-  footer a:hover { color:var(--cyan); }
+footer{margin-top:60px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(192,232,240,.2);letter-spacing:2px;padding-bottom:40px}
+footer a{color:rgba(0,245,255,.35);text-decoration:none}
+footer a:hover{color:var(--c)}
 </style>
 </head>
 <body>
+<div class="c tl"></div><div class="c tr"></div><div class="c bl"></div><div class="c br"></div>
+<div class="pts" id="pts"></div>
 
-<div class="corner corner-tl"></div>
-<div class="corner corner-tr"></div>
-<div class="corner corner-bl"></div>
-<div class="corner corner-br"></div>
-<div class="particles" id="particles"></div>
+<div class="wrap">
+<header>
+  <div class="badge">◄ SISTEMA ACTIVO // DATOS EN TIEMPO REAL ►</div>
+  <h1>LLANES</h1>
+  <div class="sub">AGENDA CULTURAL &amp; FIESTAS // CONCEJO DE LLANES · ASTURIAS</div>
+  <div class="deco"><div class="diamond"></div></div>
+</header>
 
-<div class="container">
-  <header>
-    <div class="header-badge">◄ SISTEMA ACTIVO // CONEXIÓN DIRECTA LLANES.ES ►</div>
-    <h1>LLANES</h1>
-    <div class="subtitle">AGENDA CULTURAL &amp; FIESTAS // CONCEJO DE LLANES · ASTURIAS</div>
-    <div class="deco-line"><div class="deco-diamond"></div></div>
-  </header>
-
-  <div class="status-bar">
-    <div class="status-item">
-      <div class="status-dot loading" id="status-dot"></div>
-      <span id="status-text">INICIALIZANDO...</span>
-    </div>
-    <div class="status-item" id="update-info" style="display:none">
-      ACTUALIZADO: <span id="update-date" style="color:var(--cyan);margin-left:6px"></span>
-    </div>
-    <button class="btn-refresh" id="btn-refresh" onclick="forceReload()">⟳ ACTUALIZAR</button>
-  </div>
-
-  <div id="loader">
-    <div class="loader-ring"></div>
-    <div class="loader-text" id="loader-text">CARGANDO EVENTOS...</div>
-  </div>
-
-  <div id="main-content" style="display:none">
-    <div class="tabs" id="tabs"></div>
-    <div class="section-title" id="section-label">EVENTOS</div>
-    <div class="events-grid" id="events-grid"></div>
-  </div>
+<div class="sbar">
+  <div class="si"><div class="dot" id="dot"></div><span id="stxt">CARGANDO...</span></div>
+  <div class="si" id="uinfo" style="display:none">ACT.: <span id="udate" style="color:var(--c);margin-left:6px"></span></div>
+  <button class="btn" id="btnR" onclick="forceReload()">⟳ ACTUALIZAR</button>
 </div>
 
-<footer>
-  FUENTE: <a href="https://www.llanes.es/es/agenda" target="_blank">LLANES.ES/ES/AGENDA</a>
-  &nbsp;//&nbsp; DATOS ACTUALIZADOS DIARIAMENTE &nbsp;//&nbsp; CONCEJO DE LLANES · ASTURIAS
-</footer>
+<div id="loader"><div class="ring"></div><div class="ltext" id="ltxt">CARGANDO AGENDA...</div></div>
+
+<div id="app" style="display:none">
+  <div class="tabs" id="tabs"></div>
+  <div class="filterbar" id="filters"></div>
+  <div class="stitle" id="slabel">EVENTOS</div>
+  <div class="grid" id="grid"></div>
+</div>
+</div>
+
+<footer>FUENTE: <a href="https://www.llanes.es/es/agenda" target="_blank">LLANES.ES/ES/AGENDA</a> &nbsp;//&nbsp; ACTUALIZACIÓN DIARIA AUTOMÁTICA &nbsp;//&nbsp; ASTURIAS</footer>
 
 <script>
-// ── PARTICLES ────────────────────────────────────────────────
+// ── PARTICLES
 (function(){
-  const c = document.getElementById('particles');
+  const c=document.getElementById('pts');
   for(let i=0;i<22;i++){
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random()*100+'%';
-    p.style.width = p.style.height = (Math.random()*2+1)+'px';
-    p.style.animationDuration = (Math.random()*15+10)+'s';
-    p.style.animationDelay = (Math.random()*15)+'s';
-    if(Math.random()>.7) p.style.background='var(--magenta)';
+    const p=document.createElement('div');p.className='pt';
+    p.style.cssText=`left:${Math.random()*100}%;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;background:${Math.random()>.7?'var(--m)':'var(--c)'};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*15}s`;
     c.appendChild(p);
   }
 })();
 
-// ── SEED DATA (scraped 2026-02-28 from llanes.es/es/agenda) ──
-const SEED = {
-  fetchedOn: "28/02/2026",
-  months: [
-    {
-      label: "FEBRERO 2026",
-      events: [
-        {
-          date:"Sáb 28 Feb", title:"Fiesta del Santo Ángel de la Guarda – El Mazucu",
-          desc:"23:00h Toro mecánico. Verbena con DJ JAVI MORO. Bingo incluido. El 1 de marzo: procesión, misa solemne, remate del ramo, sesión vermú con Bandina Los Collainos, Mariachis (19h) y Romería (20h). ¡Hay carpa!",
-          cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-el-mazucu-0", hoy:true
-        },
-        {
-          date:"Sáb 28 Feb", title:"Fiesta del Santo Ángel de la Guarda – Oviu",
-          desc:"18:00h Chocolatada, ensayos y bingo. El 1 de marzo: procesión con Gaiteros de Cuerres, misa solemne, danza prima, subasta del roscu y comida campestre (fabada, verdinas, arroz con leche).",
-          cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-oviu", hoy:true
-        },
-        {
-          date:"Sáb 28 Feb", title:"Proyección Festival Corto Gijón (Llanes)",
-          desc:"XII Festival de Cortometrajes de Gijón. Sección Oficial – Extensión Llanes. Casa Municipal de Cultura, 19:00h.",
-          cat:"Cine", url:"https://www.llanes.es/es/proyeccion-festival-corto-gijon-llanes", hoy:true
-        },
-        {
-          date:"Vie 27 Feb", title:"Concierto: Joaquim Challem",
-          desc:"Concierto en la Casa de Cultura de Llanes.",
-          cat:"Concierto", url:"https://www.llanes.es/es/concierto-joaquim-challem-llanes"
-        },
-        {
-          date:"Jue 27 Feb", title:"Cine Fórum: «Tenemos que hablar de Kevin»",
-          desc:"Proyección y debate. Nueva de Llanes.",
-          cat:"Cine", url:"https://www.llanes.es/es/cine-forum-tenemos-que-hablar-de-kevin-nueva-de-llanes"
-        },
-        {
-          date:"Dom 22 Feb", title:"8ª Marcha Solidaria «Corre con Galbán»",
-          desc:"Carrera solidaria contra el cáncer infantil. 12:00h en los 78 municipios de Asturias. Fondos íntegramente destinados a investigación.",
-          cat:"Deportivo", url:"https://www.llanes.es/es/8o-marcha-solidaria-corre-con-galban"
-        },
-        {
-          date:"Sáb 21 Feb", title:"Concierto: Marta Elola y Arella",
-          desc:"Concierto en Llanes.",
-          cat:"Concierto", url:"https://www.llanes.es/es/concierto-marta-elola-y-arella-llanes"
-        },
-        {
-          date:"Sáb 21 Feb", title:"Carnaval en Villahormes",
-          desc:"Celebración del Carnaval en el pueblo de Villahormes.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-en-villahormes"
-        },
-        {
-          date:"Vie 20 Feb", title:"Carnaval Nueva 2026",
-          desc:"Celebración del Carnaval en Nueva de Llanes.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-nueva-2026"
-        },
-        {
-          date:"Mar 17 Feb", title:"El Antroxu – Cortines / Calduenu",
-          desc:"Celebración del Antroxu (carnaval asturiano) en los pueblos de Cortines y Calduenu.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/el-antroxu-cortines-calduenu"
-        },
-        {
-          date:"Dom 15 Feb", title:"Antroxu en Parres – Llanes",
-          desc:"Celebración del Antroxu en Parres.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/antroxu-en-parres-llanes"
-        },
-        {
-          date:"Sáb 14 Feb", title:"Carnaval Llanes 2026",
-          desc:"Gran celebración del Carnaval en el centro de Llanes. Desfiles, música y disfraces.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-llanes-2026"
-        },
-        {
-          date:"Dom 7 Feb", title:"II Encuentru de Ollas Ferroviarias – Llanes con Sabor",
-          desc:"Encuentro gastronómico de ollas ferroviarias.",
-          cat:"Gastronomía", url:"https://www.llanes.es/es/ii-encuentru-de-ollas-ferroviarias-llanes-con-sabor-llanes"
-        },
-        {
-          date:"Sáb 7 Feb", title:"Feria del Árbol (Santa Dorotea) en Balmori",
-          desc:"Feria tradicional del árbol coincidiendo con la festividad de Santa Dorotea, en Balmori.",
-          cat:"Feria", url:"https://www.llanes.es/es/feria-del-arbol-santa-dorotea-en-balmori"
-        },
-        {
-          date:"Sáb 7 Feb", title:"Talleres Artesanos en Balmori",
-          desc:"Talleres de artesanía tradicional en el pueblo de Balmori.",
-          cat:"Cultural", url:"https://www.llanes.es/es/talleres-artesanos-balmori"
-        },
-        {
-          date:"Sáb 7 Feb", title:"Ciclo «Es tiempo de teatro» – Porrúa",
-          desc:"Función de teatro en Porrúa, dentro del ciclo teatral.",
-          cat:"Teatro", url:"https://www.llanes.es/es/ciclo-es-tiempo-de-teatro-porrua"
-        },
-        {
-          date:"Sáb 7 Feb", title:"Lectura dramatizada: «Manzanas Rojas»",
-          desc:"Lectura dramatizada en Llanes.",
-          cat:"Teatro", url:"https://www.llanes.es/es/lectura-dramatizada-manzanas-rojas-llanes"
-        },
-        {
-          date:"Dom 1 Feb", title:"Día de la Candelera – Posada de Llanes",
-          desc:"Celebración de la festividad de la Candelera en Posada de Llanes.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/dia-de-la-candelera-posada-de-llanes"
-        },
-        {
-          date:"3 Feb – 28 Feb", title:"Exposición: «Indumentaria tradicional del Oriente de Asturias»",
-          desc:"«Por la pinta son de Llanes». Fruto de la colaboración entre la Asociación de Amigos de la Indumentaria Tradicional, la colección Javier Emperador y el Ayuntamiento. Casa de Cultura (1ª planta), 11:00–13:30h.",
-          cat:"Exposición", url:"https://www.llanes.es/es/exposicion-indumentaria-tradicional-del-oriente-de-asturias-por-la-pinta-son-de-llanes-llanes"
-        },
-        {
-          date:"3 Feb – 28 Feb", title:"Exposición: «Maestros de la pintura del s. XX»",
-          desc:"Artistas vinculados a Asturias: Orlando Pelayo, Antonio Suárez, Rubio Camín, Aurelio Suárez, Juan Barjola, Eduardo Arroyo, Vaquero Palacios. Casa de Cultura (2ª planta), 11:00–13:30h.",
-          cat:"Exposición", url:"https://www.llanes.es/es/exposicion-maestros-de-la-pintura-del-s-xx-artistas-vinculados-asturias-llanes"
-        },
-        {
-          date:"3 Feb – 28 Feb", title:"Exposición: «Esto es un agujero»",
-          desc:"Exposición artística en la Casa de Cultura de Llanes.",
-          cat:"Exposición", url:"https://www.llanes.es/es/exposicion-esto-es-un-agujero-llanes"
-        },
-        {
-          date:"19 Feb – 14 Mar", title:"Exposición: «Quebrar la pintura II. Transitando el soporte»",
-          desc:"Elena Rato, comisariada por María Touceda Castro. Casa de Cultura de Llanes. Mar–Vie 11:00–13:30 y 18:00–20:30h. Sáb 11:00–14:00h.",
-          cat:"Exposición", url:"https://www.llanes.es/es/exposicion-quebrar-la-pintura-ii-transitando-el-soporte-llanes"
-        },
-      ]
-    },
-    {
-      label: "MARZO 2026",
-      events: [
-        {
-          date:"Dom 1 Mar", title:"Fiesta del Santo Ángel – Oviu (continuación)",
-          desc:"12:30h Salida del Ramu con Gaiteros de Cuerres. 13:00h Misa solemne, danza prima, subasta del roscu. 15:00h Comida campestre: fabada, verdinas, arroz con leche y parrilla.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-oviu"
-        },
-        {
-          date:"Dom 1 Mar", title:"Fiesta del Santo Ángel – El Mazucu (continuación)",
-          desc:"12:30h Salida del Ramo y procesión. 13:00h Misa solemne y remate del ramo. 14:00h Sesión vermú con Bandina Los Collainos. 19:00h Mariachis. 20:00h Romería con Trío Picos de Europa.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-el-mazucu-0"
-        },
-        {
-          date:"Sáb 14 Mar", title:"Fiesta de San Patricio – Pancar",
-          desc:"Festividad de San Patricio en el pueblo de Pancar.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-de-san-patricio-pancar-2"
-        },
-        {
-          date:"14–15 Mar", title:"XIII San Martín del Gochu – Recuperación de la Matanza",
-          desc:"Tradicional recuperación de la matanza del cerdo asturiana en Posada la Vieja.",
-          cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"
-        },
-        {
-          date:"Sáb 21 Mar", title:"Fiesta de San José – Posada la Vieja",
-          desc:"Festividad de San José en Posada la Vieja.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-de-san-jose-posada-la-vieja-0"
-        },
-        {
-          date:"Sáb 28 Mar", title:"Carnaval Posada de Llanes 2026",
-          desc:"Celebración tardía del Carnaval en Posada de Llanes.",
-          cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-posada-de-llanes-2026"
-        },
-        {
-          date:"19 Feb – 14 Mar", title:"Exposición: «Quebrar la pintura II. Transitando el soporte»",
-          desc:"Elena Rato. Casa de Cultura de Llanes. Mar–Vie 11:00–13:30 y 18:00–20:30h. Sáb 11:00–14:00h.",
-          cat:"Exposición", url:"https://www.llanes.es/es/exposicion-quebrar-la-pintura-ii-transitando-el-soporte-llanes"
-        },
-      ]
-    }
-  ]
+// ── CAT STYLES
+const CAT={
+  'Fiesta':    'color:rgba(255,0,170,.9);border-color:rgba(255,0,170,.4)',
+  'Concierto': 'color:rgba(255,215,0,.9);border-color:rgba(255,215,0,.35)',
+  'Gastronomía':'color:rgba(0,255,128,.85);border-color:rgba(0,255,128,.3)',
+  'Deportivo': 'color:rgba(255,110,0,.9);border-color:rgba(255,110,0,.35)',
+  'Cine':      'color:rgba(180,80,255,.9);border-color:rgba(180,80,255,.35)',
+  'Teatro':    'color:rgba(255,60,60,.9);border-color:rgba(255,60,60,.35)',
+  'Exposición':'color:rgba(0,245,255,.75);border-color:rgba(0,245,255,.25)',
+  'Taller':    'color:rgba(0,200,180,.85);border-color:rgba(0,200,180,.3)',
+  'Conferencia':'color:rgba(200,200,255,.85);border-color:rgba(200,200,255,.3)',
+  'Cultural':  'color:rgba(192,232,240,.65);border-color:rgba(192,232,240,.2)',
 };
 
-// ── STATE ────────────────────────────────────────────────────
-let DATA = null;
-let activeTab = 0;
-const CACHE_KEY = 'llanes_v4_data';
-const CACHE_DATE = 'llanes_v4_date';
-const TODAY_STR = new Date().toISOString().slice(0,10);
+// ── SEED DATA — scraped 2 Mar 2026 from llanes.es
+// Estructura: array de meses, cada uno con array de eventos
+// Cada evento: { iso:"YYYY-MM-DD" o rango "YYYY-MM-DD/YYYY-MM-DD", title, desc, cat, url }
 
-// ── HELPERS ──────────────────────────────────────────────────
-function setStatus(type, text){
-  document.getElementById('status-dot').className = 'status-dot' + (type !== 'ok' ? ' '+type : '');
-  document.getElementById('status-text').textContent = text;
+const SEED = [
+  {
+    mes:"MARZO 2026", ym:"2026-03",
+    eventos:[
+      {iso:"2026-03-01", title:"Fiesta del Santo Ángel – El Mazucu (continuación)", desc:"12:30h Salida del Ramo y procesión. 13:00h Misa solemne y remate del ramo. 14:00h Sesión vermú con Bandina Los Collainos. Rifa de cesta. 17:30h hinchables y pintacaras. 19:00h Mariachis. 20:00h Romería con Trío Picos de Europa y DJ JAVI MORO. Hay carpa.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-el-mazucu-0"},
+      {iso:"2026-03-01", title:"Fiesta del Santo Ángel – Oviu (continuación)", desc:"12:30h Salida del Ramu desde la plaza del Oteru con Gaiteros de Cuerres. 13:00h Misa solemne, procesión, bailes regionales, danza prima y subasta del roscu. 15:00h Comida campestre: fabada, verdinas, arroz con leche y parrilla.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-oviu"},
+      {iso:"2026-03-06", title:"Proyección: «Un simple accidente»", desc:"Proyección cinematográfica en la Casa Municipal de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-de-la-pelicula-un-simple-accidente-llanes"},
+      {iso:"2026-03-07", title:"Concierto: Mariajo Baudot – «Señora Bien»", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-mariajo-baudot-senora-bien-llanes"},
+      {iso:"2026-03-13", title:"Proyección: Documental «Las Mujeres de España – María Lejarraga»", desc:"Proyección del documental en la Casa de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-del-documental-las-muejres-de-espana-maria-lejarraga-llanes"},
+      {iso:"2026-03-14", title:"XIII San Martín del Gochu – Recuperación de la Matanza", desc:"Recuperación de la tradicional matanza del cerdo asturiana en Posada la Vieja.", cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
+      {iso:"2026-03-14", title:"Fiesta de San Patricio – Pancar", desc:"Festividad de San Patricio en el pueblo de Pancar.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-de-san-patricio-pancar-2"},
+      {iso:"2026-03-14", title:"Concierto: Cubasturia Jazz (Llanes)", desc:"Concierto de jazz en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-cubasturia-jazz-llanes"},
+      {iso:"2026-03-14", title:"Torneo del Abonado (Golf)", desc:"Torneo de golf para abonados en el Campo de Golf de Llanes.", cat:"Deportivo", url:"https://www.llanes.es/es/torneo-del-abonado-0"},
+      {iso:"2026-03-15", title:"XIII San Martín del Gochu – día 2", desc:"Continuación de la recuperación de la matanza del cerdo en Posada la Vieja.", cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
+      {iso:"2026-03-21", title:"Fiesta de San José – Posada la Vieja", desc:"Festividad de San José en Posada la Vieja.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-de-san-jose-posada-la-vieja-0"},
+      {iso:"2026-03-21", title:"Concierto: Fee Reega (Llanes)", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-fee-reega-llanes-0"},
+      {iso:"2026-03-26", title:"Inauguración y visita guiada: Exposición «Remiendos»", desc:"Inauguración de la nueva exposición con visita guiada incluida en Llanes.", cat:"Exposición", url:"https://www.llanes.es/es/inauguracion-y-visita-guiada-la-exposicion-remiendos-llanes"},
+      {iso:"2026-03-27", title:"Conferencia: Eclipse Total de Sol (Llanes)", desc:"Conferencia divulgativa sobre el eclipse total de sol. Casa de Cultura de Llanes.", cat:"Conferencia", url:"https://www.llanes.es/es/conferencia-eclipse-total-de-sol-llanes"},
+      {iso:"2026-03-27", title:"Proyección: «Valle Blanco, Gallo Negro»", desc:"Proyección cinematográfica en la Casa Municipal de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-de-la-pelicula-valle-blanco-gallo-negro-llanes"},
+      {iso:"2026-03-28", title:"Carnaval Posada de Llanes 2026", desc:"Celebración tardía del Carnaval en Posada de Llanes. Desfiles y verbena.", cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-posada-de-llanes-2026"},
+      {iso:"2026-03-28", title:"Concierto: Indocentes (Llanes)", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-indocentes-llanes"},
+      {iso:"2026-03-31", title:"Presentación novela: «Flor de Agua»", desc:"Presentación literaria en Llanes.", cat:"Cultural", url:"https://www.llanes.es/es/presentacion-de-la-novela-flor-de-agua-llanes"},
+      // Exposiciones continuas
+      {iso:"2026-02-19/2026-03-14", title:"Exposición: «Quebrar la pintura II. Transitando el soporte»", desc:"Elena Rato. Comisariada por María Touceda Castro. Casa de Cultura de Llanes. Mar–Vie 11:00–13:30 y 18:00–20:30h. Sáb 11:00–14:00h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-quebrar-la-pintura-ii-transitando-el-soporte-llanes"},
+      {iso:"2026-02-03/2026-03-31", title:"Exposición: «Indumentaria tradicional del Oriente de Asturias»", desc:"«Por la pinta son de Llanes». Colaboración entre la Asociación de Amigos de la Indumentaria Tradicional y el Ayuntamiento. Casa de Cultura (1ª planta) 11:00–13:30h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-indumentaria-tradicional-del-oriente-de-asturias-por-la-pinta-son-de-llanes-llanes"},
+      {iso:"2026-02-03/2026-03-31", title:"Exposición: «Maestros de la pintura del s. XX»", desc:"Orlando Pelayo, Antonio Suárez, Rubio Camín, Aurelio Suárez, Juan Barjola, Eduardo Arroyo, Vaquero Palacios. Casa de Cultura (2ª planta) 11:00–13:30h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-maestros-de-la-pintura-del-s-xx-artistas-vinculados-asturias-llanes"},
+    ]
+  },
+  {
+    mes:"ABRIL 2026", ym:"2026-04",
+    eventos:[
+      {iso:"2026-04-01", title:"Más eventos próximamente", desc:"Consulta la agenda oficial de Llanes para ver los eventos de abril cuando se publiquen.", cat:"Cultural", url:"https://www.llanes.es/es/agenda?month=2026-04"}
+    ]
+  }
+];
+
+// ── STATE
+const CK='llanes_v5';  // new key = fresh start, ignores old cache
+const TODAY = new Date().toISOString().slice(0,10);  // YYYY-MM-DD
+let DATA=null, tabIdx=0, activeCat='TODOS';
+
+function setDot(type){document.getElementById('dot').className='dot'+(type==='spin'?' spin':'')}
+function setStatus(t){document.getElementById('stxt').textContent=t}
+function showApp(v){document.getElementById('loader').style.display=v?'none':'block';document.getElementById('app').style.display=v?'block':'none'}
+
+// Parse ISO date or range → display string
+function fmtDate(iso){
+  const DAYS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const MES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  if(iso.includes('/')){
+    const [a,b]=iso.split('/');
+    const da=new Date(a), db=new Date(b);
+    return `${da.getDate()} ${MES[da.getMonth()]} – ${db.getDate()} ${MES[db.getMonth()]}`;
+  }
+  const d=new Date(iso+'T12:00:00');
+  return `${DAYS[d.getDay()]} ${d.getDate()} ${MES[d.getMonth()]}`;
 }
-function showMain(show){
-  document.getElementById('loader').style.display = show ? 'none' : 'block';
-  document.getElementById('main-content').style.display = show ? 'block' : 'none';
+
+// Is event happening today?
+function isToday(iso){
+  if(iso.includes('/')){
+    const [a,b]=iso.split('/');
+    return TODAY>=a && TODAY<=b;
+  }
+  return iso===TODAY;
 }
 
-// ── CAT COLORS ───────────────────────────────────────────────
-const CAT_COLORS = {
-  'Fiesta':     'color:rgba(255,0,170,.9);border-color:rgba(255,0,170,.35)',
-  'Concierto':  'color:rgba(255,220,0,.85);border-color:rgba(255,220,0,.3)',
-  'Gastronomía':'color:rgba(0,255,128,.8);border-color:rgba(0,255,128,.25)',
-  'Deportivo':  'color:rgba(255,110,0,.85);border-color:rgba(255,110,0,.3)',
-  'Cine':       'color:rgba(180,100,255,.9);border-color:rgba(180,100,255,.3)',
-  'Teatro':     'color:rgba(255,60,60,.85);border-color:rgba(255,60,60,.3)',
-  'Feria':      'color:rgba(255,165,0,.85);border-color:rgba(255,165,0,.3)',
-  'Exposición': 'color:rgba(0,245,255,.7);border-color:rgba(0,245,255,.2)',
-};
-
-// ── RENDER ───────────────────────────────────────────────────
-function renderAll(data){
-  DATA = data;
-  renderTabs();
-  renderEvents();
-  showMain(true);
-  document.getElementById('update-info').style.display = 'flex';
-  document.getElementById('update-date').textContent = data.fetchedOn;
+// Is event in the past?
+function isPast(iso){
+  const end=iso.includes('/')?iso.split('/')[1]:iso;
+  return end<TODAY;
 }
 
+// ── RENDER
 function renderTabs(){
-  const el = document.getElementById('tabs');
-  el.innerHTML = '';
-  DATA.months.forEach((m, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'tab' + (i === activeTab ? ' active' : '');
-    btn.textContent = m.label + ' (' + m.events.length + ')';
-    btn.onclick = () => { activeTab = i; renderTabs(); renderEvents(); };
+  const el=document.getElementById('tabs');el.innerHTML='';
+  DATA.forEach((m,i)=>{
+    const btn=document.createElement('button');
+    btn.className='tab'+(i===tabIdx?' on':'');
+    btn.textContent=m.mes+' ('+m.eventos.length+')';
+    btn.onclick=()=>{tabIdx=i;activeCat='TODOS';renderAll()};
     el.appendChild(btn);
   });
 }
 
+function renderFilters(){
+  const month=DATA[tabIdx];
+  const cats=['TODOS',...new Set(month.eventos.map(e=>e.cat))];
+  const el=document.getElementById('filters');el.innerHTML='';
+  const lbl=document.createElement('span');lbl.className='filter-label';lbl.textContent='FILTRAR:';el.appendChild(lbl);
+  cats.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='ftag'+(c===activeCat?' active':'');
+    b.textContent=c;
+    b.onclick=()=>{activeCat=c;renderFilters();renderEvents()};
+    el.appendChild(b);
+  });
+}
+
 function renderEvents(){
-  const month = DATA.months[activeTab];
-  const grid = document.getElementById('events-grid');
-  grid.innerHTML = '';
+  const month=DATA[tabIdx];
+  let evs=month.eventos.filter(e=>activeCat==='TODOS'||e.cat===activeCat);
+  const grid=document.getElementById('grid');grid.innerHTML='';
 
-  document.getElementById('section-label').textContent =
-    month.label + ' // ' + month.events.length + ' EVENTO' + (month.events.length!==1?'S':'');
+  // Sort: today first, then future by date, then past at end
+  evs.sort((a,b)=>{
+    const aT=isToday(a.iso),bT=isToday(b.iso);
+    if(aT&&!bT)return -1;if(!aT&&bT)return 1;
+    const aP=isPast(a.iso),bP=isPast(b.iso);
+    if(!aP&&bP)return -1;if(aP&&!bP)return 1;
+    const ad=a.iso.split('/')[0],bd=b.iso.split('/')[0];
+    return ad<bd?-1:ad>bd?1:0;
+  });
 
-  if(!month.events.length){
-    grid.innerHTML = '<div class="no-events">◈ SIN EVENTOS REGISTRADOS PARA ESTE MES</div>';
-    return;
-  }
+  const lbl=document.getElementById('slabel');
+  lbl.textContent=month.mes+' // '+evs.length+' EVENTO'+(evs.length!==1?'S':'')+
+    (activeCat!=='TODOS'?' // '+activeCat:'');
 
-  // Today cards first
-  const sorted = [
-    ...month.events.filter(e=>e.hoy),
-    ...month.events.filter(e=>!e.hoy)
-  ];
+  if(!evs.length){grid.innerHTML='<div class="none">◈ SIN EVENTOS PARA ESTE FILTRO</div>';return}
 
-  sorted.forEach((ev, i) => {
-    const card = document.createElement('div');
-    card.className = 'event-card' + (ev.hoy ? ' today-card' : '');
-    card.style.animationDelay = (i*0.055)+'s';
-    const cs = CAT_COLORS[ev.cat] || 'color:rgba(192,232,240,.6);border-color:rgba(192,232,240,.15)';
-    card.innerHTML = `
-      <div class="card-number">${String(i+1).padStart(2,'0')}</div>
-      <div class="event-date">${ev.date}</div>
-      <div class="event-title">${ev.title}</div>
-      ${ev.desc ? `<div class="event-desc">${ev.desc}</div>` : ''}
-      <div class="event-meta">
-        ${ev.cat ? `<span class="event-tag" style="${cs}">${ev.cat}</span>` : ''}
-        ${ev.hoy ? `<span class="event-tag" style="color:rgba(255,0,170,.9);border-color:rgba(255,0,170,.4)">▶ HOY</span>` : ''}
-        ${ev.url ? `<a class="event-link" href="${ev.url}" target="_blank">VER MÁS →</a>` : ''}
+  evs.forEach((ev,i)=>{
+    const hoy=isToday(ev.iso), past=isPast(ev.iso);
+    const card=document.createElement('div');
+    card.className='card'+(hoy?' hoy':past?' past':'');
+    card.style.animationDelay=(i*.05)+'s';
+    const cs=CAT[ev.cat]||CAT['Cultural'];
+    card.innerHTML=`
+      <div class="cardnum">${String(i+1).padStart(2,'0')}</div>
+      <div class="edate">${fmtDate(ev.iso)}</div>
+      <div class="etitle">${ev.title}</div>
+      ${ev.desc?`<div class="edesc">${ev.desc}</div>`:''}
+      <div class="emeta">
+        <span class="etag" style="${cs}">${ev.cat}</span>
+        ${hoy?`<span class="etag" style="color:rgba(255,0,170,.95);border-color:rgba(255,0,170,.5)">▶ HOY</span>`:''}
+        ${past&&!hoy?`<span class="etag" style="color:rgba(192,232,240,.3);border-color:rgba(192,232,240,.15)">PASADO</span>`:''}
+        ${ev.url?`<a class="elink" href="${ev.url}" target="_blank">VER MÁS →</a>`:''}
       </div>`;
     grid.appendChild(card);
   });
 }
 
-// ── LIVE FETCH via CORS proxy ─────────────────────────────────
-async function tryLiveFetch(){
-  const PROXY = 'https://api.allorigins.win/get?url=';
-  const now = new Date();
-  const results = [];
+function renderAll(){renderTabs();renderFilters();renderEvents()}
 
-  for(let m=0; m<2; m++){
-    const d = new Date(now.getFullYear(), now.getMonth()+m, 1);
-    const ym = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-    const url = 'https://www.llanes.es/es/agenda?month='+ym;
+// ── PROXY FETCH — intenta obtener datos frescos
+async function tryFetch(){
+  const PROXY='https://api.allorigins.win/get?url=';
+  const now=new Date();
+  const results=[];
+  for(let m=0;m<2;m++){
+    const d=new Date(now.getFullYear(),now.getMonth()+m,1);
+    const ym=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    const url='https://www.llanes.es/es/agenda?month='+ym;
     try{
-      const r = await fetch(PROXY+encodeURIComponent(url), {signal:AbortSignal.timeout(8000)});
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      const json = await r.json();
-      results.push({html: json.contents, d});
-    } catch(e){ console.warn('proxy fail', ym, e); }
+      const r=await fetch(PROXY+encodeURIComponent(url),{signal:AbortSignal.timeout(9000)});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      const j=await r.json();
+      results.push({html:j.contents,d,ym});
+    }catch(e){console.warn('proxy',ym,e)}
   }
-  if(!results.length) throw new Error('proxy unavailable');
-
-  return parseHTML(results);
+  if(!results.length)throw new Error('proxy unavailable');
+  return parseResults(results);
 }
 
-function parseHTML(results){
-  const MONTHS_ES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  const MONTHS_ABBR = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  const now = new Date();
-  const data = { fetchedOn: now.toLocaleDateString('es-ES'), months:[] };
+function parseResults(results){
+  const MABBR=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const data=[];
+  results.forEach(({html,d,ym})=>{
+    const doc=new DOMParser().parseFromString(html,'text/html');
+    const seen=new Set();
+    const eventos=[];
+    const mStr=MABBR[d.getMonth()].toUpperCase()+' '+d.getFullYear();
 
-  results.forEach(({html, d}) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    const seen = new Set();
-    const events = [];
-    const mAbbr = MONTHS_ABBR[d.getMonth()];
-    const mLabel = MONTHS_ABBR[d.getMonth()].toUpperCase() + ' ' + d.getFullYear();
-
-    doc.querySelectorAll('table td').forEach(td => {
-      const dayMatch = td.textContent.trim().match(/^(\d{1,2})/);
-      if(!dayMatch) return;
-      const day = dayMatch[1];
-      td.querySelectorAll('a').forEach(a => {
-        const title = a.textContent.trim();
-        if(!title || title.length < 5 || seen.has(title)) return;
+    doc.querySelectorAll('table td').forEach(td=>{
+      const dm=td.textContent.trim().match(/^(\d{1,2})/);
+      if(!dm)return;
+      const day=String(dm[1]).padStart(2,'0');
+      const isoDate=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+day;
+      td.querySelectorAll('a').forEach(a=>{
+        const title=a.textContent.trim();
+        if(!title||title.length<5||seen.has(title))return;
         seen.add(title);
-        let href = a.getAttribute('href')||'';
-        if(!href.startsWith('http')) href = 'https://www.llanes.es/'+href.replace(/^\.\.\//,'es/');
-        let cat='Cultural';
+        let href=a.getAttribute('href')||'';
+        if(!href.startsWith('http'))href='https://www.llanes.es/'+href.replace(/^\.\.\//,'es/');
         const t=title.toLowerCase();
-        if(/fiesta|antroxu|carnaval|romería|san |santo|virgen|candelera/.test(t)) cat='Fiesta';
-        else if(/expos/.test(t)) cat='Exposición';
-        else if(/concierto/.test(t)) cat='Concierto';
-        else if(/taller/.test(t)) cat='Taller';
-        else if(/teatro|dramatizada/.test(t)) cat='Teatro';
-        else if(/cine|película|proyección|corto|fórum/.test(t)) cat='Cine';
-        else if(/marcha|carrera|deport/.test(t)) cat='Deportivo';
-        else if(/gastron|matanza|gochu|ollas/.test(t)) cat='Gastronomía';
-        else if(/feria/.test(t)) cat='Feria';
-        const isToday = (
-          parseInt(day) === now.getDate() &&
-          d.getMonth() === now.getMonth() &&
-          d.getFullYear() === now.getFullYear()
-        );
-        events.push({date:`${day} ${mAbbr}`, title, cat, url:href, desc:'', hoy:isToday});
+        let cat='Cultural';
+        if(/fiesta|antroxu|carnaval|romería|romer|san |santo|virgen|candelera|angel/.test(t))cat='Fiesta';
+        else if(/expos/.test(t))cat='Exposición';
+        else if(/concierto/.test(t))cat='Concierto';
+        else if(/taller/.test(t))cat='Taller';
+        else if(/teatro|dramatizada/.test(t))cat='Teatro';
+        else if(/cine|película|proyección|corto|fórum|documental/.test(t))cat='Cine';
+        else if(/marcha|carrera|deport|torneo|golf/.test(t))cat='Deportivo';
+        else if(/gastron|matanza|gochu|ollas/.test(t))cat='Gastronomía';
+        else if(/conferencia|charla/.test(t))cat='Conferencia';
+        else if(/feria/.test(t))cat='Feria';
+        eventos.push({iso:isoDate,title,cat,url:href,desc:''});
       });
     });
 
-    if(events.length) data.months.push({label:mLabel, events});
+    if(eventos.length){
+      data.push({mes:mStr,ym,eventos});
+    }
   });
-
   return data;
 }
 
-// ── MAIN ─────────────────────────────────────────────────────
-async function init(){
-  setStatus('loading','INICIALIZANDO...');
-  document.getElementById('loader-text').textContent = 'CARGANDO EVENTOS...';
+// ── MAIN
+async function init(force=false){
+  setDot('spin');setStatus('VERIFICANDO CACHÉ...');
 
-  // Check cache
-  const cDate = localStorage.getItem(CACHE_DATE);
-  const cData = localStorage.getItem(CACHE_KEY);
-  if(cDate === TODAY_STR && cData){
+  // Smart cache: key includes current year+month so it auto-expires each month
+  const nowYM = TODAY.slice(0,7); // YYYY-MM
+  const cacheKey = CK+'_'+nowYM;
+  const cached = localStorage.getItem(cacheKey);
+  const cachedDate = localStorage.getItem(cacheKey+'_date');
+
+  if(!force && cachedDate===TODAY && cached){
     try{
-      const d = JSON.parse(cData);
-      renderAll(d);
-      const total = d.months.reduce((s,m)=>s+m.events.length,0);
-      setStatus('ok', `${total} EVENTOS // CACHÉ DIARIA`);
+      DATA=JSON.parse(cached);
+      renderAll();showApp(true);
+      const total=DATA.reduce((s,m)=>s+m.eventos.length,0);
+      setDot('');setStatus(`${total} EVENTOS // CACHÉ ${TODAY}`);
+      document.getElementById('uinfo').style.display='flex';
+      document.getElementById('udate').textContent=TODAY;
       return;
-    } catch(e){}
+    }catch(e){}
   }
 
-  // Try live
-  document.getElementById('loader-text').textContent = 'CONECTANDO CON LLANES.ES...';
-  setStatus('loading','CONECTANDO CON LLANES.ES...');
+  // Try live fetch
+  setStatus('CONECTANDO CON LLANES.ES...');
+  document.getElementById('ltxt').textContent='CONECTANDO CON LLANES.ES...';
   try{
-    const d = await tryLiveFetch();
-    const total = d.months.reduce((s,m)=>s+m.events.length,0);
-    // If live returned reasonable data, use it; otherwise fallback
-    if(total > 0){
-      localStorage.setItem(CACHE_KEY, JSON.stringify(d));
-      localStorage.setItem(CACHE_DATE, TODAY_STR);
-      renderAll(d);
-      setStatus('ok', `${total} EVENTOS // EN DIRECTO`);
+    const live=await tryFetch();
+    const total=live.reduce((s,m)=>s+m.eventos.length,0);
+    if(total>3){
+      DATA=live;
+      localStorage.setItem(cacheKey,JSON.stringify(DATA));
+      localStorage.setItem(cacheKey+'_date',TODAY);
+      renderAll();showApp(true);
+      setDot('');setStatus(`${total} EVENTOS // EN DIRECTO`);
+      document.getElementById('uinfo').style.display='flex';
+      document.getElementById('udate').textContent=TODAY+' · EN DIRECTO';
       return;
     }
-    throw new Error('empty');
-  } catch(e){
-    console.warn('Using seed data:', e);
-  }
+  }catch(e){console.warn('live fetch failed:',e)}
 
-  // Fallback to seed
-  localStorage.setItem(CACHE_KEY, JSON.stringify(SEED));
-  localStorage.setItem(CACHE_DATE, TODAY_STR);
-  renderAll(SEED);
-  const total = SEED.months.reduce((s,m)=>s+m.events.length,0);
-  setStatus('ok', `${total} EVENTOS // DATOS EMBEBIDOS`);
+  // Fallback seed — auto-pick the right month(s)
+  const nowYMM=TODAY.slice(0,7);
+  DATA=SEED.filter(m=>m.ym>=nowYMM);
+  if(!DATA.length)DATA=SEED;
+  // Mark tab to show current month
+  tabIdx=0;
+  renderAll();showApp(true);
+  const total=DATA.reduce((s,m)=>s+m.eventos.length,0);
+  setDot('');setStatus(`${total} EVENTOS // DATOS EMBEBIDOS ${TODAY}`);
+  document.getElementById('uinfo').style.display='flex';
+  document.getElementById('udate').textContent=TODAY+' · EMBEBIDO';
 }
 
 async function forceReload(){
-  localStorage.removeItem(CACHE_DATE);
-  document.getElementById('btn-refresh').disabled = true;
-  showMain(false);
-  setStatus('loading','RECARGANDO...');
-  await init();
-  document.getElementById('btn-refresh').disabled = false;
+  const nowYM=TODAY.slice(0,7);
+  localStorage.removeItem(CK+'_'+nowYM);
+  localStorage.removeItem(CK+'_'+nowYM+'_date');
+  document.getElementById('btnR').disabled=true;
+  showApp(false);
+  await init(true);
+  document.getElementById('btnR').disabled=false;
 }
 
-window.addEventListener('load', init);
+window.addEventListener('load',()=>init());
 </script>
 </body>
 </html>
