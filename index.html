@@ -12,8 +12,6 @@ body{background:var(--dark);color:#c0e8f0;font-family:'Rajdhani',sans-serif;min-
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);z-index:0;pointer-events:none}
 .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:40px 20px}
-
-/* HEADER */
 header{text-align:center;margin-bottom:48px}
 .badge{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--m);margin-bottom:12px;opacity:.8;animation:blink 4s infinite}
 @keyframes blink{0%,92%,100%{opacity:.8}96%{opacity:.1}}
@@ -23,40 +21,34 @@ h1{font-family:'Orbitron',sans-serif;font-size:clamp(36px,7vw,78px);font-weight:
 .deco{display:flex;align-items:center;gap:16px;margin:26px 0;justify-content:center}
 .deco::before,.deco::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);max-width:340px}
 .diamond{width:8px;height:8px;border:1px solid var(--c);transform:rotate(45deg);box-shadow:0 0 10px var(--c)}
-
-/* STATUS */
 .sbar{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(0,245,255,.15);background:rgba(0,245,255,.03);padding:12px 20px;margin-bottom:30px;font-family:'Share Tech Mono',monospace;font-size:12px;flex-wrap:wrap;gap:10px}
 .si{display:flex;align-items:center;gap:8px;color:rgba(192,232,240,.6)}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);animation:pulse 2s infinite}
-.dot.spin{background:var(--m);box-shadow:0 0 8px var(--m)}
+.dot.spin{background:var(--m);box-shadow:0 0 8px var(--m);animation:spin-dot 0.8s linear infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+@keyframes spin-dot{to{transform:rotate(360deg)}}
+.sbar-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .btn{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;color:var(--c);background:transparent;border:1px solid rgba(0,245,255,.4);padding:8px 20px;cursor:pointer;text-transform:uppercase;transition:all .3s;position:relative;overflow:hidden}
 .btn::before{content:'';position:absolute;inset:0;background:rgba(0,245,255,.08);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .btn:hover::before{transform:scaleX(1)}
 .btn:hover{box-shadow:var(--glow)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* FILTER BAR */
+.source-badge{font-family:'Share Tech Mono',monospace;font-size:10px;padding:4px 10px;border:1px solid;letter-spacing:1px}
+.source-live{color:rgba(0,255,128,.8);border-color:rgba(0,255,128,.3)}
+.source-cache{color:rgba(255,215,0,.7);border-color:rgba(255,215,0,.25)}
+.source-seed{color:rgba(192,232,240,.4);border-color:rgba(192,232,240,.15)}
 .filterbar{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
 .filter-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(192,232,240,.4);letter-spacing:2px;margin-right:4px}
 .ftag{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(192,232,240,.5);background:transparent;border:1px solid rgba(0,245,255,.12);padding:5px 14px;cursor:pointer;transition:all .2s;text-transform:uppercase}
 .ftag:hover{border-color:rgba(0,245,255,.4);color:var(--c)}
 .ftag.active{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.07);box-shadow:var(--glow)}
-
-/* TABS */
 .tabs{display:flex;gap:4px;margin-bottom:24px;flex-wrap:wrap}
 .tab{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:rgba(192,232,240,.5);background:transparent;border:1px solid rgba(0,245,255,.12);padding:8px 18px;cursor:pointer;transition:all .2s;text-transform:uppercase}
 .tab:hover{border-color:rgba(0,245,255,.4);color:var(--c)}
 .tab.on{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.06);box-shadow:var(--glow)}
-
-/* SECTION TITLE */
 .stitle{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:4px;color:rgba(192,232,240,.4);margin-bottom:22px;display:flex;align-items:center;gap:12px}
 .stitle::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,245,255,.3),transparent)}
-
-/* GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-
-/* CARD */
 .card{border:1px solid rgba(0,245,255,.12);background:rgba(0,245,255,.02);padding:22px;position:relative;overflow:hidden;transition:all .3s;animation:fadeUp .5s both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--c),var(--m))}
@@ -65,8 +57,7 @@ h1{font-family:'Orbitron',sans-serif;font-size:clamp(36px,7vw,78px);font-weight:
 .card.hoy{border-color:rgba(255,0,170,.35);background:rgba(255,0,170,.04)}
 .card.hoy::before{background:linear-gradient(180deg,var(--m),var(--c))}
 .card.hoy::after{background:linear-gradient(90deg,var(--m),transparent)}
-.card.past{opacity:.5}
-
+.card.past{opacity:.45}
 .edate{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--m);text-shadow:0 0 10px var(--m);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .edate::before{content:'◈';font-size:8px;color:var(--c)}
 .etitle{font-size:19px;font-weight:700;color:#e0f4ff;margin-bottom:10px;line-height:1.3}
@@ -76,26 +67,19 @@ h1{font-family:'Orbitron',sans-serif;font-size:clamp(36px,7vw,78px);font-weight:
 .elink{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.5);text-decoration:none;letter-spacing:1px;transition:color .2s}
 .elink:hover{color:var(--c)}
 .cardnum{position:absolute;top:12px;right:16px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.2)}
-
-/* LOADER */
 #loader{text-align:center;padding:80px 20px}
-.ring{width:60px;height:60px;border:2px solid rgba(0,245,255,.1);border-top-color:var(--c);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
-@keyframes spin{to{transform:rotate(360deg)}}
+.ring{width:60px;height:60px;border:2px solid rgba(0,245,255,.1);border-top-color:var(--c);border-radius:50%;animation:spinr 1s linear infinite;margin:0 auto 20px}
+@keyframes spinr{to{transform:rotate(360deg)}}
 .ltext{font-family:'Share Tech Mono',monospace;color:rgba(192,232,240,.6);font-size:13px;letter-spacing:2px}
-
 .none{text-align:center;padding:60px;font-family:'Share Tech Mono',monospace;color:rgba(192,232,240,.3);font-size:13px}
-
-/* CORNERS */
 .c{position:fixed;width:50px;height:50px;z-index:2;pointer-events:none}
 .tl{top:16px;left:16px;border-top:1px solid var(--c);border-left:1px solid var(--c);opacity:.3}
 .tr{top:16px;right:16px;border-top:1px solid var(--c);border-right:1px solid var(--c);opacity:.3}
 .bl{bottom:16px;left:16px;border-bottom:1px solid var(--c);border-left:1px solid var(--c);opacity:.3}
 .br{bottom:16px;right:16px;border-bottom:1px solid var(--c);border-right:1px solid var(--c);opacity:.3}
-
 .pts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.pt{position:absolute;width:1px;height:1px;border-radius:50%;opacity:0;animation:fl linear infinite}
+.pt{position:absolute;border-radius:50%;opacity:0;animation:fl linear infinite}
 @keyframes fl{0%{transform:translateY(100vh);opacity:0}10%{opacity:.5}90%{opacity:.1}100%{transform:translateY(-5vh) translateX(30px);opacity:0}}
-
 footer{margin-top:60px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(192,232,240,.2);letter-spacing:2px;padding-bottom:40px}
 footer a{color:rgba(0,245,255,.35);text-decoration:none}
 footer a:hover{color:var(--c)}
@@ -104,23 +88,22 @@ footer a:hover{color:var(--c)}
 <body>
 <div class="c tl"></div><div class="c tr"></div><div class="c bl"></div><div class="c br"></div>
 <div class="pts" id="pts"></div>
-
 <div class="wrap">
 <header>
-  <div class="badge">◄ SISTEMA ACTIVO // DATOS EN TIEMPO REAL ►</div>
+  <div class="badge">◄ SISTEMA ACTIVO // AUTO-ACTUALIZACIÓN EN TIEMPO REAL ►</div>
   <h1>LLANES</h1>
   <div class="sub">AGENDA CULTURAL &amp; FIESTAS // CONCEJO DE LLANES · ASTURIAS</div>
   <div class="deco"><div class="diamond"></div></div>
 </header>
-
 <div class="sbar">
   <div class="si"><div class="dot" id="dot"></div><span id="stxt">CARGANDO...</span></div>
   <div class="si" id="uinfo" style="display:none">ACT.: <span id="udate" style="color:var(--c);margin-left:6px"></span></div>
-  <button class="btn" id="btnR" onclick="forceReload()">⟳ ACTUALIZAR</button>
+  <div class="sbar-right">
+    <span class="source-badge" id="src-badge" style="display:none"></span>
+    <button class="btn" id="btnR" onclick="forceReload()">⟳ ACTUALIZAR</button>
+  </div>
 </div>
-
 <div id="loader"><div class="ring"></div><div class="ltext" id="ltxt">CARGANDO AGENDA...</div></div>
-
 <div id="app" style="display:none">
   <div class="tabs" id="tabs"></div>
   <div class="filterbar" id="filters"></div>
@@ -128,8 +111,7 @@ footer a:hover{color:var(--c)}
   <div class="grid" id="grid"></div>
 </div>
 </div>
-
-<footer>FUENTE: <a href="https://www.llanes.es/es/agenda" target="_blank">LLANES.ES/ES/AGENDA</a> &nbsp;//&nbsp; ACTUALIZACIÓN DIARIA AUTOMÁTICA &nbsp;//&nbsp; ASTURIAS</footer>
+<footer>FUENTE: <a href="https://www.llanes.es/es/agenda" target="_blank">LLANES.ES/ES/AGENDA</a> &nbsp;//&nbsp; AUTO-ACTUALIZACIÓN DIARIA VÍA RSS &amp; PROXY &nbsp;//&nbsp; ASTURIAS</footer>
 
 <script>
 // ── PARTICLES
@@ -144,110 +126,130 @@ footer a:hover{color:var(--c)}
 
 // ── CAT STYLES
 const CAT={
-  'Fiesta':    'color:rgba(255,0,170,.9);border-color:rgba(255,0,170,.4)',
-  'Concierto': 'color:rgba(255,215,0,.9);border-color:rgba(255,215,0,.35)',
+  'Fiesta':     'color:rgba(255,0,170,.9);border-color:rgba(255,0,170,.4)',
+  'Concierto':  'color:rgba(255,215,0,.9);border-color:rgba(255,215,0,.35)',
   'Gastronomía':'color:rgba(0,255,128,.85);border-color:rgba(0,255,128,.3)',
-  'Deportivo': 'color:rgba(255,110,0,.9);border-color:rgba(255,110,0,.35)',
-  'Cine':      'color:rgba(180,80,255,.9);border-color:rgba(180,80,255,.35)',
-  'Teatro':    'color:rgba(255,60,60,.9);border-color:rgba(255,60,60,.35)',
-  'Exposición':'color:rgba(0,245,255,.75);border-color:rgba(0,245,255,.25)',
-  'Taller':    'color:rgba(0,200,180,.85);border-color:rgba(0,200,180,.3)',
+  'Deportivo':  'color:rgba(255,110,0,.9);border-color:rgba(255,110,0,.35)',
+  'Cine':       'color:rgba(180,80,255,.9);border-color:rgba(180,80,255,.35)',
+  'Teatro':     'color:rgba(255,60,60,.9);border-color:rgba(255,60,60,.35)',
+  'Exposición': 'color:rgba(0,245,255,.75);border-color:rgba(0,245,255,.25)',
+  'Taller':     'color:rgba(0,200,180,.85);border-color:rgba(0,200,180,.3)',
   'Conferencia':'color:rgba(200,200,255,.85);border-color:rgba(200,200,255,.3)',
-  'Cultural':  'color:rgba(192,232,240,.65);border-color:rgba(192,232,240,.2)',
+  'Religioso':  'color:rgba(255,180,50,.85);border-color:rgba(255,180,50,.3)',
+  'Cultural':   'color:rgba(192,232,240,.65);border-color:rgba(192,232,240,.2)',
 };
 
-// ── SEED DATA — scraped 2 Mar 2026 from llanes.es
-// Estructura: array de meses, cada uno con array de eventos
-// Cada evento: { iso:"YYYY-MM-DD" o rango "YYYY-MM-DD/YYYY-MM-DD", title, desc, cat, url }
-
+// ── SEED DATA — scrapeado 13 Mar 2026 de llanes.es/es/agenda
 const SEED = [
   {
     mes:"MARZO 2026", ym:"2026-03",
     eventos:[
-      {iso:"2026-03-01", title:"Fiesta del Santo Ángel – El Mazucu (continuación)", desc:"12:30h Salida del Ramo y procesión. 13:00h Misa solemne y remate del ramo. 14:00h Sesión vermú con Bandina Los Collainos. Rifa de cesta. 17:30h hinchables y pintacaras. 19:00h Mariachis. 20:00h Romería con Trío Picos de Europa y DJ JAVI MORO. Hay carpa.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-el-mazucu-0"},
-      {iso:"2026-03-01", title:"Fiesta del Santo Ángel – Oviu (continuación)", desc:"12:30h Salida del Ramu desde la plaza del Oteru con Gaiteros de Cuerres. 13:00h Misa solemne, procesión, bailes regionales, danza prima y subasta del roscu. 15:00h Comida campestre: fabada, verdinas, arroz con leche y parrilla.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-oviu"},
-      {iso:"2026-03-06", title:"Proyección: «Un simple accidente»", desc:"Proyección cinematográfica en la Casa Municipal de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-de-la-pelicula-un-simple-accidente-llanes"},
-      {iso:"2026-03-07", title:"Concierto: Mariajo Baudot – «Señora Bien»", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-mariajo-baudot-senora-bien-llanes"},
-      {iso:"2026-03-13", title:"Proyección: Documental «Las Mujeres de España – María Lejarraga»", desc:"Proyección del documental en la Casa de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-del-documental-las-muejres-de-espana-maria-lejarraga-llanes"},
-      {iso:"2026-03-14", title:"XIII San Martín del Gochu – Recuperación de la Matanza", desc:"Recuperación de la tradicional matanza del cerdo asturiana en Posada la Vieja.", cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
+      // ── FIESTAS
+      {iso:"2026-03-01", title:"Fiesta del Santo Ángel de la Guarda – El Mazucu", desc:"12:30h Salida del Ramo y procesión. 13:00h Misa solemne y remate del ramo. 14:00h Sesión vermú con Bandina Los Collainos. 17:30h hinchables y pintacaras. 19:00h Mariachis. 20:00h Romería con Trío Picos de Europa y DJ JAVI MORO. Hay carpa.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-el-mazucu-0"},
+      {iso:"2026-03-01", title:"Fiesta del Santo Ángel de la Guarda – Oviu", desc:"12:30h Salida del Ramu con Gaiteros de Cuerres. 13:00h Misa solemne, danza prima, subasta del roscu. 15:00h Comida campestre: fabada, verdinas, arroz con leche y parrilla.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-oviu"},
+      {iso:"2026-03-07", title:"8M – El bosque en memoria de les muyeres asesinaes (San Roque del Acebal)", desc:"Acto del 8 de Marzo en San Roque del Acebal.", cat:"Cultural", url:"https://www.llanes.es/es/8-m-el-bosque-en-memoria-de-les-muyeres-asesinaes-pola-violencia-machista-san-roque-del-acebal"},
       {iso:"2026-03-14", title:"Fiesta de San Patricio – Pancar", desc:"Festividad de San Patricio en el pueblo de Pancar.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-de-san-patricio-pancar-2"},
-      {iso:"2026-03-14", title:"Concierto: Cubasturia Jazz (Llanes)", desc:"Concierto de jazz en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-cubasturia-jazz-llanes"},
-      {iso:"2026-03-14", title:"Torneo del Abonado (Golf)", desc:"Torneo de golf para abonados en el Campo de Golf de Llanes.", cat:"Deportivo", url:"https://www.llanes.es/es/torneo-del-abonado-0"},
-      {iso:"2026-03-15", title:"XIII San Martín del Gochu – día 2", desc:"Continuación de la recuperación de la matanza del cerdo en Posada la Vieja.", cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
+      {iso:"2026-03-14", title:"Carnaval en Poo de Llanes 2026", desc:"Celebración del Carnaval en Poo de Llanes.", cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-en-poo-de-llanes-2026-0"},
       {iso:"2026-03-21", title:"Fiesta de San José – Posada la Vieja", desc:"Festividad de San José en Posada la Vieja.", cat:"Fiesta", url:"https://www.llanes.es/es/fiesta-de-san-jose-posada-la-vieja-0"},
-      {iso:"2026-03-21", title:"Concierto: Fee Reega (Llanes)", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-fee-reega-llanes-0"},
-      {iso:"2026-03-26", title:"Inauguración y visita guiada: Exposición «Remiendos»", desc:"Inauguración de la nueva exposición con visita guiada incluida en Llanes.", cat:"Exposición", url:"https://www.llanes.es/es/inauguracion-y-visita-guiada-la-exposicion-remiendos-llanes"},
-      {iso:"2026-03-27", title:"Conferencia: Eclipse Total de Sol (Llanes)", desc:"Conferencia divulgativa sobre el eclipse total de sol. Casa de Cultura de Llanes.", cat:"Conferencia", url:"https://www.llanes.es/es/conferencia-eclipse-total-de-sol-llanes"},
+      {iso:"2026-03-28", title:"Carnaval Posada de Llanes 2026", desc:"Celebración tardía del Carnaval en Posada de Llanes.", cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-posada-de-llanes-2026"},
+      {iso:"2026-03-29", title:"Semana Santa 2026 – Basílica de Llanes", desc:"Celebración de la Semana Santa en la Basílica de Llanes.", cat:"Religioso", url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
+      // ── CONCIERTOS
+      {iso:"2026-03-07", title:"Concierto: Mariajo Baudot – «Señora Bien»", desc:"Concierto en la Casa Municipal de Cultura de Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-mariajo-baudot-senora-bien-llanes"},
+      {iso:"2026-03-14", title:"Concierto: Cubasturia Jazz", desc:"Concierto de jazz en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-cubasturia-jazz-llanes"},
+      {iso:"2026-03-21", title:"Concierto: Fee Reega", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-fee-reega-llanes-0"},
+      {iso:"2026-03-28", title:"Concierto: Indocentes", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-indocentes-llanes"},
+      // ── DEPORTIVO
+      {iso:"2026-03-14", title:"Torneo del Abonado (Golf)", desc:"Torneo de golf para abonados en el Campo de Golf de Llanes.", cat:"Deportivo", url:"https://www.llanes.es/es/torneo-del-abonado-0"},
+      {iso:"2026-03-14", title:"II Raid Hípico Ayto. de Llanes – Porrúa", desc:"Segunda edición del Raid Hípico organizado por el Ayuntamiento de Llanes en Porrúa.", cat:"Deportivo", url:"https://www.llanes.es/es/ii-raid-hipico-ayto-de-llanes-porrua"},
+      {iso:"2026-03-15", title:"II Concentración de Escuelas de Rugby y Jornada de Rugby Inclusivo", desc:"Segunda concentración de escuelas de rugby y jornada de rugby inclusivo en Llanes.", cat:"Deportivo", url:"https://www.llanes.es/es/ii-concentracion-de-escuelas-de-rugby-y-ii-jornada-de-rugby-inclusivo-llanes"},
+      {iso:"2026-03-21", title:"Juega Pueblos – Meré", desc:"Actividad deportiva Juega Pueblos en el pueblo de Meré.", cat:"Deportivo", url:"https://www.llanes.es/es/juega-pueblos-mere"},
+      // ── GASTRONOMÍA
+      {iso:"2026-03-14", title:"XIII San Martín del Gochu – Recuperación de la Matanza", desc:"Recuperación de la matanza tradicional del cerdo asturiana en Posada la Vieja.", cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
+      {iso:"2026-03-15", title:"XIII San Martín del Gochu – Día 2", desc:"Continuación de la matanza tradicional asturiana en Posada la Vieja.", cat:"Gastronomía", url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
+      // ── CINE
+      {iso:"2026-03-06", title:"Proyección: «Un simple accidente»", desc:"Proyección cinematográfica en la Casa Municipal de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-de-la-pelicula-un-simple-accidente-llanes"},
+      {iso:"2026-03-13", title:"Proyección documental: «A las mujeres de España: María Lejárraga»", desc:"19:00h. Documental de Laura Hojman (2022), presentado por la Asociación La Quimera. Casa Municipal de Cultura.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-del-documental-las-mujeres-de-espana-maria-lejarraga-llanes"},
+      {iso:"2026-03-20", title:"Cine Fórum: «Siempre Alice» (Nueva de Llanes)", desc:"Proyección y debate en Nueva de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/cine-forum-siempre-alice-nueva-de-llanes"},
       {iso:"2026-03-27", title:"Proyección: «Valle Blanco, Gallo Negro»", desc:"Proyección cinematográfica en la Casa Municipal de Cultura de Llanes.", cat:"Cine", url:"https://www.llanes.es/es/proyeccion-de-la-pelicula-valle-blanco-gallo-negro-llanes"},
-      {iso:"2026-03-28", title:"Carnaval Posada de Llanes 2026", desc:"Celebración tardía del Carnaval en Posada de Llanes. Desfiles y verbena.", cat:"Fiesta", url:"https://www.llanes.es/es/carnaval-posada-de-llanes-2026"},
-      {iso:"2026-03-28", title:"Concierto: Indocentes (Llanes)", desc:"Concierto en Llanes.", cat:"Concierto", url:"https://www.llanes.es/es/concierto-indocentes-llanes"},
+      // ── EXPOSICIONES
+      {iso:"2026-02-19/2026-03-21", title:"Exposición: «Quebrar la pintura II. Transitando el soporte»", desc:"Elena Rato. Comisariada por María Touceda Castro. Casa de Cultura de Llanes. Mar–Vie 11:00–13:30 y 18:00–20:30h. Sáb 11:00–14:00h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-quebrar-la-pintura-ii-transitando-el-soporte-llanes"},
+      {iso:"2026-02-03/2026-03-31", title:"Exposición: «Indumentaria tradicional del Oriente de Asturias»", desc:"«Por la pinta son de Llanes». Casa de Cultura (1ª planta) 11:00–13:30h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-indumentaria-tradicional-del-oriente-de-asturias-por-la-pinta-son-de-llanes-llanes-0"},
+      {iso:"2026-02-03/2026-03-31", title:"Exposición: «Maestros de la pintura del s. XX»", desc:"Orlando Pelayo, Antonio Suárez, Rubio Camín, Eduardo Arroyo, Vaquero Palacios y más. Casa de Cultura (2ª planta) 11:00–13:30h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-maestros-de-la-pintura-del-s-xx-artistas-vinculados-asturias-llanes-0"},
+      {iso:"2026-03-26/2026-04-30", title:"Exposición: «Remiendos» – Inauguración y visita guiada", desc:"Inauguración el 26 de marzo con visita guiada incluida. Casa de Cultura de Llanes.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-remiendos-llanes"},
+      {iso:"2026-03-27/2026-04-30", title:"Exposición: «Luxury Eco Style» (Nueva de Llanes)", desc:"Exposición en la Casa de Cultura de Nueva de Llanes.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-luxury-eco-style-nueva-de-llanes"},
+      // ── CONFERENCIAS Y ACTOS
+      {iso:"2026-03-13", title:"Homenaje y colocación de Stolpersteine", desc:"12:00h en el puente de Llanes. Colocación de adoquines de la memoria en honor a tres llaniscos deportados a campos de concentración nazis: Emilio Valdajos, Antonio Dosal y Antonio Alonso.", cat:"Cultural", url:"https://www.llanes.es/es/homenaje-y-colocacion-de-stolpersteine-llanes"},
+      {iso:"2026-03-14", title:"Visita guiada: Exposición «Quebrar la pintura II» con Elena Rato", desc:"Visita guiada con la artista Elena Rato a su propia exposición.", cat:"Cultural", url:"https://www.llanes.es/es/visita-guiada-con-la-artista-elena-rato-la-exposicion-quebrar-la-pintura-ii-transitando-el-soporte"},
+      {iso:"2026-03-27", title:"Conferencia: Eclipse Total de Sol", desc:"Conferencia divulgativa sobre el eclipse total de sol. Casa de Cultura de Llanes.", cat:"Conferencia", url:"https://www.llanes.es/es/conferencia-eclipse-total-de-sol-llanes"},
+      {iso:"2026-03-26", title:"Inauguración y visita guiada: Exposición «Remiendos»", desc:"Inauguración de la nueva exposición con visita guiada incluida.", cat:"Exposición", url:"https://www.llanes.es/es/inauguracion-y-visita-guiada-la-exposicion-remiendos-llanes"},
       {iso:"2026-03-31", title:"Presentación novela: «Flor de Agua»", desc:"Presentación literaria en Llanes.", cat:"Cultural", url:"https://www.llanes.es/es/presentacion-de-la-novela-flor-de-agua-llanes"},
-      // Exposiciones continuas
-      {iso:"2026-02-19/2026-03-14", title:"Exposición: «Quebrar la pintura II. Transitando el soporte»", desc:"Elena Rato. Comisariada por María Touceda Castro. Casa de Cultura de Llanes. Mar–Vie 11:00–13:30 y 18:00–20:30h. Sáb 11:00–14:00h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-quebrar-la-pintura-ii-transitando-el-soporte-llanes"},
-      {iso:"2026-02-03/2026-03-31", title:"Exposición: «Indumentaria tradicional del Oriente de Asturias»", desc:"«Por la pinta son de Llanes». Colaboración entre la Asociación de Amigos de la Indumentaria Tradicional y el Ayuntamiento. Casa de Cultura (1ª planta) 11:00–13:30h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-indumentaria-tradicional-del-oriente-de-asturias-por-la-pinta-son-de-llanes-llanes"},
-      {iso:"2026-02-03/2026-03-31", title:"Exposición: «Maestros de la pintura del s. XX»", desc:"Orlando Pelayo, Antonio Suárez, Rubio Camín, Aurelio Suárez, Juan Barjola, Eduardo Arroyo, Vaquero Palacios. Casa de Cultura (2ª planta) 11:00–13:30h.", cat:"Exposición", url:"https://www.llanes.es/es/exposicion-maestros-de-la-pintura-del-s-xx-artistas-vinculados-asturias-llanes"},
     ]
   },
   {
     mes:"ABRIL 2026", ym:"2026-04",
     eventos:[
-      {iso:"2026-04-01", title:"Más eventos próximamente", desc:"Consulta la agenda oficial de Llanes para ver los eventos de abril cuando se publiquen.", cat:"Cultural", url:"https://www.llanes.es/es/agenda?month=2026-04"}
+      {iso:"2026-04-01", title:"Consulta eventos de abril", desc:"Los eventos de abril se publicarán próximamente en la agenda oficial de Llanes. Pulsa ⟳ ACTUALIZAR para obtener los datos más recientes.", cat:"Cultural", url:"https://www.llanes.es/es/agenda?month=2026-04"}
     ]
   }
 ];
 
-// ── STATE
-const CK='llanes_v5';  // new key = fresh start, ignores old cache
-const TODAY = new Date().toISOString().slice(0,10);  // YYYY-MM-DD
-let DATA=null, tabIdx=0, activeCat='TODOS';
+// ── ESTADO
+const CK = 'llanes_v6';
+const TODAY = new Date().toISOString().slice(0,10);
+let DATA=null, tabIdx=0, activeCat='TODOS', sourceType='seed';
 
-function setDot(type){document.getElementById('dot').className='dot'+(type==='spin'?' spin':'')}
+// ── UI HELPERS
+function setDot(s){document.getElementById('dot').className='dot'+(s==='spin'?' spin':'')}
 function setStatus(t){document.getElementById('stxt').textContent=t}
-function showApp(v){document.getElementById('loader').style.display=v?'none':'block';document.getElementById('app').style.display=v?'block':'none'}
+function showApp(v){
+  document.getElementById('loader').style.display=v?'none':'block';
+  document.getElementById('app').style.display=v?'block':'none';
+}
+function setBadge(type){
+  const el=document.getElementById('src-badge');
+  el.style.display='inline-block';
+  if(type==='live'){el.className='source-badge source-live';el.textContent='◉ EN DIRECTO'}
+  else if(type==='cache'){el.className='source-badge source-cache';el.textContent='◎ CACHÉ'}
+  else{el.className='source-badge source-seed';el.textContent='○ EMBEBIDO'}
+}
 
-// Parse ISO date or range → display string
+// ── DATE HELPERS
+const DAYS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const MES_ABR=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 function fmtDate(iso){
-  const DAYS=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-  const MES=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   if(iso.includes('/')){
-    const [a,b]=iso.split('/');
-    const da=new Date(a), db=new Date(b);
-    return `${da.getDate()} ${MES[da.getMonth()]} – ${db.getDate()} ${MES[db.getMonth()]}`;
+    const[a,b]=iso.split('/');
+    const da=new Date(a+'T12:00:00'),db=new Date(b+'T12:00:00');
+    return `${da.getDate()} ${MES_ABR[da.getMonth()]} – ${db.getDate()} ${MES_ABR[db.getMonth()]}`;
   }
   const d=new Date(iso+'T12:00:00');
-  return `${DAYS[d.getDay()]} ${d.getDate()} ${MES[d.getMonth()]}`;
+  return `${DAYS[d.getDay()]} ${d.getDate()} ${MES_ABR[d.getMonth()]}`;
 }
-
-// Is event happening today?
 function isToday(iso){
-  if(iso.includes('/')){
-    const [a,b]=iso.split('/');
-    return TODAY>=a && TODAY<=b;
-  }
+  if(iso.includes('/')){const[a,b]=iso.split('/');return TODAY>=a&&TODAY<=b}
   return iso===TODAY;
 }
-
-// Is event in the past?
 function isPast(iso){
-  const end=iso.includes('/')?iso.split('/')[1]:iso;
-  return end<TODAY;
+  return (iso.includes('/')?iso.split('/')[1]:iso)<TODAY;
 }
 
 // ── RENDER
+function renderAll(){renderTabs();renderFilters();renderEvents()}
+
 function renderTabs(){
   const el=document.getElementById('tabs');el.innerHTML='';
   DATA.forEach((m,i)=>{
-    const btn=document.createElement('button');
-    btn.className='tab'+(i===tabIdx?' on':'');
-    btn.textContent=m.mes+' ('+m.eventos.length+')';
-    btn.onclick=()=>{tabIdx=i;activeCat='TODOS';renderAll()};
-    el.appendChild(btn);
+    const b=document.createElement('button');
+    b.className='tab'+(i===tabIdx?' on':'');
+    b.textContent=m.mes+' ('+m.eventos.length+')';
+    b.onclick=()=>{tabIdx=i;activeCat='TODOS';renderAll()};
+    el.appendChild(b);
   });
 }
 
 function renderFilters(){
-  const month=DATA[tabIdx];
-  const cats=['TODOS',...new Set(month.eventos.map(e=>e.cat))];
+  const m=DATA[tabIdx];
+  const cats=['TODOS',...new Set(m.eventos.map(e=>e.cat))];
   const el=document.getElementById('filters');el.innerHTML='';
   const lbl=document.createElement('span');lbl.className='filter-label';lbl.textContent='FILTRAR:';el.appendChild(lbl);
   cats.forEach(c=>{
@@ -260,28 +262,25 @@ function renderFilters(){
 }
 
 function renderEvents(){
-  const month=DATA[tabIdx];
-  let evs=month.eventos.filter(e=>activeCat==='TODOS'||e.cat===activeCat);
+  const m=DATA[tabIdx];
+  let evs=m.eventos.filter(e=>activeCat==='TODOS'||e.cat===activeCat);
+  document.getElementById('slabel').textContent=
+    m.mes+' // '+evs.length+' EVENTO'+(evs.length!==1?'S':'')+(activeCat!=='TODOS'?' // '+activeCat:'');
   const grid=document.getElementById('grid');grid.innerHTML='';
+  if(!evs.length){grid.innerHTML='<div class="none">◈ SIN EVENTOS PARA ESTE FILTRO</div>';return}
 
-  // Sort: today first, then future by date, then past at end
+  // Orden: hoy primero → futuros → pasados
   evs.sort((a,b)=>{
-    const aT=isToday(a.iso),bT=isToday(b.iso);
-    if(aT&&!bT)return -1;if(!aT&&bT)return 1;
-    const aP=isPast(a.iso),bP=isPast(b.iso);
-    if(!aP&&bP)return -1;if(aP&&!bP)return 1;
+    const at=isToday(a.iso),bt=isToday(b.iso);
+    if(at&&!bt)return -1;if(!at&&bt)return 1;
+    const ap=isPast(a.iso),bp=isPast(b.iso);
+    if(!ap&&bp)return -1;if(ap&&!bp)return 1;
     const ad=a.iso.split('/')[0],bd=b.iso.split('/')[0];
     return ad<bd?-1:ad>bd?1:0;
   });
 
-  const lbl=document.getElementById('slabel');
-  lbl.textContent=month.mes+' // '+evs.length+' EVENTO'+(evs.length!==1?'S':'')+
-    (activeCat!=='TODOS'?' // '+activeCat:'');
-
-  if(!evs.length){grid.innerHTML='<div class="none">◈ SIN EVENTOS PARA ESTE FILTRO</div>';return}
-
   evs.forEach((ev,i)=>{
-    const hoy=isToday(ev.iso), past=isPast(ev.iso);
+    const hoy=isToday(ev.iso),past=isPast(ev.iso);
     const card=document.createElement('div');
     card.className='card'+(hoy?' hoy':past?' past':'');
     card.style.animationDelay=(i*.05)+'s';
@@ -301,128 +300,149 @@ function renderEvents(){
   });
 }
 
-function renderAll(){renderTabs();renderFilters();renderEvents()}
-
-// ── PROXY FETCH — intenta obtener datos frescos
-async function tryFetch(){
-  const PROXY='https://api.allorigins.win/get?url=';
-  const now=new Date();
-  const results=[];
-  for(let m=0;m<2;m++){
-    const d=new Date(now.getFullYear(),now.getMonth()+m,1);
-    const ym=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-    const url='https://www.llanes.es/es/agenda?month='+ym;
-    try{
-      const r=await fetch(PROXY+encodeURIComponent(url),{signal:AbortSignal.timeout(9000)});
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      const j=await r.json();
-      results.push({html:j.contents,d,ym});
-    }catch(e){console.warn('proxy',ym,e)}
-  }
-  if(!results.length)throw new Error('proxy unavailable');
-  return parseResults(results);
+// ── AUTO-UPDATE: parsear HTML de llanes.es via proxy CORS
+function guessCategory(title){
+  const t=title.toLowerCase();
+  if(/fiesta|antroxu|carnaval|romer|verbena|san |santo|virgen|ángel|angel|candelera/.test(t)) return 'Fiesta';
+  if(/semana santa|procesión|misa|religios/.test(t)) return 'Religioso';
+  if(/expos/.test(t)) return 'Exposición';
+  if(/concierto/.test(t)) return 'Concierto';
+  if(/taller/.test(t)) return 'Taller';
+  if(/teatro|dramatizada|espectáculo/.test(t)) return 'Teatro';
+  if(/cine|película|proyección|corto|documental|fórum/.test(t)) return 'Cine';
+  if(/marcha|carrera|raid|rugby|golf|torneo|deport|juega/.test(t)) return 'Deportivo';
+  if(/matanza|gochu|gastron|ollas|sabor/.test(t)) return 'Gastronomía';
+  if(/conferencia|charla|homenaje|presentación|inauguración/.test(t)) return 'Conferencia';
+  return 'Cultural';
 }
 
-function parseResults(results){
-  const MABBR=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  const data=[];
-  results.forEach(({html,d,ym})=>{
-    const doc=new DOMParser().parseFromString(html,'text/html');
-    const seen=new Set();
-    const eventos=[];
-    const mStr=MABBR[d.getMonth()].toUpperCase()+' '+d.getFullYear();
+async function fetchMonth(ym){
+  // Intentar múltiples proxies CORS en orden de preferencia
+  const proxies=[
+    `https://api.allorigins.win/get?url=${encodeURIComponent('https://www.llanes.es/es/agenda?month='+ym)}`,
+    `https://corsproxy.io/?url=${encodeURIComponent('https://www.llanes.es/es/agenda?month='+ym)}`,
+  ];
+  for(const url of proxies){
+    try{
+      const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
+      if(!r.ok) continue;
+      const j=await r.json();
+      const html=j.contents||j.body||'';
+      if(html.length>1000) return html;
+    }catch(e){console.warn('proxy fail',url,e)}
+  }
+  return null;
+}
 
-    doc.querySelectorAll('table td').forEach(td=>{
-      const dm=td.textContent.trim().match(/^(\d{1,2})/);
-      if(!dm)return;
-      const day=String(dm[1]).padStart(2,'0');
-      const isoDate=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+day;
-      td.querySelectorAll('a').forEach(a=>{
-        const title=a.textContent.trim();
-        if(!title||title.length<5||seen.has(title))return;
-        seen.add(title);
-        let href=a.getAttribute('href')||'';
-        if(!href.startsWith('http'))href='https://www.llanes.es/'+href.replace(/^\.\.\//,'es/');
-        const t=title.toLowerCase();
-        let cat='Cultural';
-        if(/fiesta|antroxu|carnaval|romería|romer|san |santo|virgen|candelera|angel/.test(t))cat='Fiesta';
-        else if(/expos/.test(t))cat='Exposición';
-        else if(/concierto/.test(t))cat='Concierto';
-        else if(/taller/.test(t))cat='Taller';
-        else if(/teatro|dramatizada/.test(t))cat='Teatro';
-        else if(/cine|película|proyección|corto|fórum|documental/.test(t))cat='Cine';
-        else if(/marcha|carrera|deport|torneo|golf/.test(t))cat='Deportivo';
-        else if(/gastron|matanza|gochu|ollas/.test(t))cat='Gastronomía';
-        else if(/conferencia|charla/.test(t))cat='Conferencia';
-        else if(/feria/.test(t))cat='Feria';
-        eventos.push({iso:isoDate,title,cat,url:href,desc:''});
-      });
+function parseMonthHTML(html, ym){
+  const[year,month]=ym.split('-').map(Number);
+  const doc=new DOMParser().parseFromString(html,'text/html');
+  const seen=new Set();
+  const eventos=[];
+
+  doc.querySelectorAll('table td').forEach(td=>{
+    const raw=td.textContent.trim();
+    const dm=raw.match(/^(\d{1,2})/);
+    if(!dm) return;
+    const day=String(dm[1]).padStart(2,'0');
+    const iso=`${year}-${String(month).padStart(2,'0')}-${day}`;
+
+    td.querySelectorAll('a').forEach(a=>{
+      const title=a.textContent.trim().replace(/\s+/g,' ');
+      if(!title||title.length<5||seen.has(title)) return;
+      // Ignorar genéricos
+      if(/espacio joven llanes|taller de orientación educ|taller gratuito de comunicaci|grupo de conversación|formación usuarios/i.test(title)) return;
+      seen.add(title);
+      let href=a.getAttribute('href')||'';
+      if(!href.startsWith('http')) href='https://www.llanes.es/'+href.replace(/^\.\.\//,'es/').replace(/^\/es\//,'es/');
+      eventos.push({iso, title, cat:guessCategory(title), url:href, desc:''});
     });
-
-    if(eventos.length){
-      data.push({mes:mStr,ym,eventos});
-    }
   });
-  return data;
+
+  const mesNombre=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'][month-1]+' '+year;
+  return {mes:mesNombre, ym, eventos};
+}
+
+async function tryLiveFetch(){
+  const now=new Date();
+  const meses=[];
+  for(let i=0;i<2;i++){
+    const d=new Date(now.getFullYear(),now.getMonth()+i,1);
+    const ym=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    setStatus(`DESCARGANDO ${ym}...`);
+    const html=await fetchMonth(ym);
+    if(html){
+      const parsed=parseMonthHTML(html,ym);
+      if(parsed.eventos.length>2) meses.push(parsed);
+    }
+  }
+  if(!meses.length) throw new Error('Sin datos del proxy');
+  return {fetchedOn:TODAY, meses};
 }
 
 // ── MAIN
 async function init(force=false){
-  setDot('spin');setStatus('VERIFICANDO CACHÉ...');
+  setDot('spin');setStatus('VERIFICANDO...');
+  const nowYM=TODAY.slice(0,7);
+  const cacheKey=`${CK}_${nowYM}`;
 
-  // Smart cache: key includes current year+month so it auto-expires each month
-  const nowYM = TODAY.slice(0,7); // YYYY-MM
-  const cacheKey = CK+'_'+nowYM;
-  const cached = localStorage.getItem(cacheKey);
-  const cachedDate = localStorage.getItem(cacheKey+'_date');
-
-  if(!force && cachedDate===TODAY && cached){
-    try{
-      DATA=JSON.parse(cached);
-      renderAll();showApp(true);
-      const total=DATA.reduce((s,m)=>s+m.eventos.length,0);
-      setDot('');setStatus(`${total} EVENTOS // CACHÉ ${TODAY}`);
-      document.getElementById('uinfo').style.display='flex';
-      document.getElementById('udate').textContent=TODAY;
-      return;
-    }catch(e){}
+  // Caché diaria con clave de mes
+  if(!force){
+    const cDate=localStorage.getItem(cacheKey+'_d');
+    const cData=localStorage.getItem(cacheKey);
+    if(cDate===TODAY&&cData){
+      try{
+        const saved=JSON.parse(cData);
+        DATA=saved.meses||saved; // compatibilidad con versiones anteriores
+        tabIdx=0;
+        renderAll();showApp(true);
+        const total=DATA.reduce((s,m)=>s+m.eventos.length,0);
+        setDot('');setStatus(`${total} EVENTOS // CACHÉ ${TODAY}`);
+        setBadge('cache');
+        document.getElementById('uinfo').style.display='flex';
+        document.getElementById('udate').textContent=cDate;
+        return;
+      }catch(e){}
+    }
   }
 
-  // Try live fetch
-  setStatus('CONECTANDO CON LLANES.ES...');
+  // Fetch en vivo
   document.getElementById('ltxt').textContent='CONECTANDO CON LLANES.ES...';
+  setStatus('CONECTANDO...');
   try{
-    const live=await tryFetch();
-    const total=live.reduce((s,m)=>s+m.eventos.length,0);
+    const live=await tryLiveFetch();
+    const total=live.meses.reduce((s,m)=>s+m.eventos.length,0);
     if(total>3){
-      DATA=live;
-      localStorage.setItem(cacheKey,JSON.stringify(DATA));
-      localStorage.setItem(cacheKey+'_date',TODAY);
-      renderAll();showApp(true);
+      DATA=live.meses;
+      localStorage.setItem(cacheKey,JSON.stringify(live));
+      localStorage.setItem(cacheKey+'_d',TODAY);
+      tabIdx=0;renderAll();showApp(true);
       setDot('');setStatus(`${total} EVENTOS // EN DIRECTO`);
+      setBadge('live');
       document.getElementById('uinfo').style.display='flex';
-      document.getElementById('udate').textContent=TODAY+' · EN DIRECTO';
+      document.getElementById('udate').textContent=TODAY+' · DIRECTO';
       return;
     }
-  }catch(e){console.warn('live fetch failed:',e)}
+    throw new Error('datos insuficientes');
+  }catch(e){console.warn('live fail:',e)}
 
-  // Fallback seed — auto-pick the right month(s)
+  // Fallback SEED — mostrar solo meses actuales o futuros
   const nowYMM=TODAY.slice(0,7);
   DATA=SEED.filter(m=>m.ym>=nowYMM);
-  if(!DATA.length)DATA=SEED;
-  // Mark tab to show current month
-  tabIdx=0;
-  renderAll();showApp(true);
+  if(!DATA.length) DATA=[...SEED];
+  tabIdx=0;renderAll();showApp(true);
   const total=DATA.reduce((s,m)=>s+m.eventos.length,0);
-  setDot('');setStatus(`${total} EVENTOS // DATOS EMBEBIDOS ${TODAY}`);
+  setDot('');setStatus(`${total} EVENTOS // DATOS EMBEBIDOS`);
+  setBadge('seed');
   document.getElementById('uinfo').style.display='flex';
   document.getElementById('udate').textContent=TODAY+' · EMBEBIDO';
 }
 
 async function forceReload(){
   const nowYM=TODAY.slice(0,7);
-  localStorage.removeItem(CK+'_'+nowYM);
-  localStorage.removeItem(CK+'_'+nowYM+'_date');
+  const cacheKey=`${CK}_${nowYM}`;
+  localStorage.removeItem(cacheKey);
+  localStorage.removeItem(cacheKey+'_d');
   document.getElementById('btnR').disabled=true;
   showApp(false);
   await init(true);
