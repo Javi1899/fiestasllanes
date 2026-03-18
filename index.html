@@ -344,13 +344,17 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
 
 /* ── CONSTANTES DE TIEMPO */
 const _NOW = new Date();
-_NOW.setHours(0,0,0,0);
-const TODAY_ISO = _NOW.toISOString().slice(0,10);
+// toISOString() usa UTC: en España (UTC+1/+2) las 00:00 locales son las 23:00 UTC del día anterior.
+// Usamos los valores locales del navegador para obtener siempre la fecha correcta.
+function localISO(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+const TODAY_ISO = localISO(_NOW);
 
-/* Fecha límite: hace 2 días */
-const CUTOFF = new Date(_NOW);
-CUTOFF.setDate(CUTOFF.getDate() - 2);
-const CUTOFF_ISO = CUTOFF.toISOString().slice(0,10);
+/* Fecha límite: hace 2 días (en hora local) */
+const _CUTOFF = new Date(_NOW);
+_CUTOFF.setDate(_NOW.getDate() - 2);
+const CUTOFF_ISO = localISO(_CUTOFF);
 
 /* ── DATOS (solo desde marzo 2026 en adelante) */
 const SEED = [
@@ -434,10 +438,12 @@ function fmtDate(iso){
 function tagHTML(cat){ return `<span class="tag ${CAT_CLASS[cat]||'tag-cultural'}">${cat}</span>`; }
 
 function getWeekRange(){
-  const dow=_NOW.getDay(), diffMon=dow===0?-6:1-dow;
+  // Semana lunes-domingo en hora local (España)
+  const dow=_NOW.getDay(); // 0=dom,1=lun...6=sáb
+  const diffMon = dow===0 ? -6 : 1-dow; // días hasta el lunes de esta semana
   const mon=new Date(_NOW); mon.setDate(_NOW.getDate()+diffMon);
   const sun=new Date(mon); sun.setDate(mon.getDate()+6);
-  return{start:mon.toISOString().slice(0,10), end:sun.toISOString().slice(0,10)};
+  return{start:localISO(mon), end:localISO(sun)};
 }
 
 /* ── SECCIÓN 1: ESTA SEMANA (sin fotos, sin eventos >2 días pasados) */
@@ -571,21 +577,14 @@ function renderFilters(){
 function renderList(){
   let evs=SEED.filter(ev=>{
     const sm=isoStart(ev).slice(0,7), em=isoEnd(ev).slice(0,7);
-    // En el listado mostrar todos del mes activo, pero ocultar los >2 días pasados solo en mes actual
     if(sm>activeMonth||em<activeMonth) return false;
-    if(activeMonth===TODAY_ISO.slice(0,7)) return isVisible(ev);
-    return true;
+    // Ocultar siempre eventos con más de 2 días de antigüedad
+    return isVisible(ev);
   });
   if(activeCat!=='TODOS') evs=evs.filter(e=>e.cat===activeCat);
 
-  // Ordenar: hoy primero, luego futuros por fecha, pasados al final
-  evs.sort((a,b)=>{
-    const at=isEvToday(a),bt=isEvToday(b);
-    if(at&&!bt)return -1;if(!at&&bt)return 1;
-    const ap=isoEnd(a)<TODAY_ISO,bp=isoEnd(b)<TODAY_ISO;
-    if(!ap&&bp)return -1;if(ap&&!bp)return 1;
-    return isoStart(a)<isoStart(b)?-1:1;
-  });
+  // Ordenar estrictamente por fecha de inicio ascendente
+  evs.sort((a,b)=>isoStart(a)<isoStart(b)?-1:isoStart(a)>isoStart(b)?1:0);
 
   const[y,m]=activeMonth.split('-');
   document.getElementById('list-title').textContent=
@@ -627,7 +626,7 @@ function renderList(){
 /* ── BOOT */
 function boot(){
   calMonths=getMonths();
-  const nowYM=TODAY_ISO.slice(0,7);
+  const nowYM=TODAY_ISO.slice(0,7); // ya es hora local
   calIdx=Math.max(0,calMonths.indexOf(nowYM));
 
   renderWeek();
