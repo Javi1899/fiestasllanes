@@ -1,671 +1,239 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLANES // AGENDA CULTURAL</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
-<style>
-:root{
-  --c:#00f5ff;--m:#ff00aa;--dark:#020b14;--dark2:#041825;--dark3:#061f30;
-  --grid:rgba(0,245,255,0.035);--glow:0 0 20px rgba(0,245,255,.45);
-  --glow2:0 0 40px rgba(0,245,255,.8),0 0 80px rgba(0,245,255,.25);
-  --mglow:0 0 20px rgba(255,0,170,.45);--border:rgba(0,245,255,.12);
-  --text:#c8e8f4;--text2:rgba(200,232,244,.55);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--dark);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);z-index:0;pointer-events:none}
-.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 24px 80px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIESTAS Y EVENTOS DE LLANES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a12;
+            --card-bg: rgba(20, 20, 35, 0.8);
+        }
 
-/* PARTICLES */
-.pts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.pt{position:absolute;border-radius:50%;opacity:0;animation:float-up linear infinite}
-@keyframes float-up{0%{transform:translateY(105vh) translateX(0);opacity:0}10%{opacity:.6}90%{opacity:.1}100%{transform:translateY(-5vh) translateX(var(--dx));opacity:0}}
+        body {
+            background-color: var(--dark-bg);
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
 
-/* CORNERS */
-.corner{position:fixed;width:56px;height:56px;z-index:3;pointer-events:none}
-.corner-tl{top:14px;left:14px;border-top:1px solid var(--c);border-left:1px solid var(--c);opacity:.35}
-.corner-tr{top:14px;right:14px;border-top:1px solid var(--c);border-right:1px solid var(--c);opacity:.35}
-.corner-bl{bottom:14px;left:14px;border-bottom:1px solid var(--c);border-left:1px solid var(--c);opacity:.35}
-.corner-br{bottom:14px;right:14px;border-bottom:1px solid var(--c);border-right:1px solid var(--c);opacity:.35}
+        .cyber-header {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
 
-/* HEADER */
-header{text-align:center;padding:56px 0 40px}
-.badge{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:5px;color:var(--m);margin-bottom:14px;opacity:.85;animation:blink 4s infinite;display:block}
-@keyframes blink{0%,91%,100%{opacity:.85}95%{opacity:.1}}
-h1{font-family:'Orbitron',sans-serif;font-size:clamp(42px,8vw,88px);font-weight:900;color:var(--c);text-shadow:var(--glow2);letter-spacing:12px;line-height:1;margin-bottom:8px;animation:glitch 8s infinite}
-@keyframes glitch{0%,90%,100%{text-shadow:var(--glow2);transform:none}92%{text-shadow:-4px 0 var(--m),4px 0 var(--c);transform:skewX(-1.5deg)}93%{text-shadow:4px 0 var(--m),-4px 0 var(--c);transform:skewX(1.5deg)}94%{text-shadow:var(--glow2);transform:none}}
-.subtitle{font-family:'Orbitron',sans-serif;font-size:clamp(9px,1.4vw,13px);letter-spacing:6px;color:rgba(200,232,244,.38);margin-bottom:28px}
-.hdeco{display:flex;align-items:center;gap:18px;justify-content:center;margin:0 auto;max-width:600px}
-.hdeco::before,.hdeco::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent)}
-.dia{width:9px;height:9px;border:1px solid var(--c);transform:rotate(45deg);box-shadow:0 0 12px var(--c)}
+        .neon-border {
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
 
-/* STATUS BAR */
-.sbar{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(0,245,255,.13);background:linear-gradient(90deg,rgba(0,245,255,.03),rgba(255,0,170,.02));padding:11px 22px;margin:0 0 44px;font-family:'Share Tech Mono',monospace;font-size:11px;flex-wrap:wrap;gap:10px}
-.si{display:flex;align-items:center;gap:8px;color:rgba(200,232,244,.55)}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);animation:pulse 2s infinite;flex-shrink:0}
-.dot.spin{background:var(--m);box-shadow:0 0 8px var(--m)}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
-.sbadge{font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 10px;border:1px solid;letter-spacing:1px}
-.s-live{color:#00ff9d;border-color:rgba(0,255,157,.3)}
-.s-seed{color:rgba(200,232,244,.4);border-color:rgba(200,232,244,.15)}
-.btn-refresh{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:var(--c);background:transparent;border:1px solid rgba(0,245,255,.35);padding:7px 18px;cursor:pointer;text-transform:uppercase;transition:all .25s;position:relative;overflow:hidden}
-.btn-refresh::before{content:'';position:absolute;inset:0;background:rgba(0,245,255,.07);transform:scaleX(0);transform-origin:left;transition:transform .25s}
-.btn-refresh:hover::before{transform:scaleX(1)}
-.btn-refresh:hover{box-shadow:var(--glow)}
-.btn-refresh:disabled{opacity:.35;cursor:not-allowed}
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
 
-/* LOADER */
-#loader{text-align:center;padding:100px 20px}
-.ring{width:56px;height:56px;border:2px solid rgba(0,245,255,.1);border-top-color:var(--c);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 18px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ltext{font-family:'Share Tech Mono',monospace;color:rgba(200,232,244,.5);font-size:12px;letter-spacing:2px}
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            border-left: 4px solid var(--neon-blue);
+        }
 
-/* SECTION HEADERS */
-.sec-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;margin-top:56px}
-.sec-num{font-family:'Orbitron',sans-serif;font-size:10px;color:var(--m);letter-spacing:3px;opacity:.7;white-space:nowrap}
-.sec-title{font-family:'Orbitron',sans-serif;font-size:clamp(12px,2vw,16px);letter-spacing:5px;color:var(--c);text-shadow:var(--glow);white-space:nowrap}
-.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,245,255,.4),transparent)}
+        .card.fiesta { border-left: 4px solid var(--neon-pink); }
+        .card.fiesta:hover { box-shadow: 0 0 20px rgba(255, 0, 255, 0.2); }
 
-/* ════════════════════════════════
-   BLOQUE 1 — FIESTAS ESTA SEMANA
-   Sin fotos, solo texto limpio
-════════════════════════════════ */
-.week-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.week-card{
-  border:1px solid rgba(0,245,255,.15);
-  background:linear-gradient(135deg,rgba(0,245,255,.04),rgba(255,0,170,.03));
-  padding:22px 24px;position:relative;overflow:hidden;
-  transition:transform .3s,box-shadow .3s,border-color .3s;
-  animation:fadeUp .55s both;
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.week-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--c),var(--m))}
-.week-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--c),transparent);opacity:.5}
-.week-card:hover{transform:translateY(-4px);box-shadow:0 8px 36px rgba(0,245,255,.13);border-color:rgba(0,245,255,.35)}
-.week-card.hoy-card{border-color:rgba(255,0,170,.35);background:linear-gradient(135deg,rgba(255,0,170,.06),rgba(0,245,255,.03))}
-.week-card.hoy-card::before{background:linear-gradient(180deg,var(--m),var(--c))}
-.week-card.hoy-card::after{background:linear-gradient(90deg,var(--m),transparent)}
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            transition: all 0.2s;
+        }
 
-.wc-date{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--m);text-shadow:0 0 10px var(--m);margin-bottom:9px;display:flex;align-items:center;gap:7px}
-.wc-date::before{content:'◈';font-size:7px;color:var(--c)}
-.wc-title{font-size:17px;font-weight:700;color:#e8f4ff;line-height:1.3;margin-bottom:9px}
-.wc-desc{font-size:13px;color:var(--text2);line-height:1.65}
-.wc-meta{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap;align-items:center}
+        .filter-btn.active {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-blue);
+            font-weight: bold;
+        }
 
-/* TAGS */
-.tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;border:1px solid;padding:3px 9px;text-transform:uppercase}
-.tag-fiesta{color:rgba(255,0,170,.9);border-color:rgba(255,0,170,.35)}
-.tag-concierto{color:rgba(255,215,0,.9);border-color:rgba(255,215,0,.3)}
-.tag-deportivo{color:rgba(255,110,0,.9);border-color:rgba(255,110,0,.3)}
-.tag-gastronomia{color:rgba(0,255,157,.85);border-color:rgba(0,255,157,.3)}
-.tag-cine{color:rgba(180,80,255,.9);border-color:rgba(180,80,255,.3)}
-.tag-exposicion{color:rgba(0,245,255,.75);border-color:rgba(0,245,255,.25)}
-.tag-religioso{color:rgba(255,180,60,.9);border-color:rgba(255,180,60,.3)}
-.tag-cultural{color:rgba(200,232,244,.6);border-color:rgba(200,232,244,.18)}
-.tag-hoy{color:rgba(255,0,170,.95);border-color:rgba(255,0,170,.5);animation:tag-pulse 1.5s infinite}
-@keyframes tag-pulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 10px rgba(255,0,170,.5)}}
-.elink{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.45);text-decoration:none;letter-spacing:1px;transition:color .2s;margin-left:auto}
-.elink:hover{color:var(--c)}
-.no-week{text-align:center;padding:50px 20px;font-family:'Share Tech Mono',monospace;color:rgba(200,232,244,.3);font-size:12px;letter-spacing:2px;border:1px solid var(--border);line-height:2}
+        .badge-semana-actual {
+            background: linear-gradient(90deg, var(--neon-pink), #800080);
+            animation: pulse 2s infinite;
+        }
 
-/* ════════════════════════════════
-   BLOQUE 2 — CALENDARIO (1 mes)
-════════════════════════════════ */
-.cal-box{border:1px solid var(--border);background:rgba(0,245,255,.02);padding:28px;max-width:680px}
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.cal-month{font-family:'Orbitron',sans-serif;font-size:15px;letter-spacing:4px;color:var(--c);text-shadow:var(--glow)}
-.cal-nav-btn{font-family:'Orbitron',sans-serif;font-size:10px;color:rgba(0,245,255,.5);background:transparent;border:1px solid rgba(0,245,255,.2);padding:6px 14px;cursor:pointer;letter-spacing:1px;transition:all .2s}
-.cal-nav-btn:hover{color:var(--c);border-color:rgba(0,245,255,.5);box-shadow:var(--glow)}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal-dow{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.4);text-align:center;padding:7px 0;letter-spacing:1px}
-.cal-day{
-  aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-family:'Share Tech Mono',monospace;font-size:12px;color:rgba(200,232,244,.35);
-  position:relative;border:1px solid transparent;transition:all .2s;cursor:default;
-}
-.cal-day.empty{background:transparent}
-.cal-day.has-event{color:var(--c);font-weight:700;cursor:pointer;background:rgba(0,245,255,.06);border-color:rgba(0,245,255,.22)}
-.cal-day.has-event:hover{background:rgba(0,245,255,.13);border-color:rgba(0,245,255,.45);box-shadow:var(--glow)}
-.cal-day.today-day{background:rgba(255,0,170,.14);border-color:rgba(255,0,170,.45);color:var(--m);font-weight:700}
-.cal-day.today-day.has-event{box-shadow:var(--mglow)}
-.event-dot{width:4px;height:4px;border-radius:50%;background:var(--m);margin-top:3px;box-shadow:0 0 5px var(--m);display:none}
-.cal-day.has-event .event-dot{display:block}
-.cal-day .tip{
-  display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
-  background:var(--dark2);border:1px solid rgba(0,245,255,.25);padding:9px 13px;
-  font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--c);
-  z-index:30;pointer-events:none;box-shadow:0 6px 24px rgba(0,0,0,.6);
-  min-width:180px;max-width:260px;white-space:normal;text-align:left;line-height:1.6;letter-spacing:.5px;
-}
-.cal-day:hover .tip{display:block}
-.cal-legend{margin-top:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
-.leg-item{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(200,232,244,.4);letter-spacing:1px}
-.leg-dot{width:8px;height:8px;border-radius:50%}
-.leg-dot-ev{background:var(--c);box-shadow:0 0 5px var(--c)}
-.leg-dot-hoy{background:var(--m);box-shadow:0 0 5px var(--m)}
-.cal-count{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(200,232,244,.28);letter-spacing:1px;margin-left:auto}
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; box-shadow: 0 0 20px var(--neon-pink); }
+            100% { opacity: 0.8; }
+        }
 
-/* ════════════════════════════════
-   BLOQUE 3 — LISTADO COMPLETO
-   Fotos bien encajadas + lightbox
-════════════════════════════════ */
-.list-controls{display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap;align-items:center}
-.list-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(200,232,244,.38);letter-spacing:2px;margin-right:4px}
-.ftag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(200,232,244,.45);background:transparent;border:1px solid var(--border);padding:5px 13px;cursor:pointer;transition:all .2s;text-transform:uppercase}
-.ftag:hover{border-color:rgba(0,245,255,.4);color:var(--c)}
-.ftag.on{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.07);box-shadow:var(--glow)}
-.month-tabs{display:flex;gap:4px;margin-bottom:26px;flex-wrap:wrap}
-.mtab{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2px;color:rgba(200,232,244,.45);background:transparent;border:1px solid var(--border);padding:8px 18px;cursor:pointer;transition:all .2s;text-transform:uppercase}
-.mtab:hover{border-color:rgba(0,245,255,.4);color:var(--c)}
-.mtab.on{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.05);box-shadow:var(--glow)}
-
-.list-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
-
-.ev-card{
-  border:1px solid rgba(0,245,255,.1);background:rgba(0,245,255,.015);
-  overflow:hidden;position:relative;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
-  animation:fadeUp .5s both;display:flex;flex-direction:column;
-}
-.ev-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--c),var(--m));z-index:1}
-.ev-card:hover{transform:translateY(-3px);box-shadow:0 6px 30px rgba(0,245,255,.12);border-color:rgba(0,245,255,.3)}
-.ev-card.hoy{border-color:rgba(255,0,170,.3);background:rgba(255,0,170,.04)}
-.ev-card.hoy::before{background:linear-gradient(180deg,var(--m),var(--c))}
-
-/* Contenedor de imagen: altura fija, no deforma la tarjeta */
-.ev-img-wrap{
-  width:100%;height:200px;overflow:hidden;flex-shrink:0;
-  position:relative;background:var(--dark3);cursor:zoom-in;
-}
-.ev-img-wrap img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  filter:saturate(.75) brightness(.82);transition:filter .35s,transform .35s;
-}
-.ev-card:hover .ev-img-wrap img{filter:saturate(1) brightness(.95);transform:scale(1.03)}
-.ev-img-wrap .zoom-icon{
-  position:absolute;bottom:8px;right:10px;
-  font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.6);
-  background:rgba(2,11,20,.7);padding:3px 8px;letter-spacing:1px;
-  opacity:0;transition:opacity .25s;
-}
-.ev-card:hover .zoom-icon{opacity:1}
-
-.ev-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
-.ev-num{position:absolute;top:10px;right:14px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(0,245,255,.18);z-index:2}
-.ev-date{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--m);text-shadow:0 0 8px var(--m);margin-bottom:8px;display:flex;align-items:center;gap:7px}
-.ev-date::before{content:'◈';font-size:7px;color:var(--c)}
-.ev-title{font-size:16px;font-weight:700;color:#e8f4ff;line-height:1.3;margin-bottom:7px}
-.ev-desc{font-size:12px;color:var(--text2);line-height:1.6;flex:1}
-.ev-meta{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap;align-items:center}
-
-/* ── LIGHTBOX ── */
-#lightbox{
-  display:none;position:fixed;inset:0;background:rgba(2,11,20,.93);z-index:1000;
-  align-items:center;justify-content:center;cursor:zoom-out;
-  animation:lb-in .2s ease;
-}
-#lightbox.open{display:flex}
-@keyframes lb-in{from{opacity:0}to{opacity:1}}
-#lb-img{
-  max-width:90vw;max-height:88vh;object-fit:contain;
-  border:1px solid rgba(0,245,255,.2);box-shadow:0 0 60px rgba(0,245,255,.15);
-  animation:lb-scale .2s ease;cursor:default;
-}
-@keyframes lb-scale{from{transform:scale(.93)}to{transform:scale(1)}}
-#lb-caption{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-  font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(200,232,244,.55);
-  letter-spacing:2px;text-align:center;
-}
-#lb-close{
-  position:fixed;top:20px;right:24px;font-family:'Orbitron',sans-serif;font-size:12px;
-  color:var(--c);cursor:pointer;letter-spacing:2px;background:transparent;border:1px solid rgba(0,245,255,.3);
-  padding:6px 14px;transition:all .2s;
-}
-#lb-close:hover{box-shadow:var(--glow);border-color:var(--c)}
-
-/* FOOTER */
-footer{margin-top:70px;padding:32px 24px;border-top:1px solid rgba(0,245,255,.1);text-align:center;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(200,232,244,.22);letter-spacing:2px;position:relative;z-index:1}
-footer a{color:rgba(0,245,255,.35);text-decoration:none;transition:color .2s}
-footer a:hover{color:var(--c)}
-.footer-sig{margin-top:12px;font-size:13px;color:rgba(200,232,244,.32);letter-spacing:4px}
-.footer-sig span{color:var(--m);text-shadow:0 0 10px var(--m)}
-</style>
+        .glitch-text {
+            position: relative;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a12; }
+        ::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 10px; border: 1px solid var(--neon-blue); }
+    </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-<div class="corner corner-tl"></div><div class="corner corner-tr"></div>
-<div class="corner corner-bl"></div><div class="corner corner-br"></div>
-<div class="pts" id="pts"></div>
+    <header class="max-w-6xl mx-auto mb-12 text-center">
+        <h1 class="cyber-header text-4xl md:text-6xl mb-2 glitch-text">Llanes 2026</h1>
+        <p class="text-cyan-400 font-light tracking-widest uppercase">Agenda Futurista de Eventos</p>
+        <div class="h-1 w-32 bg-cyan-500 mx-auto mt-4 rounded-full shadow-[0_0_10px_#00f3ff]"></div>
+    </header>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()">
-  <button id="lb-close" onclick="closeLightbox()">✕ CERRAR</button>
-  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()">
-  <div id="lb-caption"></div>
-</div>
-
-<div class="wrap">
-
-<!-- HEADER -->
-<header>
-  <span class="badge">◄ SISTEMA ACTIVO // AGENDA EN TIEMPO REAL ►</span>
-  <h1>LLANES</h1>
-  <div class="subtitle">AGENDA CULTURAL &amp; FIESTAS // CONCEJO DE LLANES · ASTURIAS</div>
-  <div class="hdeco"><div class="dia"></div></div>
-</header>
-
-<!-- STATUS BAR -->
-<div class="sbar">
-  <div class="si"><div class="dot" id="dot"></div><span id="stxt">INICIALIZANDO...</span></div>
-  <div class="si" id="uinfo" style="display:none">ACT.: <span id="udate" style="color:var(--c);margin-left:6px"></span></div>
-  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-    <span class="sbadge s-seed" id="src-badge" style="display:none"></span>
-    <button class="btn-refresh" id="btnR" onclick="forceReload()">⟳ ACTUALIZAR</button>
-  </div>
-</div>
-
-<!-- LOADER -->
-<div id="loader"><div class="ring"></div><div class="ltext">CARGANDO AGENDA...</div></div>
-
-<!-- APP -->
-<div id="app" style="display:none">
-
-  <!-- 01 ESTA SEMANA -->
-  <div class="sec-header">
-    <span class="sec-num">01 //</span>
-    <span class="sec-title">FIESTAS DE ESTA SEMANA</span>
-    <div class="sec-line"></div>
-  </div>
-  <div id="week-container"></div>
-
-  <!-- 02 CALENDARIO -->
-  <div class="sec-header">
-    <span class="sec-num">02 //</span>
-    <span class="sec-title">CALENDARIO DEL MES</span>
-    <div class="sec-line"></div>
-  </div>
-  <div id="cal-container"></div>
-
-  <!-- 03 LISTADO COMPLETO -->
-  <div class="sec-header">
-    <span class="sec-num">03 //</span>
-    <span class="sec-title" id="list-title">TODOS LOS EVENTOS</span>
-    <div class="sec-line"></div>
-  </div>
-  <div class="month-tabs" id="month-tabs"></div>
-  <div class="list-controls">
-    <span class="list-label">FILTRAR:</span>
-    <div id="filters" style="display:flex;gap:6px;flex-wrap:wrap"></div>
-  </div>
-  <div class="list-grid" id="list-grid"></div>
-
-</div>
-</div>
-
-<footer>
-  FUENTE: <a href="https://www.llanes.es/es/agenda" target="_blank">LLANES.ES/ES/AGENDA</a>
-  &nbsp;//&nbsp; ACTUALIZACIÓN DIARIA AUTOMÁTICA &nbsp;//&nbsp; ASTURIAS
-  <div class="footer-sig">PÁGINA WEB DE <span>JAVI TJ</span></div>
-</footer>
-
-<script>
-'use strict';
-
-/* ── PARTICLES */
-(function(){
-  const c=document.getElementById('pts');
-  for(let i=0;i<28;i++){
-    const p=document.createElement('div');p.className='pt';
-    const size=Math.random()*2.5+.8, dx=(Math.random()-.5)*120;
-    p.style.cssText=`left:${Math.random()*100}%;width:${size}px;height:${size}px;`+
-      `background:${Math.random()>.72?'var(--m)':Math.random()>.5?'var(--c)':'rgba(0,255,157,.7)'};`+
-      `animation-duration:${Math.random()*18+10}s;animation-delay:${Math.random()*18}s;--dx:${dx}px`;
-    c.appendChild(p);
-  }
-})();
-
-/* ── LIGHTBOX */
-function openLightbox(src,caption){
-  document.getElementById('lb-img').src=src;
-  document.getElementById('lb-caption').textContent=caption||'';
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
-
-/* ── CONSTANTES DE TIEMPO */
-const _NOW = new Date();
-// toISOString() usa UTC: en España (UTC+1/+2) las 00:00 locales son las 23:00 UTC del día anterior.
-// Usamos los valores locales del navegador para obtener siempre la fecha correcta.
-function localISO(d){
-  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-}
-const TODAY_ISO = localISO(_NOW);
-
-/* Fecha límite: hace 2 días (en hora local) */
-const _CUTOFF = new Date(_NOW);
-_CUTOFF.setDate(_NOW.getDate() - 2);
-const CUTOFF_ISO = localISO(_CUTOFF);
-
-/* ── DATOS (solo desde marzo 2026 en adelante) */
-const SEED = [
-  /* ══ MARZO 2026 ══ */
-  {iso:"2026-03-01",title:"Fiesta del Santo Ángel de la Guarda – El Mazucu",desc:"12:30h Salida del Ramo y procesión. 13:00h Misa solemne y remate del ramo. 14:00h Sesión vermú con Bandina Los Collainos. 17:30h Hinchables y pintacaras. 19:00h Mariachis. 20:00h Romería con Trío Picos de Europa y DJ JAVI MORO.",cat:"Fiesta",img:"",url:"https://www.llanes.es/es/fiesta-del-santo-angel-de-la-guarda-el-mazucu-0"},
-  {iso:"2026-03-06",title:"Actos por el Día Internacional de la Mujer (8M)",desc:"Lectura del manifiesto, XXVI Premios Mujer Concejo de Llanes, proyecciones de cine y actividades infantiles en el Espacio Joven.",cat:"Cultural",img:"",url:"https://www.llanes.es/es/lectura-manifiesto-y-acto-de-entrega-de-los-xxvi-premios-mujer-concejo-de-llanes-llanes"},
-  {iso:"2026-03-07",title:"Concierto: Mariajo Baudot – «Señora Bien»",desc:"Concierto en la Casa Municipal de Cultura de Llanes.",cat:"Concierto",img:"",url:"https://www.llanes.es/es/concierto-mariajo-baudot-senora-bien-llanes"},
-  {iso:"2026-03-08",title:"Manifestación 8M",desc:"Autobús y manifestación «Ni la tierra ni las mujeres somos territorio de conquista» desde Llanes.",cat:"Cultural",img:"",url:"https://www.llanes.es/es/autobus-manifestacion-8-m-ni-la-tierra-ni-las-mujeres-somos-territorio-de-conquista-llanes"},
-  {iso:"2026-03-14",title:"Carnaval en Poo de Llanes 2026",desc:"Juegos infantiles, cena popular y romería con DJ en la Bolera Cubierta de Poo de Llanes.",cat:"Fiesta",img:"",url:"https://www.llanes.es/es/carnaval-en-poo-de-llanes-2026-0"},
-  {iso:"2026-03-14",title:"Fiesta de San Patricio – Pancar",desc:"Misa cantada por la Coral Concejo de Llanes y sesión vermut en Pancar.",cat:"Fiesta",img:"",url:"https://www.llanes.es/es/fiesta-de-san-patricio-pancar-2"},
-  {iso:"2026-03-14",title:"II Raid Hípico Ayuntamiento de Llanes – Porrúa",desc:"Segunda edición del Raid Hípico organizado por el Ayuntamiento de Llanes en Porrúa.",cat:"Deportivo",img:"",url:"https://www.llanes.es/es/ii-raid-hipico-ayto-de-llanes-porrua"},
-  {iso:"2026-03-14",title:"Torneo del Abonado – Campo de Golf Municipal",desc:"Torneo de golf para abonados en el Campo de Golf Municipal de Llanes.",cat:"Deportivo",img:"",url:"https://www.llanes.es/es/torneo-del-abonado-2026"},
-  {iso:"2026-03-14",title:"Concierto: Cubasturia Jazz – Casino de Llanes",desc:"Concierto de jazz en el Casino de Llanes a las 19:30 h.",cat:"Concierto",img:"",url:"https://www.llanes.es/es/concierto-cubasturia-jazz-llanes"},
-  {iso:"2026-03-14",title:"XIII Jornadas del San Martín del Gochu – Posada la Vieja",desc:"Día 1. Cena tradicional de la matanza con actuaciones musicales.",cat:"Gastronomía",img:"",url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
-  {iso:"2026-03-15",title:"XIII Jornadas del San Martín del Gochu – Día 2",desc:"Continuación de las jornadas gastronómicas de la matanza tradicional asturiana en Posada la Vieja.",cat:"Gastronomía",img:"",url:"https://www.llanes.es/es/xiii-san-martin-del-gochu-recuperacion-de-la-matanza-posada-la-vieja"},
-  {iso:"2026-03-15",title:"II Concentración de Escuelas de Rugby e Jornada de Rugby Inclusivo",desc:"Concentración de escuelas de rugby y jornada de rugby inclusivo en las instalaciones deportivas locales.",cat:"Deportivo",img:"",url:"https://www.llanes.es/es/ii-concentracion-de-escuelas-de-rugby-y-ii-jornada-de-rugby-inclusivo-llanes"},
-  {iso:"2026-03-21",title:"Fiesta de San José – Posada de Llanes",desc:"Festividad de San José en Posada de Llanes.",cat:"Fiesta",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/san_jose_posada_la_vieja_6.jpg?itok=ei8v_0-h",url:"https://www.llanes.es/es/fiesta-de-san-jose-posada-la-vieja-0"},
-  {iso:"2026-03-21",title:"Juega Pueblos – Meré",desc:"Actividad deportiva y de convivencia vecinal en el pueblo de Meré.",cat:"Deportivo",img:"",url:"https://www.llanes.es/es/juega-pueblos-mere"},
-  {iso:"2026-03-21",title:"Concierto: Fee Reega",desc:"Concierto en la Casa Municipal de Cultura de Llanes.",cat:"Concierto",img:"",url:"https://www.llanes.es/es/concierto-fee-reega-llanes-0"},
-  {iso:"2026-03-28",title:"Carnaval de Posada de Llanes 2026",desc:"Celebración tardía del Carnaval en Posada de Llanes. Desfiles, disfraces y verbena.",cat:"Fiesta",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/cartel_prov_carnaval_posada.jpg?itok=NIhM_Hxh",url:"https://www.llanes.es/es/carnaval-posada-de-llanes-2026"},
-  {iso:"2026-03-28",title:"Concierto: Indocentes",desc:"Concierto del grupo Indocentes en Llanes.",cat:"Concierto",img:"",url:"https://www.llanes.es/es/concierto-indocentes-llanes"},
-  {iso:"2026-03-29",title:"Semana Santa – Domingo de Ramos",desc:"11:45h Bendición de Ramos en la Capilla de Santa Ana. Procesión a la Basílica y Santa Misa. 19:00h Santa Misa en la Basílica.",cat:"Religioso",img:"",url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
-  {iso:"2026-03-29/2026-04-06",title:"XVIII Mercadillo Solidario de Artesanías Guatemaltecas",desc:"Mercadillo solidario de artesanías guatemaltecas en Llanes. Del 29 de marzo al 6 de abril.",cat:"Cultural",img:"",url:"https://www.llanes.es/es/xviii-mercadillo-solidario-de-artesanias-guatemaltecas-llanes"},
-  {iso:"2026-03-31",title:"Presentación novela: «Flor de Agua»",desc:"Presentación literaria en Llanes.",cat:"Conferencia",img:"",url:"https://www.llanes.es/es/presentacion-de-la-novela-flor-de-agua-llanes"},
-  {iso:"2026-03-15/2026-03-21",title:"Exposición: «Quebrar la pintura II» – Elena Rato",desc:"Casa de Cultura de Llanes. Mar–Vie 11:00–13:30 y 18:00–20:30h. Sáb 11:00–14:00h.",cat:"Exposición",img:"",url:"https://www.llanes.es/es/exposicion-quebrar-la-pintura-ii-transitando-el-soporte-llanes"},
-  {iso:"2026-03-15/2026-04-30",title:"Exposición: «Indumentaria tradicional del Oriente de Asturias»",desc:"«Por la pinta son de Llanes». Casa de Cultura (1ª planta) 11:00–13:30h.",cat:"Exposición",img:"",url:"https://www.llanes.es/es/exposicion-indumentaria-tradicional-del-oriente-de-asturias-por-la-pinta-son-de-llanes-llanes-0"},
-  {iso:"2026-03-15/2026-04-30",title:"Exposición: «Maestros de la pintura del s. XX»",desc:"Orlando Pelayo, Antonio Suárez, Rubio Camín, Eduardo Arroyo, Vaquero Palacios y más. Casa de Cultura (2ª planta).",cat:"Exposición",img:"",url:"https://www.llanes.es/es/exposicion-maestros-de-la-pintura-del-s-xx-artistas-vinculados-asturias-llanes-0"},
-  {iso:"2026-03-26/2026-04-30",title:"Exposición: «Remiendos» – Natalia Suárez",desc:"Inaugurada el 26 de marzo en la Casa de Cultura de Llanes. Continúa durante todo abril.",cat:"Exposición",img:"",url:"https://www.llanes.es/es/exposicion-remiendos-llanes"},
-  {iso:"2026-03-27/2026-04-11",title:"Exposición: «Luxury Eco Style» – Linda Prema",desc:"Casa de Cultura de Nueva de Llanes. Del 27 de marzo al 11 de abril.",cat:"Exposición",img:"",url:"https://www.llanes.es/es/exposicion-luxury-eco-style-nueva-de-llanes"},
-
-  /* ══ ABRIL 2026 ══ */
-  {iso:"2026-04-01",title:"Semana Santa – Miércoles Santo: Vía Crucis",desc:"20:30h Solemne Vía Crucis procesional por las calles de la villa de Llanes, con las imágenes del Cirineo, Dolorosa y María Magdalena.",cat:"Religioso",img:"",url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
-  {iso:"2026-04-02",title:"Semana Santa – Jueves Santo",desc:"18:00h Misa vespertina de la CENA DEL SEÑOR. 20:30h HORA SANTA en la Basílica de Llanes.",cat:"Religioso",img:"",url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
-  {iso:"2026-04-03",title:"Semana Santa – Viernes Santo: Descendimiento y Procesión",desc:"9:00h Vía Crucis Cristo del Camino. 18:00h Celebración de la PASIÓN DE CRISTO. 20:00h Vía Crucis, Descendimiento y Procesión del Santo Entierro.",cat:"Religioso",img:"",url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
-  {iso:"2026-04-03",title:"IX Fiesta de los Tortos – Meré",desc:"Fiesta tradicional de los tortos en el pueblo de Meré.",cat:"Gastronomía",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/lardinal_1.jpg?itok=UObTCElB",url:"https://www.llanes.es/es/ix-fiesta-de-los-tortos-mere"},
-  {iso:"2026-04-03",title:"Puya de San Antonio – Riensena",desc:"Subasta tradicional. Se subastan boronas, arroz con leche, fabes, mantequilla, miel y licores. Al terminar, aperitivo para todos los asistentes.",cat:"Fiesta",img:"",url:"https://www.llanes.es/es/puya-de-san-antonio-riensena"},
-  {iso:"2026-04-04",title:"Semana Santa – Sábado Santo: Vigilia Pascual",desc:"10:30h Santo Rosario. 20:00h Solemne VIGILIA PASCUAL en la Basílica de Llanes.",cat:"Religioso",img:"",url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
-  {iso:"2026-04-05",title:"Semana Santa – Domingo de Pascua",desc:"12:00h Procesión SANTO ENCUENTRO y SOLEMNE MISA DE PASCUA. 19:00h Santa Misa.",cat:"Religioso",img:"",url:"https://www.llanes.es/es/semana-santa-2026-basilica-de-llanes"},
-  {iso:"2026-04-11",title:"Ruta Ecuestre y Cintas – El Mazucu",desc:"Ruta ecuestre y juego de cintas en El Mazucu.",cat:"Deportivo",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/ruta_ecuestre_el_mazucu.jpg?itok=DD3899Cp",url:"https://www.llanes.es/es/ruta-ecuestre-y-cintas-el-mazucu"},
-  {iso:"2026-04-12",title:"Fiesta de Nuestra Señora de la Flor – Pría",desc:"Festividad de la Virgen de la Flor en Pría.",cat:"Fiesta",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/la_flor_pria_1.jpg?itok=gZrFf5u6",url:"https://www.llanes.es/es/fiesta-de-nuestra-senora-de-la-flor-de-pria"},
-  {iso:"2026-04-18",title:"II Cova Negra Trail Fest – Nueva de Llanes",desc:"Segunda edición del trail fest en Nueva de Llanes.",cat:"Deportivo",img:"",url:"https://www.llanes.es/es/ii-cova-negra-trail-fest-nueva-de-llanes"},
-  {iso:"2026-04-23",title:"Fiesta de San Jorge – Nueva de Llanes",desc:"Fiesta de San Jorge con eventos culturales y gastronómicos en Nueva de Llanes.",cat:"Fiesta",img:"",url:""},
-  {iso:"2026-04-24",title:"Vuelta Ciclista a Asturias 2026 – Salida 2ª Etapa",desc:"Salida de la 2ª etapa de la Vuelta Ciclista a Asturias 2026 desde Llanes.",cat:"Deportivo",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/etapa_2.jpg?itok=txULEJZi",url:"https://www.llanes.es/es/salida-de-la-2a-etapa-de-la-vuelta-ciclista-asturias-2026"},
-  {iso:"2026-04-24",title:"Ciclo de charlas sobre la violencia de género",desc:"Ciclo de charlas y talleres sobre la violencia de género en Llanes.",cat:"Conferencia",img:"",url:"https://www.llanes.es/es/ciclo-de-charlastalleres-sobre-la-violencia-de-genero-llanes-0"},
-  {iso:"2026-04-25",title:"Feria de Ganado y Fiesta de San Jorge – Nueva",desc:"Feria de ganado y celebración de San Jorge en Nueva de Llanes.",cat:"Fiesta",img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/feria-ganado-san-jorge-2019-nueva-2-225x225.jpg?itok=OkGseU4_",url:"https://www.llanes.es/es/feria-de-ganado-y-fiesta-de-san-jorge-nueva"},
-  {iso:"2026-04-26",title:"Torneo de Golf «Restaurante Bajo Par»",desc:"Torneo de golf en el Campo de Golf Municipal de Llanes.",cat:"Deportivo",img:"",url:""},
-];
-
-/* ── HELPERS */
-const DAYS_ES   = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-const MON_ABR   = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-const CAT_CLASS = {
-  'Fiesta':'tag-fiesta','Concierto':'tag-concierto','Deportivo':'tag-deportivo',
-  'Gastronomía':'tag-gastronomia','Cine':'tag-cine','Exposición':'tag-exposicion',
-  'Religioso':'tag-religioso','Cultural':'tag-cultural',
-};
-
-function isoStart(ev){ return ev.iso.split('/')[0]; }
-function isoEnd(ev)  { return ev.iso.includes('/')?ev.iso.split('/')[1]:ev.iso; }
-function evInDay(ev,d){ return d>=isoStart(ev)&&d<=isoEnd(ev); }
-function isEvToday(ev){ return evInDay(ev,TODAY_ISO); }
-
-/* Evento visible: no ocultar si es de rango largo (exposición) o si su fin >= CUTOFF */
-function isVisible(ev){
-  return isoEnd(ev) >= CUTOFF_ISO;
-}
-
-function fmtDate(iso){
-  if(iso.includes('/')){
-    const[a,b]=iso.split('/');
-    const da=new Date(a+'T12:00:00'),db=new Date(b+'T12:00:00');
-    if(da.getMonth()===db.getMonth())
-      return `${da.getDate()}–${db.getDate()} ${MON_ABR[da.getMonth()]} ${da.getFullYear()}`;
-    return `${da.getDate()} ${MON_ABR[da.getMonth()]} – ${db.getDate()} ${MON_ABR[db.getMonth()]} ${db.getFullYear()}`;
-  }
-  const d=new Date(iso+'T12:00:00');
-  return `${DAYS_ES[d.getDay()]} ${d.getDate()} ${MON_ABR[d.getMonth()]} ${d.getFullYear()}`;
-}
-
-function tagHTML(cat){ return `<span class="tag ${CAT_CLASS[cat]||'tag-cultural'}">${cat}</span>`; }
-
-function getWeekRange(){
-  // Semana lunes-domingo en hora local (España)
-  const dow=_NOW.getDay(); // 0=dom,1=lun...6=sáb
-  const diffMon = dow===0 ? -6 : 1-dow; // días hasta el lunes de esta semana
-  const mon=new Date(_NOW); mon.setDate(_NOW.getDate()+diffMon);
-  const sun=new Date(mon); sun.setDate(mon.getDate()+6);
-  return{start:localISO(mon), end:localISO(sun)};
-}
-
-/* ── SECCIÓN 1: ESTA SEMANA (sin fotos, sin eventos >2 días pasados) */
-function renderWeek(){
-  const {start,end}=getWeekRange();
-  // Solo eventos cuyo rango solape con la semana Y cuyo fin no sea anterior al cutoff
-  const evs=SEED.filter(ev=>{
-    const s=isoStart(ev), e=isoEnd(ev);
-    return s<=end && e>=start && isVisible(ev);
-  });
-  // Deduplicar por título
-  const uniq=[...new Map(evs.map(e=>[e.title,e])).values()];
-  // Ordenar por fecha de inicio
-  uniq.sort((a,b)=>isoStart(a)<isoStart(b)?-1:1);
-
-  const d1=new Date(start+'T12:00:00'), d2=new Date(end+'T12:00:00');
-  const wLabel=`Semana del ${d1.getDate()} al ${d2.getDate()} de ${MONTHS_ES[d2.getMonth()]} ${d2.getFullYear()}`;
-  const el=document.getElementById('week-container');
-
-  if(!uniq.length){
-    el.innerHTML=`<div class="no-week">◈ NO HAY FIESTAS PROGRAMADAS ESTA SEMANA<br><span style="font-size:10px;opacity:.5">${wLabel.toUpperCase()}</span></div>`;
-    return;
-  }
-
-  let html=`<div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,.4);letter-spacing:2px;margin-bottom:18px">${wLabel.toUpperCase()}</div>`;
-  html+='<div class="week-grid">';
-  uniq.forEach((ev,i)=>{
-    const hoy=isEvToday(ev);
-    html+=`<div class="week-card${hoy?' hoy-card':''}" style="animation-delay:${i*.07}s">
-      <div class="wc-date">${fmtDate(ev.iso)}</div>
-      <div class="wc-title">${ev.title}</div>
-      ${ev.desc?`<div class="wc-desc">${ev.desc}</div>`:''}
-      <div class="wc-meta">
-        ${tagHTML(ev.cat)}
-        ${hoy?'<span class="tag tag-hoy">▶ HOY</span>':''}
-        ${ev.url?`<a class="elink" href="${ev.url}" target="_blank">VER MÁS →</a>`:''}
-      </div>
-    </div>`;
-  });
-  html+='</div>';
-  el.innerHTML=html;
-}
-
-/* ── SECCIÓN 2: CALENDARIO (un solo mes, navegable) */
-let calMonths=[], calIdx=0;
-
-function getMonths(){
-  const set=new Set();
-  SEED.forEach(ev=>set.add(isoStart(ev).slice(0,7)));
-  return [...set].sort();
-}
-
-function buildCal(ym){
-  const[yr,mo]=ym.split('-').map(Number);
-  const first=new Date(yr,mo-1,1), last=new Date(yr,mo,0);
-  const total=last.getDate();
-  let startDow=first.getDay()-1; if(startDow<0)startDow=6;
-
-  const monthEvs=SEED.filter(ev=>{
-    const s=isoStart(ev).slice(0,7), e=isoEnd(ev).slice(0,7);
-    return s<=ym&&e>=ym;
-  });
-  const dayMap={};
-  for(let d=1;d<=total;d++){
-    const iso=`${yr}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const evs=monthEvs.filter(ev=>evInDay(ev,iso));
-    if(evs.length) dayMap[d]=evs;
-  }
-
-  const DOWS=['L','M','X','J','V','S','D'];
-  let h=`<div class="cal-box">
-    <div class="cal-nav">
-      <button class="cal-nav-btn" onclick="prevCal()">‹ ANTERIOR</button>
-      <div class="cal-month">${MONTHS_ES[mo-1].toUpperCase()} ${yr}</div>
-      <button class="cal-nav-btn" onclick="nextCal()">SIGUIENTE ›</button>
-    </div>
-    <div class="cal-grid">`;
-  DOWS.forEach(d=>{ h+=`<div class="cal-dow">${d}</div>`; });
-  for(let i=0;i<startDow;i++) h+='<div class="cal-day empty"></div>';
-  for(let d=1;d<=total;d++){
-    const iso=`${yr}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const evs=dayMap[d]||[];
-    const isT=iso===TODAY_ISO, hasE=evs.length>0;
-    let cls='cal-day'+(hasE?' has-event':'')+(isT?' today-day':'');
-    let tip='';
-    if(hasE){
-      const names=evs.slice(0,4).map(e=>e.title.slice(0,40)+(e.title.length>40?'…':'')).join('<br>');
-      const more=evs.length>4?`<br><span style="color:rgba(0,245,255,.5)">+${evs.length-4} más</span>`:'';
-      tip=`<div class="tip">${names}${more}</div>`;
-    }
-    h+=`<div class="${cls}">${d}<div class="event-dot"></div>${tip}</div>`;
-  }
-  h+=`</div>
-    <div class="cal-legend">
-      <div class="leg-item"><div class="leg-dot leg-dot-ev"></div>CON EVENTO</div>
-      <div class="leg-item"><div class="leg-dot leg-dot-hoy"></div>HOY</div>
-      <div class="cal-count">${Object.keys(dayMap).length} DÍAS CON EVENTOS</div>
-    </div>
-  </div>`;
-  return h;
-}
-
-function renderCal(){
-  document.getElementById('cal-container').innerHTML=buildCal(calMonths[calIdx]);
-}
-function prevCal(){ if(calIdx>0){calIdx--;renderCal()} }
-function nextCal(){ if(calIdx<calMonths.length-1){calIdx++;renderCal()} }
-
-/* ── SECCIÓN 3: LISTADO COMPLETO */
-let activeMonth='', activeCat='TODOS';
-
-function renderMonthTabs(){
-  const months=getMonths();
-  if(!activeMonth||!months.includes(activeMonth)) activeMonth=months[0];
-  document.getElementById('month-tabs').innerHTML=months.map(ym=>{
-    const[y,m]=ym.split('-');
-    return `<button class="mtab${ym===activeMonth?' on':''}" onclick="setMonth('${ym}')">${MONTHS_ES[+m-1].toUpperCase()} ${y}</button>`;
-  }).join('');
-}
-function setMonth(ym){ activeMonth=ym;activeCat='TODOS';renderMonthTabs();renderFilters();renderList(); }
-function setFilter(cat){ activeCat=cat;renderFilters();renderList(); }
-
-function renderFilters(){
-  const evs=SEED.filter(ev=>isoStart(ev).slice(0,7)<=activeMonth&&isoEnd(ev).slice(0,7)>=activeMonth);
-  const cats=['TODOS',...new Set(evs.map(e=>e.cat))];
-  document.getElementById('filters').innerHTML=cats.map(c=>
-    `<button class="ftag${c===activeCat?' on':''}" onclick="setFilter('${c}')">${c}</button>`
-  ).join('');
-}
-
-function renderList(){
-  let evs=SEED.filter(ev=>{
-    const sm=isoStart(ev).slice(0,7), em=isoEnd(ev).slice(0,7);
-    if(sm>activeMonth||em<activeMonth) return false;
-    // Ocultar siempre eventos con más de 2 días de antigüedad
-    return isVisible(ev);
-  });
-  if(activeCat!=='TODOS') evs=evs.filter(e=>e.cat===activeCat);
-
-  // Ordenar estrictamente por fecha de inicio ascendente
-  evs.sort((a,b)=>isoStart(a)<isoStart(b)?-1:isoStart(a)>isoStart(b)?1:0);
-
-  const[y,m]=activeMonth.split('-');
-  document.getElementById('list-title').textContent=
-    `${MONTHS_ES[+m-1].toUpperCase()} ${y} — ${evs.length} EVENTO${evs.length!==1?'S':''}${activeCat!=='TODOS'?' · '+activeCat:''}`;
-
-  const grid=document.getElementById('list-grid');
-  if(!evs.length){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px;font-family:\'Share Tech Mono\',monospace;color:rgba(200,232,244,.3);font-size:11px;letter-spacing:2px">◈ SIN EVENTOS PARA ESTE FILTRO</div>';
-    return;
-  }
-
-  grid.innerHTML=evs.map((ev,i)=>{
-    const hoy=isEvToday(ev);
-    const past=isoEnd(ev)<TODAY_ISO;
-    // Imagen: si tiene url de foto, renderizar en contenedor de altura fija
-    const imgBlock=ev.img
-      ? `<div class="ev-img-wrap" onclick="openLightbox('${ev.img}','${ev.title.replace(/'/g,"\\'")}')">
-           <img src="${ev.img}" alt="${ev.title}" loading="lazy" onerror="this.closest('.ev-img-wrap').style.display='none'">
-           <span class="zoom-icon">⤢ AMPLIAR</span>
-         </div>`
-      : '';
-    return `<div class="ev-card${hoy?' hoy':''}${past?' pasado':''}" style="animation-delay:${i*.04}s">
-      ${imgBlock}
-      <div class="ev-body">
-        <div class="ev-num">${String(i+1).padStart(2,'0')}</div>
-        <div class="ev-date">${fmtDate(ev.iso)}</div>
-        <div class="ev-title">${ev.title}</div>
-        ${ev.desc?`<div class="ev-desc">${ev.desc}</div>`:''}
-        <div class="ev-meta">
-          ${tagHTML(ev.cat)}
-          ${hoy?'<span class="tag tag-hoy">▶ HOY</span>':''}
-          ${ev.url?`<a class="elink" href="${ev.url}" target="_blank">VER MÁS →</a>`:''}
+    <main class="max-w-6xl mx-auto">
+        
+        <!-- Filtros -->
+        <div id="filters" class="flex flex-wrap gap-3 mb-10 justify-center">
+            <button onclick="filterEvents('all')" class="filter-btn active px-6 py-2 rounded-sm" id="btn-all">TODOS</button>
+            <button onclick="filterEvents('Fiesta')" class="filter-btn px-6 py-2 rounded-sm" id="btn-fiesta">FIESTAS</button>
+            <button onclick="filterEvents('Deporte')" class="filter-btn px-6 py-2 rounded-sm" id="btn-deporte">DEPORTE</button>
+            <button onclick="filterEvents('Cultura')" class="filter-btn px-6 py-2 rounded-sm" id="btn-cultura">CULTURA</button>
+            <button onclick="filterEvents('Infantil')" class="filter-btn px-6 py-2 rounded-sm" id="btn-infantil">INFANTIL</button>
         </div>
-      </div>
-    </div>`;
-  }).join('');
-}
 
-/* ── BOOT */
-function boot(){
-  calMonths=getMonths();
-  const nowYM=TODAY_ISO.slice(0,7); // ya es hora local
-  calIdx=Math.max(0,calMonths.indexOf(nowYM));
+        <!-- Sección Semana Actual -->
+        <section id="this-week-section" class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+                <h2 class="cyber-header text-2xl text-pink-500">Esta Semana</h2>
+                <span class="px-3 py-1 text-xs badge-semana-actual rounded text-white font-bold">LIVE NOW</span>
+            </div>
+            <div id="this-week-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Se llena con JS -->
+            </div>
+        </section>
 
-  renderWeek();
-  renderCal();
-  renderMonthTabs();
-  renderFilters();
-  renderList();
+        <!-- Resto de Eventos -->
+        <section>
+            <h2 class="cyber-header text-2xl mb-8 text-cyan-500">Próximos Eventos</h2>
+            <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Se llena con JS -->
+            </div>
+        </section>
 
-  const total=new Set(SEED.map(e=>e.title)).size;
-  document.getElementById('dot').className='dot';
-  document.getElementById('stxt').textContent=`${total} EVENTOS // DATOS AL DÍA`;
-  const sb=document.getElementById('src-badge');
-  sb.style.display='inline-block';sb.className='sbadge s-seed';sb.textContent='◉ MAR–ABR 2026';
-  document.getElementById('uinfo').style.display='flex';
-  document.getElementById('udate').textContent=TODAY_ISO;
-  document.getElementById('loader').style.display='none';
-  document.getElementById('app').style.display='block';
-}
+    </main>
 
-async function forceReload(){
-  document.getElementById('btnR').disabled=true;
-  document.getElementById('dot').className='dot spin';
-  document.getElementById('stxt').textContent='RECARGANDO...';
-  try{
-    const proxy=`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.llanes.es/es/agenda')}`;
-    const r=await fetch(proxy,{signal:AbortSignal.timeout(8000)});
-    if(r.ok){
-      document.getElementById('src-badge').className='sbadge s-live';
-      document.getElementById('src-badge').textContent='◉ EN DIRECTO';
-      document.getElementById('stxt').textContent='CONECTADO // DATOS EN DIRECTO';
-    } else throw new Error();
-  }catch(e){
-    document.getElementById('stxt').textContent='DATOS EMBEBIDOS ACTUALIZADOS';
-  }
-  document.getElementById('dot').className='dot';
-  document.getElementById('btnR').disabled=false;
-}
+    <footer class="mt-20 py-10 border-t border-cyan-900 text-center">
+        <p class="text-cyan-800 tracking-widest uppercase text-sm">Página web de Javi TJ</p>
+    </footer>
 
-window.addEventListener('load',boot);
-</script>
+    <script>
+        // Datos extraídos del archivo (Simulando el parseo del .txt)
+        const eventos = [
+            { id: 1, fecha: "2026-04-01", titulo: "XIV Torneo de Fútbol Concejo de Llanes", categoria: "Deporte", lugar: "Llanes, Posada, Nueva", desc: "Torneo de fútbol base con equipos de diversas CCAA.", tipo: "evento" },
+            { id: 2, fecha: "2026-04-01", titulo: "Semana Santa 2026", categoria: "Cultura", lugar: "Basílica de Llanes", desc: "Programa de actos religiosos y procesiones.", tipo: "evento" },
+            { id: 3, fecha: "2026-04-02", titulo: "Exposición Retrato y Sociedad", categoria: "Cultura", lugar: "Porrúa", desc: "Fotografías de Daniel Álvarez Fervienza (1885-1899).", tipo: "evento" },
+            { id: 4, fecha: "2026-04-03", titulo: "Puya de San Antonio", categoria: "Fiesta", lugar: "Riensena", desc: "Tradicional subasta de boronas y productos locales.", tipo: "fiesta" },
+            { id: 5, fecha: "2026-04-03", titulo: "IX Fiesta de los Tortos", categoria: "Fiesta", lugar: "Meré", desc: "Gastronomía, música y tortos con picadillo.", tipo: "fiesta" },
+            { id: 6, fecha: "2026-04-04", titulo: "Fiesta de la Primavera", categoria: "Fiesta", lugar: "Calduenu", desc: "Celebración comunitaria de la llegada del buen tiempo.", tipo: "fiesta" },
+            { id: 7, fecha: "2026-04-05", titulo: "Concierto Virgen de la Flor", categoria: "Cultura", lugar: "Pría", desc: "Música y chocolatada tradicional.", tipo: "evento" },
+            { id: 8, fecha: "2026-04-11", titulo: "Ruta Ecuestre y Cintas", categoria: "Deporte", lugar: "El Mazucu", desc: "Tradición ecuestre en la montaña llanisca.", tipo: "evento" },
+            { id: 9, fecha: "2026-04-12", titulo: "Fiesta de Ntra. Sra. de la Flor", categoria: "Fiesta", lugar: "Pría", desc: "Fiesta patronal con misa y actos festivos.", tipo: "fiesta" },
+            { id: 10, fecha: "2026-04-16", titulo: "IV Fant Llanes", categoria: "Cultura", lugar: "Llanes", desc: "Festival de Cine Fantástico y de Terror.", tipo: "evento" },
+            { id: 11, fecha: "2026-04-18", titulo: "II Cova Negra Trail Fest", categoria: "Deporte", lugar: "Nueva", desc: "Prueba de trail running en entorno natural.", tipo: "evento" },
+            { id: 12, fecha: "2026-04-23", titulo: "VI Encuentro del Libro Ilustrado", categoria: "Cultura", lugar: "Llanes y Nueva", desc: "Misterios de Tejos y actividades literarias.", tipo: "evento" },
+            { id: 13, fecha: "2026-04-24", titulo: "Vuelta Ciclista Asturias (Etapa 2)", categoria: "Deporte", lugar: "Llanes", desc: "Salida de etapa de la mítica ronda asturiana.", tipo: "evento" },
+            { id: 14, fecha: "2026-04-25", titulo: "Feria de Ganado San Jorge", categoria: "Fiesta", lugar: "Nueva", desc: "Tradicional mercado ganadero y fiesta patronal.", tipo: "fiesta" },
+            { id: 15, fecha: "2026-05-01", titulo: "Fiesta de San Felipe", categoria: "Fiesta", lugar: "La Galguera", desc: "Inicio de las fiestas de mayo.", tipo: "fiesta" },
+            { id: 16, fecha: "2026-05-02", titulo: "VIII Trail de Cuera", categoria: "Deporte", lugar: "Porrúa", desc: "32km de montaña con gran desnivel.", tipo: "evento" },
+            { id: 17, fecha: "2026-05-09", titulo: "Fiesta de La Sacramental", categoria: "Fiesta", lugar: "Poo", desc: "Fiesta religiosa y popular comunitaria.", tipo: "fiesta" },
+            { id: 18, fecha: "2026-05-15", titulo: "9º Eco-Rallye Villa de Llanes", categoria: "Deporte", lugar: "Llanes", desc: "Motor y sostenibilidad.", tipo: "evento" },
+            { id: 19, fecha: "2026-05-16", titulo: "La Sacramental de Porrúa", categoria: "Fiesta", lugar: "Porrúa", desc: "Tradición y folclore llanisco.", tipo: "fiesta" },
+            { id: 20, fecha: "2026-05-24", titulo: "Tri100Llanes", categoria: "Deporte", lugar: "Llanes", desc: "Triatlón de alta competición.", tipo: "evento" },
+            { id: 21, fecha: "2026-05-27", titulo: "Cto. España Voleibol Infantil", categoria: "Deporte", lugar: "Llanes", desc: "Sede nacional de voleibol femenino.", tipo: "evento" },
+            { id: 22, fecha: "2026-05-30", titulo: "Fiesta de San Fernando", categoria: "Fiesta", lugar: "Cué", desc: "Fiesta patronal junto al mar.", tipo: "fiesta" },
+            { id: 23, fecha: "2026-04-17", titulo: "Taller Sombras Chinescas", categoria: "Infantil", lugar: "Llanes", desc: "Actividad creativa para niños.", tipo: "evento" }
+        ];
+
+        // Configuración de fecha actual según el documento (3 de abril de 2026 - Viernes)
+        const HOY = new Date("2026-04-03");
+        
+        function getStartOfWeek(date) {
+            const d = new Date(date);
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1); // lunes
+            return new Date(d.setDate(diff)).setHours(0,0,0,0);
+        }
+
+        function getEndOfWeek(date) {
+            const start = new Date(getStartOfWeek(date));
+            return new Date(start.setDate(start.getDate() + 6)).setHours(23,59,59,999);
+        }
+
+        const startWeek = getStartOfWeek(HOY);
+        const endWeek = getEndOfWeek(HOY);
+
+        function renderEvents(filter = 'all') {
+            const container = document.getElementById('events-container');
+            const weekContainer = document.getElementById('this-week-container');
+            container.innerHTML = '';
+            weekContainer.innerHTML = '';
+
+            // Clasificar y ordenar: Fiestas primero
+            const sortedEvents = [...eventos].sort((a, b) => {
+                if (a.tipo === 'fiesta' && b.tipo !== 'fiesta') return -1;
+                if (a.tipo !== 'fiesta' && b.tipo === 'fiesta') return 1;
+                return new Date(a.fecha) - new Date(b.fecha);
+            });
+
+            sortedEvents.forEach(ev => {
+                if (filter !== 'all' && ev.categoria !== filter) return;
+
+                const evDate = new Date(ev.fecha).getTime();
+                const isThisWeek = evDate >= startWeek && evDate <= endWeek;
+                
+                const cardHtml = `
+                    <div class="card p-6 rounded-lg neon-border ${ev.tipo === 'fiesta' ? 'fiesta' : ''}">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-bold px-2 py-1 bg-cyan-900 text-cyan-300 rounded">${ev.fecha.split('-').reverse().join('/')}</span>
+                            <span class="text-xs uppercase tracking-tighter ${ev.tipo === 'fiesta' ? 'text-pink-500' : 'text-cyan-400'}">${ev.categoria}</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 ${ev.tipo === 'fiesta' ? 'text-pink-400' : 'text-white'}">${ev.titulo}</h3>
+                        <p class="text-gray-400 text-sm mb-4 font-light italic">${ev.lugar}</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">${ev.desc}</p>
+                        <div class="mt-4 pt-4 border-t border-gray-800 flex justify-end">
+                            <button class="text-xs font-bold hover:text-white transition-colors cursor-pointer text-cyan-600">MÁS INFO +</button>
+                        </div>
+                    </div>
+                `;
+
+                if (isThisWeek) {
+                    weekContainer.innerHTML += cardHtml;
+                } else {
+                    container.innerHTML += cardHtml;
+                }
+            });
+
+            if (weekContainer.innerHTML === '') {
+                document.getElementById('this-week-section').style.display = 'none';
+            } else {
+                document.getElementById('this-week-section').style.display = 'block';
+            }
+        }
+
+        function filterEvents(cat) {
+            // UI Update
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${cat.toLowerCase()}`).classList.add('active');
+            
+            renderEvents(cat);
+        }
+
+        // Inicializar
+        window.onload = () => renderEvents();
+
+    </script>
 </body>
 </html>
