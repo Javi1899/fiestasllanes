@@ -3,237 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIESTAS Y EVENTOS DE LLANES</title>
+    <title>Llanes 2026 | Agenda Futurista</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-blue: #00f3ff;
-            --neon-pink: #ff00ff;
-            --dark-bg: #0a0a12;
-            --card-bg: rgba(20, 20, 35, 0.8);
+            --neon-purple: #bc13fe;
+            --dark-bg: #050505;
         }
 
         body {
             background-color: var(--dark-bg);
             color: #e0e0e0;
             font-family: 'Rajdhani', sans-serif;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
-                linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            overflow-x: hidden;
         }
 
-        .cyber-header {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* Estilo Neón */
+        .neon-border {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .neon-border:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .neon-text {
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        .neon-border {
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        .neon-text-purple {
+            text-shadow: 0 0 10px var(--neon-purple);
         }
 
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+        /* Fondo Animado */
+        .bg-grid {
+            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
         }
 
-        .card:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+        .month-header {
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
             border-left: 4px solid var(--neon-blue);
+            border-right: 4px solid var(--neon-blue);
         }
 
-        .card.fiesta { border-left: 4px solid var(--neon-pink); }
-        .card.fiesta:hover { box-shadow: 0 0 20px rgba(255, 0, 255, 0.2); }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            transition: all 0.2s;
+        .tag {
+            background: rgba(188, 19, 254, 0.2);
+            border: 1px solid var(--neon-purple);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
         }
 
-        .filter-btn.active {
-            background: var(--neon-blue);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px var(--neon-blue);
-            font-weight: bold;
-        }
-
-        .badge-semana-actual {
-            background: linear-gradient(90deg, var(--neon-pink), #800080);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; box-shadow: 0 0 20px var(--neon-pink); }
-            100% { opacity: 0.8; }
-        }
-
-        .glitch-text {
-            position: relative;
-        }
-        
+        /* Scrollbar personalizada */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a12; }
-        ::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 10px; border: 1px solid var(--neon-blue); }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
     </style>
 </head>
 <body class="p-4 md:p-8">
+    <div class="bg-grid"></div>
 
-    <header class="max-w-6xl mx-auto mb-12 text-center">
-        <h1 class="cyber-header text-4xl md:text-6xl mb-2 glitch-text">Llanes 2026</h1>
-        <p class="text-cyan-400 font-light tracking-widest uppercase">Agenda Futurista de Eventos</p>
-        <div class="h-1 w-32 bg-cyan-500 mx-auto mt-4 rounded-full shadow-[0_0_10px_#00f3ff]"></div>
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto text-center mb-12">
+        <h1 class="orbitron text-4xl md:text-6xl font-bold neon-text mb-2 uppercase tracking-tighter">
+            Llanes <span class="text-white">2026</span>
+        </h1>
+        <p class="text-lg md:text-xl text-cyan-400 tracking-widest uppercase">Agenda Cultural • Abril / Mayo</p>
+        <div class="mt-4 flex justify-center gap-4 text-sm">
+            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-cyan-500 rounded-full inline-block animate-pulse"></span> Sistema Activo</span>
+            <span class="flex items-center gap-1">📍 Concejo de Llanes</span>
+        </div>
     </header>
 
     <main class="max-w-6xl mx-auto">
         
-        <!-- Filtros -->
-        <div id="filters" class="flex flex-wrap gap-3 mb-10 justify-center">
-            <button onclick="filterEvents('all')" class="filter-btn active px-6 py-2 rounded-sm" id="btn-all">TODOS</button>
-            <button onclick="filterEvents('Fiesta')" class="filter-btn px-6 py-2 rounded-sm" id="btn-fiesta">FIESTAS</button>
-            <button onclick="filterEvents('Deporte')" class="filter-btn px-6 py-2 rounded-sm" id="btn-deporte">DEPORTE</button>
-            <button onclick="filterEvents('Cultura')" class="filter-btn px-6 py-2 rounded-sm" id="btn-cultura">CULTURA</button>
-            <button onclick="filterEvents('Infantil')" class="filter-btn px-6 py-2 rounded-sm" id="btn-infantil">INFANTIL</button>
-        </div>
-
-        <!-- Sección Semana Actual -->
-        <section id="this-week-section" class="mb-16">
-            <div class="flex items-center gap-4 mb-6">
-                <h2 class="cyber-header text-2xl text-pink-500">Esta Semana</h2>
-                <span class="px-3 py-1 text-xs badge-semana-actual rounded text-white font-bold">LIVE NOW</span>
+        <!-- SECCIÓN ABRIL -->
+        <section id="abril" class="mb-20">
+            <div class="month-header py-4 mb-8 text-center">
+                <h2 class="orbitron text-3xl font-bold neon-text uppercase">Abril 📅</h2>
+                <p class="text-gray-400 italic">Eventos desde el 11 de abril</p>
             </div>
-            <div id="this-week-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Se llena con JS -->
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 11 ABR -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">11 <span class="text-sm block text-cyan-500">ABR</span></span>
+                        <span class="tag">Tradición</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🏇 Ruta Ecuestre y Cintas</h3>
+                    <p class="text-sm text-gray-400 mb-4">El Mazucu. Combinación de hípica y tradición popular en un entorno natural único.</p>
+                </div>
+
+                <div class="neon-border bg-black/60 p-5 rounded-lg border-purple-900/30">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">11 <span class="text-sm block text-purple-500">ABR</span></span>
+                        <span class="tag">Teatro</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">🎭 Teatro: "Matadero"</h3>
+                    <p class="text-sm text-gray-400 mb-4">Casa Municipal de Cultura. Una pieza dramática intensa dentro del ciclo cultural.</p>
+                </div>
+
+                <!-- 12 ABR -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">12 <span class="text-sm block text-cyan-500">ABR</span></span>
+                        <span class="tag">Fiesta Patronal</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🌸 Ntra. Sra. de la Flor</h3>
+                    <p class="text-sm text-gray-400 mb-4">Pría. Celebración religiosa y actos tradicionales en una de las parroquias más bellas.</p>
+                </div>
+
+                <!-- 16-18 ABR -->
+                <div class="neon-border bg-black/80 p-5 rounded-lg border-cyan-400/50 scale-105 z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">16-18 <span class="text-sm block text-cyan-500">ABR</span></span>
+                        <span class="tag bg-cyan-900">Destacado</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 neon-text">🎬 IV FANT LLANES</h3>
+                    <p class="text-sm text-gray-300 mb-4 font-bold">Festival de Cine Fantástico. Proyecciones, terror y ciencia ficción invaden la villa.</p>
+                </div>
+
+                <!-- 18 ABR -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">18 <span class="text-sm block text-cyan-500">ABR</span></span>
+                        <span class="tag">Deporte</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🏃 II Cova Negra Trail</h3>
+                    <p class="text-sm text-gray-400 mb-4">Nueva de Llanes. Deporte extremo y paisajes espectaculares en esta carrera de montaña.</p>
+                </div>
+
+                <!-- 24 ABR -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">24 <span class="text-sm block text-cyan-500">ABR</span></span>
+                        <span class="tag">Deporte</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🚲 Vuelta Ciclista Asturias</h3>
+                    <p class="text-sm text-gray-400 mb-4">Llanes acoge la salida de la 2ª etapa. El ciclismo profesional llega a nuestras calles.</p>
+                </div>
+
+                <!-- 25 ABR -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">25 <span class="text-sm block text-cyan-500">ABR</span></span>
+                        <span class="tag">Feria</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🐂 San Jorge y Feria Ganado</h3>
+                    <p class="text-sm text-gray-400 mb-4">Nueva. Tradición ganadera, concurso de tortillas y verbena popular.</p>
+                </div>
+
+                <!-- 23 ABR -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg border-purple-900/30">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">23 <span class="text-sm block text-purple-500">ABR</span></span>
+                        <span class="tag">Libros</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">📖 VI Encuentro Libro Ilustrado</h3>
+                    <p class="text-sm text-gray-400 mb-4">"Misterios de Tejos". Sedes en Llanes y Nueva. Día Internacional del Libro.</p>
+                </div>
             </div>
         </section>
 
-        <!-- Resto de Eventos -->
-        <section>
-            <h2 class="cyber-header text-2xl mb-8 text-cyan-500">Próximos Eventos</h2>
-            <div id="events-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Se llena con JS -->
+        <!-- SECCIÓN MAYO -->
+        <section id="mayo" class="mb-20">
+            <div class="month-header py-4 mb-8 text-center border-purple-500">
+                <h2 class="orbitron text-3xl font-bold neon-text-purple uppercase">Mayo ✨</h2>
+                <p class="text-gray-400 italic">Primavera cultural a pleno rendimiento</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 01 MAY -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">01 <span class="text-sm block text-purple-500">MAY</span></span>
+                        <span class="tag">Fiesta</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">🕯️ San Felipe</h3>
+                    <p class="text-sm text-gray-400 mb-4">La Galguera y Soberrón. Festividad tradicional religiosa y popular.</p>
+                </div>
+
+                <!-- 02 MAY -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">02 <span class="text-sm block text-purple-500">MAY</span></span>
+                        <span class="tag">Running</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">⛰️ VIII Trail de Cuera</h3>
+                    <p class="text-sm text-gray-400 mb-4">Porrúa. 1.700m de desnivel en la espectacular Sierra del Cuera.</p>
+                </div>
+
+                <!-- 15-17 MAY -->
+                <div class="neon-border bg-black/80 p-5 rounded-lg border-purple-400/50">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">15-17 <span class="text-sm block text-purple-500">MAY</span></span>
+                        <span class="tag">Motor</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 neon-text-purple">🔋 9º Eco-Rallye Villa de Llanes</h3>
+                    <p class="text-sm text-gray-300 mb-4">Campeonato de España de energías alternativas. Deporte sostenible.</p>
+                </div>
+
+                <!-- 24 MAY -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">24 <span class="text-sm block text-purple-500">MAY</span></span>
+                        <span class="tag">Triatlón</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">🏊 Tri100Llanes</h3>
+                    <p class="text-sm text-gray-400 mb-4">Natación, ciclismo y carrera en los escenarios más épicos del concejo.</p>
+                </div>
+
+                <!-- 27-31 MAY -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg border-cyan-400/20">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">27-31 <span class="text-sm block text-cyan-500">MAY</span></span>
+                        <span class="tag">Voleibol</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🏐 Cto. España Voleibol Infantil</h3>
+                    <p class="text-sm text-gray-400 mb-4">Las mejores promesas nacionales se citan en Llanes.</p>
+                </div>
+
+                <!-- 30-31 MAY -->
+                <div class="neon-border bg-black/60 p-5 rounded-lg border-purple-400/20">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="orbitron text-2xl font-bold text-white">30-31 <span class="text-sm block text-purple-500">MAY</span></span>
+                        <span class="tag">Feria Libro</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">📚 II Feria del Libro "Valle de San Jorge"</h3>
+                    <p class="text-sm text-gray-400 mb-4">Nueva. Expositores, autores y talleres literarios para cerrar el mes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPOSICIONES PERMANENTES -->
+        <section class="mb-20">
+            <h2 class="orbitron text-3xl font-bold text-white mb-8 border-b border-gray-800 pb-2">🖼️ Módulos de Exposición (Activos)</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-cyan-500 shadow-xl">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-3">👗 Indumentaria Tradicional</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        "Por la pinta son de Llanes". Casa de Cultura (1ª Planta). Todo abril y mayo. Trajes históricos y patrimonio etnográfico.
+                    </p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="text-xs text-gray-500">⏰ 11:00-13:00 / 17:30-20:00</span>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-purple-500 shadow-xl">
+                    <h3 class="text-xl font-bold text-purple-400 mb-3">📸 Retrato y Sociedad</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Museo Etnográfico de Porrúa. 44 fotografías históricas de Daniel Álvarez Fervienza (1885-1899). Inéditas.
+                    </p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="text-xs text-gray-500">📍 Porrúa • Todo Mayo</span>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-blue-400 shadow-xl">
+                    <h3 class="text-xl font-bold text-blue-300 mb-3">🖌️ Posada en Caras</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Centro Cívico de Posada. Carboncillo por David Concha Llorente. Hasta el 9 de mayo. Rostros de ayer y hoy.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-pink-500 shadow-xl">
+                    <h3 class="text-xl font-bold text-pink-400 mb-3">🏺 Cerámica Begoña López</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Posada. Esculturas originales de la ceramista local. Abierta hasta el 30 de abril.
+                    </p>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="mt-20 py-10 border-t border-cyan-900 text-center">
-        <p class="text-cyan-800 tracking-widest uppercase text-sm">Página web de Javi TJ</p>
+    <footer class="max-w-6xl mx-auto text-center py-10 border-t border-gray-900">
+        <p class="orbitron text-xl font-bold neon-text tracking-widest uppercase mb-2">Web de Javi TJ</p>
+        <p class="text-gray-500 text-sm">SISTEMA DE INFORMACIÓN CULTURAL LLANES 2.0.26</p>
     </footer>
 
     <script>
-        // Datos extraídos del archivo (Simulando el parseo del .txt)
-        const eventos = [
-            { id: 1, fecha: "2026-04-01", titulo: "XIV Torneo de Fútbol Concejo de Llanes", categoria: "Deporte", lugar: "Llanes, Posada, Nueva", desc: "Torneo de fútbol base con equipos de diversas CCAA.", tipo: "evento" },
-            { id: 2, fecha: "2026-04-01", titulo: "Semana Santa 2026", categoria: "Cultura", lugar: "Basílica de Llanes", desc: "Programa de actos religiosos y procesiones.", tipo: "evento" },
-            { id: 3, fecha: "2026-04-02", titulo: "Exposición Retrato y Sociedad", categoria: "Cultura", lugar: "Porrúa", desc: "Fotografías de Daniel Álvarez Fervienza (1885-1899).", tipo: "evento" },
-            { id: 4, fecha: "2026-04-03", titulo: "Puya de San Antonio", categoria: "Fiesta", lugar: "Riensena", desc: "Tradicional subasta de boronas y productos locales.", tipo: "fiesta" },
-            { id: 5, fecha: "2026-04-03", titulo: "IX Fiesta de los Tortos", categoria: "Fiesta", lugar: "Meré", desc: "Gastronomía, música y tortos con picadillo.", tipo: "fiesta" },
-            { id: 6, fecha: "2026-04-04", titulo: "Fiesta de la Primavera", categoria: "Fiesta", lugar: "Calduenu", desc: "Celebración comunitaria de la llegada del buen tiempo.", tipo: "fiesta" },
-            { id: 7, fecha: "2026-04-05", titulo: "Concierto Virgen de la Flor", categoria: "Cultura", lugar: "Pría", desc: "Música y chocolatada tradicional.", tipo: "evento" },
-            { id: 8, fecha: "2026-04-11", titulo: "Ruta Ecuestre y Cintas", categoria: "Deporte", lugar: "El Mazucu", desc: "Tradición ecuestre en la montaña llanisca.", tipo: "evento" },
-            { id: 9, fecha: "2026-04-12", titulo: "Fiesta de Ntra. Sra. de la Flor", categoria: "Fiesta", lugar: "Pría", desc: "Fiesta patronal con misa y actos festivos.", tipo: "fiesta" },
-            { id: 10, fecha: "2026-04-16", titulo: "IV Fant Llanes", categoria: "Cultura", lugar: "Llanes", desc: "Festival de Cine Fantástico y de Terror.", tipo: "evento" },
-            { id: 11, fecha: "2026-04-18", titulo: "II Cova Negra Trail Fest", categoria: "Deporte", lugar: "Nueva", desc: "Prueba de trail running en entorno natural.", tipo: "evento" },
-            { id: 12, fecha: "2026-04-23", titulo: "VI Encuentro del Libro Ilustrado", categoria: "Cultura", lugar: "Llanes y Nueva", desc: "Misterios de Tejos y actividades literarias.", tipo: "evento" },
-            { id: 13, fecha: "2026-04-24", titulo: "Vuelta Ciclista Asturias (Etapa 2)", categoria: "Deporte", lugar: "Llanes", desc: "Salida de etapa de la mítica ronda asturiana.", tipo: "evento" },
-            { id: 14, fecha: "2026-04-25", titulo: "Feria de Ganado San Jorge", categoria: "Fiesta", lugar: "Nueva", desc: "Tradicional mercado ganadero y fiesta patronal.", tipo: "fiesta" },
-            { id: 15, fecha: "2026-05-01", titulo: "Fiesta de San Felipe", categoria: "Fiesta", lugar: "La Galguera", desc: "Inicio de las fiestas de mayo.", tipo: "fiesta" },
-            { id: 16, fecha: "2026-05-02", titulo: "VIII Trail de Cuera", categoria: "Deporte", lugar: "Porrúa", desc: "32km de montaña con gran desnivel.", tipo: "evento" },
-            { id: 17, fecha: "2026-05-09", titulo: "Fiesta de La Sacramental", categoria: "Fiesta", lugar: "Poo", desc: "Fiesta religiosa y popular comunitaria.", tipo: "fiesta" },
-            { id: 18, fecha: "2026-05-15", titulo: "9º Eco-Rallye Villa de Llanes", categoria: "Deporte", lugar: "Llanes", desc: "Motor y sostenibilidad.", tipo: "evento" },
-            { id: 19, fecha: "2026-05-16", titulo: "La Sacramental de Porrúa", categoria: "Fiesta", lugar: "Porrúa", desc: "Tradición y folclore llanisco.", tipo: "fiesta" },
-            { id: 20, fecha: "2026-05-24", titulo: "Tri100Llanes", categoria: "Deporte", lugar: "Llanes", desc: "Triatlón de alta competición.", tipo: "evento" },
-            { id: 21, fecha: "2026-05-27", titulo: "Cto. España Voleibol Infantil", categoria: "Deporte", lugar: "Llanes", desc: "Sede nacional de voleibol femenino.", tipo: "evento" },
-            { id: 22, fecha: "2026-05-30", titulo: "Fiesta de San Fernando", categoria: "Fiesta", lugar: "Cué", desc: "Fiesta patronal junto al mar.", tipo: "fiesta" },
-            { id: 23, fecha: "2026-04-17", titulo: "Taller Sombras Chinescas", categoria: "Infantil", lugar: "Llanes", desc: "Actividad creativa para niños.", tipo: "evento" }
-        ];
-
-        // Configuración de fecha actual según el documento (3 de abril de 2026 - Viernes)
-        const HOY = new Date("2026-04-03");
-        
-        function getStartOfWeek(date) {
-            const d = new Date(date);
-            const day = d.getDay();
-            const diff = d.getDate() - day + (day === 0 ? -6 : 1); // lunes
-            return new Date(d.setDate(diff)).setHours(0,0,0,0);
-        }
-
-        function getEndOfWeek(date) {
-            const start = new Date(getStartOfWeek(date));
-            return new Date(start.setDate(start.getDate() + 6)).setHours(23,59,59,999);
-        }
-
-        const startWeek = getStartOfWeek(HOY);
-        const endWeek = getEndOfWeek(HOY);
-
-        function renderEvents(filter = 'all') {
-            const container = document.getElementById('events-container');
-            const weekContainer = document.getElementById('this-week-container');
-            container.innerHTML = '';
-            weekContainer.innerHTML = '';
-
-            // Clasificar y ordenar: Fiestas primero
-            const sortedEvents = [...eventos].sort((a, b) => {
-                if (a.tipo === 'fiesta' && b.tipo !== 'fiesta') return -1;
-                if (a.tipo !== 'fiesta' && b.tipo === 'fiesta') return 1;
-                return new Date(a.fecha) - new Date(b.fecha);
+        // Animación simple de entrada para las tarjetas
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.neon-border');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease-out';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
             });
-
-            sortedEvents.forEach(ev => {
-                if (filter !== 'all' && ev.categoria !== filter) return;
-
-                const evDate = new Date(ev.fecha).getTime();
-                const isThisWeek = evDate >= startWeek && evDate <= endWeek;
-                
-                const cardHtml = `
-                    <div class="card p-6 rounded-lg neon-border ${ev.tipo === 'fiesta' ? 'fiesta' : ''}">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-bold px-2 py-1 bg-cyan-900 text-cyan-300 rounded">${ev.fecha.split('-').reverse().join('/')}</span>
-                            <span class="text-xs uppercase tracking-tighter ${ev.tipo === 'fiesta' ? 'text-pink-500' : 'text-cyan-400'}">${ev.categoria}</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2 ${ev.tipo === 'fiesta' ? 'text-pink-400' : 'text-white'}">${ev.titulo}</h3>
-                        <p class="text-gray-400 text-sm mb-4 font-light italic">${ev.lugar}</p>
-                        <p class="text-gray-300 text-sm leading-relaxed">${ev.desc}</p>
-                        <div class="mt-4 pt-4 border-t border-gray-800 flex justify-end">
-                            <button class="text-xs font-bold hover:text-white transition-colors cursor-pointer text-cyan-600">MÁS INFO +</button>
-                        </div>
-                    </div>
-                `;
-
-                if (isThisWeek) {
-                    weekContainer.innerHTML += cardHtml;
-                } else {
-                    container.innerHTML += cardHtml;
-                }
-            });
-
-            if (weekContainer.innerHTML === '') {
-                document.getElementById('this-week-section').style.display = 'none';
-            } else {
-                document.getElementById('this-week-section').style.display = 'block';
-            }
-        }
-
-        function filterEvents(cat) {
-            // UI Update
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`btn-${cat.toLowerCase()}`).classList.add('active');
-            
-            renderEvents(cat);
-        }
-
-        // Inicializar
-        window.onload = () => renderEvents();
-
+        });
     </script>
 </body>
 </html>
