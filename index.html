@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Llanes 2026 | Agenda Futurista</title>
+    <title>Llanes 2026 - Agenda Futurista</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-blue: #00f3ff;
-            --neon-purple: #bc13fe;
+            --neon-pink: #ff00ff;
             --dark-bg: #050505;
         }
 
@@ -17,297 +17,282 @@
             background-color: var(--dark-bg);
             color: #e0e0e0;
             font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 243, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 40%);
         }
 
         .orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* Estilo Neón */
-        .neon-border {
-            border: 1px solid rgba(0, 243, 255, 0.3);
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
             transition: all 0.3s ease;
         }
 
-        .neon-border:hover {
+        .glass-card:hover {
             border-color: var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
             transform: translateY(-5px);
         }
 
-        .neon-text {
-            text-shadow: 0 0 10px var(--neon-blue);
+        .neon-text-blue {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
         }
 
-        .neon-text-purple {
-            text-shadow: 0 0 10px var(--neon-purple);
+        .neon-text-pink {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
 
-        /* Fondo Animado */
-        .bg-grid {
-            background-image: linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-        }
-
-        .month-header {
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
-            border-left: 4px solid var(--neon-blue);
-            border-right: 4px solid var(--neon-blue);
-        }
-
-        .tag {
-            background: rgba(188, 19, 254, 0.2);
-            border: 1px solid var(--neon-purple);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+        .date-badge {
+            background: linear-gradient(45deg, var(--neon-blue), #0077ff);
+            color: black;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 5px;
             text-transform: uppercase;
         }
 
-        /* Scrollbar personalizada */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-pink));
+            opacity: 0.3;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0, 243, 255, 0.05) 0%, transparent 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="bg-grid"></div>
+<body class="min-h-screen p-4 md:p-8">
+    <div class="scanline"></div>
 
-    <!-- Header -->
-    <header class="max-w-6xl mx-auto text-center mb-12">
-        <h1 class="orbitron text-4xl md:text-6xl font-bold neon-text mb-2 uppercase tracking-tighter">
-            Llanes <span class="text-white">2026</span>
+    <header class="max-w-5xl mx-auto text-center mb-16 relative">
+        <h1 class="orbitron text-4xl md:text-6xl font-bold mb-4 tracking-tighter">
+            LLANES <span class="neon-text-blue">2026</span>
         </h1>
-        <p class="text-lg md:text-xl text-cyan-400 tracking-widest uppercase">Agenda Cultural • Abril / Mayo</p>
-        <div class="mt-4 flex justify-center gap-4 text-sm">
-            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-cyan-500 rounded-full inline-block animate-pulse"></span> Sistema Activo</span>
-            <span class="flex items-center gap-1">📍 Concejo de Llanes</span>
-        </div>
+        <p class="text-xl opacity-70 uppercase tracking-widest">Protocolo de Eventos: Abril & Mayo</p>
+        <div class="h-1 w-32 bg-neon-blue mx-auto mt-4 shadow-[0_0_15px_#00f3ff]"></div>
     </header>
 
-    <main class="max-w-6xl mx-auto">
+    <main class="max-w-5xl mx-auto space-y-12">
         
         <!-- SECCIÓN ABRIL -->
-        <section id="abril" class="mb-20">
-            <div class="month-header py-4 mb-8 text-center">
-                <h2 class="orbitron text-3xl font-bold neon-text uppercase">Abril 📅</h2>
-                <p class="text-gray-400 italic">Eventos desde el 11 de abril</p>
-            </div>
+        <section>
+            <h2 class="orbitron text-2xl neon-text-pink mb-8 border-l-4 border-neon-pink pl-4">ABRIL / FASE ACTUAL</h2>
+            <div class="space-y-6 relative pl-8">
+                <div class="timeline-line"></div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 11 ABR -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">11 <span class="text-sm block text-cyan-500">ABR</span></span>
-                        <span class="tag">Tradición</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🏇 Ruta Ecuestre y Cintas</h3>
-                    <p class="text-sm text-gray-400 mb-4">El Mazucu. Combinación de hípica y tradición popular en un entorno natural único.</p>
+                <!-- 14 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">14 ABR - HOY</span>
+                    <h3 class="text-xl font-bold mt-3 neon-text-blue">Taller Terapéutico de Biodanza y Meditación</h3>
+                    <p class="mt-2 text-sm opacity-80">Sesión terapéutica impartida por Eckna. En la Escuela Municipal de Música de Llanes (12:00-13:00 h). Gratuito.</p>
                 </div>
 
-                <div class="neon-border bg-black/60 p-5 rounded-lg border-purple-900/30">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">11 <span class="text-sm block text-purple-500">ABR</span></span>
-                        <span class="tag">Teatro</span>
+                <!-- 16 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">16 ABR</span>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="font-bold neon-text-blue">Animación a la Lectura</h3>
+                            <p class="text-sm opacity-80">Actividad infantil lúdica en la Casa de Cultura de Llanes.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold neon-text-blue">Taller de Decoración y Reciclaje</h3>
+                            <p class="text-sm opacity-80">Manualidades creativas en Nueva de Llanes.</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">🎭 Teatro: "Matadero"</h3>
-                    <p class="text-sm text-gray-400 mb-4">Casa Municipal de Cultura. Una pieza dramática intensa dentro del ciclo cultural.</p>
                 </div>
 
-                <!-- 12 ABR -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">12 <span class="text-sm block text-cyan-500">ABR</span></span>
-                        <span class="tag">Fiesta Patronal</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🌸 Ntra. Sra. de la Flor</h3>
-                    <p class="text-sm text-gray-400 mb-4">Pría. Celebración religiosa y actos tradicionales en una de las parroquias más bellas.</p>
+                <!-- Jornadas Gastronómicas -->
+                <div class="glass-card p-6 border-l-4 border-yellow-400">
+                    <span class="date-badge bg-yellow-400">17 - 26 ABR</span>
+                    <h3 class="text-2xl font-bold mt-3 text-yellow-400 italic">Jornadas de la Fabada, Fabes y Verdinas</h3>
+                    <p class="mt-2 text-sm">Evento gastronómico mayor en todo el concejo. Menús especiales (aprox. 25€) incluyendo entrantes, especialidad de fabes/verdinas y postre.</p>
                 </div>
 
-                <!-- 16-18 ABR -->
-                <div class="neon-border bg-black/80 p-5 rounded-lg border-cyan-400/50 scale-105 z-10">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">16-18 <span class="text-sm block text-cyan-500">ABR</span></span>
-                        <span class="tag bg-cyan-900">Destacado</span>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2 neon-text">🎬 IV FANT LLANES</h3>
-                    <p class="text-sm text-gray-300 mb-4 font-bold">Festival de Cine Fantástico. Proyecciones, terror y ciencia ficción invaden la villa.</p>
+                <!-- 17 Abril Infantil -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">17 ABR</span>
+                    <h3 class="font-bold neon-text-blue italic">Especial Día del Libro Infantil</h3>
+                    <p class="text-sm opacity-80 mt-2">Talleres de creación de cuentos y sombras chinescas en la Casa de Cultura.</p>
                 </div>
 
-                <!-- 18 ABR -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">18 <span class="text-sm block text-cyan-500">ABR</span></span>
-                        <span class="tag">Deporte</span>
+                <!-- 18 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">18 ABR</span>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="font-bold neon-text-pink">Taller Exposición "Remiendos"</h3>
+                            <p class="text-sm opacity-80">Práctica artística vinculada a la obra de Natalia Suárez.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold neon-text-blue">Ruta Literaria Celso Amieva</h3>
+                            <p class="text-sm opacity-80">Primera sesión del recorrido por el Llanes literario.</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🏃 II Cova Negra Trail</h3>
-                    <p class="text-sm text-gray-400 mb-4">Nueva de Llanes. Deporte extremo y paisajes espectaculares en esta carrera de montaña.</p>
                 </div>
 
-                <!-- 24 ABR -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">24 <span class="text-sm block text-cyan-500">ABR</span></span>
-                        <span class="tag">Deporte</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🚲 Vuelta Ciclista Asturias</h3>
-                    <p class="text-sm text-gray-400 mb-4">Llanes acoge la salida de la 2ª etapa. El ciclismo profesional llega a nuestras calles.</p>
+                <!-- 22-23 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">22 - 23 ABR</span>
+                    <h3 class="font-bold neon-text-blue">Literatura y Escritura</h3>
+                    <p class="text-sm opacity-80 mt-2">Presentación "El Actor Ecuánime", Taller de Escritura y VI Encuentro Internacional del Libro Ilustrado (Nueva + Llanes).</p>
                 </div>
 
-                <!-- 25 ABR -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">25 <span class="text-sm block text-cyan-500">ABR</span></span>
-                        <span class="tag">Feria</span>
+                <!-- 24 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">24 ABR</span>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="font-bold neon-text-pink">Vuelta Ciclista a Asturias</h3>
+                            <p class="text-sm opacity-80">Salida de la 2ª etapa desde Llanes. Ambiente deportivo máximo.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold neon-text-blue">Expo "Líneas de Infantería"</h3>
+                            <p class="text-sm opacity-80">Inauguración y visita guiada en la Casa de Cultura.</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🐂 San Jorge y Feria Ganado</h3>
-                    <p class="text-sm text-gray-400 mb-4">Nueva. Tradición ganadera, concurso de tortillas y verbena popular.</p>
                 </div>
 
-                <!-- 23 ABR -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg border-purple-900/30">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">23 <span class="text-sm block text-purple-500">ABR</span></span>
-                        <span class="tag">Libros</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">📖 VI Encuentro Libro Ilustrado</h3>
-                    <p class="text-sm text-gray-400 mb-4">"Misterios de Tejos". Sedes en Llanes y Nueva. Día Internacional del Libro.</p>
+                <!-- 25 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">25 ABR</span>
+                    <h3 class="font-bold neon-text-blue">Super Sábado Cultural</h3>
+                    <p class="text-sm opacity-80 mt-2">Feria de Ganado en Nueva (San Jorge), Múltiples presentaciones de libros, Recital Poético y Concierto "Llanes Lloplin".</p>
+                </div>
+
+                <!-- 30 Abril -->
+                <div class="glass-card p-6">
+                    <span class="date-badge">30 ABR</span>
+                    <h3 class="font-bold neon-text-blue">Cierre de Mes</h3>
+                    <p class="text-sm opacity-80 mt-2">Presentación del libro "Tinta Indistinta" y talleres recurrentes.</p>
                 </div>
             </div>
         </section>
 
         <!-- SECCIÓN MAYO -->
-        <section id="mayo" class="mb-20">
-            <div class="month-header py-4 mb-8 text-center border-purple-500">
-                <h2 class="orbitron text-3xl font-bold neon-text-purple uppercase">Mayo ✨</h2>
-                <p class="text-gray-400 italic">Primavera cultural a pleno rendimiento</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 01 MAY -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
+        <section class="mt-20">
+            <h2 class="orbitron text-2xl neon-text-blue mb-8 border-l-4 border-neon-blue pl-4">MAYO / FASE PROXIMAMENTE</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <div class="glass-card p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">01 <span class="text-sm block text-purple-500">MAY</span></span>
-                        <span class="tag">Fiesta</span>
+                        <span class="date-badge">01 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Tradición</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">🕯️ San Felipe</h3>
-                    <p class="text-sm text-gray-400 mb-4">La Galguera y Soberrón. Festividad tradicional religiosa y popular.</p>
+                    <h3 class="text-lg font-bold neon-text-pink">Fiesta de San Felipe</h3>
+                    <p class="text-sm opacity-70">La Galguera y Soberrón.</p>
                 </div>
 
-                <!-- 02 MAY -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                <div class="glass-card p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">02 <span class="text-sm block text-purple-500">MAY</span></span>
-                        <span class="tag">Running</span>
+                        <span class="date-badge">02 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Deporte</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">⛰️ VIII Trail de Cuera</h3>
-                    <p class="text-sm text-gray-400 mb-4">Porrúa. 1.700m de desnivel en la espectacular Sierra del Cuera.</p>
+                    <h3 class="text-lg font-bold neon-text-blue">VIII Trail de Cuera</h3>
+                    <p class="text-sm opacity-70">Carrera de montaña (32km) en Porrúa.</p>
                 </div>
 
-                <!-- 15-17 MAY -->
-                <div class="neon-border bg-black/80 p-5 rounded-lg border-purple-400/50">
+                <div class="glass-card p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">15-17 <span class="text-sm block text-purple-500">MAY</span></span>
-                        <span class="tag">Motor</span>
+                        <span class="date-badge">09 / 16 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Tradición</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 neon-text-purple">🔋 9º Eco-Rallye Villa de Llanes</h3>
-                    <p class="text-sm text-gray-300 mb-4">Campeonato de España de energías alternativas. Deporte sostenible.</p>
+                    <h3 class="text-lg font-bold neon-text-pink">La Sacramental</h3>
+                    <p class="text-sm opacity-70">Día 9 en Poo de Llanes / Día 16 en Porrúa.</p>
                 </div>
 
-                <!-- 24 MAY -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg">
+                <div class="glass-card p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">24 <span class="text-sm block text-purple-500">MAY</span></span>
-                        <span class="tag">Triatlón</span>
+                        <span class="date-badge">15 - 17 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Motor</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">🏊 Tri100Llanes</h3>
-                    <p class="text-sm text-gray-400 mb-4">Natación, ciclismo y carrera en los escenarios más épicos del concejo.</p>
+                    <h3 class="text-lg font-bold neon-text-blue">9º Eco-Rallye "Villa de Llanes"</h3>
+                    <p class="text-sm opacity-70">Orientación sostenible puntuable para el Campeonato de España.</p>
                 </div>
 
-                <!-- 27-31 MAY -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg border-cyan-400/20">
+                <div class="glass-card p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">27-31 <span class="text-sm block text-cyan-500">MAY</span></span>
-                        <span class="tag">Voleibol</span>
+                        <span class="date-badge">24 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Multideporte</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-cyan-300">🏐 Cto. España Voleibol Infantil</h3>
-                    <p class="text-sm text-gray-400 mb-4">Las mejores promesas nacionales se citan en Llanes.</p>
+                    <h3 class="text-lg font-bold neon-text-blue">Triatlón Tri100Llanes</h3>
+                    <p class="text-sm opacity-70">Natación, ciclismo y carrera en entorno natural.</p>
                 </div>
 
-                <!-- 30-31 MAY -->
-                <div class="neon-border bg-black/60 p-5 rounded-lg border-purple-400/20">
+                <div class="glass-card p-6">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="orbitron text-2xl font-bold text-white">30-31 <span class="text-sm block text-purple-500">MAY</span></span>
-                        <span class="tag">Feria Libro</span>
+                        <span class="date-badge">27 - 31 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Nacional</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">📚 II Feria del Libro "Valle de San Jorge"</h3>
-                    <p class="text-sm text-gray-400 mb-4">Nueva. Expositores, autores y talleres literarios para cerrar el mes.</p>
+                    <h3 class="text-lg font-bold neon-text-pink">Ctmo. España Voleibol Infantil</h3>
+                    <p class="text-sm opacity-70">Sede oficial del campeonato nacional femenino.</p>
                 </div>
+
+                <div class="glass-card p-6 col-span-full">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="date-badge">30 - 31 MAY</span>
+                        <span class="text-xs uppercase opacity-50">Libros</span>
+                    </div>
+                    <h3 class="text-lg font-bold neon-text-blue">II Feria del Libro "Valle de San Jorge"</h3>
+                    <p class="text-sm opacity-70">Nueva de Llanes. Expositores, autores y actividades.</p>
+                </div>
+
             </div>
         </section>
 
-        <!-- EXPOSICIONES PERMANENTES -->
-        <section class="mb-20">
-            <h2 class="orbitron text-3xl font-bold text-white mb-8 border-b border-gray-800 pb-2">🖼️ Módulos de Exposición (Activos)</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-cyan-500 shadow-xl">
-                    <h3 class="text-xl font-bold text-cyan-400 mb-3">👗 Indumentaria Tradicional</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        "Por la pinta son de Llanes". Casa de Cultura (1ª Planta). Todo abril y mayo. Trajes históricos y patrimonio etnográfico.
-                    </p>
-                    <div class="mt-4 flex gap-2">
-                        <span class="text-xs text-gray-500">⏰ 11:00-13:00 / 17:30-20:00</span>
-                    </div>
+        <!-- SECCIÓN EXPOSICIONES -->
+        <section class="mt-20">
+            <h2 class="orbitron text-xl neon-text-pink mb-6 text-center">NÚCLEOS ARTÍSTICOS ACTIVOS</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="glass-card p-4 text-center">
+                    <p class="text-xs opacity-50">POSADA</p>
+                    <h4 class="font-bold">Esculturas Cerámica</h4>
+                    <p class="text-xs italic">Hasta 30 Abr</p>
                 </div>
-                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-purple-500 shadow-xl">
-                    <h3 class="text-xl font-bold text-purple-400 mb-3">📸 Retrato y Sociedad</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Museo Etnográfico de Porrúa. 44 fotografías históricas de Daniel Álvarez Fervienza (1885-1899). Inéditas.
-                    </p>
-                    <div class="mt-4 flex gap-2">
-                        <span class="text-xs text-gray-500">📍 Porrúa • Todo Mayo</span>
-                    </div>
+                <div class="glass-card p-4 text-center">
+                    <p class="text-xs opacity-50">PORRÚA</p>
+                    <h4 class="font-bold">Retrato y Sociedad</h4>
+                    <p class="text-xs italic">Todo Abril y Mayo</p>
                 </div>
-                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-blue-400 shadow-xl">
-                    <h3 class="text-xl font-bold text-blue-300 mb-3">🖌️ Posada en Caras</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Centro Cívico de Posada. Carboncillo por David Concha Llorente. Hasta el 9 de mayo. Rostros de ayer y hoy.
-                    </p>
-                </div>
-                <div class="bg-gradient-to-r from-gray-900 to-black p-6 rounded-xl border-l-4 border-pink-500 shadow-xl">
-                    <h3 class="text-xl font-bold text-pink-400 mb-3">🏺 Cerámica Begoña López</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        Posada. Esculturas originales de la ceramista local. Abierta hasta el 30 de abril.
-                    </p>
+                <div class="glass-card p-4 text-center">
+                    <p class="text-xs opacity-50">LLANES</p>
+                    <h4 class="font-bold">Indumentaria Tradicional</h4>
+                    <p class="text-xs italic">Todo Abril y Mayo</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="max-w-6xl mx-auto text-center py-10 border-t border-gray-900">
-        <p class="orbitron text-xl font-bold neon-text tracking-widest uppercase mb-2">Web de Javi TJ</p>
-        <p class="text-gray-500 text-sm">SISTEMA DE INFORMACIÓN CULTURAL LLANES 2.0.26</p>
+    <footer class="mt-20 text-center pb-10">
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-neon-pink to-transparent opacity-30 mb-8"></div>
+        <p class="orbitron tracking-widest text-sm neon-text-blue">
+            Web de Javi TJ
+        </p>
     </footer>
-
-    <script>
-        // Animación simple de entrada para las tarjetas
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.neon-border');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.5s ease-out';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 * index);
-            });
-        });
-    </script>
 </body>
 </html>
