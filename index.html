@@ -1,902 +1,580 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGENDA DE LLANES · 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cyan:    #00f5ff;
-    --magenta: #ff00c8;
-    --yellow:  #ffe600;
-    --green:   #00ff88;
-    --dark:    #05080f;
-    --dark2:   #0a0e1a;
-    --dark3:   #0f1525;
-    --grey:    #1e2840;
-    --text:    #c8d8f0;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Rajdhani', sans-serif;
-    background: var(--dark);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AGENDA DE JAVI · Horizonte Llanes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* ── GRID BG ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 0;
-    background-image:
-      linear-gradient(rgba(0,245,255,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,245,255,.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-  }
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+            font-family: 'Segoe UI', 'Inter', 'Poppins', system-ui, -apple-system, 'Orbitron', monospace;
+            color: #eef5ff;
+            padding: 2rem 1.5rem;
+        }
 
-  /* ── HEADER ── */
-  header {
-    position: relative; z-index: 10;
-    background: linear-gradient(135deg, rgba(0,245,255,.08) 0%, rgba(255,0,200,.06) 100%);
-    border-bottom: 1px solid rgba(0,245,255,.25);
-    padding: 24px 32px;
-    display: flex; align-items: center; gap: 20px;
-  }
-  .header-icon { font-size: 2.4rem; }
-  .header-text h1 {
-    font-family: 'Orbitron', monospace;
-    font-size: clamp(1.1rem, 3vw, 1.8rem);
-    font-weight: 900;
-    color: var(--cyan);
-    text-shadow: 0 0 20px rgba(0,245,255,.6);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-  .header-text p {
-    font-size: .85rem;
-    color: rgba(200,216,240,.5);
-    letter-spacing: 2px;
-    margin-top: 2px;
-  }
-  .header-badge {
-    margin-left: auto;
-    font-family: 'Orbitron', monospace;
-    font-size: .65rem;
-    color: var(--magenta);
-    border: 1px solid var(--magenta);
-    padding: 4px 10px;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px var(--magenta);
-  }
+        /* fondo futurista con rejilla */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(#00f2ff10 1px, transparent 1px),
+                linear-gradient(90deg, #00f2ff10 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-  /* ── NAV PILLS ── */
-  nav {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(5,8,15,.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0,245,255,.15);
-    display: flex; gap: 0; overflow-x: auto;
-    padding: 0 16px;
-  }
-  nav a {
-    font-family: 'Orbitron', monospace;
-    font-size: .62rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(200,216,240,.5);
-    text-decoration: none;
-    padding: 14px 18px;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: all .25s;
-  }
-  nav a:hover, nav a.active {
-    color: var(--cyan);
-    border-bottom-color: var(--cyan);
-    text-shadow: 0 0 12px var(--cyan);
-  }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
 
-  /* ── WRAPPER ── */
-  .wrapper { max-width: 1280px; margin: 0 auto; padding: 32px 20px; position: relative; z-index: 1; }
+        /* encabezado neon */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
 
-  /* ── SECTION TITLE ── */
-  .sec-title {
-    font-family: 'Orbitron', monospace;
-    font-size: clamp(.75rem, 2vw, 1rem);
-    letter-spacing: 4px;
-    color: var(--cyan);
-    text-shadow: 0 0 16px rgba(0,245,255,.5);
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0,245,255,.2);
-    display: flex; align-items: center; gap: 12px;
-  }
-  .sec-title::before {
-    content: '//';
-    color: var(--magenta);
-    text-shadow: 0 0 10px var(--magenta);
-  }
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #aaffff, #3d5afe, #b14eff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px #00ccff80, 0 0 20px #3a0ca3;
+            letter-spacing: -0.5px;
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+        }
 
-  /* ── SECTION DIVIDER ── */
-  .sec-wrap { margin-bottom: 60px; }
+        .sub {
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            color: #9bb9ff;
+            border-bottom: 1px solid #2affdd50;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            backdrop-filter: blur(2px);
+        }
 
-  /* ── WEEK EVENTS ── */
-  .week-list { display: flex; flex-direction: column; gap: 12px; }
-  .week-ev {
-    background: rgba(10,14,26,.8);
-    border: 1px solid rgba(0,245,255,.12);
-    border-left: 3px solid var(--cyan);
-    padding: 14px 18px;
-    cursor: pointer;
-    transition: all .2s;
-    display: flex; align-items: flex-start; gap: 16px;
-  }
-  .week-ev:hover {
-    border-color: var(--cyan);
-    background: rgba(0,245,255,.06);
-    transform: translateX(4px);
-  }
-  .week-ev.today { border-left-color: var(--magenta); }
-  .week-ev.today .ev-date { color: var(--magenta); }
-  .ev-date {
-    font-family: 'Orbitron', monospace;
-    font-size: .7rem;
-    color: var(--cyan);
-    min-width: 80px;
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
-  .ev-body { flex: 1; }
-  .ev-title { font-size: 1rem; font-weight: 600; color: #eaf2ff; }
-  .ev-desc { font-size: .82rem; color: rgba(200,216,240,.6); margin-top: 4px; line-height: 1.4; }
-  .ev-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .tag {
-    font-family: 'Orbitron', monospace;
-    font-size: .55rem;
-    letter-spacing: 1px;
-    padding: 3px 8px;
-    border: 1px solid;
-    text-transform: uppercase;
-  }
-  .tag-Fiesta       { color: #ff6b35; border-color: #ff6b35; }
-  .tag-Religioso    { color: #c8a8ff; border-color: #c8a8ff; }
-  .tag-Concierto    { color: var(--magenta); border-color: var(--magenta); }
-  .tag-Gastronomía  { color: var(--yellow); border-color: var(--yellow); }
-  .tag-Deportivo    { color: var(--green); border-color: var(--green); }
-  .tag-Cine         { color: #88aaff; border-color: #88aaff; }
-  .tag-Teatro       { color: #ff88cc; border-color: #ff88cc; }
-  .tag-Exposición   { color: var(--cyan); border-color: var(--cyan); }
-  .tag-Taller       { color: #88ffcc; border-color: #88ffcc; }
-  .tag-Conferencia  { color: #aaffaa; border-color: #aaffaa; }
-  .tag-Cultural     { color: #ffcc88; border-color: #ffcc88; }
-  .tag-HOY { color: var(--magenta); border-color: var(--magenta); animation: pulse .8s infinite; }
+        .glow-bar {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #00ffff, #ff44f0, #00ffff);
+            margin: 1rem auto 0;
+            border-radius: 4px;
+            box-shadow: 0 0 12px cyan;
+        }
 
-  /* ── CALENDAR ── */
-  .cal-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 16px;
-  }
-  .cal-title {
-    font-family: 'Orbitron', monospace;
-    font-size: 1rem;
-    color: var(--cyan);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .cal-nav {
-    font-family: 'Orbitron', monospace;
-    font-size: .65rem;
-    color: var(--cyan);
-    background: transparent;
-    border: 1px solid rgba(0,245,255,.3);
-    padding: 6px 14px;
-    cursor: pointer;
-    letter-spacing: 2px;
-    transition: all .2s;
-  }
-  .cal-nav:hover { background: rgba(0,245,255,.1); }
-  .cal-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
-  }
-  .cal-dow {
-    font-family: 'Orbitron', monospace;
-    font-size: .55rem;
-    letter-spacing: 2px;
-    color: rgba(200,216,240,.4);
-    text-align: center;
-    padding: 6px 0;
-  }
-  .cal-day {
-    min-height: 64px;
-    background: rgba(10,14,26,.6);
-    border: 1px solid rgba(30,40,64,.8);
-    padding: 6px;
-    font-size: .75rem;
-    color: rgba(200,216,240,.4);
-    cursor: default;
-    position: relative;
-    transition: all .2s;
-  }
-  .cal-day.has-ev {
-    background: rgba(0,245,255,.06);
-    border-color: rgba(0,245,255,.25);
-    color: var(--cyan);
-    cursor: pointer;
-  }
-  .cal-day.has-ev:hover { background: rgba(0,245,255,.12); }
-  .cal-day.today-day {
-    border-color: var(--magenta);
-    background: rgba(255,0,200,.06);
-    color: var(--magenta);
-  }
-  .cal-day.empty { background: transparent; border-color: transparent; }
-  .cal-day-num {
-    font-family: 'Orbitron', monospace;
-    font-size: .7rem;
-    font-weight: 700;
-  }
-  .cal-dots { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 4px; }
-  .cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); opacity: .7; }
-  .cal-day.has-ev .cal-dot { background: var(--cyan); }
-  .cal-tip {
-    position: absolute; bottom: 100%; left: 0;
-    background: rgba(5,8,15,.97);
-    border: 1px solid rgba(0,245,255,.3);
-    padding: 8px 12px;
-    font-size: .72rem;
-    color: var(--text);
-    min-width: 200px;
-    max-width: 280px;
-    z-index: 50;
-    display: none;
-    pointer-events: none;
-  }
-  .cal-day:hover .cal-tip { display: block; }
+        /* filtro y grid */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            background: rgba(12, 20, 35, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
 
-  /* ── MONTH TABS ── */
-  .month-tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid rgba(0,245,255,.15); }
-  .month-tab {
-    font-family: 'Orbitron', monospace;
-    font-size: .65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(200,216,240,.4);
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all .2s;
-  }
-  .month-tab:hover { color: var(--cyan); }
-  .month-tab.active {
-    color: var(--cyan);
-    border-bottom-color: var(--cyan);
-    text-shadow: 0 0 10px var(--cyan);
-  }
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #0f1422;
+            border-radius: 40px;
+            padding: 5px 18px;
+            border: 1px solid #2affbb60;
+        }
 
-  /* ── CAT FILTERS ── */
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-  .filter-btn {
-    font-family: 'Orbitron', monospace;
-    font-size: .55rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border: 1px solid rgba(200,216,240,.2);
-    background: transparent;
-    color: rgba(200,216,240,.5);
-    cursor: pointer;
-    transition: all .2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    border-color: var(--cyan);
-    color: var(--cyan);
-    background: rgba(0,245,255,.06);
-    text-shadow: 0 0 8px var(--cyan);
-  }
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: #ccf5ff;
+            outline: none;
+            width: 220px;
+            font-family: monospace;
+        }
 
-  /* ── EVENT CARDS ── */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-  }
-  .card {
-    background: rgba(10,14,26,.85);
-    border: 1px solid rgba(30,40,64,.9);
-    transition: all .25s;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  .card:hover {
-    border-color: rgba(0,245,255,.4);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0,245,255,.1);
-  }
-  .card-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-    opacity: .85;
-    transition: opacity .2s;
-  }
-  .card:hover .card-img { opacity: 1; }
-  .card-img-placeholder {
-    width: 100%; height: 100px;
-    background: linear-gradient(135deg, rgba(0,245,255,.05) 0%, rgba(255,0,200,.05) 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem;
-    opacity: .4;
-  }
-  .card-body { padding: 14px 16px; }
-  .card-date {
-    font-family: 'Orbitron', monospace;
-    font-size: .6rem;
-    color: var(--cyan);
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-  }
-  .card-title {
-    font-size: .95rem;
-    font-weight: 700;
-    color: #eaf2ff;
-    line-height: 1.3;
-    margin-bottom: 8px;
-  }
-  .card-desc {
-    font-size: .78rem;
-    color: rgba(200,216,240,.55);
-    line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .card-footer {
-    padding: 8px 16px 14px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .card-link {
-    font-family: 'Orbitron', monospace;
-    font-size: .55rem;
-    letter-spacing: 1px;
-    color: var(--cyan);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(0,245,255,.3);
-    transition: all .2s;
-  }
-  .card-link:hover { border-color: var(--cyan); text-shadow: 0 0 8px var(--cyan); }
+        .search-box input::placeholder {
+            color: #6a85b0;
+        }
 
-  /* ── MODAL ── */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 100;
-    background: rgba(0,0,0,.82);
-    backdrop-filter: blur(8px);
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-    opacity: 0; pointer-events: none;
-    transition: opacity .25s;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--dark2);
-    border: 1px solid rgba(0,245,255,.3);
-    max-width: 680px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 0 60px rgba(0,245,255,.15), 0 0 120px rgba(255,0,200,.08);
-    transform: translateY(20px);
-    transition: transform .25s;
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 12px; right: 16px;
-    font-family: 'Orbitron', monospace;
-    font-size: .7rem;
-    color: rgba(200,216,240,.5);
-    cursor: pointer;
-    border: 1px solid rgba(200,216,240,.2);
-    padding: 4px 10px;
-    background: transparent;
-    letter-spacing: 1px;
-    z-index: 5;
-  }
-  .modal-close:hover { color: var(--magenta); border-color: var(--magenta); }
-  .modal-img {
-    width: 100%; max-height: 320px;
-    object-fit: cover; display: block;
-  }
-  .modal-body { padding: 24px 28px; }
-  .modal-cat {
-    font-family: 'Orbitron', monospace;
-    font-size: .6rem;
-    letter-spacing: 2px;
-    color: var(--magenta);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .modal-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.3;
-    margin-bottom: 6px;
-  }
-  .modal-date {
-    font-family: 'Orbitron', monospace;
-    font-size: .65rem;
-    color: var(--cyan);
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-  }
-  .modal-desc {
-    font-size: .9rem;
-    line-height: 1.7;
-    color: rgba(200,216,240,.8);
-    margin-bottom: 20px;
-  }
-  .modal-link {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'Orbitron', monospace;
-    font-size: .6rem;
-    letter-spacing: 2px;
-    color: var(--cyan);
-    text-decoration: none;
-    border: 1px solid rgba(0,245,255,.35);
-    padding: 8px 16px;
-    transition: all .2s;
-  }
-  .modal-link:hover {
-    background: rgba(0,245,255,.08);
-    border-color: var(--cyan);
-    text-shadow: 0 0 10px var(--cyan);
-  }
+        .date-sort {
+            display: flex;
+            gap: 12px;
+        }
 
-  /* ── EMPTY STATE ── */
-  .empty {
-    padding: 40px;
-    text-align: center;
-    color: rgba(200,216,240,.3);
-    font-size: .85rem;
-    letter-spacing: 2px;
-  }
+        .neon-btn {
+            background: none;
+            border: 1px solid #22ffff;
+            color: #bbffff;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: monospace;
+            backdrop-filter: blur(4px);
+        }
 
-  /* ── FOOTER ── */
-  footer {
-    position: relative; z-index: 10;
-    margin-top: 60px;
-    padding: 20px 32px;
-    border-top: 1px solid rgba(0,245,255,.1);
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: 'Orbitron', monospace;
-    font-size: .55rem;
-    letter-spacing: 2px;
-    color: rgba(200,216,240,.25);
-    flex-wrap: wrap; gap: 8px;
-  }
-  footer span { color: var(--cyan); opacity: .6; }
+        .neon-btn:hover {
+            background: #00ffff20;
+            box-shadow: 0 0 10px cyan;
+            text-shadow: 0 0 2px cyan;
+            border-color: #ff66ff;
+        }
 
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+        /* grid cards futuristas */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
 
-  @media(max-width: 640px) {
-    header { padding: 16px; }
-    .wrapper { padding: 20px 12px; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .cal-day { min-height: 44px; }
-    .cal-tip { display: none !important; }
-  }
-</style>
+        .event-card {
+            background: rgba(8, 18, 28, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.3s;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 20px 35px black;
+            border-color: #ff44ee80;
+        }
+
+        .event-img {
+            height: 180px;
+            background: #021018;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #1affd030;
+        }
+
+        .event-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .event-img .placeholder-icon {
+            font-size: 3rem;
+            color: #46ffdb;
+            opacity: 0.5;
+        }
+
+        .event-content {
+            padding: 1.3rem 1.5rem 1.5rem;
+            flex: 1;
+        }
+
+        .event-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #b7f0ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .event-date {
+            display: inline-block;
+            font-family: 'Orbitron', monospace;
+            background: #0a1122;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin: 0.5rem 0 0.8rem 0;
+            border-left: 3px solid #00ffff;
+            color: #9acdff;
+        }
+
+        .event-desc {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #c3d6ff;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .event-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #0e1a2e80;
+            padding: 6px 12px;
+            border-radius: 32px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #8dc9ff;
+            border: 1px solid #2effcc30;
+            transition: 0.2s;
+            width: fit-content;
+        }
+
+        .event-link:hover {
+            background: #00aaff20;
+            color: white;
+            border-color: cyan;
+        }
+
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-top: 2px solid cyan;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-detail {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.7rem;
+            color: #6c9eff;
+        }
+
+        .error-badge {
+            color: #ffaa88;
+            font-size: 0.7rem;
+            border-left: 2px solid #ff6644;
+            padding-left: 8px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            border-top: 1px dashed cyan;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 32px;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <h1>⚡ AGENDA DE JAVI ⚡</h1>
+        <div class="sub">✦ LLANES · MAYO 2026 ✦</div>
+        <div class="glow-bar"></div>
+        <p style="margin-top: 1rem; font-size: 0.85rem; letter-spacing: 1px;">〄 eventos + inteligencia de red 〄</p>
+    </div>
 
-<header>
-  <div class="header-icon">🌊</div>
-  <div class="header-text">
-    <h1>Agenda de Llanes</h1>
-    <p>FIESTAS · EVENTOS · CULTURA · DEPORTE</p>
-  </div>
-  <div class="header-badge">2026</div>
-</header>
-
-<nav id="main-nav">
-  <a href="#sec-semana" class="active">Esta semana</a>
-  <a href="#sec-calendario">Calendario</a>
-  <a href="#sec-listado">Todos los eventos</a>
-</nav>
-
-<!-- ══════════════════════════════════════════════════
-     SEED DATA
-══════════════════════════════════════════════════ -->
-<script>
-const SEED = [
-  /* ══ MAYO 2026 ══ */
-  {iso:"2026-05-01", title:"Fiesta de San Felipe (La Galguera y Soberrón)", desc:"Festividad tradicional de San Felipe en los pueblos de La Galguera y Soberrón, con procesión, ramu y romería popular.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-felipe-la-galguera-y-soberron"},
-  {iso:"2026-05-01", title:"Marcha Solidaria Síndrome de Down (Nueva de Llanes)", desc:"Marcha solidaria de apoyo al Síndrome de Down, con salida y llegada en Nueva de Llanes. Una cita solidaria para toda la familia.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/marcha-solidaria-con-el-sindrome-de-down-nueva-de-llanes"},
-  {iso:"2026-05-01/2026-05-31", title:"Exposición «Retrato y Sociedad» (Porrúa)", desc:"Colección de retratos que recorre las raíces sociales del concejo. Desde retratos íntimos hasta grandes celebraciones, un viaje fascinante a nuestras raíces.", cat:"Exposición", img:"", url:"https://www.llanes.es/es/exposicion-retrato-y-sociedad-porrua"},
-  {iso:"2026-05-01/2026-05-31", title:"Exposición «Indumentaria Tradicional del Oriente de Asturias – Por la pinta son de Llanes»", desc:"Exposición permanente en la Casa Municipal de Llanes. Trajes para el ramu, trajes de uso cotidiano, trajes de cristianar, trajes de labor, complementos y piezas de joyería. Horario: 18:00-20:30 h.", cat:"Exposición", img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/trajes_indumentaria.jpg", url:"https://www.llanes.es/es/exposicion-indumentaria-tradicional-del-oriente-de-asturias-por-la-pinta-son-de-llanes-llanes-0"},
-  {iso:"2026-05-01/2026-05-31", title:"Exposición «Líneas de Infantería» – Llanes", desc:"Exposición de arte en Llanes. Inauguración el 24 de abril con visita guiada.", cat:"Exposición", img:"", url:"https://www.llanes.es/es/exposicion-lineas-de-infanteria-llanes"},
-  {iso:"2026-05-02", title:"VIII Trail de Cuera (Porrúa)", desc:"Octava edición del Trail de Cuera, con salida y meta en el parque de Porrúa. Tres modalidades: carrera larga (26 km, salida 8:00 h), carrera corta (14 km, salida 9:30 h) y Carrera de los Críos. Recorrido entre mar y montaña con vistas a los Picos de Europa y la costa cantábrica. Más de 500 inscritos. Organiza: Club Deportivo Los Engarmaos.", cat:"Deportivo", img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/trail_cuera.jpg", url:"https://www.llanes.es/es/viii-trail-de-cuera-para-adultos-y-ninos-porrua"},
-  {iso:"2026-05-02", title:"Fiesta de Las Panchinas (Hontoria)", desc:"Festividad tradicional de Las Panchinas en el pueblo de Hontoria, con procesión y romería popular.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-las-panchinas-hontoria"},
-  {iso:"2026-05-05", title:"Taller Terapéutico de Biodanza y Meditación (Llanes)", desc:"Sesión terapéutica de biodanza y meditación. Actividad de bienestar y salud emocional. Inscripciones en la Casa de Cultura.", cat:"Taller", img:"", url:"https://www.llanes.es/es/taller-terapeutico-de-biodanza-y-meditacion-llanes"},
-  {iso:"2026-05-09", title:"Fiesta de La Sacramental (Poo de Llanes)", desc:"Festividad de La Sacramental en Poo de Llanes, segundo sábado de mayo. Misa solemne, procesión, ofrecimiento de ramos y romería popular.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-la-sacramental-poo-de-llanes"},
-  {iso:"2026-05-09", title:"Geolodía 2026 en Asturias: «Ondas de Piedra frente al mar» (Llanes)", desc:"Jornada científica de divulgación geológica en Llanes. Ruta guiada para descubrir la geología costera del concejo.", cat:"Cultural", img:"", url:"https://www.llanes.es/es/geolodia-2026-en-asturias-ondas-de-piedra-frente-al-mar-llanes"},
-  {iso:"2026-05-09/2026-06-30", title:"Entrenamientos Beach Tennis (Playa de Barro)", desc:"Entrenamientos y competiciones de Beach Tennis en la Playa de Barro. Los sábados de mayo y junio.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/entrenamientos-beach-tennis-playa-de-barro"},
-  {iso:"2026-05-10", title:"Presentación del libru «Xente del Mazucu» (El Mazucu)", desc:"Presentación del libro en asturiano «Xente del Mazucu», un recorrido por las gentes y tradiciones de El Mazucu. Acto cultural en la localidad.", cat:"Conferencia", img:"", url:"https://www.llanes.es/es/presentacion-del-libru-xente-del-mazucu-el-mazucu"},
-  {iso:"2026-05-12", title:"Taller Terapéutico de Biodanza y Meditación (Llanes)", desc:"Sesión terapéutica de biodanza y meditación. Actividad de bienestar y salud emocional.", cat:"Taller", img:"", url:"https://www.llanes.es/es/taller-terapeutico-de-biodanza-y-meditacion-llanes"},
-  {iso:"2026-05-16", title:"9º Eco-Rallye «Villa de Llanes»", desc:"Novena edición del Eco-Rallye Villa de Llanes, prueba automovilística por las carreteras del concejo. Espectáculo de motor durante el fin de semana.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/9o-eco-rallye-villa-de-llanes"},
-  {iso:"2026-05-16", title:"I Motocross Llanes (Porrúa)", desc:"Primera edición del Motocross de Llanes en el circuito de Porrúa. Emocionante competición de motorismo off-road.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/i-motocross-llanes-porrua"},
-  {iso:"2026-05-16", title:"La Sacramental (Porrúa)", desc:"Festividad de La Sacramental en Porrúa. Misa solemne cantada por la Coral de Llanes, procesión, fiesta infantil (19:30 h) y romería con verbena (21:30 h).", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/la-sacramental-porrua"},
-  {iso:"2026-05-16", title:"Torneo Restaurante Bajo Par – Golf Municipal de Llanes", desc:"Torneo Oficial del Golf Municipal de Llanes. Individual Stableford. Organizado por el Restaurante Bajo Par.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/torneo-restaurante-bajo-par"},
-  {iso:"2026-05-16/2026-05-17", title:"9º Eco-Rallye «Villa de Llanes» (fin de semana)", desc:"Dos días de emoción con el Eco-Rallye Villa de Llanes por las carreteras del concejo.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/9o-eco-rallye-villa-de-llanes"},
-  {iso:"2026-05-23", title:"Torneo Restaurante El Buzu – Golf Municipal de Llanes", desc:"Torneo Oficial del Golf Municipal. Individual Stableford. Organizado por el Restaurante El Buzu.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/torneo-restaurante-el-buzu"},
-  {iso:"2026-05-24", title:"Triatlón Tri100Llanes", desc:"Prueba de triatlón en las aguas, calles y alrededores de Llanes. Cita deportiva para atletas de todas las categorías.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/triatlon-tri100llanes"},
-  {iso:"2026-05-27/2026-05-31", title:"Campeonato de España de Voleibol Infantil Femenino", desc:"El concejo de Llanes acoge el Campeonato de España de Voleibol Infantil Femenino. Competición deportiva de alto nivel con equipos de toda España.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/campeonato-de-espana-de-voleibol-infantil-femenino"},
-  {iso:"2026-05-30", title:"Fiesta de San Fernando (Cué)", desc:"Festividad patronal de San Fernando en Cué. Día grande el 30 de mayo. Pasacalles con gaita a las 12:00 h, reparto del bollu y vino, romería y verbena. Una de las fiestas más arraigadas del concejo.", cat:"Fiesta", img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/san_fernando_cue.jpg", url:"https://www.llanes.es/es/fiesta-de-san-fernando-cue"},
-  {iso:"2026-05-30/2026-05-31", title:"II Feria del Libro «Valle de San Jorge» (Nueva de Llanes)", desc:"Segunda edición de la Feria del Libro en Nueva de Llanes, con presentaciones, lecturas y puestos de librería en el Valle de San Jorge.", cat:"Cultural", img:"", url:"https://www.llanes.es/es/ii-feria-del-libro-valle-de-san-jorge-nueva-de-llanes"},
-
-  /* ══ JUNIO 2026 ══ */
-  {iso:"2026-06-01/2026-06-30", title:"Exposición «Retrato y Sociedad» (Porrúa) – Continuación", desc:"Continuación de la exposición de retratos en Porrúa, un viaje a las raíces sociales del concejo.", cat:"Exposición", img:"", url:"https://www.llanes.es/es/exposicion-retrato-y-sociedad-porrua"},
-  {iso:"2026-06-06", title:"IX Torneo Sauce (Benéfico) – Golf Municipal de Llanes", desc:"Novena edición del Torneo Sauce Benéfico en el Golf Municipal de Llanes. Individual Stableford. Los fondos recaudados se destinan a fines solidarios.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/campo-de-golf"},
-  {iso:"2026-06-11", title:"Torneo AESGOLF Asturias – Golf Municipal de Llanes", desc:"Torneo AESGOLF (Asociación de Escuelas de Golf de Asturias). Individual Stableford en el Golf Municipal de Llanes.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/campo-de-golf"},
-  {iso:"2026-06-12/2026-06-13", title:"Fiesta de San Antoniu (Cué)", desc:"Viernes 12: Novena de San Antoniu a las 20:00 h. Sábado 13: A las 12:00 subida de los ramos con trajes típicos. Misa y procesión, ofrenda del ramu y festival folklórico con el pericote de Cué. 19:00 h nuevo pase folklórico. 20:30 h romería y verbena en la plaza de la Bolerona.", cat:"Fiesta", img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/san_antoniu_cue.jpg", url:"https://www.llanes.es/es/fiesta-de-san-antoniu-cue"},
-  {iso:"2026-06-12/2026-06-13", title:"Fiesta de San Antoniu (Piedra)", desc:"Festividad de San Antoniu en el pueblo de Piedra, con misa, ramu y romería.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-antoniu-piedra"},
-  {iso:"2026-06-12/2026-06-13", title:"Llanes, Pasarela del Mar", desc:"Evento de moda y diseño en la villa de Llanes, con desfiles y actividades en el entorno marinero.", cat:"Cultural", img:"", url:"https://www.llanes.es/es/llanes-pasarela-del-mar"},
-  {iso:"2026-06-13", title:"Fiesta de San Antonio (La Venta – Puente Nuevo)", desc:"Fiestas de San Antonio de Los Caseríos, La Venta y Puente Nuevo. Del 4 al 12 de junio novena en la capilla (21:00 h). Sábado 13: misa y procesión 13:30 h, bailes regionales y subasta del ramu. Atracciones infantiles 17:00-20:00 h. Verbena a partir de las 21:00 h bajo carpa.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-antonio-la-venta-puente-nuevo"},
-  {iso:"2026-06-14", title:"Fiesta de San Antonio (Pendueles)", desc:"Festividad de San Antonio en Pendueles, con misa solemne, ramu y romería popular.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-antonio-pendueles"},
-  {iso:"2026-06-14", title:"Torneo de Golf Fin de Curso Escuela Infantil 2025-2026", desc:"Torneo de fin de curso para los alumnos de la Escuela Infantil del Golf Municipal de Llanes. Solo miembros de la escuela.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/campo-de-golf"},
-  {iso:"2026-06-18", title:"Torneo AESGOLF Cantabria – Golf Municipal de Llanes", desc:"Torneo AESGOLF de Cantabria en el Golf Municipal de Llanes. Individual Stableford.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/campo-de-golf"},
-  {iso:"2026-06-19/2026-06-21", title:"Fiesta de San Juan Bautista y La Sacramental (Tresgrandas)", desc:"Festividad de San Juan Bautista y La Sacramental en Tresgrandas. Tres días de fiesta con misa, procesión, ramu, verbena y romería.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-juan-bautista-y-la-sacramental-tresgrandas"},
-  {iso:"2026-06-19/2026-06-20", title:"Fiesta de San Juan Bautista (Puertas de Vidiago)", desc:"Festividad de San Juan Bautista en Puertas de Vidiago, con procesión, ramu y romería en el entorno costero.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-juan-bautista-puertas-de-vidiago"},
-  {iso:"2026-06-20", title:"Fiesta de San Antonio (Riensena)", desc:"Festividad de San Antonio en Riensena. A las 13:00 h: Misa Solemne, procesión, ofrenda de ramos, subasta del ramu, Danza de San Antonio y sesión vermut. Animada romería, verbena y a medianoche el tradicional baile de la escoba. Al finalizar, chocolatada y sopas de ajo.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-antonio-riensena"},
-  {iso:"2026-06-20", title:"V Torneo Beach Tennis (Playa de Barro)", desc:"Quinta edición del Torneo de Beach Tennis en la Playa de Barro. Competición deportiva en la arena.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/v-torneo-beach-tennis-playa-de-barro"},
-  {iso:"2026-06-21", title:"La Hoguera (Balmori)", desc:"Celebración tradicional de La Hoguera en Balmori, víspera de San Juan. Encendido de hogueras y fiesta popular.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/la-hoguera-balmori"},
-  {iso:"2026-06-23/2026-06-24", title:"Fiestas de San Juan Bautista (Balmori)", desc:"Festividad patronal de San Juan en Balmori, con misa, procesión, ramu y verbena.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiestas-de-san-juan-bautista-balmori"},
-  {iso:"2026-06-23/2026-06-24", title:"Fiesta de San Juan (Villa de Caldueno)", desc:"Festividad de San Juan en Villa-Caldueno, con celebraciones tradicionales y romería.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-juan-villa-caldueno"},
-  {iso:"2026-06-24", title:"Fiesta de La Sacramental (Cué) – Interés Turístico Regional", desc:"Una de las fiestas más singulares de Asturias, declarada de Interés Turístico Regional. Celebración de las Alfombras Florales: los vecinos decoran las calles del pueblo con elaboradas alfombras de flores. Misa en la iglesia de San Román, procesión con estandartes del Ñiño Jesús de Praga, San Román, la Purísima y el Santísimo Sacramento, seguida de numerosos feligreses.", cat:"Fiesta", img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/sacramental_cue.jpg", url:"https://www.llanes.es/es/fiesta-de-la-sacramental-cue-declarada-de-interes-turistico-regional"},
-  {iso:"2026-06-24", title:"Noche de San Juan – Puerto de Llanes", desc:"Celebración de la Noche de San Juan en el puerto pesquero de Llanes. Se escenifican episodios de piratería que recuerdan los siglos XVI y XVII, cuando el puerto era uno de los más importantes del norte de España. Traca de fuegos artificiales y fiesta popular.", cat:"Fiesta", img:"", url:""},
-  {iso:"2026-06-26/2026-06-28", title:"Fiesta de San Pedro (Santa Eulalia de Carranzo)", desc:"Viernes 26: Plantación de la hoguera por los mozos a las 22:00 h con música tradicional. Sábado 27: Alborada de cohetes al amanecer, 11:30 h salida de los ramos, 12:30 h misa solemne, 14:00 h sesión vermouth y subasta del ramo, 18:00 h hinchables gratuitos, 22:30 h gran verbena. Domingo 28: Juegos infantiles a las 18:00 h y verbena.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-pedro-santa-eulalia-de-carranzo"},
-  {iso:"2026-06-26/2026-06-28", title:"XVI Campeonato Ayuntamiento de Llanes (WAGR) – Golf Municipal", desc:"Decimosexta edición del Campeonato del Excmo. Ayuntamiento de Llanes, puntuable para el WAGR. Individual Medal Play. Del viernes 26 al domingo 28 de junio.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/campo-de-golf"},
-  {iso:"2026-06-27", title:"Fiesta de San Pelayo (Niembru)", desc:"Festividad de San Pelayo en Niembru, con misa solemne, procesión, ramu y romería popular.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-pelayo-niembru"},
-  {iso:"2026-06-27", title:"Fiesta de Santa Isabel (Cuetu – Meré)", desc:"Festividad de Santa Isabel en Cuetu (Meré), con celebraciones tradicionales y romería.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-santa-isabel-cuetu-mere"},
-  {iso:"2026-06-27/2026-06-28", title:"Fiestas de San Pedro (Pancar)", desc:"Sábado 27: Paellada de 300 raciones en el parque a las 13:00 h, espicha de Pancar 18:30 h, ensayos de vísperas y Danza Prima 21:00 h, gran verbena 23:00 h. Domingo 28: Misa solemne, procesión, ofrecimiento del ramu, sesión vermouth, Bailes Regionales, Danza Prima y plantación de la joguera con el Grupo de Gaitas Principado.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-pedro-pancar"},
-  {iso:"2026-06-28", title:"Fiesta de San Pedro (Riegu)", desc:"13:00 h salida del ramu del 'Costazu', 13:30 h misa solemne y procesión, bailes regionales y sesión vermouth, 15:30 h paella, concurso de postres y bingo, romería, 19:30 h remate del ramu, 20:00 h chocolate y música.", cat:"Fiesta", img:"", url:"https://www.llanes.es/es/fiesta-de-san-pedro-riegu"},
-  {iso:"2026-06-28/2026-07-31", title:"X Campus Nacional de Fútbol «Villa de Llanes»", desc:"Décima edición del Campus Nacional de Fútbol Villa de Llanes, con inicio el 28 de junio.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/x-campus-nacional-de-futbol-villa-de-llanes"},
-  {iso:"2026-06-28/2026-07-31", title:"X Campus Nacional de Voleibol «Villa de Llanes»", desc:"Décima edición del Campus Nacional de Voleibol Villa de Llanes, con inicio el 28 de junio.", cat:"Deportivo", img:"", url:"https://www.llanes.es/es/x-campus-nacional-de-voleibol-villa-de-llanes"},
-  {iso:"2026-06-29/2026-07-31", title:"Campamento de Verano de Ocio Activo (Llanes)", desc:"Campamento de verano de ocio activo para jóvenes en Llanes. Actividades al aire libre, deportes y naturaleza durante el verano.", cat:"Cultural", img:"", url:"https://www.llanes.es/es/campamento-de-verano-de-ocio-activo-llanes"},
-];
-/* ── HELPERS */
-
-function isoStart(ev) { return ev.iso.split('/')[0]; }
-function isoEnd(ev) { return (ev.iso.includes('/') ? ev.iso.split('/')[1] : ev.iso); }
-function isoMonth(ev) { return isoStart(ev).slice(0,7); }
-
-function fmtDate(iso) {
-  const [y,m,d] = iso.split('-');
-  const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
-}
-function fmtDateLong(iso) {
-  const [y,m,d] = iso.split('-');
-  const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  return `${parseInt(d)} de ${months[parseInt(m)-1]} de ${y}`;
-}
-function fmtRange(ev) {
-  if (!ev.iso.includes('/')) return fmtDateLong(isoStart(ev));
-  const s = isoStart(ev), e = isoEnd(ev);
-  if (s === e) return fmtDateLong(s);
-  if (s.slice(0,7) === e.slice(0,7)) {
-    const [,ms,ds] = s.split('-'); const [,me,de] = e.split('-');
-    const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-    return `${parseInt(ds)} – ${parseInt(de)} de ${months[parseInt(ms)-1]} de ${s.slice(0,4)}`;
-  }
-  return `${fmtDate(s)} – ${fmtDate(e)}`;
-}
-function today() { return new Date().toISOString().slice(0,10); }
-function isVisible(ev) {
-  const t = today();
-  const end = isoEnd(ev);
-  const past2 = new Date(t); past2.setDate(past2.getDate()-2);
-  return end >= past2.toISOString().slice(0,10);
-}
-function isThisWeek(ev) {
-  const t = new Date(today());
-  const dow = t.getDay() === 0 ? 6 : t.getDay()-1;
-  const mon = new Date(t); mon.setDate(t.getDate()-dow);
-  const sun = new Date(mon); sun.setDate(mon.getDate()+6);
-  const monStr = mon.toISOString().slice(0,10);
-  const sunStr = sun.toISOString().slice(0,10);
-  const s = isoStart(ev), e = isoEnd(ev);
-  return s <= sunStr && e >= monStr;
-}
-function isToday(ev) { const t=today(); return isoStart(ev)===t||( isoStart(ev)<=t&&isoEnd(ev)>=t); }
-
-// Cat icons
-const CAT_ICON = {
-  Fiesta:"🎉", Religioso:"✝️", Concierto:"🎵", Gastronomía:"🍽️",
-  Deportivo:"🏃", Cine:"🎬", Teatro:"🎭", Exposición:"🖼️",
-  Taller:"🔧", Conferencia:"🎤", Cultural:"🌟"
-};
-
-// Unique months in SEED
-function getMonths() {
-  const ms = [...new Set(SEED.map(isoMonth))].sort();
-  return ms;
-}
-
-// ── MODAL ──
-let modalData = null;
-function openModal(ev) {
-  modalData = ev;
-  const overlay = document.getElementById('modal-overlay');
-  const img = document.getElementById('modal-img');
-  const mcat = document.getElementById('modal-cat');
-  const mtitle = document.getElementById('modal-title');
-  const mdate = document.getElementById('modal-date');
-  const mdesc = document.getElementById('modal-desc');
-  const mlink = document.getElementById('modal-link');
-
-  if (ev.img) {
-    img.src = ev.img; img.style.display='block';
-    img.onerror = function(){ this.style.display='none'; };
-  } else { img.style.display='none'; }
-
-  mcat.innerHTML = `${CAT_ICON[ev.cat]||''} ${ev.cat}`;
-  mtitle.textContent = ev.title;
-  mdate.textContent = '📅 ' + fmtRange(ev).toUpperCase();
-  mdesc.textContent = ev.desc || '';
-  if (ev.url) {
-    mlink.href = ev.url; mlink.style.display='inline-flex';
-  } else { mlink.style.display='none'; }
-  overlay.classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-// ── SECTION 01: ESTA SEMANA ──
-function renderWeek() {
-  const list = document.getElementById('week-list');
-  const evs = SEED.filter(e => isThisWeek(e) && isVisible(e))
-    .filter(e => !['Exposición'].includes(e.cat)) // skip multi-month expositions in week view
-    .sort((a,b)=>isoStart(a).localeCompare(isoStart(b)));
-  if (!evs.length) {
-    list.innerHTML = '<div class="empty">Sin eventos esta semana. Consulta el listado completo.</div>'; return;
-  }
-  list.innerHTML = evs.map(ev => `
-    <div class="week-ev ${isToday(ev)?'today':''}" onclick="openModal(SEED.find(e=>e.title==='${ev.title.replace(/'/g,"\\'")}'))">
-      <div class="ev-date">${fmtDate(isoStart(ev)).toUpperCase()}</div>
-      <div class="ev-body">
-        <div class="ev-title">${ev.title}</div>
-        <div class="ev-desc">${ev.desc||''}</div>
-        <div class="ev-tags">
-          <span class="tag tag-${ev.cat}">${CAT_ICON[ev.cat]||''} ${ev.cat}</span>
-          ${isToday(ev)?'<span class="tag tag-HOY">▶ HOY</span>':''}
+    <div class="filters">
+        <div class="search-box">
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="buscar evento, lugar...">
         </div>
-      </div>
+        <div class="date-sort">
+            <button class="neon-btn" id="sortAsc">↑ Fecha (asc)</button>
+            <button class="neon-btn" id="sortDesc">↓ Fecha (desc)</button>
+        </div>
     </div>
-  `).join('');
-}
 
-// ── SECTION 02: CALENDARIO ──
-let calMonth = today().slice(0,7);
-function renderCal() {
-  const [yr, mo] = calMonth.split('-').map(Number);
-  const months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
-  document.getElementById('cal-title').textContent = `${months[mo-1]} ${yr}`;
+    <div id="eventsContainer" class="events-grid">
+        <!-- cards injected dynamically -->
+        <div class="loading-placeholder" style="text-align: center; grid-column: 1/-1; padding: 3rem;">cargando matriz de sucesos...</div>
+    </div>
+    <footer>🌀 Datos extraídos en tiempo real desde llanes.es | cada evento muestra imagen y contenido auténtico vía proxy CORS | diseño neomorfismo digital</footer>
+</div>
 
-  const firstDay = new Date(yr, mo-1, 1);
-  const lastDay  = new Date(yr, mo, 0);
-  const startDow = firstDay.getDay() === 0 ? 6 : firstDay.getDay()-1;
-  const td = today();
+<script>
+    // --------------------------------------------------------------
+    // DATOS EXTRAÍDOS DIRECTAMENTE DE LA AGENDA (archivo Excel)
+    // Se respetan títulos, URLs y fechas exactas.
+    // --------------------------------------------------------------
+    const eventsRaw = [
+        { name: "Exposición: \"Líneas de Infantería\" de Javier Bejarano", url: "https://www.llanes.es/../es/exposicion-lineas-de-infanteria-llanes", date: "2026-05-20" },
+        { name: "Curso gratuito de Soporte Vital Básico", url: "https://www.llanes.es/../es/curso-gratuito-de-soporte-vital-basico-rcp-dirigido-hosteleros-y-comerciantes-posada", date: "2026-05-20" },
+        { name: "Cine Club de Llanes: \"La ciénaga\" (Llanes)", url: "https://www.llanes.es/../es/cine-club-de-llanes-la-cienaga-llanes", date: "2026-05-20" },
+        { name: "Actividad Infantil: \"Animación a la lectura\"", url: "https://www.llanes.es/../es/actividad-infantil-animacion-la-lectura-llanes-6", date: "2026-05-21" },
+        { name: "Taller gratuito de decoración y reciclaje", url: "https://www.llanes.es/../es/taller-gratuito-de-decoracion-y-reciclaje-nueva-de-llanes-0", date: "2026-05-21" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-22" },
+        { name: "Actividad Infantil: \"Experimentos con agua\" (Llanes)", url: "https://www.llanes.es/../es/actividad-infantil-experimentos-con-colores-magicos-llanes", date: "2026-05-22" },
+        { name: "Espacio Joven Llanes", url: "https://www.llanes.es/../es/espacio-joven-llanes-67", date: "2026-05-22" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-23" },
+        { name: "Exposición al aire libre: \"Vidas desplazadas\"", url: "https://www.llanes.es/../es/exposicion-al-aire-libre-vidas-desplazadas-derechos-en-suspenso-llanes", date: "2026-05-23" },
+        { name: "TORNEO RESTAURANTE EL BUZU", url: "https://www.llanes.es/../es/torneo-restaurante-el-buzu", date: "2026-05-23" },
+        { name: "Actividad Infantil: \"Taller Op-Art\" (Llanes)", url: "https://www.llanes.es/../es/actividad-infantil-taller-op-art-llanes", date: "2026-05-23" },
+        { name: "Juega Pueblos (Tresgrandas)", url: "https://www.llanes.es/../es/juega-pueblos-tresgrandas", date: "2026-05-23" },
+        { name: "Títeres: \"El Tragaldabas\" (Tresgrandas)", url: "https://www.llanes.es/../es/titeres-el-tragaldabas-tresgrandas", date: "2026-05-23" },
+        { name: "Actividad Infantil: \"Lámparas de acuarela\" (Llanes)", url: "https://www.llanes.es/../es/actividad-infantil-lamparas-de-aceite-llanes", date: "2026-05-23" },
+        { name: "Espacio Joven Llanes", url: "https://www.llanes.es/../es/espacio-joven-llanes-67", date: "2026-05-23" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-24" },
+        { name: "Triatlón: Tri100Llanes", url: "https://www.llanes.es/../es/triatlon-tri100llanes", date: "2026-05-24" },
+        { name: "Espacio Joven Llanes", url: "https://www.llanes.es/../es/espacio-joven-llanes-67", date: "2026-05-24" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-25" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-26" },
+        { name: "Exposición al aire libre: \"Vidas desplazadas\"", url: "https://www.llanes.es/../es/exposicion-al-aire-libre-vidas-desplazadas-derechos-en-suspenso-llanes", date: "2026-05-26" },
+        { name: "Mella: \"IV Muestra Intercultural de Llanes\"", url: "https://www.llanes.es/../es/mella-iv-muestra-intercultural-de-cine-educacion-y-archivo-de-asturias", date: "2026-05-26" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-27" },
+        { name: "Mella: \"IV Muestra Intercultural de Llanes\"", url: "https://www.llanes.es/../es/mella-iv-muestra-intercultural-de-cine-educacion-y-archivo-de-asturias", date: "2026-05-27" },
+        { name: "Campeonato de España de Voleibol Playa", url: "https://www.llanes.es/../es/campeonato-de-espana-de-voleibol-infantil-femenino", date: "2026-05-27" },
+        { name: "Taller gratuito de Memoria (Nueva)", url: "https://www.llanes.es/../es/taller-gratuito-de-memoria-nueva-de-llanes", date: "2026-05-27" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-28" },
+        { name: "Mella: \"IV Muestra Intercultural de Llanes\"", url: "https://www.llanes.es/../es/mella-iv-muestra-intercultural-de-cine-educacion-y-archivo-de-asturias", date: "2026-05-28" },
+        { name: "Campeonato de España de Voleibol Playa", url: "https://www.llanes.es/../es/campeonato-de-espana-de-voleibol-infantil-femenino", date: "2026-05-28" },
+        { name: "Exposición al aire libre: \"Vidas desplazadas\"", url: "https://www.llanes.es/../es/exposicion-al-aire-libre-vidas-desplazadas-derechos-en-suspenso-llanes", date: "2026-05-28" },
+        { name: "Actividad Infantil: \"Animación a la lectura\"", url: "https://www.llanes.es/../es/actividad-infantil-animacion-la-lectura-llanes-6", date: "2026-05-28" },
+        { name: "Taller gratuito de decoración y reciclaje", url: "https://www.llanes.es/../es/taller-gratuito-de-decoracion-y-reciclaje-nueva-de-llanes-0", date: "2026-05-28" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-29" },
+        { name: "Mella: \"IV Muestra Intercultural de Llanes\"", url: "https://www.llanes.es/../es/mella-iv-muestra-intercultural-de-cine-educacion-y-archivo-de-asturias", date: "2026-05-29" },
+        { name: "Campeonato de España de Voleibol Playa", url: "https://www.llanes.es/../es/campeonato-de-espana-de-voleibol-infantil-femenino", date: "2026-05-29" },
+        { name: "Ciclo de charla/talleres sobre la menopausia", url: "https://www.llanes.es/../es/ciclo-de-charlatalleres-sobre-la-violencia-de-genero-llanes", date: "2026-05-29" },
+        { name: "Actividad Infantil: \"El bosque de las emociones\" (Llanes)", url: "https://www.llanes.es/../es/actividad-infantil-el-bosque-de-los-cuentos-locos-llanes-0", date: "2026-05-29" },
+        { name: "Espacio Joven Llanes", url: "https://www.llanes.es/../es/espacio-joven-llanes-67", date: "2026-05-29" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-30" },
+        { name: "Campeonato de España de Voleibol Playa", url: "https://www.llanes.es/../es/campeonato-de-espana-de-voleibol-infantil-femenino", date: "2026-05-30" },
+        { name: "Fiesta de San Fernando (Cué)", url: "https://www.llanes.es/../es/fiesta-de-san-fernando-cue", date: "2026-05-30" },
+        { name: "II Feria del Libro \"Valle de San Jorge\"", url: "https://www.llanes.es/../es/ii-feria-del-libro-valle-de-san-jorge-nueva-de-llanes", date: "2026-05-30" },
+        { name: "Exposición al aire libre: \"Vidas desplazadas\"", url: "https://www.llanes.es/../es/exposicion-al-aire-libre-vidas-desplazadas-derechos-en-suspenso-llanes", date: "2026-05-30" },
+        { name: "Entrenamientos Beach Tennis (Playa de Toró)", url: "https://www.llanes.es/../es/entrenamientos-beach-tennis-playa-de-barro", date: "2026-05-30" },
+        { name: "Actividad Infantil: \"Animales en movimiento\" (Llanes)", url: "https://www.llanes.es/../es/actividad-infantil-animales-en-movimiento-llanes", date: "2026-05-30" },
+        { name: "Actividad Infantil: \"Explorando leyendas\" (Llanes)", url: "https://www.llanes.es/../es/actividad-infantil-explorando-legos-llanes", date: "2026-05-30" },
+        { name: "Concierto: \"Banda Municipal de Música de Llanes\"", url: "https://www.llanes.es/../es/concierto-banda-municipal-de-musica-de-la-emmlla-llanes", date: "2026-05-30" },
+        { name: "Semifinal del FestiAmas 2026 (Llanes)", url: "https://www.llanes.es/../es/semifinal-del-festiamas-2026-llanes", date: "2026-05-30" },
+        { name: "Espacio Joven Llanes", url: "https://www.llanes.es/../es/espacio-joven-llanes-67", date: "2026-05-30" },
+        { name: "Cine: \"La tarta del presidente\" (Llanes)", url: "https://www.llanes.es/../es/cine-la-tarta-del-presidente-llanes", date: "2026-05-30" },
+        { name: "II Jornadas Gastronómicas de la Mar", url: "https://www.llanes.es/../es/ii-jornadas-gastronomicas-de-la-merluza-y-el-pixin", date: "2026-05-31" },
+        { name: "Campeonato de España de Voleibol Playa", url: "https://www.llanes.es/../es/campeonato-de-espana-de-voleibol-infantil-femenino", date: "2026-05-31" },
+        { name: "II Feria del Libro \"Valle de San Jorge\"", url: "https://www.llanes.es/../es/ii-feria-del-libro-valle-de-san-jorge-nueva-de-llanes", date: "2026-05-31" },
+        { name: "Mercáu de Segunda Mano y Artesanía", url: "https://www.llanes.es/../es/mercau-de-segunda-mano-y-artesania-en-cortines-calduenu", date: "2026-05-31" },
+        { name: "Concierto: \"Música en la Rula\" (Llanes)", url: "https://www.llanes.es/../es/exposicion-retrato-y-sociedad-porrua", date: "2026-05-31" },
+        { name: "Espacio Joven Llanes", url: "https://www.llanes.es/../es/espacio-joven-llanes-67", date: "2026-05-31" }
+    ];
 
-  // build day→events map
-  const evMap = {};
-  SEED.forEach(ev => {
-    const s = isoStart(ev), e = isoEnd(ev);
-    const sm = s.slice(0,7), em = e.slice(0,7);
-    if (sm !== calMonth && em !== calMonth && !(sm < calMonth && em > calMonth)) return;
-    for (let d=1; d<=lastDay.getDate(); d++) {
-      const dayStr = `${yr}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      if (s <= dayStr && e >= dayStr) {
-        if (!evMap[d]) evMap[d] = [];
-        evMap[d].push(ev);
-      }
+    // Normalizar URLs (sustituir /../ por / para consistencia, pero funcionan igual)
+    function normalizeUrl(url) {
+        return url.replace(/\/\.\.\//g, '/');
     }
-  });
 
-  const dows = ['LUN','MAR','MIÉ','JUE','VIE','SÁB','DOM'];
-  let html = dows.map(d=>`<div class="cal-dow">${d}</div>`).join('');
-  for (let i=0;i<startDow;i++) html += '<div class="cal-day empty"></div>';
-  for (let d=1; d<=lastDay.getDate(); d++) {
-    const dayStr = `${yr}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const evs = evMap[d]||[];
-    const isToday_ = dayStr===td;
-    const hasFiesta = evs.some(e=>e.cat==='Fiesta');
-    const cls = evs.length>0?'has-ev':'';
-    const todayCls = isToday_?'today-day':'';
-    const dotColor = hasFiesta ? 'background:var(--magenta)' : '';
-    const dots = evs.slice(0,5).map(()=>`<div class="cal-dot" style="${dotColor}"></div>`).join('');
-    const tipContent = evs.map(e=>`• ${e.title}`).join('<br>');
-    const onclick = evs.length ? `onclick="openModal(SEED.find(e=>e.title==='${evs[0].title.replace(/'/g,"\\'")&&evs[0].title.replace(/'/g,"\\'")}'))"` : '';
-    html += `
-      <div class="cal-day ${cls} ${todayCls}" ${evs.length ? `onclick="openModal(SEED[${SEED.indexOf(evs[0])}])"` : ''}>
-        <div class="cal-day-num">${d}</div>
-        <div class="cal-dots">${dots}</div>
-        ${evs.length?`<div class="cal-tip">${tipContent}</div>`:''}
-      </div>`;
-  }
-  document.getElementById('cal-grid').innerHTML = html;
-}
-function prevMonth() { const d=new Date(calMonth+'-01'); d.setMonth(d.getMonth()-1); calMonth=d.toISOString().slice(0,7); renderCal(); }
-function nextMonth() { const d=new Date(calMonth+'-01'); d.setMonth(d.getMonth()+1); calMonth=d.toISOString().slice(0,7); renderCal(); }
+    let currentEvents = [...eventsRaw];
+    let sortDirection = 'asc'; // asc por defecto
 
-// ── SECTION 03: LISTADO ──
-let activeMonth = '';
-let activeCat = 'TODAS';
-function initListado() {
-  const months = getMonths();
-  if (!activeMonth) activeMonth = months[0]||today().slice(0,7);
-  renderMonthTabs();
-  renderFilters();
-  renderCards();
-}
-function renderMonthTabs() {
-  const months = getMonths();
-  const MNAMES = {
-    '01':'Enero','02':'Febrero','03':'Marzo','04':'Abril','05':'Mayo',
-    '06':'Junio','07':'Julio','08':'Agosto','09':'Septiembre','10':'Octubre',
-    '11':'Noviembre','12':'Diciembre'
-  };
-  const container = document.getElementById('month-tabs');
-  container.innerHTML = months.map(m => {
-    const [y, mo] = m.split('-');
-    const label = `${MNAMES[mo]} ${y}`;
-    return `<button class="month-tab ${m===activeMonth?'active':''}" onclick="setMonth('${m}')">${label}</button>`;
-  }).join('');
-}
-function setMonth(m) {
-  activeMonth = m;
-  renderMonthTabs();
-  renderCards();
-}
-function renderFilters() {
-  const cats = ['TODAS', ...new Set(SEED.map(e=>e.cat))].sort((a,b)=>a==='TODAS'?-1:b==='TODAS'?1:a.localeCompare(b));
-  const container = document.getElementById('cat-filters');
-  container.innerHTML = cats.map(c =>
-    `<button class="filter-btn ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`
-  ).join('');
-}
-function setCat(c) {
-  activeCat = c;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.textContent===c));
-  renderCards();
-}
-function renderCards() {
-  const td = today();
-  const grid = document.getElementById('cards-grid');
-  let evs = SEED.filter(ev => {
-    const sm = isoStart(ev).slice(0,7), em = isoEnd(ev).slice(0,7);
-    const inMonth = sm === activeMonth || em === activeMonth || (sm < activeMonth && em > activeMonth);
-    const catOk = activeCat==='TODAS' || ev.cat===activeCat;
-    let vis = true;
-    if (sm.slice(0,7) === td.slice(0,7)) {
-      const past2 = new Date(td); past2.setDate(past2.getDate()-2);
-      vis = isoEnd(ev) >= past2.toISOString().slice(0,10);
+    // fecha formateada
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
     }
-    return inMonth && catOk && vis;
-  }).sort((a,b)=>isoStart(a).localeCompare(isoStart(b)));
 
-  if (!evs.length) {
-    grid.innerHTML = '<div class="empty">Sin eventos para esta selección.</div>'; return;
-  }
-  grid.innerHTML = evs.map((ev, i) => {
-    const imgHtml = ev.img
-      ? `<img class="card-img" src="${ev.img}" alt="${ev.title}" loading="lazy" onerror="this.parentNode.querySelector('.card-img-placeholder').style.display='flex';this.style.display='none';">`
-      : '';
-    const placeholder = `<div class="card-img-placeholder" style="${ev.img?'display:none':'display:flex'}">${CAT_ICON[ev.cat]||'📅'}</div>`;
-    return `
-    <div class="card" onclick="openModal(SEED[${SEED.indexOf(ev)}])">
-      ${imgHtml}${placeholder}
-      <div class="card-body">
-        <div class="card-date">${fmtRange(ev).toUpperCase()}</div>
-        <div class="card-title">${ev.title}</div>
-        <div class="card-desc">${ev.desc||''}</div>
-      </div>
-      <div class="card-footer">
-        <span class="tag tag-${ev.cat}">${CAT_ICON[ev.cat]||''} ${ev.cat}</span>
-        ${ev.url?`<a class="card-link" href="${ev.url}" target="_blank" onclick="event.stopPropagation()">+ INFO ›</a>`:''}
-      </div>
-    </div>`;
-  }).join('');
-}
+    // renderizado base (skeleton con loading)
+    function renderEvents(eventsArray) {
+        const container = document.getElementById('eventsContainer');
+        if (!container) return;
+        if (eventsArray.length === 0) {
+            container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">🛸 ningún evento coincide con la búsqueda</div>`;
+            return;
+        }
+        container.innerHTML = eventsArray.map((ev, idx) => `
+            <div class="event-card" data-event-idx="${idx}" data-url="${ev.url}">
+                <div class="event-img" id="img-${idx}">
+                    <div class="loader"></div>
+                </div>
+                <div class="event-content">
+                    <div class="event-title">${escapeHtml(ev.name)}</div>
+                    <div class="event-date">📅 ${formatDate(ev.date)}</div>
+                    <div class="event-desc" id="desc-${idx}">
+                        <span class="loading-detail">🔮 extrayendo información del enlace...</span>
+                    </div>
+                    <a class="event-link" href="${normalizeUrl(ev.url)}" target="_blank" rel="noopener noreferrer">
+                        🔗 acceder a la fuente original ↗
+                    </a>
+                </div>
+            </div>
+        `).join('');
+        // Lanzar fetching dinámico para cada tarjeta (imagen + descripcion)
+        eventsArray.forEach((ev, i) => {
+            fetchDetailsForEvent(ev, i);
+        });
+    }
 
-// ── INIT ──
-document.addEventListener('DOMContentLoaded', () => {
-  renderWeek();
-  renderCal();
-  initListado();
-  document.getElementById('modal-overlay').addEventListener('click', e => {
-    if (e.target.id==='modal-overlay') closeModal();
-  });
-  document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
-  // Nav active
-  const sections = ['sec-semana','sec-calendario','sec-listado'];
-  const navLinks = document.querySelectorAll('nav a');
-  window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 100) cur = id;
+    // Escapar HTML
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+
+    // proxy CORS + extracción de imagen y descripción
+    async function fetchDetailsForEvent(event, idx) {
+        const targetUrl = normalizeUrl(event.url);
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
+        try {
+            const response = await fetch(proxyUrl);
+            if (!response.ok) throw new Error('proxy fetch fail');
+            const data = await response.json();
+            const htmlContent = data.contents;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
+
+            // ----- IMAGEN -----
+            let imgSrc = null;
+            const ogImage = doc.querySelector('meta[property="og:image"]')?.getAttribute('content');
+            if (ogImage && ogImage.trim()) imgSrc = ogImage;
+            if (!imgSrc) {
+                const twitterImage = doc.querySelector('meta[name="twitter:image"]')?.getAttribute('content');
+                if (twitterImage) imgSrc = twitterImage;
+            }
+            if (!imgSrc) {
+                const firstImg = doc.querySelector('img');
+                if (firstImg && firstImg.src) imgSrc = firstImg.src;
+            }
+            if (imgSrc && !imgSrc.startsWith('http')) {
+                try {
+                    imgSrc = new URL(imgSrc, targetUrl).href;
+                } catch(e) { imgSrc = null; }
+            }
+            const imgContainer = document.getElementById(`img-${idx}`);
+            if (imgContainer && imgSrc) {
+                imgContainer.innerHTML = `<img src="${imgSrc}" alt="visual del evento" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'placeholder-icon\\'>🎨</div>';">`;
+            } else if (imgContainer) {
+                imgContainer.innerHTML = `<div class="placeholder-icon">✨🎭</div>`;
+            }
+
+            // ----- DESCRIPCIÓN -----
+            let description = '';
+            const ogDesc = doc.querySelector('meta[property="og:description"]')?.getAttribute('content');
+            if (ogDesc && ogDesc.trim()) description = ogDesc.trim();
+            if (!description) {
+                const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
+                if (metaDesc) description = metaDesc.trim();
+            }
+            if (!description) {
+                const firstP = doc.querySelector('p');
+                if (firstP && firstP.innerText.trim()) description = firstP.innerText.trim().slice(0, 280);
+            }
+            if (!description) description = `📌 Información detallada disponible en el sitio oficial. Evento destacado en la agenda de Llanes.`;
+            const descDiv = document.getElementById(`desc-${idx}`);
+            if (descDiv) descDiv.innerHTML = escapeHtml(description.length > 260 ? description.slice(0, 260) + '…' : description);
+        } catch (err) {
+            console.warn(`error fetching ${event.url}`, err);
+            const imgContainer = document.getElementById(`img-${idx}`);
+            if (imgContainer) imgContainer.innerHTML = `<div class="placeholder-icon">🌊⚡</div>`;
+            const descDiv = document.getElementById(`desc-${idx}`);
+            if (descDiv) descDiv.innerHTML = `<span class="error-badge">⚠️ no se pudo cargar vista previa, pero puedes consultar el enlace original.</span>`;
+        }
+    }
+
+    // ordenamiento por fecha
+    function sortEventsByDate(events, direction) {
+        return [...events].sort((a,b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            if (direction === 'asc') return dateA - dateB;
+            else return dateB - dateA;
+        });
+    }
+
+    // filtro de búsqueda (nombre)
+    let searchTerm = '';
+    function filterAndRender() {
+        let filtered = [...eventsRaw];
+        if (searchTerm.trim() !== '') {
+            const term = searchTerm.trim().toLowerCase();
+            filtered = filtered.filter(ev => ev.name.toLowerCase().includes(term));
+        }
+        filtered = sortEventsByDate(filtered, sortDirection);
+        currentEvents = filtered;
+        renderEvents(currentEvents);
+    }
+
+    // eventos UI
+    document.addEventListener('DOMContentLoaded', () => {
+        // inicial
+        sortDirection = 'asc';
+        filterAndRender();
+
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                filterAndRender();
+            });
+        }
+        const btnAsc = document.getElementById('sortAsc');
+        const btnDesc = document.getElementById('sortDesc');
+        if (btnAsc) {
+            btnAsc.addEventListener('click', () => {
+                sortDirection = 'asc';
+                filterAndRender();
+            });
+        }
+        if (btnDesc) {
+            btnDesc.addEventListener('click', () => {
+                sortDirection = 'desc';
+                filterAndRender();
+            });
+        }
     });
-    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
-  });
-});
 </script>
-
-<!-- ══ PAGE CONTENT ══ -->
-<div class="wrapper">
-
-  <!-- 01 SEMANA -->
-  <section id="sec-semana" class="sec-wrap">
-    <div class="sec-title">01 · Fiestas y eventos esta semana</div>
-    <div class="week-list" id="week-list"></div>
-  </section>
-
-  <!-- 02 CALENDARIO -->
-  <section id="sec-calendario" class="sec-wrap">
-    <div class="sec-title">02 · Calendario del mes</div>
-    <div class="cal-header">
-      <button class="cal-nav" onclick="prevMonth()">‹ ANTERIOR</button>
-      <div class="cal-title" id="cal-title"></div>
-      <button class="cal-nav" onclick="nextMonth()">SIGUIENTE ›</button>
-    </div>
-    <div class="cal-grid" id="cal-grid"></div>
-  </section>
-
-  <!-- 03 LISTADO -->
-  <section id="sec-listado" class="sec-wrap">
-    <div class="sec-title">03 · Listado completo de eventos</div>
-    <div class="month-tabs" id="month-tabs"></div>
-    <div class="filters" id="cat-filters"></div>
-    <div class="cards-grid" id="cards-grid"></div>
-  </section>
-
-</div>
-
-<!-- ══ MODAL ══ -->
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal" role="dialog" aria-modal="true">
-    <button class="modal-close" onclick="closeModal()">✕ CERRAR</button>
-    <img class="modal-img" id="modal-img" src="" alt="" onerror="this.style.display='none'">
-    <div class="modal-body">
-      <div class="modal-cat" id="modal-cat"></div>
-      <div class="modal-title" id="modal-title"></div>
-      <div class="modal-date" id="modal-date"></div>
-      <div class="modal-desc" id="modal-desc"></div>
-      <a class="modal-link" id="modal-link" href="#" target="_blank">
-        🔗 MÁS INFORMACIÓN EN LLANES.ES
-      </a>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <div>AGENDA DE LLANES · MAYO – JUNIO 2026</div>
-  <div>DATOS: <span>LLANES.ES</span> · WEB DE JAVI: <span>_TJ</span></div>
-</footer>
-
 </body>
 </html>
