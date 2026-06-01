@@ -1,1351 +1,1113 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agenda Llanes — Junio 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@200;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-  :root {
-    --bg: #0a0a12;
-    --bg2: #10101f;
-    --card: rgba(16,16,35,0.7);
-    --border: rgba(0,255,210,0.15);
-    --accent1: #00ffd2;
-    --accent2: #ff2d95;
-    --accent3: #a8ff00;
-    --accent4: #ff8c00;
-    --text: #e8e8f0;
-    --muted: #8888aa;
-    --glass: rgba(255,255,255,0.04);
-  }
-
-  * { margin:0; padding:0; box-sizing:border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Exo 2', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
-
-  /* ===== FONDO ANIMADO ===== */
-  .bg-mesh {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .bg-mesh .orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    animation: orbFloat 20s ease-in-out infinite alternate;
-  }
-  .bg-mesh .orb:nth-child(1) {
-    width: 600px; height: 600px;
-    background: var(--accent1);
-    top: -10%; left: -10%;
-    animation-duration: 25s;
-  }
-  .bg-mesh .orb:nth-child(2) {
-    width: 500px; height: 500px;
-    background: var(--accent2);
-    bottom: -10%; right: -10%;
-    animation-duration: 30s;
-    animation-delay: -5s;
-  }
-  .bg-mesh .orb:nth-child(3) {
-    width: 400px; height: 400px;
-    background: var(--accent3);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    animation-duration: 22s;
-    animation-delay: -10s;
-    opacity: 0.18;
-  }
-  .bg-mesh .orb:nth-child(4) {
-    width: 350px; height: 350px;
-    background: var(--accent4);
-    top: 20%; right: 15%;
-    animation-duration: 28s;
-    animation-delay: -7s;
-    opacity: 0.2;
-  }
-
-  @keyframes orbFloat {
-    0% { transform: translate(0,0) scale(1); }
-    33% { transform: translate(80px,-60px) scale(1.1); }
-    66% { transform: translate(-50px,70px) scale(0.95); }
-    100% { transform: translate(30px,-40px) scale(1.05); }
-  }
-
-  /* ===== GRID DE FONDO ===== */
-  .bg-grid {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background-image:
-      linear-gradient(rgba(0,255,210,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,210,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
-
-  /* ===== CONTENIDO ===== */
-  .content-wrap {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    position: relative;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1.2rem;
-    border: 1px solid var(--accent1);
-    border-radius: 100px;
-    font-size: 0.8rem;
-    color: var(--accent1);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-    background: rgba(0,255,210,0.05);
-    animation: fadeInDown 1s ease;
-  }
-  .hero h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: clamp(2.5rem, 7vw, 5.5rem);
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    animation: fadeInUp 1s ease 0.2s both;
-  }
-  .hero h1 .line1 { color: var(--text); }
-  .hero h1 .line2 {
-    background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-sub {
-    font-size: 1.2rem;
-    color: var(--muted);
-    font-weight: 200;
-    max-width: 600px;
-    margin-bottom: 2.5rem;
-    animation: fadeInUp 1s ease 0.4s both;
-  }
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    animation: fadeInUp 1s ease 0.6s both;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .hero-stat {
-    text-align: center;
-  }
-  .hero-stat .num {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--accent1);
-  }
-  .hero-stat .label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s ease infinite;
-    color: var(--muted);
-    font-size: 1.5rem;
-  }
-
-  @keyframes fadeInUp {
-    from { opacity:0; transform:translateY(40px); }
-    to { opacity:1; transform:translateY(0); }
-  }
-  @keyframes fadeInDown {
-    from { opacity:0; transform:translateY(-30px); }
-    to { opacity:1; transform:translateY(0); }
-  }
-  @keyframes bounce {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(12px); }
-  }
-
-  /* ===== FILTROS ===== */
-  .filters-bar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10,10,18,0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    overflow-x: auto;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .filter-btn {
-    padding: 0.45rem 1rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 100px;
-    background: transparent;
-    color: var(--muted);
-    font-family: 'Exo 2', sans-serif;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-  }
-  .filter-btn:hover {
-    border-color: var(--accent1);
-    color: var(--accent1);
-    background: rgba(0,255,210,0.05);
-  }
-  .filter-btn.active {
-    border-color: var(--accent1);
-    color: var(--bg);
-    background: var(--accent1);
-    font-weight: 600;
-  }
-
-  /* ===== TIMELINE ===== */
-  .timeline-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem 1.5rem 6rem;
-  }
-
-  .date-group {
-    margin-bottom: 4rem;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.7s cubic-bezier(0.22,1,0.36,1);
-  }
-  .date-group.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .date-header {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  .date-header .day-num {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 2.8rem;
-    color: var(--accent1);
-    min-width: 80px;
-    line-height: 1;
-  }
-  .date-header .day-info {
-    display: flex;
-    flex-direction: column;
-  }
-  .date-header .day-name {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--accent2);
-    font-weight: 600;
-  }
-  .date-header .day-month {
-    font-size: 1rem;
-    color: var(--muted);
-    font-weight: 200;
-  }
-  .date-header .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, var(--border), transparent);
-  }
-
-  /* ===== TARJETAS DE EVENTO ===== */
-  .events-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .event-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-    position: relative;
-    cursor: default;
-  }
-  .event-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(0,255,210,0.2), transparent, rgba(255,45,149,0.2));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .event-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(0,255,210,0.3);
-    box-shadow: 0 20px 60px rgba(0,255,210,0.08), 0 0 40px rgba(255,45,149,0.05);
-  }
-  .event-card:hover::before { opacity: 1; }
-
-  .card-img-wrap {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-  }
-  .card-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
-  }
-  .event-card:hover .card-img-wrap img {
-    transform: scale(1.08);
-  }
-  .card-img-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(0deg, var(--bg) 0%, transparent 60%);
-  }
-  .card-cat-badge {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 100px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 2;
-  }
-  .cat-exposicion { background: rgba(0,255,210,0.2); color: var(--accent1); border: 1px solid rgba(0,255,210,0.3); }
-  .cat-fiesta { background: rgba(255,45,149,0.2); color: var(--accent2); border: 1px solid rgba(255,45,149,0.3); }
-  .cat-musica { background: rgba(168,255,0,0.2); color: var(--accent3); border: 1px solid rgba(168,255,0,0.3); }
-  .cat-deporte { background: rgba(255,140,0,0.2); color: var(--accent4); border: 1px solid rgba(255,140,0,0.3); }
-  .cat-teatro { background: rgba(180,100,255,0.2); color: #b464ff; border: 1px solid rgba(180,100,255,0.3); }
-  .cat-taller { background: rgba(0,180,255,0.2); color: #00b4ff; border: 1px solid rgba(0,180,255,0.3); }
-  .cat-joven { background: rgba(255,220,0,0.2); color: #ffdc00; border: 1px solid rgba(255,220,0,0.3); }
-  .cat-solidario { background: rgba(255,100,100,0.2); color: #ff6464; border: 1px solid rgba(255,100,100,0.3); }
-  .cat-campus { background: rgba(100,255,180,0.2); color: #64ffb4; border: 1px solid rgba(100,255,180,0.3); }
-
-  .card-time-badge {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 8px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    z-index: 2;
-  }
-
-  .card-body {
-    padding: 1.2rem 1.3rem 1.4rem;
-  }
-  .card-location {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.72rem;
-    color: var(--accent1);
-    margin-bottom: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .card-location i { font-size: 0.65rem; }
-  .card-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 0.7rem;
-    color: #fff;
-  }
-  .card-desc {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    font-weight: 200;
-  }
-  .card-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .detail-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.2rem 0.6rem;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    background: var(--glass);
-    border: 1px solid rgba(255,255,255,0.06);
-    color: var(--muted);
-  }
-  .detail-tag i { font-size: 0.6rem; }
-
-  .card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--accent1);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s;
-    letter-spacing: 0.5px;
-  }
-  .card-link:hover {
-    color: #fff;
-    gap: 0.8rem;
-  }
-  .card-link i {
-    font-size: 0.7rem;
-    transition: transform 0.3s;
-  }
-  .card-link:hover i { transform: translateX(3px); }
-
-  /* ===== SEPARADOR ===== */
-  .section-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 3rem 0;
-    color: var(--muted);
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .section-divider::before,
-  .section-divider::after {
-    content: '';
-    flex: 1;
-    max-width: 200px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    text-align: center;
-    padding: 3rem 2rem;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 0.8rem;
-    font-weight: 200;
-  }
-  footer a { color: var(--accent1); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-
-  /* ===== TOAST ===== */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    padding: 1rem 1.5rem;
-    background: rgba(16,16,35,0.95);
-    border: 1px solid var(--accent1);
-    border-radius: 12px;
-    color: var(--accent1);
-    font-size: 0.85rem;
-    backdrop-filter: blur(16px);
-    z-index: 999;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.22,1,0.36,1);
-    pointer-events: none;
-  }
-  .toast.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /* ===== SCROLL TO TOP ===== */
-  .scroll-top {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--card);
-    backdrop-filter: blur(10px);
-    color: var(--accent1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 100;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s;
-    font-size: 1rem;
-  }
-  .scroll-top.show { opacity: 1; transform: translateY(0); }
-  .scroll-top:hover {
-    background: var(--accent1);
-    color: var(--bg);
-    border-color: var(--accent1);
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 768px) {
-    .events-row { grid-template-columns: 1fr; }
-    .hero-stats { gap: 1.5rem; }
-    .hero-stat .num { font-size: 2rem; }
-    .date-header .day-num { font-size: 2rem; min-width: 60px; }
-    .filters-bar { padding: 0.8rem 1rem; justify-content: flex-start; }
-  }
-
-  /* ===== REDUCED MOTION ===== */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda Cultural y de Fiestas - Concejo de Llanes</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
     }
-  }
-
-  /* ===== PARTICLES CANVAS ===== */
-  #particles-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-</style>
+    .serif-title {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
 
-<!-- Fondo animado -->
-<div class="bg-mesh">
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-</div>
-<div class="bg-grid"></div>
-<canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <!-- HEADER / HERO -->
+  <header class="relative bg-slate-950 text-white overflow-hidden">
+    <!-- Fondo decorativo con overlay -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
 
-<div class="content-wrap">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-28 flex flex-col items-center text-center">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-6 uppercase tracking-wider">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Asturias, España
+      </span>
+      <h1 class="serif-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+        Descubre Llanes <br class="hidden sm:inline" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+          Cultura, Fiestas y Deporte
+        </span>
+      </h1>
+      <p class="max-w-2xl text-slate-300 text-base sm:text-lg md:text-xl font-light mb-10 leading-relaxed">
+        Agenda completa de eventos tradicionales, exposiciones artísticas, competiciones deportivas y talleres en el espectacular concejo de Llanes. ¡Planifica tu visita!
+      </p>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-badge"><i class="fa-solid fa-calendar-days"></i> Agenda Oficial 2026</div>
-    <h1>
-      <span class="line1">LLANES</span><br>
-      <span class="line2">JUNIO 2026</span>
-    </h1>
-    <p class="hero-sub">Todos los eventos, fiestas, exposiciones, conciertos y actividades deportivas del concejo de Llanes para el mes de junio.</p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="num" id="counter-events">33</div>
-        <div class="label">Eventos</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">15</div>
-        <div class="label">Fiestas</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">17</div>
-        <div class="label">Localidades</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">30</div>
-        <div class="label">Días</div>
+      <!-- Estadísticas rápidas -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl p-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 text-center">
+        <div>
+          <p class="text-2xl sm:text-3xl font-extrabold text-emerald-400">33</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Eventos Registrados</p>
+        </div>
+        <div>
+          <p class="text-2xl sm:text-3xl font-extrabold text-teal-300">14</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Fiestas y Romerías</p>
+        </div>
+        <div>
+          <p class="text-2xl sm:text-3xl font-extrabold text-cyan-300">5</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Campus Deportivos</p>
+        </div>
+        <div>
+          <p class="text-2xl sm:text-3xl font-extrabold text-amber-300">100%</p>
+          <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Auténtico Asturiano</p>
+        </div>
       </div>
     </div>
-    <div class="scroll-indicator"><i class="fa-solid fa-chevron-down"></i></div>
   </header>
 
-  <!-- FILTROS -->
-  <nav class="filters-bar" role="navigation" aria-label="Filtrar eventos por categoría">
-    <button class="filter-btn active" data-filter="todos">Todos</button>
-    <button class="filter-btn" data-filter="fiesta"><i class="fa-solid fa-fire"></i> Fiestas</button>
-    <button class="filter-btn" data-filter="exposicion"><i class="fa-solid fa-palette"></i> Exposiciones</button>
-    <button class="filter-btn" data-filter="musica"><i class="fa-solid fa-music"></i> Música</button>
-    <button class="filter-btn" data-filter="deporte"><i class="fa-solid fa-futbol"></i> Deporte</button>
-    <button class="filter-btn" data-filter="teatro"><i class="fa-solid fa-masks-theater"></i> Teatro / Títeres</button>
-    <button class="filter-btn" data-filter="taller"><i class="fa-solid fa-chalkboard-user"></i> Talleres</button>
-    <button class="filter-btn" data-filter="campus"><i class="fa-solid fa-campground"></i> Campus</button>
-    <button class="filter-btn" data-filter="solidario"><i class="fa-solid fa-hand-holding-heart"></i> Solidario</button>
-    <button class="filter-btn" data-filter="joven"><i class="fa-solid fa-users"></i> Juvenil</button>
-  </nav>
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    
+    <!-- BARRA DE BÚSQUEDA Y FILTROS -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 mb-10">
+      <div class="flex flex-col gap-6">
+        <!-- Fila superior: Búsqueda y Selector de Categorías -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <!-- Input de búsqueda -->
+          <div class="relative lg:col-span-5">
+            <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+            <input 
+              type="text" 
+              id="searchInput" 
+              placeholder="Buscar por título, lugar, descripción, pueblo..." 
+              class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
+              oninput="filterEvents()"
+            />
+          </div>
 
-  <!-- TIMELINE DE EVENTOS -->
-  <main class="timeline-section" id="timeline" aria-label="Lista de eventos por fecha"></main>
+          <!-- Filtro de Categoría -->
+          <div class="lg:col-span-4">
+            <div class="relative">
+              <i data-lucide="filter" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+              <select 
+                id="categoryFilter" 
+                class="w-full pl-11 pr-8 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition appearance-none cursor-pointer"
+                onchange="filterEvents()"
+              >
+                <option value="all">Todas las categorías</option>
+                <option value="cultura">Cultura, Arte y Talleres</option>
+                <option value="fiestas">Fiestas Tradicionales</option>
+                <option value="deportes">Deportes y Campus de Verano</option>
+              </select>
+              <i data-lucide="chevron-down" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 pointer-events-none"></i>
+            </div>
+          </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>Datos extraídos de la agenda oficial del <a href="https://www.llanes.es" target="_blank" rel="noopener">Ayuntamiento de Llanes</a> — Junio 2026</p>
-    <p style="margin-top:0.5rem; opacity:0.5;">Pagina generada con fines informativos. Consulta la web oficial para confirmaciones.</p>
+          <!-- Filtro de Pueblo/Lugar -->
+          <div class="lg:col-span-3">
+            <div class="relative">
+              <i data-lucide="map-pin" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+              <select 
+                id="locationFilter" 
+                class="w-full pl-11 pr-8 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition appearance-none cursor-pointer"
+                onchange="filterEvents()"
+              >
+                <option value="all">Cualquier localidad</option>
+                <option value="Llanes">Llanes (Villa)</option>
+                <option value="Posada">Posada de Llanes</option>
+                <option value="Porrúa">Porrúa</option>
+                <option value="Cué">Cué</option>
+                <option value="Balmori">Balmori</option>
+                <option value="Otros">Otros Pueblos</option>
+              </select>
+              <i data-lucide="chevron-down" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 pointer-events-none"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila inferior: Información rápida e interruptor de ordenamiento -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-t border-slate-100 pt-4 gap-4">
+          <div class="text-sm text-slate-500 font-medium">
+            Mostrando <span id="visibleCount" class="text-emerald-600 font-bold">33</span> de <span class="font-bold">33</span> eventos programados.
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Orden:</span>
+            <button 
+              id="sortBtn" 
+              onclick="toggleSortOrder()"
+              class="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-lg text-sm text-slate-700 font-semibold transition"
+            >
+              <i data-lucide="calendar-days" class="w-4 h-4 text-emerald-600"></i>
+              <span id="sortText">Cronológico Ascendente</span>
+              <i data-lucide="arrow-up-narrow-wide" id="sortIcon" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTADO DE EVENTOS -->
+    <div id="eventsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Se genera dinámicamente con JavaScript -->
+    </div>
+
+    <!-- ESTADO VACÍO (Si no hay resultados) -->
+    <div id="noResults" class="hidden flex-col items-center justify-center text-center py-20 bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-4 bg-emerald-50 rounded-full text-emerald-600 mb-4">
+        <i data-lucide="calendar-x" class="w-12 h-12"></i>
+      </div>
+      <h3 class="text-xl font-bold text-slate-800 mb-1">No se encontraron eventos</h3>
+      <p class="text-slate-500 max-w-sm mb-6">Prueba a cambiar tus criterios de búsqueda o a restablecer los filtros aplicados.</p>
+      <button 
+        onclick="resetFilters()" 
+        class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition shadow-md shadow-emerald-600/15"
+      >
+        Restablecer todo
+      </button>
+    </div>
+
+  </main>
+
+  <!-- MODAL DETALLE EVENTO -->
+  <div id="eventModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100 transform scale-95 transition-transform duration-300 flex flex-col" id="modalContainer">
+      
+      <!-- Cabecera con imagen -->
+      <div class="relative h-60 w-full overflow-hidden shrink-0">
+        <img id="modalImg" class="w-full h-full object-cover" src="" alt="Imagen de Evento">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-transparent"></div>
+        
+        <!-- Botón cerrar -->
+        <button 
+          onclick="closeModal()" 
+          class="absolute top-4 right-4 bg-black/55 hover:bg-black/80 text-white p-2 rounded-full transition focus:outline-none"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Etiquetas de categoría en el modal -->
+        <span id="modalBadge" class="absolute bottom-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider">
+          Categoria
+        </span>
+      </div>
+
+      <!-- Cuerpo del modal -->
+      <div class="p-6 md:p-8 flex-grow">
+        <div class="flex items-center gap-2 text-emerald-600 text-sm font-semibold mb-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          <span id="modalDateStr">Fecha de Evento</span>
+        </div>
+        
+        <h2 id="modalTitle" class="serif-title text-2xl md:text-3xl font-bold text-slate-900 mb-4">Título del Evento</h2>
+        
+        <!-- Detalles rápidos de ubicación y contacto -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+          <div class="flex items-start gap-2.5 text-sm text-slate-600">
+            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>
+            <div>
+              <p class="font-semibold text-slate-800">Ubicación</p>
+              <p id="modalLocation">Ubicación exacta</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2.5 text-sm text-slate-600" id="modalTimeContainer">
+            <i data-lucide="clock" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>
+            <div>
+              <p class="font-semibold text-slate-800">Horario</p>
+              <p id="modalTime">Hora indicada</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descripción extendida -->
+        <div class="prose prose-slate max-w-none text-slate-600 mb-8">
+          <p id="modalDescription" class="whitespace-pre-line leading-relaxed text-sm sm:text-base"></p>
+        </div>
+
+        <!-- Enlaces e inscripciones -->
+        <div class="border-t border-slate-100 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div class="text-xs text-slate-400">
+            * Información obtenida de la agenda turística oficial de Llanes.
+          </div>
+          <div class="flex gap-3">
+            <a 
+              id="modalLink" 
+              href="#" 
+              target="_blank" 
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition text-sm shadow-md shadow-emerald-600/10"
+            >
+              <i data-lucide="external-link" class="w-4 h-4"></i>
+              Ver web oficial
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="bg-slate-950 text-slate-400 pt-16 pb-8 border-t border-slate-900 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <!-- Columna 1 -->
+        <div>
+          <h3 class="serif-title text-2xl font-bold text-white mb-4">Llanes Festivo &amp; Cultural</h3>
+          <p class="text-sm text-slate-400 leading-relaxed mb-6">
+            Guía digital de todos los acontecimientos festivos, culturales, deportivos e infantiles que tienen lugar en las diferentes localidades del Concejo de Llanes.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="https://www.facebook.com/ayuntamientodellanes" target="_blank" class="p-2 bg-slate-900 rounded-lg hover:bg-slate-800 hover:text-white transition">
+              <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+            <a href="https://www.instagram.com/turismollanes" target="_blank" class="p-2 bg-slate-900 rounded-lg hover:bg-slate-800 hover:text-white transition">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Columna 2 -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Secciones Especiales</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li>
+              <a href="javascript:void(0)" onclick="quickFilter('cultura')" class="hover:text-emerald-400 transition flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Arte y Exposiciones
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="quickFilter('fiestas')" class="hover:text-teal-400 transition flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-teal-400 rounded-full"></span> Fiestas Patronales y Romerías
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="quickFilter('deportes')" class="hover:text-cyan-400 transition flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> Campus Deportivos y Torneos
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Columna 3 -->
+        <div>
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Oficina de Turismo de Llanes</h4>
+          <p class="text-sm leading-relaxed mb-4">
+            C/ Marqués de Canillejas, 1<br>
+            33500 Llanes, Asturias<br>
+            Teléfono: +34 985 40 01 64
+          </p>
+          <div class="inline-flex items-center gap-2 text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-lg font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Temporada Alta de Verano 2026
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+        <p>&copy; 2026 Agenda Turística de Llanes. Recopilación interactiva con fines informativos.</p>
+        <div class="flex gap-6">
+          <a href="https://www.llanes.es" class="hover:text-white transition">Web Municipal</a>
+          <a href="https://www.turismoasturias.es" class="hover:text-white transition">Turismo de Asturias</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
-</div>
+  <!-- SCRIPT CON DATOS Y LÓGICA -->
+  <script>
+    // LISTADO DE EVENTOS COMPLETO PROCESADO Y ORDENADO POR FECHA
+    const eventsData = [
+      {
+        id: 1,
+        title: "Exposición \"Retrato y Sociedad\" (Porrúa)",
+        category: "cultura",
+        categoryLabel: "Cultura",
+        startDate: "2026-04-02",
+        endDate: "2026-08-22",
+        dateStr: "Del 2 de abril al 22 de agosto de 2026",
+        location: "Museo del Oriente de Asturias, Porrúa",
+        hours: "11:00 - 13:30 h. Viernes y sábados también de 17:00 a 19:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80", // Retrato artístico
+        officialUrl: "https://www.llanes.es/es/exposicion-retrato-y-sociedad-porrua",
+        townGroup: "Porrúa",
+        description: `El día 2 de abril, jueves, a las 12:00 horas, se inaugura la exposición "Retrato y sociedad" en la obra fotográfica de Daniel Álvarez Fervienza, Llanes 1885-1899.\n\nEstá comisariada por Antonio Diego Llaca. Podréis disfrutar de 44 fotografías recuperadas de placas de vidrio originales, ¡30 de las cuales son totalmente inéditas!.\n\nDesde retratos íntimos hasta grandes celebraciones y eventos sociales, esta colección es un viaje fascinante a nuestras raíces.\n\nAcceso gratuito.\n\nHORARIOS:\n• Del 18 de marzo al 30 de junio y del 9 de septiembre al 15 de diciembre (excepto puentes):\n  Martes a jueves, domingos y festivos: 11:00 a 13:30 h.\n  Viernes y sábados: 11:00 a 13:30 h. y 17:00 a 19:00 h.\n• Semana Santa:\n  De jueves a domingo: 11:00 a 13:30 h. y 17:00 a 20:00 h.\n• Del 1 de julio al 8 de septiembre:\n  De martes a domingo: 11:00 a 13:30 h. y 17:00 a 20:00 h. (Cerrado el segundo domingo de agosto por fiesta local).`
+      },
+      {
+        id: 2,
+        title: "Taller Gratuito de Memoria (Mayores de 55 años)",
+        category: "cultura",
+        categoryLabel: "Taller",
+        startDate: "2026-04-22",
+        endDate: "2026-07-01",
+        dateStr: "Miércoles, del 22 de abril al 1 de julio de 2026",
+        location: "Casa de Cultura de Nueva, Nueva de Llanes",
+        hours: "11:00 a 13:00 h. (Todos los Miércoles)",
+        imageUrl: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80", // Taller cognitivo/escritura
+        officialUrl: "https://www.llanes.es/es/taller-gratuito-de-memoria-nueva-de-llanes",
+        townGroup: "Otros",
+        description: `Taller gratuito dirigido a personas mayores de 55 años, organizado por la asociación Solidaridad Intergeneracional en colaboración con la Casa de Cultura del Valle de San Jorge (Nueva).\n\nLa pérdida de memoria asociada a la edad es un proceso en el que intervienen numerosos factores sobre los que podemos actuar mediante la estimulación y el mantenimiento cognitivo. Se trabajará la atención, la concentración, las funciones ejecutivas, el lenguaje, las habilidades visuoconstructivas, el pensamiento conceptual, el cálculo y la orientación, además de potenciar recuerdos autobiográficos específicos y positivos.\n\nInscripciones:\nDe manera presencial en la Casa de Cultura del Valle de San Jorge.\nTeléfonos: 985410106 y 679389399\nCorreos electrónicos: culturanueva@ayuntamientodellanes.com / siasturias@solidaridadintergeneracional.es`
+      },
+      {
+        id: 3,
+        title: "Espacio Joven Llanes: Ocio Alternativo",
+        category: "cultura",
+        categoryLabel: "Juvenil",
+        startDate: "2026-05-01", // Representando vigencia de fin de semana todo el año
+        endDate: "2026-12-31",
+        dateStr: "Viernes, Sábados y Domingos (Todo el año)",
+        location: "Paseo de Las Marismas s/n, Llanes",
+        hours: "Viernes y Sábados: 18:00 - 22:00 h. Domingos: 18:00 - 20:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80", // Jóvenes divirtiéndose
+        officialUrl: "https://www.llanes.es/es/espacio-joven-llanes-67",
+        townGroup: "Llanes",
+        description: `Programa Municipal de Ocio Alternativo Juvenil situado en el Paseo de las Marismas de Llanes (edificio del antiguo matadero municipal, junto al parque infantil).\n\nOfrece actividades gratuitas para adolescentes y jóvenes de entre 12 y 18 años durante los fines de semana de todo el año, así como en puentes no lectivos y vacaciones escolares.\n\nInstalaciones y equipamiento de dos plantas:\n• Mesa de ping-pong, futbolín, billar y diana.\n• Consolas de videojuegos y gran variedad de juegos de mesa.\n• Cuenta con 2 monitores dinamizadores permanentes.\n• Actividades cada fin de semana: talleres artísticos, manualidades, cenas saludables, cine debates, juegos cooperativos y concursos.\n\nTRANSPORTE GRATUITO:\nDesde octubre de 2021 se ofrece opción de transporte gratuito para facilitar la asistencia de menores que residen en otros pueblos del concejo.\nInstagram: @espacio_joven_llanes\nFacebook: EspacioJoven Llanes`
+      },
+      {
+        id: 4,
+        title: "Exposición de Pintura de Miodrag Djergovic \"Michel\"",
+        category: "cultura",
+        categoryLabel: "Cultura",
+        startDate: "2026-05-08",
+        endDate: "2026-06-06",
+        dateStr: "Del 8 de mayo al 6 de junio de 2026",
+        location: "Centro Cívico de Posada, Posada de Llanes",
+        hours: "Lunes a Jueves: 09:30-13:00 h. y 16:00-19:30 h. Viernes: 09:30-14:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=800&q=80", // Taller de pintura/oleo
+        officialUrl: "https://www.llanes.es/es/exposicion-de-pintura-de-miodrag-djergovic-michel-posada",
+        townGroup: "Posada",
+        description: `La sala de Exposiciones del Centro Cívico de Posada de Llanes alberga esta muestra imperdible del artista serbio Miodrag Djergovic "Michel".\n\nSu obra plástica nace en el cruce entre la memoria, el territorio y la experiencia vital. Nacido en Belgrado y criado en un entorno artístico, su lenguaje recoge las intensas huellas de sus raíces balcánicas y el influjo estético del paisaje asturiano, donde reside desde hace décadas.\n\nEn sus pinturas habitan el viaje, la emoción y el recuerdo de una biografía atravesada por distintos rincones del mundo y por la experiencia directa de la Guerra de Yugoslavia. Un trabajo pictórico intenso, matérico y de fuerte reconstrucción emocional que suspende hermosas historias sobre el lienzo.`
+      },
+      {
+        id: 5,
+        title: "Títeres en la Calle: Caperucita Roja",
+        category: "cultura",
+        categoryLabel: "Teatro / Infantil",
+        startDate: "2026-05-16",
+        endDate: "2026-05-16",
+        dateStr: "Sábado 16 de mayo de 2026 a las 11:30 h.",
+        location: "Casa de Concejo de Piedra, Piedra",
+        hours: "11:30 h.",
+        imageUrl: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80", // Títeres o marionetas
+        officialUrl: "https://www.llanes.es/es/titeres-la-nina-que-riega-la-albahaca-parres",
+        townGroup: "Otros",
+        description: `Forma parte del nuevo ciclo itinerante de títeres por los pueblos de Llanes \"La Raíz Titiritera\", en colaboración con el Plan de Infancia de Llanes.\n\nTres maravillosas historias tradicionales llevadas a cabo por la compañía \"Bailadera Títeres\" en formato de cercanía y al aire libre, pensadas para disfrutar en familia.\n\n• Obra: \"Caperucita Roja\"\n• Entrada: Libre y gratuita hasta completar aforo.`
+      },
+      {
+        id: 6,
+        title: "Títeres en la Calle: El Tragaldabas",
+        category: "cultura",
+        categoryLabel: "Teatro / Infantil",
+        startDate: "2026-05-23",
+        endDate: "2026-05-23",
+        dateStr: "Sábado 23 de mayo de 2026 a las 11:30 h.",
+        location: "Plaza de Tresgrandas, Tresgrandas",
+        hours: "11:30 h.",
+        imageUrl: "https://images.unsplash.com/photo-1534349762230-e09ff05da0e3?auto=format&fit=crop&w=800&q=80", // Marionetas de hilos
+        officialUrl: "https://www.llanes.es/es/titeres-la-nina-que-riega-la-albahaca-parres",
+        townGroup: "Otros",
+        description: `Segunda entrega de la programación \"La Raíz Titiritera\", un ciclo cultural infantil de títeres itinerantes que recorren los rincones más pintorescos de los pueblos del concejo de Llanes.\n\n• Obra: \"El Tragaldabas\" representado de la mano de Bailadera Títeres.\n• Ubicación: Tresgrandas, en formato cercano para disfrute de grandes y pequeños.\n• Entrada: Libre y gratuita hasta completar el aforo.`
+      },
+      {
+        id: 7,
+        title: "III Concurso de Canción Asturiana \"Pueblos de Llanes\"",
+        category: "cultura",
+        categoryLabel: "Música Tradicional",
+        startDate: "2026-05-30",
+        endDate: "2026-06-07",
+        dateStr: "Del 30 de mayo al 7 de junio de 2026",
+        location: "Poo de Llanes",
+        hours: "Rondas y finales a las 18:30 h.",
+        imageUrl: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=800&q=80", // Cantante folk/micrófono clásico
+        officialUrl: "https://www.llanes.es/es/iii-concurso-de-cancion-asturiana-pueblos-de-llanes-poo-de-llanes",
+        townGroup: "Otros",
+        description: `Prestigioso festival y concurso de la tradicional tonada asturiana que rinde homenaje a la herencia lírica regional.\n\nPROGRAMACIÓN COMPLETA:\n• Sábado 30 y Domingo 31 de mayo (18:30 h): Rondas clasificatorias en categorías femenina, masculina y moza.\n• Domingo 31 de mayo: Actuación de monologuista cómico para amenizar el certamen.\n• Sábado 6 de junio (18:30 h): Grandes Finales.\n• Domingo 7 de junio (18:30 h): Gala especial con actuación de los ganadores, entrega de premios y nuevo monólogo festivo.\n\nInscripciones:\nLlamando al teléfono oficial habilitado: 616 816 346.`
+      },
+      {
+        id: 8,
+        title: "Concierto de \"Buir\" (Música Asturiana)",
+        category: "cultura",
+        categoryLabel: "Música Tradicional",
+        startDate: "2026-06-05",
+        endDate: "2026-06-05",
+        dateStr: "Viernes 5 de junio de 2026",
+        location: "Museo del Oriente de Asturias, Porrúa",
+        hours: "20:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80", // Grupo de música tradicional tocando folk
+        officialUrl: "https://www.llanes.es/es/conciertu-buir-porrua",
+        townGroup: "Porrúa",
+        description: `Buir es un grupo imprescindible de la música de raíz asturiana, conformado por los reconocidos folcloristas Xosé Ambás, Vero Rubio y Pepín de Muñalén.\n\nSu propuesta se centra en recoger de forma directa la tradición oral y musical asturiana, dándole un soplo de aire fresco y vistiéndola de vanguardia para presentarla al público de la época actual de una forma sumamente emotiva y vibrante.`
+      },
+      {
+        id: 9,
+        title: "Fiesta de San Antoniu (Piedra)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-12",
+        endDate: "2026-06-13",
+        dateStr: "12 y 13 de junio de 2026",
+        location: "Pueblo de Piedra, Llanes",
+        hours: "Desde las 10:30 h del viernes hasta la madrugada del domingo",
+        imageUrl: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80", // Fiesta de pueblo/luces verbena
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-antoniu-piedra",
+        townGroup: "Otros",
+        description: `Gran romería regional de tradición ancestral dedicada a San Antonio de Padua. (*Según la programación tradicional consolidada).\n\nVIERNES 12:\n• 10:30 h: Salida comunal a cortar la enorme hoguera forestal.\n• 17:00 h: Misa de San Antoniu.\n• 17:30 h: Plantación manual de la hoguera y posterior apertura de colchonetas hinchables infantiles.\n• 20:00 h: Ensayo general de bailes típicos del Oriente, seguido de la tradicional Espicha de vecinos.\n• 22:00 h: Primera gran Verbena nocturna.\n\nSÁBADO 13:\n• 12:00 h: Salida vistosa de los ramos de pan y ofrendas, escoltados con gaiteros y tamborileros regionales.\n• 12:30 h: Misa solemne patronal, seguida de la subasta de los ramos (\"el remate\") y bailes regionales.\n• 20:00 h: Nuevos pases de bailes regionales.\n• 23:00 h: Segunda gran Verbena festiva.`
+      },
+      {
+        id: 10,
+        title: "Fiesta de San Antoniu (Cué)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-12",
+        endDate: "2026-06-13",
+        dateStr: "12 y 13 de junio de 2026",
+        location: "Capilla de San Antonio, Cué",
+        hours: "Desde las 20:00 h del viernes",
+        imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80", // Danzas tradicionales/gaiteros
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-antoniu-cue",
+        townGroup: "Cué",
+        description: `Declaradas fiestas entrañables, destacan por la gran elegancia de sus trajes regionales y la fidelidad de sus antiguas danzas folclóricas. (*Según programación del año anterior).\n\nVIERNES 12:\n• 20:00 h: Solemne Novena en la capilla de San Antonio. A su término, procesión para subir a la imagen de San Antonio de Padua hasta la iglesia de San Román.\n\nSÁBADO 13:\n• 12:00 h: Desfile de los ramos de ofrenda de pan blanco portados por mozos y aldeanas ataviados con trajes de llanisca y porruanu.\n• 12:30 h: Misa Mayor, procesión de regreso hasta su capilla y ofrenda de ramos. Estreno del festival folclórico con el mítico \"Baile del Pericote de Cué\" (bailado por varias generaciones).\n• 19:00 h: Segundo pase de bailes y exhibición folclórica.\n• 20:30 h: Gran romería asturiana y verbena nocturna en la céntrica Plaza de la Bolerona.`
+      },
+      {
+        id: 11,
+        title: "Fiestas de San Antonio (La Venta - Puente Nuevo)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-04",
+        endDate: "2026-06-13",
+        dateStr: "Del 4 al 13 de junio de 2026",
+        location: "La Venta - Puente Nuevo",
+        hours: "Misa y procesión a las 13:30 h; verbena a partir de las 21:00 h",
+        imageUrl: "https://images.unsplash.com/photo-1472653431158-6364773b2a56?auto=format&fit=crop&w=800&q=80", // Espacio cubierto con carpa/luces
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-antonio-la-venta-puente-nuevo",
+        townGroup: "Otros",
+        description: `Las entrañables fiestas conjuntas de los caseríos de La Venta y Puente Nuevo en honor a San Antonio de Padua.\n\nNOVENA PREVIA:\n• Del 4 al 12 de junio a las 21:00 h: Novena diaria en la Capilla de San Antonio.\n\nSÁBADO 13 DE JUNIO (DÍA GRANDE):\n• 13:30 h: Misa solemne patronal, seguida de la emotiva procesión por los parajes verdes, la subasta tradicional del \"ramu\" y los típicos bailes regionales de la zona.\n• De 17:00 a 20:00 h: Atracciones infantiles, juegos deportivos y pintacaras para todos los niños.\n• A partir de las 21:00 h: Gran Verbena que se extenderá hasta altas horas de la noche.\n\n*Nota: Todo el recinto festivo estará cubierto por una robusta carpa para garantizar la fiesta sin importar las condiciones climáticas.`
+      },
+      {
+        id: 12,
+        title: "XV Torneo de Fútbol de Veteranos \"Villa de Llanes\"",
+        category: "deportes",
+        categoryLabel: "Fútbol Veteranos",
+        startDate: "2026-06-13",
+        endDate: "2026-06-14",
+        dateStr: "13 y 14 de junio de 2026",
+        location: "Campos Municipales de La Encarnación y de San José, Llanes",
+        hours: "Sábado de 10:00 a 20:00 h. Domingo de 10:00 a 15:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80", // Fútbol en campo de césped
+        officialUrl: "https://www.llanes.es/es/xv-torneo-de-futbol-veteranos-villa-de-llanes",
+        townGroup: "Llanes",
+        description: `Tradicional encuentro deportivo de veteranos de gran renombre nacional que acoge a clubes procedentes de toda España.\n\nGRUPOS DEL TORNEO:\n• GRUPO A: C.D. Llanes, Selaya C.F., J.V. León, V. Santa Marina del Rey.\n• GRUPO B: V.P. Lamadrid, Unión Club Hullera, V.L.S. Guadalajara.\n• GRUPO C: Tres Cantos V.D., Base R. Ribadeo, P. Castro Centro Asturiano.\n• GRUPO D: S.D. Buelna, D. Piloñesa, C.D. Cerdedilla, Juventud Sanse.\n\nLas fases clasificatorias se disputarán durante el sábado completo, mientras que las semifinales y la gran final tendrán lugar el domingo por la mañana.`
+      },
+      {
+        id: 13,
+        title: "Títeres: \"La niña que riega la albahaca\"",
+        category: "cultura",
+        categoryLabel: "Teatro / Infantil",
+        startDate: "2026-06-13",
+        endDate: "2026-06-13",
+        dateStr: "Sábado 13 de junio de 2026",
+        location: "Plaza de Parres, Parres de Llanes",
+        hours: "17:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=800&q=80", // Teatro familiar infantil
+        officialUrl: "https://www.llanes.es/es/titeres-la-nina-que-riega-la-albahaca-parres",
+        townGroup: "Otros",
+        description: `Broche de oro del ciclo de espectáculos de títeres de calle \"La Raíz Titiritera\", organizado junto con el Plan de Infancia Municipal.\n\n• Obra: \"La niña que riega la albahaca\", una historia con mucha magia y humor que rinde homenaje al teatro popular de títeres de cachiporra tradicional.\n• Compañía: Bailadera Títeres.\n• Entrada: Totalmente gratuita y abierta para todo el público hasta completar el aforo del entorno.`
+      },
+      {
+        id: 14,
+        title: "Teatro: \"Comedias de Enredo\"",
+        category: "cultura",
+        categoryLabel: "Teatro / Poesía",
+        startDate: "2026-06-13",
+        endDate: "2026-06-13",
+        dateStr: "Sábado 13 de junio de 2026 a las 20:00 h.",
+        location: "Salón de Actos de La Borbolla, La Borbolla",
+        hours: "20:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1460881680858-30d872d5b530?auto=format&fit=crop&w=800&q=80", // Máscaras de teatro/escenario
+        officialUrl: "https://www.llanes.es/es/teatro-comedias-de-enredo-la-borbolla",
+        townGroup: "Otros",
+        description: `Velada teatral de primer nivel en la Casa de Cultura de La Borbolla, ideal para los amantes de las risas y la declamación poética.\n\nPROGRAMA:\n• Representación de 4 comedias de enredo rápidas y muy divertidas.\n• Recital lírico de poesía a cargo de los reconocidos actores Mercedes Álvarez Álvarez y José Julio Ruenes Santoveña.\n• Dirección general: Cristina López del Hierro.`
+      },
+      {
+        id: 15,
+        title: "Fiesta de San Antonio (Pendueles)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-14",
+        endDate: "2026-06-14",
+        dateStr: "Domingo 14 de junio de 2026",
+        location: "Iglesia de Pendueles y alrededores, Pendueles",
+        hours: "A partir de las 11:45 h.",
+        imageUrl: "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80", // Comida campestre entre amigos/as
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-antonio-pendueles",
+        townGroup: "Otros",
+        description: `Festividad tradicional en el bello pueblo costero de Pendueles. (*Según el programa consolidado del año anterior).\n\nPROGRAMACIÓN DEL DOMINGO 14:\n• 11:45 h: Solemne Misa Cantada en la iglesia de Pendueles y posterior procesión con la imagen de San Antonio de Padua.\n• 14:30 h: Tradicional comida de hermandad vecinal asturiana al aire libre.\n• 16:00 h: Gran parque de hinchables, emocionante toro mecánico y talleres de pintacaras totalmente gratuitos para todos los pequeños.\n• 20:00 h: Chocolatada caliente para todos los asistentes como fin de fiesta.`
+      },
+      {
+        id: 16,
+        title: "Festival Rociero Llanes 2026",
+        category: "fiestas",
+        categoryLabel: "Festivales",
+        startDate: "2026-06-19",
+        endDate: "2026-06-21",
+        dateStr: "Del 19 al 21 de junio de 2026",
+        location: "La Talá, Llanes",
+        hours: "Durante todo el día y la noche",
+        imageUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80", // Feria de caballos/Andalucía en Llanes
+        officialUrl: "https://www.llanes.es/es/festival-rociero-llanes-2026",
+        townGroup: "Llanes",
+        description: `Un rincón de Andalucía se traslada a la costa llanisca en un festival ecuestre y musical rociero de enorme popularidad.\n\nVIERNES 19:\n• 19:30 h: Inauguración del recinto ferial.\n• 21:00 h: Degustación de pescadito frito, rebujito y música flamenca.\n\nSÁBADO 20:\n• 10:00 h: Apertura con música rociera.\n• 11:00 h: Gran Ruta Ecuestre a caballo por la zona costera.\n• 17:00 h: Yincana a caballo y emocionante carrera de cintas.\n• A partir de las 22:00 h hasta las 02:00 h: Actuaciones en vivo de grupos flamencos.\n• Todo el día: Exhibiciones del Grupo de Baile Flamenco de Cartes.\n\nDOMINGO 21:\n• 11:00 h: Desfile a caballo desde La Talá hasta la espectacular playa de El Sablón.\n• 12:00 h: Misa Rociera oficial en la Basílica de Santa María del Concejo de Llanes, cantada por el Coro de las Marismas del Rocío.\n• 17:30 h: Espectáculo ecuestre \"La Magia del Caballo\".\n\n*Servicio de boxes disponible e inscripciones al 678 91 22 26.`
+      },
+      {
+        id: 17,
+        title: "Fiesta de San Juan Bautista (Puertas de Vidiago)",
+        category: "fiestas",
+        categoryLabel: "Hogueras de San Juan",
+        startDate: "2026-06-19",
+        endDate: "2026-06-20",
+        dateStr: "19 y 20 de junio de 2026",
+        location: "Puertas de Vidiago",
+        hours: "A partir de las 22:30 h del viernes",
+        imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", // Hoguera/Danza prima
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-juan-bautista-puertas-de-vidiago",
+        townGroup: "Otros",
+        description: `Festividad tradicional que destaca por la imponente plantación de la hoguera de San Juan y sus rituales de enrame de fuentes. (*Según programa del año pasado).\n\nVIERNES 19 DE JUNIO:\n• 22:30 h: Gran plantación de la típica hoguera eucalipto de San Juan de forma manual, seguida de verbena musical.\n\nSÁBADO 20 DE JUNIO (DÍA GRANDE DE SAN JUAN):\n• 12:00 h: Salida del tradicional \"Ramu de Argüenu\" portado con cánticos.\n• 12:30 h: Misa Solemne de San Juan Bautista, procesión y espectaculares bailes regionales asturianos. Sesión vermú festiva en La Bolera.\n• 19:00 h: Tradicional ritual de \"Enrame de la Fuente\".\n• 20:00 h: Subasta o remate de los panes del ramu, bailes autóctonos y la mágica Danza de San Juan en corro.\n• 23:00 h: Gran verbena nocturna de cierre.`
+      },
+      {
+        id: 18,
+        title: "Fiesta de San Juan Bautista y la Sacramental (Tresgrandas)",
+        category: "fiestas",
+        categoryLabel: "Hogueras de San Juan",
+        startDate: "2026-06-19",
+        endDate: "2026-06-21",
+        dateStr: "Del 19 al 21 de junio de 2026",
+        location: "Tresgrandas",
+        hours: "Varios horarios en el fin de semana",
+        imageUrl: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=800&q=80", // Fiesta/Paella comunal
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-juan-bautista-y-la-sacramental-tresgrandas",
+        townGroup: "Otros",
+        description: `Tradición folclórica, religiosidad y gastronomía en una de las fiestas más queridas del Valle Oscuro.\n\nVIERNES 19:\n• 22:30 h: Levantamiento y plantación de la hoguera tradicional, acompañada de música asturiana tradicional. Primera gran Verbena nocturna.\n\nSÁBADO 20 (DÍA GRANDE):\n• 12:00 h: Misa solemne cantada, procesión sacramental con el Santísimo y San Juan, desfile, música tradicional y gran subasta del ramu de ofrendas. Sesión vermú animada.\n• 21:30 h: Romería y verbena.\n\nDOMINGO 21 (DÍA INFANTIL Y DE VECINOS):\n• 13:30 h: Espectáculo musical folclórico.\n• 15:00 h: GRAN PAELLA VECINAL a precios de hermandad.\n• 18:30 h: Hinchables para los niños, juegos y chocolatada dulce tradicional.\n• Al terminar: Cierre con Disco Móvil de alta potencia.\n\n*Nota: ¡Todo el recinto cuenta con una gran carpa de protección!`
+      },
+      {
+        id: 19,
+        title: "V Torneo Beach Tennis (Playa de Barro)",
+        category: "deportes",
+        categoryLabel: "Deportes de Playa",
+        startDate: "2026-06-20",
+        endDate: "2026-06-20",
+        dateStr: "Sábado 20 de junio de 2026",
+        location: "Playa de Barro, Llanes",
+        hours: "Todo el día",
+        imageUrl: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=800&q=80", // Tenis playa/arena
+        officialUrl: "https://www.llanes.es/es/v-torneo-beach-tennis-playa-de-barro",
+        townGroup: "Otros",
+        description: `Espectacular torneo de tenis de playa que se celebra sobre las arenas finas de una de las calas más hermosas del oriente de Asturias.\n\nInscripciones abiertas hasta el 15 de junio de 2026.\n\nOrganización e Información:\nTeléfono: 646 587 392\nWeb oficial: https://escuelarv.es`
+      },
+      {
+        id: 20,
+        title: "Fiesta de San Antonio (Riensena)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-20",
+        endDate: "2026-06-20",
+        dateStr: "Sábado 20 de junio de 2026",
+        location: "Riensena de Llanes",
+        hours: "Desde las 13:00 h. hasta la madrugada",
+        imageUrl: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80", // Fiesta con baile de escoba
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-antonio-riensena",
+        townGroup: "Otros",
+        description: `Las tradicionales y singulares fiestas de Riensena en honor a San Antonio. (*Según programa tradicional del año anterior).\n\nPROGRAMACIÓN DEL SÁBADO 20:\n• 13:00 h: Solemne Misa Cantada, seguida de la emotiva Procesión del Santo, la Ofrenda de Ramos de pan, la subasta tradicional del ramu, y la típica Danza de San Antonio.\n• A continuación: Sesión vermut musical.\n• Tarde/Noche: Romería popular asturiana y verbena.\n• 24:00 h (Medianoche): Tradicional e hilarante \"Baile de la Escoba\" con premios especiales para todos los participantes.\n• Fin de Verbena: Gran chocolatada y las típicas sopas de ajo asturianas para todos los asistentes.`
+      },
+      {
+        id: 21,
+        title: "Día Mundial del Yoga: \"108 Saludos al Sol\"",
+        category: "cultura",
+        categoryLabel: "Yoga / Solidario",
+        startDate: "2026-06-21",
+        endDate: "2026-06-21",
+        dateStr: "Domingo 21 de junio de 2026 a las 06:00 h. (Amanecer)",
+        location: "El Tendederu de Redes, Llanes",
+        hours: "06:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80", // Yoga frente al mar / amanecer
+        officialUrl: "https://www.llanes.es/es/evento-solidario-108-saludos-al-sol-llanes",
+        townGroup: "Llanes",
+        description: `Encuentro solidario único para celebrar el Día Mundial del Yoga y el solsticio de verano.\n\nLa práctica consiste en realizar la secuencia de los 108 Saludos al Sol de forma libre al ritmo personal, acompañada por el sonido de las olas y la salida del sol en los acantilados de Llanes.\n\nFIN SOLIDARIO:\nDonación de 10 € destinada íntegramente a \"La Tribu Asociación\", que apoya a personas con cáncer de mama y ginecológico en el Oriente de Asturias.\n\n*Nota Importante: En caso de lluvia intensa el evento se trasladará al Polideportivo Municipal de Llanes a las 08:00 h. Se confirmará antes de las 20:00 h. del día anterior. Es necesario traer esterilla de yoga de forma obligatoria.`
+      },
+      {
+        id: 22,
+        title: "La Hoguera y Enrame de San Juan (Balmori)",
+        category: "fiestas",
+        categoryLabel: "Hogueras de San Juan",
+        startDate: "2026-06-21",
+        endDate: "2026-06-24",
+        dateStr: "Del 21 al 24 de junio de 2026",
+        location: "Pueblo de Balmori",
+        hours: "Varios horarios durante los días festivos",
+        imageUrl: "https://images.unsplash.com/photo-1561542320-9a18cd340469?auto=format&fit=crop&w=800&q=80", // Romería asturiana trajes típicos
+        officialUrl: "https://www.llanes.es/es/la-hoguera-balmori",
+        townGroup: "Balmori",
+        description: `Una de las programaciones tradicionales de San Juan más extensas e impresionantes de la costa asturiana. (*Según programa del año pasado).\n\nDOMINGO 21 DE JUNIO (LA HOGUERA):\n• 08:00 h: Salida de los mozos al monte a cortar el enorme árbol de la Hoguera.\n• 17:00 h: Plantación manual de la Hoguera, seguida de bailes tradicionales asturianos y Espicha popular vecinal.\n• 22:00 h: Verbena.\n\nMARTES 23 DE JUNIO (EL ENRAME):\n• 22:30 h: Tradicional ritual de \"Enrame de las Fuentes\" con flores, quema simbólica de la Xana y fuegos artificiales.\n• 23:30 h: Romería y Verbena.\n\nMIÉRCOLES 24 DE JUNIO (DÍA GRANDE DE SAN JUAN BAUTISTA):\n• 12:00 h: Solemne procesión y Misa Mayor, seguida de la subasta del ramu de pan tradicional y bailes regionales típicos.\n• 20:30 h: Nuevos pases de bailes regionales.\n• 22:00 h: Verbena nocturna.\n• 03:00 h: Chocolatada caliente para los más trasnochadores.`
+      },
+      {
+        id: 23,
+        title: "Fiestas de San Juan (Villa - Caldueño)",
+        category: "fiestas",
+        categoryLabel: "Hogueras de San Juan",
+        startDate: "2026-06-23",
+        endDate: "2026-06-24",
+        dateStr: "23 y 24 de junio de 2026",
+        location: "Villa - Caldueño",
+        hours: "Desde las 20:00 h del martes",
+        imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80", // Quema de hoguera tradicional
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-juan-villa-caldueno",
+        townGroup: "Otros",
+        description: `Encantadora fiesta tradicional de San Juan celebrada en el valle interior del concejo. (*Según programa del año pasado).\n\nMARTES 23 DE JUNIO:\n• 20:00 h: Ceremonioso ritual del Enrame de la Fuente tradicional.\n• 22:00 h: Cena comunal de hermandad de todos los vecinos.\n• 23:00 h: Verbena.\n• 24:00 h (Medianoche): Espectacular quema de la Hoguera tradicional de San Juan.\n\nMIÉRCOLES 24 DE JUNIO (DÍA GRANDE):\n• 13:00 h: Misa solemne cantada.\n• 18:00 h: Divertidos juegos infantiles para todos los niños del pueblo.\n• 21:30 h: Verbena nocturna de cierre.\n• Fin de fiesta: Gran Chocolatada comunal.`
+      },
+      {
+        id: 24,
+        title: "Fiesta de la Sacramental de Cué: Alfombras Florales",
+        category: "fiestas",
+        categoryLabel: "Interés Turístico",
+        startDate: "2026-06-24",
+        endDate: "2026-06-24",
+        dateStr: "Miércoles 24 de junio de 2026",
+        location: "Calles de Cué, Cué de Llanes",
+        hours: "Durante todo el día (misa y procesión por la mañana)",
+        imageUrl: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80", // Camino de flores / alfombras florales
+        officialUrl: "https://www.llanes.es/es/fiesta-de-la-sacramental-cue-declarada-de-interes-turistico-regional",
+        townGroup: "Cué",
+        description: `Declarada Fiesta de Interés Turístico Regional por la espectacularidad plástica y devoción popular de sus alfombras florales urbanas hechas a mano.\n\nLas calles de Cué se engalanan desde la madrugada con espectaculares dibujos geométricos confeccionados con pétalos de flores frescas.\n\nPROCESIÓN SACRAMENTAL:\n• Parte de la iglesia de San Román, encabezada por el estandarte del Niño Jesús de Praga, seguido por el Santísimo Sacramento bajo palio.\n• La procesión recorre el pueblo entre cantos tradicionales para visitar los dos altares ceremoniales.\n• Entrada al \"Altar de Arriba\": es recibido con una estruendosa traca de cohetes y voladores.\n• Entrada al \"Altar de Abaju\": presidido por la imagen del Corazón de Jesús y bendecido con su traca correspondiente.\n• Finalización: El cortejo religioso concluye en la pintoresca Capilla de San Antonio.\n• Las obras de las alfombras florales permanecen expuestas todo el día para disfrute visual de visitantes y turistas.`
+      },
+      {
+        id: 25,
+        title: "Fiesta de San Pedro (Santa Eulalia de Carranzo)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-26",
+        endDate: "2026-06-28",
+        dateStr: "Del 26 al 28 de junio de 2026",
+        location: "Santa Eulalia de Carranzo",
+        hours: "Desde las 22:00 h del viernes",
+        imageUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80", // Feria asturiana
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-pedro-santa-eulalia-de-carranzo",
+        townGroup: "Otros",
+        description: `Celebraciones tradicionales de San Pedro en la localidad de Santa Eulalia de Carranzo. (*Según programa tradicional del año anterior).\n\nVIERNES 26 DE JUNIO:\n• 22:00 h: Plantación de la gran hoguera por los mozos del pueblo, amenizada con música tradicional asturiana y romería nocturna.\n\nSÁBADO 27 DE JUNIO (DÍA GRANDE):\n• Al amanecer: Lanzamiento de alborada de cohetes festivos.\n• 11:30 h: Tradicional y elegante desfile de los Ramos desde Pie de la Sierra.\n• 12:30 h: Solemne Misa y ofrecimiento de Ramos a San Pedro.\n• 14:00 h: Sesión vermut con la subasta del ramo acompañada de músicos tradicionales.\n• 18:00 h: Hinchables gratis para los niños.\n• 22:30 h: Gran Verbena nocturna.\n\nDOMINGO 28 DE JUNIO:\n• 18:00 h: Animados juegos infantiles guiados y parque de hinchables gratuitos.\n• 22:30 h: Tradicional chocolatada con churros vecinal y Verbena de despedida.`
+      },
+      {
+        id: 26,
+        title: "Fiesta de San Pelayo (Niembru)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-27",
+        endDate: "2026-06-27",
+        dateStr: "Sábado 27 de junio de 2026",
+        location: "Niembru",
+        hours: "A partir de las 11:30 h.",
+        imageUrl: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=800&q=80", // Bailes regionales asturianos/Romería
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-pelayo-niembru",
+        townGroup: "Otros",
+        description: `Grandes fiestas patronales celebradas junto a la ría y marisma de Niembru. (*Según programación oficial consolidada del año pasado).\n\nSÁBADO 27 DE JUNIO (DÍA GRANDE):\n• 11:30 h: Pasacalles inaugural a cargo de la consagrada Banda de Gaitas \"L'ALLORU\".\n• 12:00 h: Salida procesional del ramu tradicional de panes desde la Capilla de San Pelayo.\n• 12:30 h: Misa Solemne en la iglesia de Niembru. Al finalizar, las aldeanas locales ejecutarán el tradicional baile asturiano \"El Genaro\".\n• 14:00 h: Tradicional remate y subasta pública de los ramos de pan, pases de bailes de la zona y sesión vermú festiva en la carpa de la comisión.\n• 20:00 h: Exhibición de bailes tradicionales a cargo de los mozos del pueblo. A continuación, arranque de la gran romería asturiana y verbena.`
+      },
+      {
+        id: 27,
+        title: "Fiesta de Santa Isabel (Cuetu Meré)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-27",
+        endDate: "2026-06-27",
+        dateStr: "Sábado 27 de junio de 2026",
+        location: "El Cuetu - Meré",
+        hours: "A partir de las 12:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80", // Comida a la parrilla / asador
+        officialUrl: "https://www.llanes.es/es/fiesta-de-santa-isabel-cuetu-mere",
+        townGroup: "Otros",
+        description: `Entrañable fiesta de campo asturiana en los idílicos parajes interiores de El Cuetu, Meré. (*Según programa tradicional).\n\nPROGRAMACIÓN DEL SÁBADO 27:\n• 12:00 h: Solemne Misa de Campaña al aire libre, cantada con el acompañamiento tradicional de un gaitero asturiano.\n• A continuación: Animada Sesión vermú.\n• Al mediodía: Gran Parrillada asturiana bajo la carpa de la fiesta a precios muy populares.\n• Tarde: Gran parque de hinchables infantiles gratis para los más jóvenes.\n• Noche: Tradicional romería popular y Verbena.`
+      },
+      {
+        id: 28,
+        title: "Fiesta de San Pedro (Pancar)",
+        category: "fiestas",
+        categoryLabel: "Hogueras de San Juan / Romerías",
+        startDate: "2026-06-27",
+        endDate: "2026-06-28",
+        dateStr: "27 y 28 de junio de 2026",
+        location: "Pueblo de Pancar",
+        hours: "Desde las 13:00 h del sábado",
+        imageUrl: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80", // Danza prima de Pancar
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-pedro-pancar",
+        townGroup: "Otros",
+        description: `Fiestas emblemáticas del pueblo de Pancar que reúnen una de las mayores danzas primas del concejo. (*Según programa consolidado del año anterior).\n\nSÁBADO 27 DE JUNIO:\n• 13:00 h: Gran Paellada vecinal de 300 raciones gratuitas servida en el parque del pueblo.\n• 15:30 h: Salida popular de los mozos a CORTAR LA JOGUERA.\n• 18:30 h: Comienzo de la famosísima \"Espicha tradicional de Pancar\" para todos los asistentes.\n• 21:00 h: Tradicionales ensayos \"de vísperas\" y el solemne baile de la DANZA PRIMA.\n• 23:00 h: Gran Verbena nocturna.\n\nDOMINGO 28 DE JUNIO (DÍA GRANDE):\n• 13:00 h: Misa solemne patronal, Procesión del Santo por las calles de Pancar, Ofrecimiento tradicional de los Ramos de pan, sesión vermú en San Patricio y pases de bailes de Llanes de danza tradicional.\n• 19:00 h: Plantación de la Hoguera o Joguera por los mozos en el pueblo, desfile acompañado con la música tradicional del renombrado \"Grupo de Gaitas Principado\".`
+      },
+      {
+        id: 29,
+        title: "X Campus Nacional de Fútbol \"Villa de Llanes\"",
+        category: "deportes",
+        categoryLabel: "Campus de Fútbol",
+        startDate: "2026-06-28",
+        endDate: "2026-07-19",
+        dateStr: "Del 28 de junio al 19 de julio de 2026",
+        location: "Instalaciones Deportivas, Llanes",
+        hours: "Todo el día",
+        imageUrl: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80", // Campus de fútbol / entrenamiento infantil
+        officialUrl: "https://www.llanes.es/es/x-campus-nacional-de-futbol-villa-de-llanes",
+        townGroup: "Llanes",
+        description: `Décima edición del prestigioso Campus de Fútbol nacional para chicos y chicas con entrenamientos intensivos dirigidos por profesionales titulados.\n\nCATEGORÍAS:\nDirigido a jóvenes promesas desde categoría Alevín hasta Juvenil de forma integral.\n\nSEMANAS DE ENTRENAMIENTO:\n• Semana 1: Del 28 de junio al 5 de julio de 2026.\n• Semana 2: Del 5 al 12 de julio de 2026.\n• Semana 3: Del 12 al 19 de julio de 2026.\n\nInscripciones y detalles de pensión/actividades en: https://campusfutbolllanes.com/campus/`
+      },
+      {
+        id: 30,
+        title: "X Campus Nacional de Voleibol \"Villa de Llanes\"",
+        category: "deportes",
+        categoryLabel: "Campus de Voleibol",
+        startDate: "2026-06-28",
+        endDate: "2026-07-19",
+        dateStr: "Del 28 de junio al 19 de julio de 2026",
+        location: "Instalaciones de Voleibol, Llanes",
+        hours: "Todo el día",
+        imageUrl: "https://images.unsplash.com/photo-1592656094267-764a45023301?auto=format&fit=crop&w=800&q=80", // Balón de voleibol/red en pabellón
+        officialUrl: "https://www.llanes.es/es/x-campus-nacional-de-voleibol-villa-de-llanes",
+        townGroup: "Llanes",
+        description: `Décima edición del campus nacional de voleibol ideal para perfeccionar técnicas tácticas, recepción y remate. Dirigido a chicos y chicas de categorías Alevín hasta Juvenil.\n\nAdemás de los entrenamientos técnicos en pista de alta intensidad, se organizan divertidas excursiones, senderismo y actividades acuáticas por el concejo.\n\nToda la información detallada e inscripciones en: https://www.campusvoleibolllanes.com/`
+      },
+      {
+        id: 31,
+        title: "Fiesta de San Pedro (Riegu)",
+        category: "fiestas",
+        categoryLabel: "Romerías",
+        startDate: "2026-06-28",
+        endDate: "2026-06-28",
+        dateStr: "Domingo 28 de junio de 2026",
+        location: "Riegu de Llanes",
+        hours: "A partir de las 13:00 h.",
+        imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80", // Fiesta con concurso de postres/chocolate
+        officialUrl: "https://www.llanes.es/es/fiesta-de-san-pedro-riegu",
+        townGroup: "Otros",
+        description: `Tradicional fiesta de San Pedro en Riegu. (*Según programa tradicional del año anterior).\n\nPROGRAMACIÓN DEL DOMINGO 28:\n• 13:00 h: Vistosa salida del tradicional ramu desde \"El Costazu\".\n• 13:30 h: Misa solemne patronal de San Pedro y posterior procesión. Al finalizar, tradicionales bailes regionales de Llanes y sesión vermú.\n• 15:30 h: Gran comida de Paella comunal, divertido concurso vecinal de postres caseros con premios y Bingo festivo. A continuación, música de romería.\n• 19:30 h: Tradicional remate y subasta de los panes de ofrenda del ramu.\n• 20:00 h: Fin de fiesta con chocolatada para todos y buena música.`
+      },
+      {
+        id: 32,
+        title: "Campus de Fútbol de Verano Posada 1949",
+        category: "deportes",
+        categoryLabel: "Campus de Fútbol",
+        startDate: "2026-06-29",
+        endDate: "2026-08-31", // Fecha simulada de fin de temporada
+        dateStr: "Inauguración el 29 de junio de 2026",
+        location: "Campo de La Corredoria, Posada de Llanes",
+        hours: "09:30 - 14:00 h. (Lunes a Viernes)",
+        imageUrl: "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?auto=format&fit=crop&w=800&q=80", // Niños jugando al fútbol
+        officialUrl: "https://www.facebook.com/profile.php?id=61584912535963",
+        townGroup: "Posada",
+        description: `Un campus de fútbol diseñado para vivir un verano inolvidable en Posada de Llanes.\n\nDirigido a niños y niñas de 5 a 15 años.\n\n¿QUÉ INCLUYE EL CAMPUS?\n• Sesiones de entrenamiento táctico y técnico impartidas por entrenadores nacionales calificados.\n• Juegos recreativos para fomentar el compañerismo y el trabajo en equipo.\n• Actividades de aventura y excursiones acuáticas en playas de la costa.\n• Formación integral de personas además de deportistas.\n\nReserva de plazas: 636 710 077 (Plazas limitadas).`
+      },
+      {
+        id: 33,
+        title: "Campamento de Verano de Ocio Activo (Llanes)",
+        category: "deportes",
+        categoryLabel: "Campamentos",
+        startDate: "2026-06-29",
+        endDate: "2026-09-04",
+        dateStr: "Del 29 de junio al 4 de septiembre de 2026",
+        location: "Llanes (Instalaciones de AD Playas de Llanes)",
+        hours: "10:00 a 14:00 h. (Lunes a Viernes)",
+        imageUrl: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80", // Campamento infantil libre/deporte
+        officialUrl: "https://forms.gle/f2SRrVKzyjv8ia289",
+        townGroup: "Llanes",
+        description: `Divertido campamento de verano de ocio activo en Llanes diseñado por la AD Playas de Llanes para que niños y niñas disfruten y aprendan al máximo.\n\nDIRIGIDO A:\nNiños y niñas nacidos entre los años 2014 y 2022.\n\nACTIVIDADES:\n• Talleres creativos, manualidades de verano y juegos.\n• Multideporte, gymkanas de destreza y sorpresas diarias al aire libre.\n* Nota importante: no se trata de un campamento de voleibol exclusivamente, sino de ocio integral y multiactivo.\n\nPRECIOS COMPETITIVOS:\n• Quincena: 135 €\n• Mes: 250 €\n• Verano completo: 470 €\n\nInscripciones:\nWhatsApp oficial: 684 64 69 70 / 612 24 60 39\nCorreo: info.adplayasdellanes@gmail.com\nFormulario: https://forms.gle/f2SRrVKzyjv8ia289`
+      },
+      {
+        id: 34,
+        title: "X Campus de Fútbol C.D. Llanes 2026",
+        category: "deportes",
+        categoryLabel: "Campus de Fútbol",
+        startDate: "2026-06-29",
+        endDate: "2026-08-07",
+        dateStr: "Del 29 de junio al 7 de agosto de 2026",
+        location: "Campo de La Encarnación, Llanes",
+        hours: "10:00 a 14:00 h. (Recepción a las 09:30 h.)",
+        imageUrl: "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80", // Entrenamiento fútbol profesional niños
+        officialUrl: "https://www.llanes.es/es/x-campus-de-futbol-cd-llanes-2026",
+        townGroup: "Llanes",
+        description: `Prestigiosa décima edición del Campus Oficial del C.D. Llanes, ideal para la mejora del rendimiento deportivo de jóvenes futbolistas.\n\nDIRIGIDO A:\nNiños y niñas entre 4 y 14 años de edad.\n\n¿QUÉ INCLUYE?\n• Entrega de equipación oficial de entrenamiento del campus.\n• Sesiones de entrenamiento de fútbol técnica individualizada.\n• Recepción temprana de jugadores desde las 09:30 h.\n\nInscripciones abiertas desde el 25 de mayo.\nContacto: gdcdllanes@gmail.com / Teléfono: 677 42 99 94 (Iván).`
+      }
+    ];
 
-<!-- TOAST -->
-<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+    // Variables globales de estado
+    let currentEvents = [...eventsData];
+    let isAscending = true;
 
-<!-- SCROLL TO TOP -->
-<button class="scroll-top" id="scrollTop" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up"></i></button>
+    // Inicialización al cargar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      // Iniciar iconos de Lucide
+      lucide.createIcons();
+      // Renderizar eventos por primera vez
+      renderEvents(currentEvents);
+    });
 
-<script>
-// ===== BASE DE DATOS COMPLETA DE EVENTOS =====
-const eventos = [
-  {
-    id: 0,
-    titulo: "Exposición de pintura de Miodrag Djergovic y Michel Posada",
-    fecha: "2026-06-01",
-    hora: "10:00 - 20:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Centro Cultural de Llanes",
-    categoria: "exposicion",
-    catLabel: "Exposición",
-    desc: "Muestra pictórica conjunta de los artistas Miodrag Djergovic y Michel Posada. Dos visiones complementarias del paisaje y la figuración contemporánea que convergen en un espacio único. La exposición recorre trayectorias artísticas distintas unidas por la pasión por el color y la forma.",
-    tags: ["Pintura", "Arte Contemporáneo", "Gratuito"],
-    img: "https://picsum.photos/seed/pintura-djergovic/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/exposicion-de-pintura-de-miodrag-djergovic-michel-posada"
-  },
-  {
-    id: 1,
-    titulo: 'Exposición "Retrato y Sociedad" en Porrúa',
-    fecha: "2026-06-02",
-    hora: "11:00 - 19:00",
-    localidad: "Porrúa",
-    lugar: "Sala de Exposiciones de Porrúa",
-    categoria: "exposicion",
-    catLabel: "Exposición",
-    desc: 'La muestra "Retrato y Sociedad" explora la evolución del retrato como género artístico y su relación con los cambios sociales. A través de obras de distintos autores, se plantea una reflexión sobre la identidad colectiva e individual en la Asturias rural y contemporánea.',
-    tags: ["Retrato", "Fotografía", "Pintura", "Porrúa"],
-    img: "https://picsum.photos/seed/retrato-sociedad-porrua/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/exposicion-retrato-y-sociedad-porrua"
-  },
-  {
-    id: 2,
-    titulo: "Taller gratuito de Memoria — Nueva de Llanes",
-    fecha: "2026-06-03",
-    hora: "17:00 - 19:00",
-    localidad: "Nueva de Llanes",
-    lugar: "Centro Social de Nueva de Llanes",
-    categoria: "taller",
-    catLabel: "Taller",
-    desc: "Taller dirigido a personas mayores centrado en técnicas de estimulación cognitiva y ejercicios de memoria. Actividades grupales diseñadas para mantener y mejorar las capacidades mentales, fomentando la socialización y el bienestar emocional en un entorno distendido.",
-    tags: ["Gratuito", "Mayores", "Salud", "Memoria"],
-    img: "https://picsum.photos/seed/taller-memoria-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/taller-gratuito-de-memoria-nueva-de-llanes"
-  },
-  {
-    id: 3,
-    titulo: "Espacio Joven Llanes",
-    fecha: "2026-06-05",
-    hora: "16:00 - 21:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Local del Espacio Joven",
-    categoria: "joven",
-    catLabel: "Juvenil",
-    desc: "Sesión regular del Espacio Joven con actividades de ocio alternativo: juegos de mesa, consolas, taller creativo y zona de encuentro. Un espacio seguro y supervisado donde los jóvenes del concejo pueden disfrutar de su tiempo libre de forma sana y social.",
-    tags: ["Jóvenes", "Ocio", "Gratuito", "Semanal"],
-    img: "https://picsum.photos/seed/espacio-joven-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/espacio-joven-llanes-67"
-  },
-  {
-    id: 4,
-    titulo: 'Conciertu: "Buir" en Porrúa',
-    fecha: "2026-06-05",
-    hora: "21:30",
-    localidad: "Porrúa",
-    lugar: "Plaza de Porrúa",
-    categoria: "musica",
-    catLabel: "Música",
-    desc: 'Concierto del grupo asturiano "Buir", conocido por su fusión de música tradicional asturiana con sonidos contemporáneos. Un espectáculo en vivo que reivindica la riqueza del folclore local con arreglos frescos y energéticos, en el marco de la programación cultural de primavera.',
-    tags: ["Folk", "Asturiano", "En vivo", "Gratuito"],
-    img: "https://picsum.photos/seed/conciertu-buir-porrua/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/conciertu-buir-porrua"
-  },
-  {
-    id: 5,
-    titulo: "III Concurso de Canción Asturiana Pueblos de Llanes",
-    fecha: "2026-06-06",
-    hora: "20:00",
-    localidad: "Poo de Llanes",
-    lugar: "Recinto Ferial de Poo de Llanes",
-    categoria: "musica",
-    catLabel: "Música",
-    desc: "Tercera edición de este certamen que reúne a los mejores cantadores y cantaderes del concejo y la comarca. El concurso de canción asturiana es una de las expresiones más auténticas de la cultura lírica asturiana, con interpretaciones de tonada, vaqueríes y canciones tradicionales ante un jurado cualificado.",
-    tags: ["Tonada", "Concurso", "Tradición", "III Edición"],
-    img: "https://picsum.photos/seed/cancion-asturiana-poo/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/iii-concurso-de-cancion-asturiana-pueblos-de-llanes-poo-de-llanes"
-  },
-  {
-    id: 6,
-    titulo: "Fiesta de San Antoniu — Cue",
-    fecha: "2026-06-12",
-    hora: "Todo el día",
-    localidad: "Cue",
-    lugar: "Iglesia de San Antonio y plaza del pueblo",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Las fiestas de San Antoniu en Cue son una de las celebraciones más arraigadas del concejo. El programa incluye misa solemne, procesión del santo por las calles del pueblo, verbena popular con orquesta, actividades infantiles, y la tradicional comida de hermandad. Un fin de semana donde la devoción se mezcla con la alegría vecinal.",
-    tags: ["San Antonio", "Procesión", "Verbena", "Tradicional"],
-    img: "https://picsum.photos/seed/san-antoniu-cue/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-antoniu-cue"
-  },
-  {
-    id: 7,
-    titulo: "Fiesta de San Antoniu — Piedra",
-    fecha: "2026-06-12",
-    hora: "Todo el día",
-    localidad: "Piedra",
-    lugar: "Capilla de San Antonio y entorno",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Piedra celebra a su patrón San Antoniu con un programa completo de actos religiosos y lúdicos. Destacan la misa campestre, la subasta de ramas, la tradicional rifa y la verbena nocturna que anima la pequeña localidad. Los vecinos preparan comidas típicas y se visten de gala para la ocasión.",
-    tags: ["San Antonio", "Rural", "Subasta de Ramas", "Verbena"],
-    img: "https://picsum.photos/seed/san-antoniu-piedra/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-antoniu-piedra"
-  },
-  {
-    id: 8,
-    titulo: "Fiesta de San Antonio — La Venta / Puente Nuevo",
-    fecha: "2026-06-13",
-    hora: "Todo el día",
-    localidad: "La Venta / Puente Nuevo",
-    lugar: "Capilla de San Antonio, La Venta",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "La vecindad de La Venta y Puente Nuevo se une para celebrar las fiestas de San Antonio con una jornada de convivencia que incluye misa, procesión, juegos tradicionales para los más pequeños, y una verbena con orquesta que se extiende hasta la madrugada. Comida compartida y buen ambiente garantizado.",
-    tags: ["San Antonio", "Convivencia", "Juegos", "Verbena"],
-    img: "https://picsum.photos/seed/san-antonio-venta/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-antonio-la-venta-puente-nuevo"
-  },
-  {
-    id: 9,
-    titulo: "XV Torneo de Fútbol Veteranos Villa de Llanes",
-    fecha: "2026-06-13",
-    hora: "09:00 - 20:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Campos Municipales de Llanes",
-    categoria: "deporte",
-    catLabel: "Deporte",
-    desc: "Quinceava edición del torneo de fútbol para veteranos que reúne a equipos de toda la región. Un evento que combina la competición deportiva con el espíritu de camaradería entre jugadores de más de 35 años. El torneo se disputa en formato de eliminatorias con premios para los tres primeros clasificados.",
-    tags: ["Fútbol", "Veteranos", "XV Edición", "Regional"],
-    img: "https://picsum.photos/seed/torneo-veteranos-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/xv-torneo-de-futbol-veteranos-villa-de-llanes"
-  },
-  {
-    id: 10,
-    titulo: 'Títeres: "La niña que riega la albahaca" — Parres',
-    fecha: "2026-06-13",
-    hora: "18:00",
-    localidad: "Parres",
-    lugar: "Centro Cultural de Parres",
-    categoria: "teatro",
-    catLabel: "Teatro / Títeres",
-    desc: 'Espectáculo de títeres basado en el cuento popular "La niña que riega la albahaca", una historia de brujería y astucia que forma parte del acervo tradicional asturiano. La compañía utiliza marionetas de diversos tipos para recrear esta narración mágica que encanta tanto a niños como a adultos.',
-    tags: ["Títeres", "Infantil", "Cuento Popular", "Familiar"],
-    img: "https://picsum.photos/seed/titeres-albahaca-parres/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/titeres-la-nina-que-riega-la-albahaca-parres"
-  },
-  {
-    id: 11,
-    titulo: 'Teatro: "Comedias de enredo" — La Borbolla',
-    fecha: "2026-06-13",
-    hora: "20:30",
-    localidad: "La Borbolla",
-    lugar: "Sala de La Borbolla",
-    categoria: "teatro",
-    catLabel: "Teatro / Títeres",
-    desc: 'La compañía teatral local presenta "Comedias de enredo", un montaje que rescata el género clásico de la comedia de enredo con situaciones equívocas, diálogos ágiles y personajes carismáticos. Una función llena de humor y ritmo que demuestra el talento de los actores aficionados del concejo.',
-    tags: ["Comedia", "Teatro Amateur", "Clásico", "Humor"],
-    img: "https://picsum.photos/seed/comedias-enredo-borbolla/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/teatro-comedias-de-enredo-la-borbolla"
-  },
-  {
-    id: 12,
-    titulo: "Fiesta de San Antonio — Pendueles",
-    fecha: "2026-06-14",
-    hora: "Todo el día",
-    localidad: "Pendueles",
-    lugar: "Iglesia parroquial y plaza de Pendueles",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Pendueles rinde homenaje a San Antonio con un programa festivo que incluye la tradicional misa, procesión con el santo, actividades para todas las edades y una gran verbena nocturna. La fiesta es punto de encuentro de naturales del pueblo que regresan para la celebración, manteniendo viva la tradición.",
-    tags: ["San Antonio", "Verbena", "Procesión", "Tradicional"],
-    img: "https://picsum.photos/seed/san-antonio-pendueles/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-antonio-pendueles"
-  },
-  {
-    id: 13,
-    titulo: "Fiesta de San Juan Bautista y la Sacramental — Tresgrandas",
-    fecha: "2026-06-19",
-    hora: "Todo el día",
-    localidad: "Tresgrandas",
-    lugar: "Iglesia de San Juan y calles del pueblo",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Tresgrandas celebra la festividad de San Juan Bautista junto con la celebración de la Sacramental, una de las devociones más singulares del oriente asturiano. El programa incluye oficios religiosos, procesión, la ceremonia de la Sacramental, verbena popular y un amplio programa de actividades lúdicas y culturales.",
-    tags: ["San Juan", "Sacramental", "Procesión", "Patronal"],
-    img: "https://picsum.photos/seed/san-juan-tresgrandas/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-juan-bautista-y-la-sacramental-tresgrandas"
-  },
-  {
-    id: 14,
-    titulo: "Festival Rociero Llanes 2026",
-    fecha: "2026-06-19",
-    hora: "18:00 - 03:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Recinto Ferial / Paseo de San Antonio",
-    categoria: "musica",
-    catLabel: "Música",
-    desc: "El Festival Rociero llega a Llanes con una noche llena de sevillanas, rumbas y música flamenca. Actuaciones de grupos rocieros, escuela de baile y ambiente andaluz en plena costa asturiana. Un evento multicultural que每年 atrae a cientos de visitantes y que se ha consolidado como cita ineludible del inicio del verano.",
-    tags: ["Rociero", "Flamenco", "Sevillanas", "Nocturno"],
-    img: "https://picsum.photos/seed/festival-rociero-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/festival-rociero-llanes-2026"
-  },
-  {
-    id: 15,
-    titulo: "Fiesta de San Juan Bautista — Puertas de Vidiago",
-    fecha: "2026-06-19",
-    hora: "Todo el día",
-    localidad: "Puertas de Vidiago",
-    lugar: "Capilla y plazuela de Puertas de Vidiago",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "La pequeña localidad de Puertas de Vidiago celebra a San Juan Bautista con una jornada íntima y familiar. Misa, procesión, comida de hermandad y verbena nocturna conforman un programa que mantiene la esencia de las fiestas de pueblo, con la calidez que caracteriza a las celebraciones de las parroquias rurales del concejo.",
-    tags: ["San Juan", "Rural", "Familiar", "Tradicional"],
-    img: "https://picsum.photos/seed/san-juan-vidiago/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-juan-bautista-puertas-de-vidiago"
-  },
-  {
-    id: 16,
-    titulo: "V Torneo de Beach Tennis — Playa de Barro",
-    fecha: "2026-06-20",
-    hora: "09:00 - 19:00",
-    localidad: "Playa de Barro",
-    lugar: "Playa de Barro, Llanes",
-    categoria: "deporte",
-    catLabel: "Deporte",
-    desc: "Quinta edición del torneo de beach tennis que se celebra sobre la arena de la espectacular Playa de Barro. La prueba atrae a jugadores de toda Asturias y norte de España, con categorías masculina, femenina y mixta. Un deporte en auge que combina la técnica del tenis con el ambiente festivo de la playa.",
-    tags: ["Beach Tennis", "Playa", "V Edición", "Open"],
-    img: "https://picsum.photos/seed/beach-tennis-barro/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/v-torneo-beach-tennis-playa-de-barro"
-  },
-  {
-    id: 17,
-    titulo: "Fiesta de San Antonio — Rieseña",
-    fecha: "2026-06-20",
-    hora: "Todo el día",
-    localidad: "Rieseña",
-    lugar: "Iglesia y plaza de Rieseña",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Rieseña se engalana para celebrar a San Antonio con una jornada festiva que reúne a vecinos y foráneos. El programa incluye actos religiosos, la tradicional procesión, juegos populares, concurso de castañas y una verbena que pone la nota colorista y alegre a esta fiesta de profundo arraigo local.",
-    tags: ["San Antonio", "Juegos Populares", "Verbena", "Rural"],
-    img: "https://picsum.photos/seed/san-antonio-riesena/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-antonio-riensena"
-  },
-  {
-    id: 18,
-    titulo: "La Hoguera — Balmori",
-    fecha: "2026-06-21",
-    hora: "22:00",
-    localidad: "Balmori",
-    lugar: "Plaza de Balmori",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "La noche más corta del año se celebra en Balmori con la tradicional hoguera de San Juan. Alrededor del fuego se comparten historias, canciones y buenos momentos en una velada mágica que marca el inicio del verano astronómico. Un ritual pagano que se ha mantenido vivo generación tras generación en esta localidad del concejo.",
-    tags: ["Hoguera", "San Juan", "Noche de San Juan", "Solsticio"],
-    img: "https://picsum.photos/seed/hoguera-balmori/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/la-hoguera-balmori"
-  },
-  {
-    id: 19,
-    titulo: 'Evento Solidario: "108 Saludos al Sol" — Llanes',
-    fecha: "2026-06-21",
-    hora: "07:00 - 10:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Playa de Sablón o Terraza Municipal",
-    categoria: "solidario",
-    catLabel: "Solidario",
-    desc: 'Sesión masiva de yoga solidario con la práctica de 108 saludos al sol, coincidiendo con el solsticio de verano. El evento recauda fondos para una causa social local, combinando el bienestar físico y mental con la solidaridad. Participantes de todos los niveles son bienvenidos en esta jornada de consciencia y comunidad.',
-    tags: ["Yoga", "Solidario", "Solsticio", "Salud"],
-    img: "https://picsum.photos/seed/108-saludos-sol-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/evento-solidario-108-saludos-al-sol-llanes"
-  },
-  {
-    id: 20,
-    titulo: "Fiesta de San Juan — Villa / Caldueno",
-    fecha: "2026-06-23",
-    hora: "Todo el día",
-    localidad: "Villa / Caldueno",
-    lugar: "Iglesia y entorno de Villa de Caldueno",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "La parroquia de Villa y Caldueno celebra las fiestas de San Juan con un programa que mezcla lo religioso y lo festivo. Misa solemne, procesión, hoguera nocturna, verbena con orquesta y actividades infantiles configuran unas jornadas que atraen a todos los vecinos de la zona y a muchos naturales ausentes que regresan por estas fechas.",
-    tags: ["San Juan", "Hoguera", "Verbena", "Parroquial"],
-    img: "https://picsum.photos/seed/san-juan-caldueno/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-juan-villa-caldueno"
-  },
-  {
-    id: 21,
-    titulo: "Fiestas de San Juan Bautista — Balmori",
-    fecha: "2026-06-23",
-    hora: "Todo el día",
-    localidad: "Balmori",
-    lugar: "Iglesia de San Juan y plaza de Balmori",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Balmori vive sus fiestas patronales en honor a San Juan Bautista con varios días de celebración. Destacan los actos religiosos, la procesión, la verbena nocturna con orquesta, los concursos populares y la gastronomía local. Las fierras son el momento álgido de la vida social de esta pequeña localidad del oriente asturiano.",
-    tags: ["San Juan", "Patronal", "Verbena", "Gastronomía"],
-    img: "https://picsum.photos/seed/san-juan-balmori/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiestas-de-san-juan-bautista-balmori"
-  },
-  {
-    id: 22,
-    titulo: "Fiesta de la Sacramental — Cue (Interés Turístico Regional)",
-    fecha: "2026-06-24",
-    hora: "Todo el día",
-    localidad: "Cue",
-    lugar: "Iglesia parroquial y calles de Cue",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "La Sacramental de Cue, declarada de Interés Turístico Regional, es una de las celebraciones más singulares de Asturias. Se trata de una devoción ancestral centrada en la Eucaristía que se manifiesta con una procesión extraordinaria, altares decorados en las calles, danzas tradicionales y una participación masiva de los vecinos. Una joya del patrimonio inmaterial del concejo de Llanes.",
-    tags: ["Sacramental", "Interés Turístico", "Patrimonio", "Procesión"],
-    img: "https://picsum.photos/seed/sacramental-cue/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-la-sacramental-cue-declarada-de-interes-turistico-regional"
-  },
-  {
-    id: 23,
-    titulo: "Fiesta de San Pedro — Santa Eulalia de Carranzo",
-    fecha: "2026-06-26",
-    hora: "Todo el día",
-    localidad: "Santa Eulalia de Carranzo",
-    lugar: "Iglesia de San Pedro y plaza",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Santa Eulalia de Carranzo celebra a San Pedro con el tradicional programa de fiestas de parroquia: misa, procesión, verbena popular y actividades para todas las edades. Un día de encuentro vecinal donde la devoción y la celebración van de la mano en uno de los pueblos más pintorescos del concejo.",
-    tags: ["San Pedro", "Rural", "Verbena", "Tradicional"],
-    img: "https://picsum.photos/seed/san-pedro-carranzo/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-pedro-santa-eulalia-de-carranzo"
-  },
-  {
-    id: 24,
-    titulo: "Fiesta de Santa Isabel — Cuetu Mere",
-    fecha: "2026-06-27",
-    hora: "Todo el día",
-    localidad: "Cuetu Mere",
-    lugar: "Capilla de Santa Isabel",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Cuetu Mere celebra a Santa Isabel con una fiesta íntima y arraigada. Los vecinos preparan el pueblo con flores y adornos para la procesión, se celebra la misa en la pequeña capilla y después se comparte una comida colectiva. La verbena nocturna cierra una jornada de convivencia y tradición en esta localidad de la Sierra del Cuera.",
-    tags: ["Santa Isabel", "Sierra del Cuera", "Comida", "Tradicional"],
-    img: "https://picsum.photos/seed/santa-isabel-cuetumere/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-santa-isabel-cuetu-mere"
-  },
-  {
-    id: 25,
-    titulo: "Fiesta de San Pedro — Pancar",
-    fecha: "2026-06-27",
-    hora: "Todo el día",
-    localidad: "Pancar",
-    lugar: "Iglesia de San Pedro y entorno",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Pancar se viste de fiesta para honrar a San Pedro con un programa que combina la solemnidad religiosa con el ambiente festivo. Misa, procesión, juegos para niños, concurso de caramelos y verbena con orquesta conforman el programa de unas fiestas que mantienen viva la esencia de la celebración parroquial asturiana.",
-    tags: ["San Pedro", "Juegos", "Concurso", "Verbena"],
-    img: "https://picsum.photos/seed/san-pedro-pancar/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-pedro-pancar"
-  },
-  {
-    id: 26,
-    titulo: "Fiesta de San Pelayo — Niembru",
-    fecha: "2026-06-27",
-    hora: "Todo el día",
-    localidad: "Niembru",
-    lugar: "Iglesia de San Pelayo y plaza",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Niembru celebra a su patrón San Pelayo con unas fiestas que son referente en la comarca. El programa incluye oficios religiosos, procesión, verbenas, actividades deportivas y culturales, y la tradicional comida de hermandad. Las fiestas de Niembru destacan por su organización y la alta participación de los vecinos y visitantes.",
-    tags: ["San Pelayo", "Patronal", "Deporte", "Cultural"],
-    img: "https://picsum.photos/seed/san-pelayo-niembru/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-pelayo-niembru"
-  },
-  {
-    id: 27,
-    titulo: "X Campus Nacional de Fútbol Villa de Llanes",
-    fecha: "2026-06-28",
-    hora: "09:00 - 14:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Campos Municipales de Fútbol",
-    categoria: "campus",
-    catLabel: "Campus",
-    desc: "Décima edición del campus nacional de fútbol que atrae a jóvenes futbolistas de toda España. Durante varios días, los participantes reciben entrenamiento de alto nivel de técnicos profesionales, con sesiones de técnica individual, táctica colectiva, partidos y charlas formativas. Una experiencia completa para el desarrollo deportivo y personal.",
-    tags: ["Fútbol", "X Edición", "Nacional", "Juvenil"],
-    img: "https://picsum.photos/seed/campus-futbol-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/x-campus-nacional-de-futbol-villa-de-llanes"
-  },
-  {
-    id: 28,
-    titulo: "X Campus Nacional de Voleibol Villa de Llanes",
-    fecha: "2026-06-28",
-    hora: "09:00 - 14:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Pabellón Municipal de Deportes",
-    categoria: "campus",
-    catLabel: "Campus",
-    desc: "El campus nacional de voleibol celebra su décima edición con un programa intensivo de entrenamiento para jóvenes promesas. Técnicos federados dirigen las sesiones que abarcan desde los fundamentos técnicos hasta estrategias de competición, con partidos diarios y actividades complementarias de condición física y nutrición deportiva.",
-    tags: ["Voleibol", "X Edición", "Nacional", "Pabellón"],
-    img: "https://picsum.photos/seed/campus-voleibol-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/x-campus-nacional-de-voleibol-villa-de-llanes"
-  },
-  {
-    id: 29,
-    titulo: "Fiesta de San Pedro — Riegu",
-    fecha: "2026-06-28",
-    hora: "Todo el día",
-    localidad: "Riegu",
-    lugar: "Iglesia de San Pedro y plaza de Riegu",
-    categoria: "fiesta",
-    catLabel: "Fiesta",
-    desc: "Riegu celebra a San Pedro con el característico ambiente de sus fiestas de pueblo. La jornada incluye la misa en honor al santo, la procesión por las calles empedradas, y una verbena que reúne a todos los vecinos en la plaza. Un día de tradición y celebration en esta pequeña localidad del interior del concejo.",
-    tags: ["San Pedro", "Rural", "Procesión", "Verbena"],
-    img: "https://picsum.photos/seed/san-pedro-riegu/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/fiesta-de-san-pedro-riegu"
-  },
-  {
-    id: 30,
-    titulo: "Campus de Fútbol de Verano Posada 1949",
-    fecha: "2026-06-29",
-    hora: "09:00 - 14:00",
-    localidad: "Posada de Llanes",
-    lugar: "Campos de Posada 1949",
-    categoria: "campus",
-    catLabel: "Campus",
-    desc: "El histórico club Posada 1949 organiza su campus de verano de fútbol, dirigido a niños y jóvenes de todas las edades. El programa combina entrenamientos técnicos y tácticos con actividades lúdicas, baños en la playa y talleres de valores deportivos. Una semana de fútbol, diversión y aprendizaje en el entorno incomparable de Posada de Llanes.",
-    tags: ["Fútbol", "Verano", "Infantil", "Posada 1949"],
-    img: "https://picsum.photos/seed/campus-posada-1949/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/campus-de-futbol-de-verano-posada-1949-posada-de-llanes"
-  },
-  {
-    id: 31,
-    titulo: "Campamento de Verano de Ocio Activo — Llanes",
-    fecha: "2026-06-29",
-    hora: "08:30 - 16:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Instalaciones municipales y alrededores",
-    categoria: "campus",
-    catLabel: "Campus",
-    desc: "El campamento de ocio activo ofrece a los niños y niñas del concejo un verano lleno de actividades: talleres creativos, deportes variados, excursiones a la naturaleza, juegos acuáticos en las playas de Llanes y dinámicas de educación ambiental. Un programa completo supervisado por monitores cualificados que combina diversión y aprendizaje.",
-    tags: ["Ocio", "Infantil", "Naturaleza", "Multiactividad"],
-    img: "https://picsum.photos/seed/campamento-ocio-llanes/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/campamento-de-verano-de-ocio-activo-llanes"
-  },
-  {
-    id: 32,
-    titulo: "X Campus de Fútbol C.D. Llanes 2026",
-    fecha: "2026-06-29",
-    hora: "09:00 - 14:00",
-    localidad: "Llanes (Villa)",
-    lugar: "Campos del C.D. Llanes",
-    categoria: "campus",
-    catLabel: "Campus",
-    desc: "El Club Deportivo Llanes celebra la décima edición de su campus de fútbol veraniego, una referencia en la formación deportiva del oriente asturiano. Con grupos por edades y niveles, el campus ofrece entrenamientos de calidad, partidos diarios, charlas con exfutbolistas y actividades complementarias que hacen de esta experiencia algo más que deporte.",
-    tags: ["Fútbol", "C.D. Llanes", "X Edición", "Formación"],
-    img: "https://picsum.photos/seed/campus-cd-llanes-2026/600/400.jpg",
-    enlace: "https://www.llanes.es/../es/x-campus-de-futbol-cd-llanes-2026"
-  }
-];
+    // Función para renderizar los eventos en el grid
+    function renderEvents(events) {
+      const grid = document.getElementById('eventsGrid');
+      const noResults = document.getElementById('noResults');
+      const visibleCount = document.getElementById('visibleCount');
 
-// ===== UTILIDADES =====
-const diasSemana = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+      grid.innerHTML = '';
 
-function formatDate(fechaStr) {
-  const d = new Date(fechaStr + 'T00:00:00');
-  return {
-    dia: d.getDate(),
-    diaSemana: diasSemana[d.getDay()],
-    mes: meses[d.getMonth()],
-    fechaStr: fechaStr
-  };
-}
+      if (events.length === 0) {
+        grid.classList.add('hidden');
+        noResults.classList.remove('hidden');
+        visibleCount.textContent = '0';
+        return;
+      }
 
-function getCatClass(cat) {
-  const map = {
-    exposicion: 'cat-exposicion',
-    fiesta: 'cat-fiesta',
-    musica: 'cat-musica',
-    deporte: 'cat-deporte',
-    teatro: 'cat-teatro',
-    taller: 'cat-taller',
-    joven: 'cat-joven',
-    solidario: 'cat-solidario',
-    campus: 'cat-campus'
-  };
-  return map[cat] || 'cat-exposicion';
-}
+      grid.classList.remove('hidden');
+      noResults.classList.add('hidden');
+      visibleCount.textContent = events.length;
 
-function getCatIcon(cat) {
-  const map = {
-    exposicion: 'fa-palette',
-    fiesta: 'fa-fire',
-    musica: 'fa-music',
-    deporte: 'fa-futbol',
-    teatro: 'fa-masks-theater',
-    taller: 'fa-chalkboard-user',
-    joven: 'fa-users',
-    solidario: 'fa-hand-holding-heart',
-    campus: 'fa-campground'
-  };
-  return map[cat] || 'fa-calendar';
-}
+      events.forEach(event => {
+        // Formatear colores según categoría
+        let badgeColorClass = "";
+        let borderHoverClass = "";
+        let iconHtml = "";
 
-// ===== AGRUPAR POR FECHA =====
-function groupByDate(arr) {
-  const groups = {};
-  arr.forEach(ev => {
-    if (!groups[ev.fecha]) groups[ev.fecha] = [];
-    groups[ev.fecha].push(ev);
-  });
-  // Ordenar fechas
-  return Object.keys(groups).sort().map(k => ({ date: k, events: groups[k] }));
-}
+        if (event.category === 'cultura') {
+          badgeColorClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
+          borderHoverClass = "hover:border-emerald-300 hover:shadow-emerald-500/5";
+          iconHtml = `<i data-lucide="palette" class="w-4 h-4 mr-1"></i>`;
+        } else if (event.category === 'fiestas') {
+          badgeColorClass = "bg-teal-100 text-teal-800 border-teal-200";
+          borderHoverClass = "hover:border-teal-300 hover:shadow-teal-500/5";
+          iconHtml = `<i data-lucide="sparkles" class="w-4 h-4 mr-1"></i>`;
+        } else {
+          badgeColorClass = "bg-cyan-100 text-cyan-800 border-cyan-200";
+          borderHoverClass = "hover:border-cyan-300 hover:shadow-cyan-500/5";
+          iconHtml = `<i data-lucide="trophy" class="w-4 h-4 mr-1"></i>`;
+        }
 
-// ===== RENDERIZAR TIMELINE =====
-function renderTimeline(filter = 'todos') {
-  const container = document.getElementById('timeline');
-  container.innerHTML = '';
+        // Crear tarjeta de evento
+        const card = document.createElement('div');
+        card.className = `group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${borderHoverClass} flex flex-col h-full`;
+        
+        // Truncar descripción para la vista rápida
+        const shortDesc = event.description.split('\n')[0].substring(0, 110) + '...';
 
-  let filtered = filter === 'todos' ? eventos : eventos.filter(e => e.categoria === filter);
-  const groups = groupByDate(filtered);
+        card.innerHTML = `
+          <!-- Imagen del Evento con Fallback -->
+          <div class="relative h-48 sm:h-52 w-full overflow-hidden shrink-0 bg-slate-100">
+            <img 
+              src="${event.imageUrl}" 
+              alt="Imagen de ${event.title}"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.src='https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=800&q=80'"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+            
+            <!-- Badge de Categoría -->
+            <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold border ${badgeColorClass}">
+              ${iconHtml} ${event.categoryLabel}
+            </span>
+          </div>
 
-  if (groups.length === 0) {
-    container.innerHTML = `<div style="text-align:center;padding:4rem 2rem;color:var(--muted);">
-      <i class="fa-solid fa-filter-circle-xmark" style="font-size:3rem;margin-bottom:1rem;display:block;color:var(--accent2);"></i>
-      <p>No hay eventos para esta categoría en junio de 2026.</p>
-    </div>`;
-    return;
-  }
-
-  groups.forEach((group, gi) => {
-    const fd = formatDate(group.date);
-    const section = document.createElement('section');
-    section.className = 'date-group';
-    section.setAttribute('data-date', group.date);
-
-    section.innerHTML = `
-      <div class="date-header">
-        <div class="day-num">${fd.dia}</div>
-        <div class="day-info">
-          <span class="day-name">${fd.diaSemana}</span>
-          <span class="day-month">${fd.mes} 2026</span>
-        </div>
-        <div class="line"></div>
-        <span style="font-size:0.7rem;color:var(--muted);white-space:nowrap;">${group.events.length} evento${group.events.length>1?'s':''}</span>
-      </div>
-      <div class="events-row">
-        ${group.events.map(ev => `
-          <article class="event-card" data-cat="${ev.categoria}">
-            <div class="card-img-wrap">
-              <img src="${ev.img}" alt="${ev.titulo}" loading="lazy">
-              <div class="card-img-overlay"></div>
-              <span class="card-cat-badge ${getCatClass(ev.categoria)}"><i class="fa-solid ${getCatIcon(ev.categoria)}"></i> ${ev.catLabel}</span>
-              <span class="card-time-badge"><i class="fa-regular fa-clock"></i> ${ev.hora}</span>
+          <!-- Contenido de la tarjeta -->
+          <div class="p-6 flex flex-col flex-grow">
+            <!-- Ubicación rápida -->
+            <div class="flex items-center gap-1 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-500"></i>
+              <span>${event.townGroup}</span>
             </div>
-            <div class="card-body">
-              <div class="card-location"><i class="fa-solid fa-location-dot"></i> ${ev.localidad}</div>
-              <h3 class="card-title">${ev.titulo}</h3>
-              <p class="card-desc">${ev.desc}</p>
-              <div class="card-details">
-                ${ev.tags.map(t => `<span class="detail-tag"><i class="fa-solid fa-tag"></i>${t}</span>`).join('')}
-              </div>
-              <div class="card-details" style="margin-bottom:0.8rem;">
-                <span class="detail-tag"><i class="fa-solid fa-map-pin"></i>${ev.lugar}</span>
-              </div>
-              <a href="${ev.enlace}" target="_blank" rel="noopener" class="card-link">
-                Ver en la web oficial <i class="fa-solid fa-arrow-right"></i>
+
+            <!-- Título del Evento -->
+            <h3 class="serif-title text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition mb-3 line-clamp-2">
+              ${event.title}
+            </h3>
+
+            <!-- Fecha rápida -->
+            <div class="flex items-center gap-1.5 text-sm font-medium text-emerald-600 mb-4">
+              <i data-lucide="calendar" class="w-4 h-4 shrink-0"></i>
+              <span>${event.dateStr}</span>
+            </div>
+
+            <!-- Descripción Corta -->
+            <p class="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">
+              ${shortDesc}
+            </p>
+
+            <!-- Botones de Acción -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-auto pt-4 border-t border-slate-100">
+              <button 
+                onclick="openModal(${event.id})"
+                class="w-full inline-flex items-center justify-center gap-1 px-4 py-2 bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-slate-700 hover:text-emerald-700 font-bold text-sm rounded-xl transition"
+              >
+                <i data-lucide="info" class="w-4 h-4"></i> Ver detalles
+              </button>
+              <a 
+                href="${event.officialUrl}" 
+                target="_blank"
+                class="w-full inline-flex items-center justify-center gap-1 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition shadow-sm shadow-emerald-600/5"
+              >
+                <i data-lucide="external-link" class="w-4 h-4"></i> Web oficial
               </a>
             </div>
-          </article>
-        `).join('')}
-      </div>
-    `;
-    container.appendChild(section);
-  });
+          </div>
+        `;
+        
+        grid.appendChild(card);
+      });
 
-  // Re-observar para animaciones
-  observeGroups();
-}
-
-// ===== INTERSECTION OBSERVER PARA ANIMACIONES =====
-function observeGroups() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('.date-group').forEach(g => observer.observe(g));
-}
-
-// ===== FILTROS =====
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    renderTimeline(filter);
-    showToast(`Mostrando: ${filter === 'todos' ? 'Todos los eventos' : btn.textContent.trim()}`);
-    // Scroll al timeline
-    document.getElementById('timeline').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-// ===== TOAST =====
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  clearTimeout(toast._timer);
-  toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-// ===== SCROLL TO TOP =====
-const scrollBtn = document.getElementById('scrollTop');
-window.addEventListener('scroll', () => {
-  scrollBtn.classList.toggle('show', window.scrollY > 600);
-});
-scrollBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ===== PARTÍCULAS =====
-(function initParticles() {
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d');
-  let w, h;
-  const particles = [];
-  const PARTICLE_COUNT = 60;
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.5,
-      alpha: Math.random() * 0.4 + 0.1,
-      color: ['#00ffd2','#ff2d95','#a8ff00','#ff8c00'][Math.floor(Math.random()*4)]
-    });
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(0.1, p.r), 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = p.alpha;
-      ctx.fill();
-    });
-
-    // Líneas de conexión
-    ctx.globalAlpha = 1;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 150) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,255,210,${0.06 * (1 - dist/150)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
+      // Recargar iconos de Lucide dinámicos
+      lucide.createIcons();
     }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
 
-// ===== INICIO =====
-renderTimeline();
-</script>
+    // LÓGICA DE FILTRADO Y BÚSQUEDA
+    function filterEvents() {
+      const searchValue = document.getElementById('searchInput').value.toLowerCase().trim();
+      const categoryValue = document.getElementById('categoryFilter').value;
+      const locationValue = document.getElementById('locationFilter').value;
+
+      let filtered = eventsData.filter(event => {
+        // Coincidencia con buscador
+        const matchesSearch = 
+          event.title.toLowerCase().includes(searchValue) ||
+          event.description.toLowerCase().includes(searchValue) ||
+          event.location.toLowerCase().includes(searchValue) ||
+          event.townGroup.toLowerCase().includes(searchValue);
+
+        // Coincidencia con categoría
+        const matchesCategory = (categoryValue === 'all') || (event.category === categoryValue);
+
+        // Coincidencia con localidad
+        let matchesLocation = true;
+        if (locationValue !== 'all') {
+          if (locationValue === 'Otros') {
+            // No pertenece a Llanes, Posada, Porrúa, Cué, Balmori
+            matchesLocation = !['Llanes', 'Posada', 'Porrúa', 'Cué', 'Balmori'].includes(event.townGroup);
+          } else {
+            matchesLocation = (event.townGroup === locationValue);
+          }
+        }
+
+        return matchesSearch && matchesCategory && matchesLocation;
+      });
+
+      currentEvents = filtered;
+      sortCurrentEvents();
+      renderEvents(currentEvents);
+    }
+
+    // LÓGICA DE ORDENAMIENTO
+    function sortCurrentEvents() {
+      currentEvents.sort((a, b) => {
+        const dateA = new Date(a.startDate);
+        const dateB = new Date(b.startDate);
+        return isAscending ? dateA - dateB : dateB - dateA;
+      });
+    }
+
+    function toggleSortOrder() {
+      isAscending = !isAscending;
+      
+      const sortText = document.getElementById('sortText');
+      const sortIcon = document.getElementById('sortIcon');
+
+      if (isAscending) {
+        sortText.textContent = "Cronológico Ascendente";
+        sortIcon.setAttribute('data-lucide', 'arrow-up-narrow-wide');
+      } else {
+        sortText.textContent = "Cronológico Descendente";
+        sortIcon.setAttribute('data-lucide', 'arrow-down-wide-narrow');
+      }
+
+      sortCurrentEvents();
+      renderEvents(currentEvents);
+    }
+
+    // ACCESOS RÁPIDOS DESDE FOOTER
+    function quickFilter(category) {
+      document.getElementById('categoryFilter').value = category;
+      document.getElementById('searchInput').value = '';
+      document.getElementById('locationFilter').value = 'all';
+      
+      // Hacer scroll hasta el panel de control
+      document.getElementById('searchInput').scrollIntoView({ behavior: 'smooth' });
+      filterEvents();
+    }
+
+    // RESTABLECER FILTROS
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categoryFilter').value = 'all';
+      document.getElementById('locationFilter').value = 'all';
+      currentEvents = [...eventsData];
+      isAscending = true;
+      
+      const sortText = document.getElementById('sortText');
+      sortText.textContent = "Cronológico Ascendente";
+
+      sortCurrentEvents();
+      renderEvents(currentEvents);
+    }
+
+    // DETALLE DEL MODAL (OPEN/CLOSE)
+    function openModal(id) {
+      const event = eventsData.find(e => e.id === id);
+      if (!event) return;
+
+      const modal = document.getElementById('eventModal');
+      const container = document.getElementById('modalContainer');
+
+      // Asignar datos del evento
+      document.getElementById('modalImg').src = event.imageUrl;
+      document.getElementById('modalTitle').textContent = event.title;
+      document.getElementById('modalDateStr').textContent = event.dateStr;
+      document.getElementById('modalLocation').textContent = event.location;
+      document.getElementById('modalDescription').textContent = event.description;
+      document.getElementById('modalLink').href = event.officialUrl;
+
+      // Configurar badge de categoría en modal
+      const badge = document.getElementById('modalBadge');
+      badge.textContent = event.categoryLabel;
+      if (event.category === 'cultura') {
+        badge.className = "absolute bottom-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white uppercase tracking-wider";
+      } else if (event.category === 'fiestas') {
+        badge.className = "absolute bottom-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-teal-600 text-white uppercase tracking-wider";
+      } else {
+        badge.className = "absolute bottom-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-cyan-600 text-white uppercase tracking-wider";
+      }
+
+      // Configurar sección horas
+      const timeContainer = document.getElementById('modalTimeContainer');
+      const timeVal = document.getElementById('modalTime');
+      if (event.hours && event.hours.trim() !== "") {
+        timeContainer.classList.remove('hidden');
+        timeVal.textContent = event.hours;
+      } else {
+        timeContainer.classList.add('hidden');
+      }
+
+      // Mostrar modal
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        container.classList.remove('scale-95');
+        container.classList.add('scale-100');
+      }, 50);
+
+      // Desactivar scroll de body
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('eventModal');
+      const container = document.getElementById('modalContainer');
+
+      container.classList.remove('scale-100');
+      container.classList.add('scale-95');
+      
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+
+      // Restaurar scroll de body
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cerrar modal al hacer clic fuera del contenedor
+    document.getElementById('eventModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('eventModal')) {
+        closeModal();
+      }
+    });
+  </script>
 </body>
 </html>
