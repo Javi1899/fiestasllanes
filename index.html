@@ -2,530 +2,739 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AGENDA · LLANES</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Llanes en Festa · Octubre 2026 · Fiestas y eventos del concejo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#060a12;
-    --bg2:#0b1220;
-    --panel:#0e1626;
-    --cyan:#00f0ff;
-    --magenta:#ff2fd0;
-    --amber:#ffb020;
-    --green:#33ffb0;
-    --violet:#a463ff;
-    --text:#dce8f5;
-    --text-dim:#7f93ab;
-    --line:rgba(0,240,255,.18);
-  }
-  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'Rajdhani',sans-serif; overscroll-behavior-y:none;}
+:root{
+  --azul:#14419b; --azul-vivo:#1f56d6; --azul-noche:#0d1f4d; --azul-hielo:#e8efff;
+  --rojo:#e11d33; --rojo-osc:#a4131f; --vino:#8e1230;
+  --crema:#faf6ef; --papel:#ffffff; --tinta:#1c2438; --gris:#5b6478;
+  --sombra:0 20px 50px -20px rgba(13,31,77,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--crema);color:var(--tinta);overflow-x:hidden}
+img{display:block}
+button{font-family:inherit;cursor:pointer}
 
-  /* ---------- fondo ---------- */
-  body{
-    background:
-      radial-gradient(ellipse 120% 60% at 50% -10%, rgba(0,240,255,.10), transparent 60%),
-      radial-gradient(ellipse 100% 50% at 90% 110%, rgba(255,47,208,.08), transparent 60%),
-      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-  }
-  body::before{
-    content:"";
-    position:fixed; inset:0; pointer-events:none; z-index:0;
-    background-image:
-      linear-gradient(rgba(0,240,255,.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,240,255,.035) 1px, transparent 1px);
-    background-size:38px 38px;
-    mask-image:radial-gradient(ellipse 80% 80% at 50% 40%, black 40%, transparent 90%);
-  }
+/* ============ HERO ============ */
+.hero{position:relative;min-height:82vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:60px 20px 80px;background:
+  radial-gradient(circle at 12% 20%, rgba(31,86,214,.10), transparent 30%),
+  radial-gradient(circle at 88% 75%, rgba(225,29,51,.10), transparent 32%),
+  var(--crema);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(13,31,77,.10) 1.5px, transparent 1.5px);background-size:26px 26px;opacity:.5;pointer-events:none}
+.hero-in{position:relative;z-index:3;max-width:1000px}
+.pill{display:inline-block;border:2px solid;border-radius:999px;padding:7px 18px;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;background:#fff}
+.pill.azul{color:var(--azul-vivo);border-color:var(--azul-vivo)}
+.pill.rojo{color:var(--rojo);border-color:var(--rojo);transform:rotate(2deg)}
+.hero-top{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:26px}
+.hero h1{font-family:'Unbounded',sans-serif;font-weight:900;line-height:.95;font-size:clamp(2.9rem,9.5vw,7.4rem);letter-spacing:-.02em}
+.hero h1 .blue{color:var(--azul-vivo);text-shadow:5px 5px 0 rgba(20,65,155,.14)}
+.hero h1 .red{color:var(--rojo);text-shadow:5px 5px 0 rgba(225,29,51,.14)}
+.hero .sub{max-width:640px;margin:26px auto 0;color:var(--gris);font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.6}
+.hero .sub b{color:var(--rojo-osc)}
+.hero-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.stat{background:#fff;border:2px solid var(--azul-noche);border-radius:16px;padding:12px 20px;min-width:120px;box-shadow:4px 4px 0 rgba(13,31,77,.12)}
+.stat b{display:block;font-family:'Unbounded';font-size:1.5rem;color:var(--rojo)}
+.stat span{font-size:.78rem;font-weight:600;color:var(--azul);text-transform:uppercase;letter-spacing:.05em}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.btn-rojo,.btn-azul{text-decoration:none;font-weight:700;padding:14px 28px;border-radius:999px;transition:.25s;display:inline-block}
+.btn-rojo{background:var(--rojo);color:#fff;box-shadow:0 10px 24px -8px rgba(225,29,51,.6)}
+.btn-rojo:hover{background:var(--rojo-osc);transform:translateY(-3px)}
+.btn-azul{background:#fff;color:var(--azul-vivo);border:2px solid var(--azul-vivo)}
+.btn-azul:hover{background:var(--azul-vivo);color:#fff;transform:translateY(-3px)}
+.stamp{position:absolute;right:6%;top:14%;z-index:2;font-family:'Unbounded';font-weight:900;color:var(--rojo);
+  border:4px dashed var(--rojo);border-radius:18px;padding:16px 20px;font-size:1.6rem;line-height:1.05;transform:rotate(10deg);opacity:.9;background:rgba(255,255,255,.6)}
+.cf{position:absolute;border-radius:3px;z-index:1;animation:flotar ease-in-out infinite alternate}
+@keyframes flotar{to{transform:translateY(-34px) rotate(28deg)}}
+@media(max-width:700px){.stamp{display:none}}
 
-  /* ---------- cabecera fija ---------- */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:30;
-    padding:14px 18px 12px;
-    display:flex; align-items:center; justify-content:space-between;
-    background:linear-gradient(180deg, rgba(6,10,18,.92) 60%, transparent);
-    backdrop-filter:blur(6px);
-  }
-  .brand{display:flex; flex-direction:column; line-height:1;}
-  .brand b{
-    font-family:'Orbitron',sans-serif; font-weight:900; font-size:15px;
-    letter-spacing:.14em; color:var(--cyan);
-    text-shadow:0 0 12px rgba(0,240,255,.55);
-  }
-  .brand span{font-size:10px; letter-spacing:.3em; color:var(--text-dim); margin-top:3px;}
-  .counter{
-    font-family:'Orbitron',sans-serif; font-size:11px; color:var(--magenta);
-    border:1px solid rgba(255,47,208,.4); border-radius:20px;
-    padding:5px 11px; letter-spacing:.05em;
-    background:rgba(255,47,208,.06);
-    white-space:nowrap;
-  }
+/* ============ MARQUEE ============ */
+.marquee{background:var(--rojo);color:#fff;overflow:hidden;transform:rotate(-1.2deg) scale(1.03);border-top:3px solid var(--azul-noche);border-bottom:3px solid var(--azul-noche)}
+.mtrack{display:flex;width:max-content;animation:desfile 30s linear infinite}
+.mtrack span{font-family:'Unbounded';font-weight:700;font-size:.95rem;letter-spacing:.12em;padding:13px 0;white-space:nowrap}
+@keyframes desfile{to{transform:translateX(-50%)}}
 
-  /* ---------- barra de categorías ---------- */
-  .filters{
-    position:fixed; top:56px; left:0; right:0; z-index:29;
-    display:flex; gap:8px; overflow-x:auto; padding:6px 16px 12px;
-    -ms-overflow-style:none; scrollbar-width:none;
-  }
-  .filters::-webkit-scrollbar{display:none;}
-  .chip{
-    flex:0 0 auto; font-family:'Rajdhani',sans-serif; font-weight:600; font-size:12.5px;
-    letter-spacing:.04em; color:var(--text-dim);
-    border:1px solid var(--line); border-radius:20px;
-    padding:6px 13px; background:rgba(9,15,26,.7); backdrop-filter:blur(4px);
-    white-space:nowrap; cursor:pointer; transition:.15s;
-  }
-  .chip.active{color:#06131a; background:var(--cyan); border-color:var(--cyan); box-shadow:0 0 16px rgba(0,240,255,.5);}
+/* ============ TOOLBAR ============ */
+#toolbar{position:sticky;top:0;z-index:60;background:rgba(250,246,239,.93);backdrop-filter:blur(12px);border-bottom:2px solid var(--azul-noche);padding:14px 18px}
+.tb-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.tb-fila{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#buscador{flex:1;min-width:210px;border:2px solid var(--azul-noche);border-radius:999px;padding:10px 18px;font-family:inherit;font-size:.92rem;background:#fff;color:var(--azul-noche);outline:none}
+#buscador:focus{border-color:var(--rojo);box-shadow:0 0 0 4px rgba(225,29,51,.15)}
+.chip{border:2px solid var(--azul-noche);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:.8rem;display:inline-flex;align-items:center;gap:7px;transition:.2s;color:var(--azul-noche)}
+.chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chip .cnt{background:rgba(13,31,77,.1);border-radius:999px;padding:1px 7px;font-size:.7rem}
+.chip:hover{transform:translateY(-2px)}
+.chip.act{color:#fff;border-color:transparent}
+.chip.act .cnt{background:rgba(255,255,255,.25)}
+.chip.act .dot{background:#fff!important}
+.tb-nav{margin-left:auto;display:flex;gap:8px}
+.tb-nav a{text-decoration:none;font-weight:700;font-size:.8rem;color:var(--azul-vivo);border:2px solid var(--azul-vivo);border-radius:999px;padding:7px 14px;transition:.2s}
+.tb-nav a:hover{background:var(--azul-vivo);color:#fff}
 
-  /* ---------- progreso vertical ---------- */
-  .progress{
-    position:fixed; right:6px; top:112px; bottom:16px; width:3px; z-index:25;
-    background:rgba(255,255,255,.06); border-radius:3px; overflow:hidden;
-  }
-  .progress i{
-    display:block; width:100%; background:linear-gradient(180deg,var(--cyan),var(--magenta));
-    border-radius:3px; transition:height .25s ease;
-  }
+/* ============ SECCIONES ============ */
+main{max-width:1240px;margin:0 auto;padding:0 18px}
+section{margin:64px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.sec-head h2{font-family:'Unbounded';font-size:clamp(1.5rem,3.4vw,2.3rem);color:var(--azul)}
+.sec-head h2 em{color:var(--rojo);font-style:normal}
+.sec-head .linea{flex:1;height:3px;background:repeating-linear-gradient(90deg,var(--rojo) 0 14px,transparent 14px 26px);border-radius:2px;min-width:60px}
+.sec-head p{width:100%;color:var(--gris);max-width:720px}
 
-  /* ---------- feed ---------- */
-  #feed{
-    position:relative; z-index:1;
-    height:100vh; height:100dvh;
-    overflow-y:auto; scroll-snap-type:y mandatory;
-    padding-top:0;
-  }
-  .card{
-    scroll-snap-align:start; scroll-snap-stop:always;
-    min-height:100vh; min-height:100dvh;
-    display:flex; flex-direction:column;
-    padding:104px 16px 34px;
-    border-bottom:1px solid rgba(255,255,255,.05);
-    position:relative;
-  }
-  .card.today{background:linear-gradient(180deg, rgba(255,47,208,.07), transparent 40%);}
+/* ============ HOY ============ */
+#hoy .hoy-scroll{display:flex;gap:16px;overflow-x:auto;padding:6px 4px 18px;scroll-snap-type:x mandatory}
+#hoy .hoy-scroll::-webkit-scrollbar{height:8px}
+#hoy .hoy-scroll::-webkit-scrollbar-thumb{background:var(--rojo);border-radius:99px}
+.hoy-card{scroll-snap-align:start;flex:0 0 300px;background:#fff;border:2px solid var(--azul-noche);border-radius:18px;overflow:hidden;cursor:pointer;transition:.25s}
+.hoy-card:hover{transform:translateY(-5px);box-shadow:var(--sombra);border-color:var(--rojo)}
+.hoy-card img{height:140px;width:100%;object-fit:cover}
+.hoy-card .hc-b{padding:14px 16px}
+.hoy-card h4{font-family:'Unbounded';font-size:.86rem;color:var(--azul);line-height:1.3}
+.hoy-card small{color:var(--rojo-osc);font-weight:600;display:block;margin-top:6px}
 
-  .date-row{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
-  .date-badge{
-    font-family:'Orbitron',sans-serif; font-weight:700; font-size:13px;
-    letter-spacing:.06em; color:var(--bg);
-    background:linear-gradient(90deg,var(--cyan),#7cf7ff);
-    padding:8px 14px; border-radius:8px 2px 8px 2px;
-    box-shadow:0 0 18px rgba(0,240,255,.45);
-  }
-  .date-badge.range{background:linear-gradient(90deg,var(--magenta),#ff8fe6);
-    box-shadow:0 0 18px rgba(255,47,208,.45);}
-  .today-tag{
-    font-family:'Orbitron',sans-serif; font-size:10px; letter-spacing:.15em;
-    color:var(--bg); background:var(--amber); padding:5px 9px; border-radius:4px;
-    box-shadow:0 0 14px rgba(255,176,32,.6);
-  }
+/* ============ CALENDARIO ============ */
+.cal-wrap{display:grid;grid-template-columns:1.35fr 1fr;gap:26px;align-items:start}
+@media(max-width:960px){.cal-wrap{grid-template-columns:1fr}.panel{position:static!important;max-height:none!important}}
+.cal{background:#fff;border-radius:26px;padding:24px;box-shadow:var(--sombra);border:2px solid var(--azul-noche)}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.cal-title{font-family:'Unbounded';color:var(--azul-vivo);font-size:1.35rem}
+.cal-title em{color:var(--rojo);font-style:normal}
+.cal-leyenda{display:flex;gap:10px;flex-wrap:wrap}
+.cal-leyenda i{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;color:var(--gris);font-style:normal}
+.cal-leyenda b{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dow{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:8px}
+.dow span{text-align:center;font-size:.7rem;font-weight:700;color:var(--rojo);text-transform:uppercase;letter-spacing:.1em}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{position:relative;aspect-ratio:1/1.06;border-radius:14px;background:#f3efe6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px solid transparent;transition:.18s;padding:4px}
+.day:not(.oth):hover{transform:translateY(-2px);border-color:var(--azul-vivo);background:#fff}
+.day.oth{background:transparent;cursor:default}
+.day.oth .n{color:#c2bbae}
+.day .n{font-weight:700;font-size:.94rem;color:var(--azul-noche)}
+.day .dots{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;max-width:92%}
+.day .dots i{width:6px;height:6px;border-radius:50%;flex:none}
+.day.today{border-color:var(--azul-vivo);background:var(--azul-hielo)}
+.day.today::after{content:'HOY';position:absolute;top:3px;right:6px;font-size:.5rem;font-weight:700;color:var(--azul-vivo);letter-spacing:.05em}
+.day.sel{background:var(--rojo)!important;border-color:var(--rojo-osc)!important;transform:none}
+.day.sel .n{color:#fff}
+.day.sel::after{color:#fff}
 
-  .photo-wrap{
-    position:relative; width:100%; aspect-ratio:4/3; border-radius:14px;
-    overflow:hidden; margin-bottom:16px;
-    border:1px solid var(--line);
-    box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.03);
-    background:linear-gradient(135deg, var(--panel), #060a12);
-  }
-  .photo-wrap img{width:100%; height:100%; object-fit:cover; display:block;}
-  .photo-wrap::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(180deg, transparent 55%, rgba(6,10,18,.85) 100%);
-    pointer-events:none;
-  }
-  .cat-tag{
-    position:absolute; left:10px; bottom:10px; z-index:2;
-    font-family:'Orbitron',sans-serif; font-size:10px; letter-spacing:.1em;
-    padding:6px 11px; border-radius:5px; color:#06131a; font-weight:700;
-  }
-  .no-photo{
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
-    color:var(--text-dim); font-family:'Orbitron',sans-serif; font-size:11px; letter-spacing:.15em;
-  }
-  .no-photo svg{opacity:.35;}
+/* ---- panel del día ---- */
+.panel{background:var(--azul-noche);border-radius:26px;padding:24px;color:#fff;position:sticky;top:118px;max-height:calc(100vh - 140px);overflow:auto;box-shadow:var(--sombra)}
+.panel::-webkit-scrollbar{width:8px}
+.panel::-webkit-scrollbar-thumb{background:var(--rojo);border-radius:99px}
+.pd-head{display:flex;align-items:center;gap:16px;border-bottom:2px dashed rgba(255,255,255,.25);padding-bottom:16px;margin-bottom:16px}
+.pd-num{font-family:'Unbounded';font-weight:900;font-size:3.2rem;color:var(--rojo);line-height:1;text-shadow:3px 3px 0 rgba(255,255,255,.12)}
+.pd-head .pd-txt b{display:block;font-family:'Unbounded';font-size:1rem}
+.pd-head .pd-txt span{font-size:.8rem;opacity:.75}
+.pd-lbl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#ff9aa5;margin:16px 0 10px}
+.mini{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px;margin-bottom:9px;color:#fff;transition:.2s}
+.mini:hover{background:var(--rojo);border-color:var(--rojo);transform:translateX(4px)}
+.mini img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:none}
+.mini strong{font-size:.85rem;display:block;line-height:1.25}
+.mini small{font-size:.72rem;opacity:.8;display:block;margin-top:3px}
+.pd-vacio{font-size:.86rem;opacity:.75;background:rgba(255,255,255,.07);border-radius:14px;padding:18px;text-align:center}
 
-  h2{
-    font-family:'Orbitron',sans-serif; font-weight:700; font-size:19px; line-height:1.28;
-    margin:0 0 4px; color:#fff; letter-spacing:.01em;
-  }
-  .place{
-    font-size:14px; color:var(--cyan); font-weight:600; letter-spacing:.02em;
-    margin-bottom:12px; display:flex; align-items:center; gap:6px;
-  }
-  .place::before{content:"◈"; font-size:11px;}
+/* ============ AGENDA ============ */
+.dia-bloque{margin-bottom:44px}
+.dia-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.dia-num{font-family:'Unbounded';font-weight:900;font-size:2.1rem;color:#fff;background:var(--rojo);border-radius:16px;min-width:64px;height:64px;display:flex;align-items:center;justify-content:center;box-shadow:4px 4px 0 rgba(13,31,77,.18)}
+.dia-header .dia-info b{display:block;font-family:'Unbounded';color:var(--azul);font-size:1rem}
+.dia-header .dia-info span{font-size:.8rem;color:var(--gris);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.dia-header .raya{flex:1;height:2px;background:rgba(20,65,155,.2);border-radius:2px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.card{background:#fff;border-radius:20px;overflow:hidden;border:2px solid rgba(13,31,77,.12);transition:.25s;cursor:pointer;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);box-shadow:var(--sombra);border-color:var(--rojo)}
+.card-img{height:185px;position:relative;overflow:hidden;background:var(--azul-hielo)}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.card:hover .card-img img{transform:scale(1.07)}
+.tag{position:absolute;top:12px;left:12px;background:#fff;border-radius:999px;padding:5px 12px;font-size:.7rem;font-weight:700;display:flex;gap:6px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.tag-dias{position:absolute;top:12px;right:12px;background:var(--azul-vivo);color:#fff;border-radius:10px;padding:5px 10px;font-size:.68rem;font-weight:700;letter-spacing:.04em}
+.card-body{padding:18px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-family:'Unbounded';font-size:.96rem;color:var(--azul);line-height:1.3}
+.meta{color:var(--rojo-osc);font-size:.8rem;font-weight:600;display:flex;flex-direction:column;gap:4px;margin:11px 0}
+.extracto{font-size:.85rem;color:var(--gris);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.btn-mas{margin-top:14px;align-self:flex-start;background:none;border:2px solid var(--rojo);color:var(--rojo);border-radius:999px;padding:7px 16px;font-weight:700;font-size:.78rem;transition:.2s}
+.card:hover .btn-mas{background:var(--rojo);color:#fff}
 
-  .desc{
-    font-size:15.5px; line-height:1.56; color:var(--text);
-    flex:1; overflow-y:auto; padding-right:2px; padding-bottom:6px;
-  }
-  .desc p{margin:0 0 10px;}
-  .desc::-webkit-scrollbar{width:3px;}
-  .desc::-webkit-scrollbar-thumb{background:var(--line); border-radius:3px;}
+/* ============ MODAL ============ */
+#modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(13,31,77,.66);backdrop-filter:blur(6px)}
+#modal.open{display:flex;animation:apareceFondo .25s}
+@keyframes apareceFondo{from{opacity:0}}
+.modal-card{background:#fff;border-radius:24px;max-width:860px;width:100%;max-height:90vh;overflow:auto;position:relative;animation:aparece .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes aparece{from{transform:translateY(30px) scale(.96);opacity:0}}
+#mCerrar{position:absolute;top:14px;right:14px;z-index:5;width:42px;height:42px;border-radius:50%;border:none;background:var(--rojo);color:#fff;font-size:1.15rem;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.3);transition:.2s}
+#mCerrar:hover{transform:rotate(90deg);background:var(--rojo-osc)}
+#mImg{width:100%;height:280px;object-fit:cover;background:var(--azul-hielo)}
+.modal-body{padding:28px 30px 34px}
+#mCat{display:inline-flex;align-items:center;gap:7px;font-size:.74rem;font-weight:700;border:2px solid;border-radius:999px;padding:5px 14px;text-transform:uppercase;letter-spacing:.06em}
+#mTitulo{font-family:'Unbounded';color:var(--azul-noche);font-size:clamp(1.25rem,3vw,1.8rem);margin:14px 0 6px;line-height:1.2}
+#mLugar{color:var(--rojo);font-weight:700;font-size:.95rem}
+.m-meta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.m-meta span{background:var(--azul-hielo);color:var(--azul);border-radius:12px;padding:8px 14px;font-size:.82rem;font-weight:600}
+#mDesc{line-height:1.7;color:var(--tinta);font-size:.97rem}
+#mMas{margin-top:20px;border-top:2px dashed rgba(20,65,155,.25);padding-top:18px;list-style:none}
+#mMas li{position:relative;padding:6px 0 6px 26px;font-size:.9rem;color:var(--tinta);line-height:1.5}
+#mMas li::before{content:'✦';position:absolute;left:2px;color:var(--rojo);font-weight:700}
 
-  .swipe-hint{
-    position:absolute; bottom:12px; left:50%; transform:translateX(-50%);
-    font-family:'Orbitron',sans-serif; font-size:9.5px; letter-spacing:.2em; color:var(--text-dim);
-    display:flex; flex-direction:column; align-items:center; gap:3px; opacity:.7;
-  }
-  .swipe-hint svg{animation:bob 1.6s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+/* ============ REVEAL / VARIOS ============ */
+.reveal{opacity:0;transform:translateY(26px);transition:.6s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.vacio-global{text-align:center;padding:60px 20px;color:var(--gris);font-size:1rem}
+.vacio-global b{color:var(--rojo)}
+#arriba{position:fixed;right:22px;bottom:22px;z-index:70;width:52px;height:52px;border-radius:50%;border:none;background:var(--azul-vivo);color:#fff;font-size:1.3rem;box-shadow:0 10px 24px rgba(20,65,155,.45);opacity:0;pointer-events:none;transition:.3s}
+#arriba.vis{opacity:1;pointer-events:auto}
+#arriba:hover{background:var(--rojo)}
 
-  #empty{
-    height:100vh; height:100dvh; display:flex; align-items:center; justify-content:center;
-    flex-direction:column; gap:10px; padding:0 30px; text-align:center;
-  }
-  #empty b{font-family:'Orbitron',sans-serif; color:var(--cyan); letter-spacing:.08em; font-size:15px;}
-  #empty span{color:var(--text-dim); font-size:14px;}
-
-  @media (min-width:640px){
-    .card{align-items:center;}
-    .card > *{max-width:480px; width:100%;}
-  }
+/* ============ FOOTER ============ */
+footer{background:var(--azul-noche);color:#fff;margin-top:80px;border-top:6px solid var(--rojo);padding:60px 20px 40px;text-align:center;position:relative;overflow:hidden}
+footer .f-grande{font-family:'Unbounded';font-weight:900;font-size:clamp(1.6rem,5vw,3.4rem);line-height:1.1}
+footer .f-grande .r{color:var(--rojo)} footer .f-grande .a{color:#7fa3ff}
+footer p{margin-top:16px;font-size:.85rem;opacity:.75;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.6}
+footer a{color:#ff9aa5;font-weight:700}
+footer .f-sello{margin-top:26px;display:inline-block;border:2px dashed rgba(255,255,255,.4);border-radius:14px;padding:10px 20px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;transform:rotate(-2deg)}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="brand"><b>AGENDA · LLANES</b><span>FIESTAS &amp; EVENTOS</span></div>
-  <div class="counter" id="counter">— / —</div>
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div id="confetti"></div>
+  <div class="stamp">OCT<br>2026</div>
+  <div class="hero-in">
+    <div class="hero-top">
+      <span class="pill azul">Concejo de Llanes · Asturias</span>
+      <span class="pill rojo">Agenda viva · Octubre 2026</span>
+    </div>
+    <h1><span class="blue">LLANES</span><br><span class="red">EN FIESTA</span></h1>
+    <p class="sub">Romerías con hoguera y voladores, <b>sidra del duernu</b>, exposiciones, cine documental, teatro, amagüestos y <b>Samaín</b>: todo lo que se vive este mes en el concejo, en un solo golpe de vista.</p>
+    <div class="hero-stats" id="heroStats"></div>
+    <div class="hero-cta">
+      <a class="btn-rojo" href="#calendario">📅 Explorar el calendario</a>
+      <a class="btn-azul" href="#agenda">Ver agenda completa</a>
+    </div>
+  </div>
 </header>
 
-<div class="filters" id="filters"></div>
-<div class="progress"><i id="progressBar" style="height:0%"></i></div>
+<!-- ================= MARQUEE ================= -->
+<div class="marquee"><div class="mtrack">
+  <span>&nbsp;FIESTAS DEL ROSARIU ✦ DÍAS DE SIDRA ✦ SAMAIN ✦ MÚSICA EN DIRECTO ✦ EXPOSICIONES ✦ CINE DOCUMENTAL ✦ AMAGÜESTU ✦ TEATRO ✦ DEPORTE ✦ TRADICIÓN ✦ NANDO AGÜEROS ✦ LA CURUXA ✦ FERIA DEL PILAR ✦</span>
+  <span>&nbsp;FIESTAS DEL ROSARIU ✦ DÍAS DE SIDRA ✦ SAMAIN ✦ MÚSICA EN DIRECTO ✦ EXPOSICIONES ✦ CINE DOCUMENTAL ✦ AMAGÜESTU ✦ TEATRO ✦ DEPORTE ✦ TRADICIÓN ✦ NANDO AGÜEROS ✦ LA CURUXA ✦ FERIA DEL PILAR ✦</span>
+</div></div>
 
-<div id="feed"></div>
+<!-- ================= TOOLBAR ================= -->
+<nav id="toolbar">
+  <div class="tb-in">
+    <div class="tb-fila">
+      <input id="buscador" type="search" placeholder="🔎 Busca: sidra, verbena, taller, Nueva, Casino…">
+      <div class="tb-nav">
+        <a href="#calendario">Calendario</a>
+        <a href="#agenda">Agenda</a>
+      </div>
+    </div>
+    <div class="tb-fila" id="chips"></div>
+  </div>
+</nav>
+
+<main>
+  <!-- ================= HOY ================= -->
+  <section id="hoy">
+    <div class="sec-head">
+      <h2>📍 Hoy, <em>sábado 17 de octubre</em></h2>
+      <div class="linea"></div>
+      <p>Esto es lo que se cuece hoy mismo en el concejo. Toca cualquier tarjeta para ver todos los detalles.</p>
+    </div>
+    <div class="hoy-scroll" id="hoyScroll"></div>
+  </section>
+
+  <!-- ================= CALENDARIO ================= -->
+  <section id="calendario">
+    <div class="sec-head">
+      <h2>El <em>calendario</em> del mes</h2>
+      <div class="linea"></div>
+      <p>Cada punto es un plan. Pulsa un día para desplegar su programación completa en el panel azul.</p>
+    </div>
+    <div class="cal-wrap">
+      <div class="cal">
+        <div class="cal-head">
+          <div class="cal-title">Octubre <em>2026</em></div>
+          <div class="cal-leyenda" id="leyenda"></div>
+        </div>
+        <div class="dow"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+        <div class="days" id="days"></div>
+      </div>
+      <aside class="panel" id="panel"></aside>
+    </div>
+  </section>
+
+  <!-- ================= AGENDA ================= -->
+  <section id="agenda">
+    <div class="sec-head">
+      <h2>Agenda <em>día a día</em></h2>
+      <div class="linea"></div>
+      <p>Todas las citas del mes ordenadas por fecha. Pulsa una tarjeta para abrir su ficha completa con horarios, precios y reservas.</p>
+    </div>
+    <div id="lista"></div>
+  </section>
+</main>
+
+<!-- ================= MODAL ================= -->
+<div id="modal" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <button id="mCerrar" aria-label="Cerrar">✕</button>
+    <img id="mImg" alt="">
+    <div class="modal-body">
+      <span id="mCat"></span>
+      <h2 id="mTitulo"></h2>
+      <div id="mLugar"></div>
+      <div class="m-meta" id="mMeta"></div>
+      <p id="mDesc"></p>
+      <ul id="mMas"></ul>
+    </div>
+  </div>
+</div>
+
+<button id="arriba" aria-label="Volver arriba">↑</button>
+
+<footer>
+  <div class="f-grande"><span class="a">NOS VEMOS</span> <span class="r">EN LLANES</span></div>
+  <p>Agenda elaborada a partir de la información pública de fiestas, cultura y eventos del Ayuntamiento de Llanes (<a href="https://www.llanes.es" target="_blank" rel="noopener">llanes.es</a>) · Octubre 2026 · Los horarios y programas pueden sufrir cambios de última hora: consulta siempre la fuente oficial.</p>
+  <div class="f-sello">Fecho con ❤ nel Oriente d'Asturies</div>
+</footer>
 
 <script>
-/* ============ DATOS ============ */
-const SEED = [
-{start:"2026-07-31", end:"2026-08-02", place:"La Borbolla", title:"Fiesta de la Sacramental y el Sagrado Corazón", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/la_sacramental_la_borbolla_1.jpg?itok=LcSki61W",
- desc:`Viernes 31 — LA HOGUERA: 23:00 h plantación de la hoguera a cargo de los mozos, cantada por las mozas del Ramu. 00:00 h verbena con Disco Astur y Grupo La Tapadera y Amigos.
-Sábado 1 — LA SACRAMENTAL: 11:45 h salida del Ramu hacia la iglesia con cantares. 12:30 h Misa Solemne con procesión y bendición, seguida de la reverencia. 14:30 h bailes regionales en La Bolera y sesión vermut. 19:00 h salida del ramu desde la iglesia hacia la bolera, subasta del ramo y bailes regionales. 23:30 h verbena con Orquesta Fania Blanco Show, Disco Astur y DJ Jairo Ortal.
-Domingo 2 — EL SAGRADO CORAZÓN: 13:30 h procesión y misa cantada por el coro del pueblo. 14:30 h sesión vermut con Grupo Eleven. 15:00 h gran paella. 16:30 h bingo popular. 18:00 h juegos infantiles con hinchables gratuitos. 23:30 h verbena con Disco Astur, chocolatada y baile de la escoba.`},
+/* =========================================================
+   DATOS · Llanes · Octubre 2026
+   c = categoría | d = días | r = [desde, hasta, díasSemana JS]
+   perma = actividad continua (exposiciones, espacio joven…)
+========================================================= */
+const IMG = "https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/";
+const FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400"><rect width="640" height="400" fill="#e8efff"/><circle cx="320" cy="170" r="60" fill="#1f56d6" opacity=".25"/><text x="320" y="265" font-family="sans-serif" font-size="30" font-weight="bold" fill="#14419b" text-anchor="middle">LLANES · OCTUBRE 2026</text></svg>');
 
-{start:"2026-07-31", end:"2026-08-02", place:"Porrúa", title:"XIV Torneo de Fútbol San Justo y San Pastor", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/torneo_futbol_1_porrua.jpg?itok=IzoiKnTE",
- desc:`Viernes 31 — Torneo infantil: dos categorías (6-10 y 11-14 años), hasta 14 años, inscripción gratuita, merienda al finalizar.
-Sábado 1 — Torneo adultos: a partir de 14 años, inscripción 80 € por equipo, premio en efectivo para el equipo ganador.
-Domingo 2 — Sidreras vs. Cerveceras: partido porruanas, inscripción gratuita.
-Inscripciones hasta el 27 de julio: @fiestas_de_porrua · 673 718 202 · 684 64 44 83.`},
+const CATS = {
+  fiesta:    {n:"Fiestas y romerías", icon:"🎉", color:"#e11d33"},
+  tradicion: {n:"Tradición y ferias", icon:"🪗", color:"#8e1230"},
+  musica:    {n:"Música en directo",  icon:"🎶", color:"#1f56d6"},
+  cine:      {n:"Cine y artes",       icon:"🎭", color:"#4640de"},
+  letras:    {n:"Letras y charlas",   icon:"📖", color:"#123a8f"},
+  infantil:  {n:"Infantil y juvenil", icon:"🧒", color:"#f0506e"},
+  deporte:   {n:"Deporte",            icon:"🏁", color:"#b91c1c"},
+  expo:      {n:"Exposiciones",       icon:"🎨", color:"#2e86de"}
+};
+const ORDEN = ["fiesta","tradicion","musica","cine","letras","deporte","infantil","expo"];
 
-{start:"2026-07-31", end:"2026-08-01", place:"Golf Municipal de Llanes", title:"Torneo V Copa Celia Barquín", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/cartel_36.jpg?itok=jZ2D_a80",
- desc:`Viernes 31 de julio y sábado 1 de agosto de 2026. Modalidad Stableford.
-Apertura de inscripciones: viernes 24 de julio. Cierre: jueves 30 de julio a las 10 h (para el 31 de julio) y viernes 31 de julio a las 10 h (para el 1 de agosto).`},
+const EVENTOS = [
+/* --- Fiestas y romerías --- */
+{id:"san-francisco", t:"Fiestas de San Francisco", l:"Lledías", c:"fiesta", d:[2,3,4], h:"Programa completo · ¡Hay carpa!", img:"san_francisco_lledias_5.jpg?itok=hSa5bbbg",
+ x:"Lledías celebra San Francisco por todo lo alto: el viernes los mozos salen a cortar la hoguera (15:00 h), plantación, danza prima y bailes regionales, y verbena con WAYKAS y DJ CARDEO. El sábado, día grande: misa solemne, procesión, subasta de los ramos y gran verbena con GRUPO SOLO SAXO y DJ CARDEO. El domingo, misa en honor al santo.",
+ more:["Viernes 2: hoguera, danza prima y verbena","Sábado 3: día grande con misa, procesión y gran verbena","Domingo 4: misa a las 12:00 h","Descargas de voladores durante todo el fin de semana","Bailes regionales en la Residencia Sierra del Cuera (sáb 18:30 h)"]},
+{id:"rosariu-sanroque", t:"Fiesta del Rosariu", l:"San Roque del Acebal", c:"fiesta", d:[3], h:"Desde las 12:30 h", img:"el_rosariu_san_roque_0.jpg?itok=fkxsymjV",
+ x:"Salida del Ramu, misa solemne, bailes regionales y entrega de premios del Concurso de Fotografía. Por la tarde, canción asturiana con CLAUDIA ABAD y CELIA NORIEGA, y verbena con la ORQUESTA PONTEVEDRA. A las 23:00 h, DJ y chocolatada.",
+ more:["12:30 h salida del Ramu · 13:00 h misa solemne","20:00 h canción asturiana: Claudia Abad y Celia Noriega","21:00 h Orquesta Pontevedra · 23:00 h DJ + chocolatada","1:00 h segunda sesión de la orquesta · 2:30 h DJ"]},
+{id:"rosario-ardisana", t:"Fiesta de Ntra. Sra. del Rosario", l:"Ardisana", c:"fiesta", d:[3], h:"Desde las 11:00 h · ¡Hay carpa!", img:"el_rosariu_ardisana_0.jpg?itok=tuvjA96K",
+ x:"Pasacalles con la Banda de Gaitas EL TRISQUEL, salida de los Ramos y misa solemne cantada por la Coral Santa Eulalia de Ardisana. Después, ofrecimiento y subasta de los Ramos, sesión vermú, hinchables y gran verbena con GRUPO D´CANO y GRUPO COSTA NORTE. Para rematar, ¡gran chocolatada!",
+ more:["11:00 h pasacalles · 12:30 h misa solemne","17:30 h hinchables y juegos para todas las edades","22:00 h gran verbena + gran chocolatada","Bar y sesión vermú toda la tarde"]},
+{id:"rosariu-vibanu", t:"Fiestas del Rosariu y la Joguera", l:"Vibaño", c:"fiesta", d:[17,18], h:"Sábado desde 09:30 · Domingo desde 12:00", img:"el_rosariu_vibanu_4.jpg?itok=d_O0W4WA",
+ x:"Vibaño vive el Rosariu alrededor de la joguera: corte el sábado por la mañana, comida de vecinos (ración de costillas y criollu por 8 €), bajada a hombros desde lo alto del pueblo, hinchables, espicha y verbena con Discomovil VAS BAILAR y TEKILA. El domingo, salida del ramu, misa solemne, bailes regionales y subasta.",
+ more:["Voladores cada tarde desde el lunes 12 (20:00 h)","Sábado 17: espicha para vecinos y allegados","Domingo 18: misa, bailes regionales y subasta del ramu","Comida del sábado: ración de costillas y criollu, 8 €"]},
+{id:"samain", t:"Samaín 2026", l:"Llanes", c:"fiesta", d:[31], h:"Entrega de premios: 21:30 h, Ayuntamiento", img:"samain.jpg?itok=9SLFZMug",
+ x:"La noche más terrorífica del año llega a Llanes con concurso infantil de disfraces (individual y de grupo), concurso de fachadas y jardines, y de interiores y escaparates de comercios, bares y restaurantes. Entrega de premios el sábado 31 a las 21:30 h en el Ayuntamiento.",
+ more:["Inscripciones: Oficina de Turismo · 985 400 164 · turismo@ayuntamientodellanes.com","Decoración: inscripción del 20 al 28 de octubre","Disfraces: inscripción hasta el 31 de octubre (14:00 h)","Premios de hasta 250 €"]},
+{id:"amag-puertas", t:"Amagüestu", l:"Puertas de Vidiago", c:"fiesta", d:[31], h:"Desde las 20:00 h", img:"amaguestu_puertas_vidiago.jpg?itok=6ksGeMmV",
+ x:"Puertas de Vidiago despide octubre celebrando el amagüestu como se merece: castañas, sidra, parrilla y mucha música con romería amenizada por David y DJ Tony.",
+ more:["Sábado 31 de octubre, desde las 20:00 h","Castañas, sidra y parrilla","Romería con David y DJ Tony"]},
+{id:"amag-llamigu", t:"Amagüestu y concurso de postres", l:"Llamigu", c:"fiesta", d:[31], h:"Desde las 17:00 h · La Escuela", img:"amaguestu_llamigu_1.jpg?itok=UaOh_TlM",
+ x:"Amagüestu en la Escuela de Llamigu con concurso de postres cuyo ingrediente principal es la calabaza (premio para los 4 primeros), juegos tradicionales, bingo y pincheo para todos los asistentes.",
+ more:["5 € por persona: incluye vaso de sidra y cucurucho de castañas","Concurso de postres de calabaza con 4 premios","Juegos tradicionales y bingo"]},
 
-{start:"2026-07-31", end:"2026-08-01", place:"Lledías", title:"X Folixa de Lledías", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/x_folixa_lledias.jpg?itok=QDIjTIJ0",
- desc:`Viernes noche y sábado todo el día: cocina tradicional, mercáu de artesanos, taller de escanciado, chigre asturiano, música en directo.
-Sábado por la tarde: bailes tradicionales y taller de panderetas.
-Actuaciones: Bandina Los Muiles (banda tradicional asturiana), L'ésperteyu (agrupación de etnografía y folklore), La Tamarga y La Xurbial (grupos folclóricos asturianos).`},
+/* --- Tradición y ferias --- */
+{id:"visita-nueva-3", t:"Visita teatralizada a la Nueva Indiana", l:"Nueva de Llanes", c:"tradicion", d:[3], h:"12:00 h · Inscripción previa", img:"visita_teatralizada_3_oct_nueva.jpg?itok=EnEi7SJg",
+ x:"De la mano de Mónica Balmori, un recorrido gratuito por el patrimonio arquitectónico indiano de Nueva de Llanes, con paradas teatrales a cargo de Ana Morán y el músico David Varela para sumergirse en la época en la que tantos nuevenses hicieron «las américas».",
+ more:["Actividad gratuita con inscripción previa imprescindible","Inscripciones: 985 410 106 · culturanueva@ayuntamientodellanes.com"]},
+{id:"panuelu", t:"Taller de colocación de pañuelu", l:"Nueva de Llanes", c:"tradicion", d:[10], h:"11:00 y 16:00 h", img:"foto_traje_aldeana_48.jpg?itok=b2GZKgRi",
+ x:"Aprende a colocar el pañuelo del traje de aldeana. En Llanes la forma de colocarlo se llama «repicar», aunque hoy la frase más usada es «poner el pañuelu». No se suele colocar por una misma: debe hacerlo otra persona.",
+ more:["Dos sesiones: 11:00 y 16:00 h","Casa Cultura del Valle de San Jorge (Nueva)","Inscripción previa imprescindible"]},
+{id:"visita-nueva-10", t:"Visita teatralizada a la Nueva Indiana", l:"Nueva de Llanes", c:"tradicion", d:[10,11], h:"17:00 h · Inscripción previa", img:"visita_teatralizada_10_y_11_nueva.jpg?itok=kYMn1lYg",
+ x:"Segunda cita del mes con la Nueva Indiana: patrimonio indiano con Mónica Balmori y las paradas teatrales de Ana Morán y David Varela en distintos puntos de la localidad.",
+ more:["Sábado 10 y domingo 11, a las 17:00 h","Gratuito con inscripción previa: 985 410 106"]},
+{id:"dias-sidra", t:"Días de Sidra Llanes 2026", l:"Carpa del prau del Sablón · Llanes", c:"tradicion", d:[11], h:"Desde las 11:30 h", img:"dias_de_sidra_0.jpg?itok=_QEuHiB1",
+ x:"Gran jornada sidrera: desfile de gaitas con la BANDINA LOS TRAGOS, degustación de sidra casera y D.O.P. de Asturias (vaso por 5 €), master class de escanciado con la campeona LAURA OVIN, actuación de VICENTE DÍAZ, ¡castañas y sidra del duernu para todos! y bailes tradicionales con LA TAMARGA, LA TAPADERA y la BANDINA LOS TRASGOS.",
+ more:["12:00 h apertura de la carpa y degustación (vaso 5 €)","12:30 h master class de escanciado con Laura Ovín","14:00 h actuación de Vicente Díaz","18:00 h castañas y sidra del duernu · 19:00 h bailes tradicionales"]},
+{id:"feria-pilar", t:"Feria Ganadera del Pilar", l:"Posada de Llanes · Parking del Furacu", c:"tradicion", d:[12], h:"Desde las 11:30 h", img:"feria_del_pilar_posada_3.jpg?itok=9oxkrcOG",
+ x:"Posada celebra su feria ganadera con el XXI Concurso de Destreza Equina (gynkana) a las 12:00 h y, por la tarde, la XXII Carrera de Cintas a Caballo y la carrera de burros.",
+ more:["Inscripciones: antes de las 11:30 (mañana) y 15:30 h (tarde)","Tras la Gasolinera Posada Menéndez","Documentación y seguros de los animales actualizados","Terminantemente prohibido el maltrato animal"]},
+{id:"llantariega", t:"Domingos de Llantariega · Feria agroecológica", l:"Parque de Posada Herrera · Llanes", c:"tradicion", d:[25], h:"10:00 – 15:00 h", img:"llantariega_1.jpg?itok=kFdwZa5b",
+ x:"Mercado de productos locales, ecológicos y con IGP, corral de muestra de razas autóctonas asturianas y reparto de vales de visitas guiadas a la villa (1 vale para 2 personas por cada 30 € de compra). Por la noche, visitas guiadas de temática marinera: el Gremio de Mareantes de San Nicolás, la caza de ballenas y la Lonja de Llanes.",
+ more:["Apertura del mercado: 10:00 h · Cierre: 15:00 h","Corral de razas autóctonas: 10:00 – 14:30 h","Visitas guiadas marineras: 20:00 y 21:30 h"]},
 
-{start:"2026-07-18", end:"2026-08-01", place:"Nueva de Llanes · Casa Cultura del Valle de San Jorge", title:"Exposición: Óleos y Acrílicos de Pepita Villar", cat:"Exposición",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/expo_pepita_villar_nueva.jpg?itok=NsA5ezle",
- desc:`Pepita Villar invita a conocer su obra pictórica en óleo y acrílico, del 18 de julio al 1 de agosto.
-Horario: de martes a viernes de 10:00 a 14:30 h y de 16:30 a 20:00 h; sábados de 10:30 a 13:30 h.`},
+/* --- Música --- */
+{id:"resollu", t:"Conciertu Resollu · Banda Gaites Llacín + Llau", l:"La Talá · Llanes", c:"musica", d:[10], h:"21:30 h · Acceso libre", img:"conciertu_resollu_y_llau.jpg?itok=phH7ZJNv",
+ x:"La Banda Gaites Llacín presenta «Resollu», su tercer trabajo discográfico, donde la música tradicional asturiana se combina con nuevos sonidos. La noche se completa con Llau, trío formado por Dani Álvarez, Lisardo Prieto y Luis Nicolás, nacido de sesiones de improvisación alrededor de la música tradicional.",
+ more:["Concierto al aire libre en La Talá","Seronda en Llanes · Acceso libre"]},
+{id:"nando", t:"Nando Agüeros · Gira XX Aniversario «Viento del Norte»", l:"Plaza Laverde Ruiz · Nueva", c:"musica", d:[11], h:"22:30 h · Macrocarpa", img:"concierto_nando_agueros.jpg?itok=aoRqH3f7",
+ x:"Concierto de NANDO AGÜEROS dentro de la Fiesta de la Virgen de la Blanca. Bar y comida desde las 20:00 h, puestos, churrería, lotería y merchandising, macro bingo a las 00:15 h y DJ SUAREZZ de 00:30 a 04:00 h. ¿Y si llueve? Macrocarpa.",
+ more:["Domingo 11 de octubre, 22:30 h","Descargas de voladores de 19:00 a 22:00 h y traca de luz a las 00:15 h","Macro bingo a las 00:15 h · DJ Suarezz hasta las 04:00 h"]},
+{id:"obdulia", t:"Ganadores del II Premio Obdulia Álvarez «La Busdonga»", l:"Casino de Llanes", c:"musica", d:[16], h:"19:30 h · Entrada gratuita", img:"premios_obdulia.jpg?itok=j-KxqXs2",
+ x:"Alicia Villanueva, Esteban Verdeja y Néstor Díaz, ganadores del II Premiu Obdulia Álvarez «La Busdonga» d'Asturianada, se juntan en Llanes en un concierto dedicado a la canción asturiana: tres de las voces premiadas en la edición de 2025 en directo.",
+ more:["Viernes 16 de octubre, 19:30 h","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
+{id:"dinosaurio", t:"Dinosaurio Meteorito", l:"Casino de Llanes", c:"musica", d:[17], h:"19:30 h · Entrada gratuita", img:"dinosaurio_meteorito.jpg?itok=0qLGoyHi",
+ x:"Edu, Lukas, Mangel, Espi y Anteo presentan su primer EP (2026): indie-rock, guitarras directas y melodías pensadas para sonar con la misma fuerza en disco y en directo. Canciones sobre la vida adulta, las relaciones, la ansiedad y la búsqueda de un lugar propio.",
+ more:["Sábado 17 de octubre, 19:30 h","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
+{id:"milana", t:"Milana Bonita · III Noches del Casino", l:"Casino de Llanes", c:"musica", d:[23], h:"19:30 h · Indie rock", img:"milana_bonita.jpg?itok=ILJmrIDA",
+ x:"Banda gijonesa formada en 2020 que ha desarrollado una identidad propia donde conviven el rock y la música clásica: melodías directas, guitarras atmosféricas y seis músicos sobre el escenario. Ganadores del Gijón Rock 2026 y finalistas de FestiAMAS, presentaron su primer álbum homónimo en 2025.",
+ more:["Viernes 23 de octubre, 19:30 h","Entradas online gratuitas con reserva: casaculturallanes.eventbrite.com"]},
+{id:"nietas", t:"Las Nietas del Charli · III Noches del Casino", l:"Casino de Llanes", c:"musica", d:[24], h:"19:30 h · Folk progresivo", img:"las_nietas_del_charli.jpg?itok=9-SSOr8h",
+ x:"Las hermanas Raquel y María Rubio presentan «Un Sol Dentro», su nuevo álbum: nueve canciones como un viaje interior dentro del folk alternativo en castellano, grabado y producido por Campi Campón (Natalia Lafourcade, Jorge Drexler, Vetusta Morla).",
+ more:["Sábado 24 de octubre, 19:30 h","Singles previos: «Rabia», «Distancia» y «Pájaro de Plata»","Entradas gratuitas con reserva: casaculturallanes.eventbrite.com"]},
 
-{start:"2026-08-01", end:"2026-08-01", place:"Celoriu", title:"Fiesta del Bollu", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/fiestas_de_celoriu_8.jpg?itok=dXpnEEyg",
- desc:`El programa completo de fiestas arranca antes: 12 de julio (LA HOGUERA) 09:30 h salida hacia el monte a cortar la hoguera, 18:00 h plantación seguida de gran parrillada (socios gratis), 22:00 h romería y verbena con Grupo Da Silva y DJ Toni. 19 de julio (EL CARMEN) 07:30 h mañanitas, 12:00 h salida del Ramu del Collau, 13:00 h procesión y misa, subasta de los ramos y bailes regionales, 20:00 h bailes regionales, 22:00 h verbena con Paréntesis y DJ Caramelo.
-1 de agosto — EL BOLLU: 18:00-20:00 h reparto del bollu y botella de vinu. 22:00 h gran romería y verbena con Orquesta Nueva Banda y DJ Willy.`},
+/* --- Cine y artes --- */
+{id:"teatro-total", t:"III Festival Teatro Total", l:"Casino de Llanes", c:"cine", d:[3,4], h:"Curso intensivo fin de semana", img:"festival_teatro_total.png?itok=1KLfUeMp",
+ x:"«La búsqueda del personaje»: curso intensivo de Gaspar de La Zaranda dentro del III Festival Teatro Total.",
+ more:["Sábado 3 y domingo 4 de octubre","Casino de Llanes","Información: 646 37 14 72"]},
+{id:"falares-1", t:"II Falares · «Forqué, el oficio de hacer cine»", l:"Casa de Cultura de Llanes", c:"cine", d:[2], h:"19:30 h", img:"falares_viernes_2.jpg?itok=s9Pq2ih5",
+ x:"La Muestra de Cine Documental de Llanes abre su programación con el documental de Gaizka Urresti y Rafael Maluenda, que recupera la figura de José María Forqué y recorre varias décadas de cine español a través de su trayectoria.",
+ more:["Entrada gratuita hasta completar aforo","Reserva: casaculturallanes.eventbrite.com"]},
+{id:"falares-2", t:"II Falares · «MCA. La lucha eterna»", l:"Casa de Cultura de Llanes", c:"cine", d:[3], h:"19:30 h", img:"ii_muestra_de_cine_documental.jpg?itok=72T6jrGS",
+ x:"Documental dirigido por el asturiano Alejandro Nafría que reconstruye, a partir de testimonios de sus protagonistas, la historia del Movimiento Comunista de Asturias: desde la clandestinidad antifranquista hasta su relación con los nuevos movimientos sociales.",
+ more:["Segunda jornada de Falares en Llanes","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
+{id:"air-doll", t:"Cine fórum · «Air Doll»", l:"Casa Cultura del Valle de San Jorge · Nueva", c:"cine", d:[9], h:"19:00 h", img:"cine_9_oct_nueva.jpg?itok=GgdZFL5y",
+ x:"Proyección de «Air Doll» (Hirokazu Koreeda, 2009, 116´): una muñeca hinchable cobra vida y descubre un mundo exterior donde nadie sabe explicarle qué significa «estar viva». Al terminar, coloquio informal con los asistentes.",
+ more:["Viernes 9 de octubre, 19:00 h","Coloquio posterior a la proyección"]},
+{id:"mini-cine", t:"IV Mini Llanes de Cine", l:"Casa de Cultura de Llanes", c:"cine", d:[16,17], h:"Vie 19:00 · Sáb 18:00 y 19:00", img:"mini_llanes_de_cine_16_oct.jpg?itok=SHSTURD8",
+ x:"La muestra de cine infantil y juvenil combina largometrajes internacionales y cortos para los más jóvenes. Viernes: estreno mundial de «Emilie y el secreto de las tormentas» (Caroline Attia, Francia, 2026). Sábado: sesión de cortometrajes —estrenos en Asturias— y «Robot salvaje» de Chris Sanders.",
+ more:["Vie 16, 19:00 h: Emilie y el secreto de las tormentas","Sáb 17, 18:00 h: «El espíritu de la Navidad», «Kronoshock», «La aventura pirata de Casa de Bruno» y «Querida alma»","Sáb 17, 19:00 h: Robot salvaje","Entrada gratuita · casaculturallanes.eventbrite.com"]},
+{id:"genio", t:"Homenaje a Gonzalo Suárez · «El genio tranquilo»", l:"Casa Concejo de Lledías", c:"cine", d:[17], h:"19:30 h · +18", img:"el_genio_tranquilo-451249005-large.jpg?itok=Kef2D2ff",
+ x:"Llanes rinde homenaje a Gonzalo Suárez con la proyección de «El genio tranquilo» (2006, 75´) y coloquio posterior. Rodada en el Oriente de Asturias, la película vuelve sobre el territorio y el universo del director: playas, acantilados, cuevas, los Cubos de la Memoria o el ídolo de Peñatú.",
+ more:["Entrada gratuita · Reserva: casaculturallanes.eventbrite.com","Reparto: Ayanta Barilli, Pepín El Nuestru, Aitana Sánchez-Gijón…","Dedicada al actor Luis Ciges"]},
+{id:"extrano", t:"Cine Club · «El extraño» (Goksung)", l:"Casa de Cultura de Llanes", c:"cine", d:[21], h:"19:00 h · 156 min", img:"el_extrano.jpg?itok=_RsEu7ur",
+ x:"Uno de los títulos más reconocidos del thriller y el terror surcoreano de la última década (Na Hong-jin, 2016): en una pequeña localidad rural se suceden muertes violentas mientras se extiende una extraña enfermedad. Investigación policial, superstición y relato sobrenatural.",
+ more:["Miércoles 21 de octubre, 19:00 h","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
+{id:"cara-b", t:"Cara A y Cara B · Llanes en Danza", l:"Patio de la Casa de Cultura (si llueve: EMMLLA)", c:"cine", d:[22], h:"19:30 h", img:"cara_a_y_cara_b.jpg?itok=BgjTKjZ_",
+ x:"Obra de Adrián Gómez ganadora del Primer Premio de Coreografía en el XXXIV Certamen de Coreografía de Danza Española y Flamenco de Madrid. Interpretada por Adrián Gómez y Lucía Fernández, combina danza española y contemporánea para abordar la ELA, la memoria, la pérdida y los cuidados. Encuentro con el público tras la función.",
+ more:["Jueves 22 de octubre, 19:30 h","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
 
-{start:"2026-08-01", end:"2026-08-01", place:"Los Carriles", title:"XXIX Subida al Picu Benzúa", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/benzua1.jpg?itok=L6nU5JTP",
- desc:`18:00 h. Carrera de montaña que comienza y termina en la Iglesia de San Julián de Los Carriles. Recorrido de casi 7 km: primero unos 2 km de asfalto y después 1,5 km de terreno montañoso con zonas técnicas hasta la cima del Picu Benzúa (723 m). Descenso por el mismo camino hasta meta.
-Inscripciones: inscripciones.empa-t.com — «xxix-subida-al-picu…».`},
+/* --- Letras y charlas --- */
+{id:"libro-porrua", t:"Presentación · «Como si mi yo fuese yo»", l:"Centro Cultural Llacín · Porrúa", c:"letras", d:[2], h:"19:30 h", img:"presentacion_libro_porrua_0.jpg?itok=1WtwFun6",
+ x:"Presentación del libro de Arsenio Manuel González, con ilustraciones de Eduardo Carrero. Presenta el acto el profesor de filosofía Gonzalo Barrena.",
+ more:["Viernes 2 de octubre, 19:30 h","Entrada libre"]},
+{id:"espeleo", t:"Charlas de espeleología en el valle de Caldueñu", l:"Escuelas de Cortines", c:"letras", d:[3], h:"17:00 h", img:"charla_espeleo_3_octubre_cortines.jpg?itok=gdWelwH_",
+ x:"Presentación «Torcas y cuevas de la Peñe Villa y Llabres» a cargo de Pablo Solares Villar, y charla «50 años de exploraciones espeleológicas en el valle de Caldueñu» con Carla Gutiérrez Meré y Pablo Gutiérrez.",
+ more:["Entrada libre hasta completar aforo"]},
+{id:"palestina", t:"Conferencia · «Palestina: la existencia negada»", l:"Casa de Cultura de Llanes", c:"letras", d:[8], h:"19:00 h", img:"conferencia_palestina_0.jpg?itok=iZhxevve",
+ x:"Teresa Aranguren Amézola, escritora y periodista especializada en Oriente Próximo y los Balcanes, presenta su libro (Ediciones del Oriente y del Mediterráneo, 2025): un recorrido desde el nacimiento del movimiento sionista hasta el presente, pasando por la Declaración Balfour y la Nakba.",
+ more:["Jueves 8 de octubre, 19:00 h","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
+{id:"enantes", t:"Seronda en Llanes · «Enantes que tengas sede»", l:"Casa de Cultura de Llanes", c:"letras", d:[9], h:"19:00 h", img:"cultura-llanes_2026-10-09_enantes-que-tengas-sede_page-0001.jpg?itok=bB1UbnyW",
+ x:"Sidra y poesía con Sofía Castañón y Miguel Llano dentro del ciclo Seronda en Llanes.",
+ more:["Viernes 9 de octubre, 19:00 h","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com"]},
+{id:"concheso", t:"Alcuentru con Javier Martínez Concheso", l:"Casa de Cultura de Llanes (¡cambio de sede!)", c:"letras", d:[17], h:"19:00 h", img:"premio_florina_cambio_de_sede.jpg?itok=mZRz_hkp",
+ x:"Presentación de «L'home de choque», traducción al asturianu de la novela de Joseph Peyré (1936) publicada por Ediciones Trabe. El trabajo recibió el Premiu Florina Alías 2025 a la mejor traducción al asturianu: la Revolución d'Ochobre de 1934 vista por un escritor francés.",
+ more:["La presentación será en la Casa de Cultura, no en la biblioteca","Entrada gratuita · Reserva: casaculturallanes.eventbrite.com","Concheso ya ganó el Florina Alías en 2023 por «Cándidu, o l'optimismu» de Voltaire"]},
+{id:"caravana", t:"Caravana de Poetas", l:"Casino de Llanes", c:"letras", d:[27,28,29,30,31], h:"Consultar programa", img:"caravana_de_poetas.jpg?itok=qeYAthp1",
+ x:"Proyecto itinerante del Colectivo Masquepalabras con la Plataforma BajoTeja: talleres, creación literaria, encuentros y recitales. Talleres «La Primera Vez» con Alicia Merino y Alicia Pilarte (27–29), muestra abierta al público (viernes 30), «El poema que encadena» con Ainhoa Janices (sábado 31) y recital con A. J. Ponce y Aura Jiménez + micro abierto.",
+ more:["Talleres: 27, 28 y 29 · 10:30–13:30 h · Inscripción: 646 371 472","Viernes 30, 19:00 h: muestra abierta de La Primera Vez","Sábado 31, 12:00 h: taller con Ainhoa Janices · caravanadepoetas@gmail.com","Reserva gratuita para muestra y recital: casaculturallanes.eventbrite.com"]},
+{id:"verso", t:"Recital poético musical · «Llanes en verso»", l:"Casa de Cultura de Llanes", c:"letras", d:[29], h:"19:00 h", img:"ae.jpg?itok=KbQcs7A0",
+ x:"Proyecto literario audiovisual con poetas de la Asociación de Escritores y Escritoras de Asturias y música del Dúu Mestura.",
+ more:["Jueves 29 de octubre, 19:00 h","Entrada gratuita · casaculturallanes.eventbrite.com"]},
 
-{start:"2026-08-01", end:"2026-08-01", place:"Llacín · Porrúa", title:"XXXIII Muestra de Tonada Asturiana", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/muestra_tonada_porrua.jpg?itok=ZdIuQ7tx",
- desc:`20:00 h en Llacín (Porrúa). En caso de lluvia se traslada al Centro Cultural Llacín.
-Actuaciones: Celia Noriega, Claudia Abad María, Luisa Martínez, Celestino Rozada. Gaitero: Fran Álvarez.`},
+/* --- Infantil y juvenil --- */
+{id:"espacio-joven", t:"Espacio Joven Llanes", l:"Paseo de Las Marismas · Llanes", c:"infantil", perma:true, r:[1,31,[0,5,6]], h:"Vie-sáb 19:00–23:00 · Dom 19:00–21:00", img:"ej_cartel_nuevo.jpg?itok=PYG8Ha0j",
+ x:"Programa municipal de ocio alternativo para jóvenes de 12 a 18 años: ping-pong, futbolín, billar, consolas, juegos de mesa, diana y talleres cada fin de semana (manualidades, cenas saludables, cine, juegos cooperativos…). Acceso libre y gratuito, con opción de transporte gratuito para las familias que lo necesiten.",
+ more:["Edificio del antiguo matadero municipal (junto al parque infantil)","Instagram: @espacio_joven_llanes","Oficina Joven Municipal · desde 2009"]},
+{id:"pulseras", t:"Taller · «Pulseras espanta-brujas»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[9], h:"17:30 – 18:30 h · 6 a 10 años", img:"pulseras_espanta_brujas.jpg?itok=YLbNiyLL",
+ x:"Taller gratuito para crear pulseras trenzadas y decorarlas con figuritas en 3D que brillan en la oscuridad.",
+ more:["Reserva gratuita: casaculturallanes.eventbrite.com","Más información: 984 84 31 02"]},
+{id:"hadas", t:"Taller · «Las hadas de la pomarada»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[10], h:"17:30 – 18:30 h · 6 a 10 años", img:"las_hadas_de_la_pomarada.jpg?itok=3TCVs5U8",
+ x:"De Elisabet Martín Teatro: taller gratuito sobre manzanos asturianos y cultura sidrera con marionetas de hadas de la pomarada.",
+ more:["Reserva gratuita: casaculturallanes.eventbrite.com"]},
+{id:"baba", t:"Taller · «Baba de hombre lobo»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[10], h:"18:30 – 19:30 h · 6 a 10 años", img:"baba_de_hombre_lobo.jpg?itok=CL6pZPs6",
+ x:"Taller gratuito para experimentar con un slime blandito y espumoso inspirado en la baba de hombre lobo.",
+ more:["Reserva gratuita: casaculturallanes.eventbrite.com"]},
+{id:"detectives", t:"Taller · «Academia de detectives»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[16], h:"17:30 h · 6 a 10 años", img:"la_curuxa_v16.jpg?itok=YgoblOEP",
+ x:"Con Susana María Sela. Vuelven las actividades del Centro Cultural Infantil con talleres para crear, experimentar, imaginar y acercarse a la cultura asturiana.",
+ more:["Inscripción gratuita: casaculturallanes.eventbrite.com","Más información: 984 84 31 02"]},
+{id:"halloween", t:"Taller · «Atrezo de Halloween: diadema cuchillo»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[23], h:"17:30 – 18:30 h · 6 a 10 años", img:"atrezo_de_halloween.jpg?itok=U8wmwrjb",
+ x:"Crea tu propio atrezzo terrorífico para preparar la noche de Samaín.",
+ more:["Inscripción gratuita: casaculturallanes.eventbrite.com"]},
+{id:"miercoles", t:"Taller · «La mano de Miércoles»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[30], h:"17:30 – 18:30 h · 6 a 10 años", img:"v30.jpg?itok=WKjFwZxW",
+ x:"Manualidad escalofriante inspirada en la Familia Addams para calentar motores antes de Samaín.",
+ more:["Inscripción gratuita: casaculturallanes.eventbrite.com"]},
+{id:"zombi", t:"Taller · «Huesos de zombi»", l:"La Curuxa · Biblioteca de Llanes", c:"infantil", d:[30], h:"18:30 – 19:30 h · 6 a 10 años", img:"v30_0.jpg?itok=D9-mdPxR",
+ x:"Experimenta y crea en la víspera de Samaín con este taller de lo más terrorífico.",
+ more:["Inscripción gratuita: casaculturallanes.eventbrite.com"]},
 
-{start:"2026-08-01", end:"2026-08-01", place:"Los Carriles", title:"Fiesta de San Julián", cat:"Fiesta",
- img:"", desc:`11:45 h salida del Ramu. 12:30 h misa solemne, procesión y subasta del Ramu. 13:30 h Danza Prima y sesión vermut, amenizada por gaita y tambor. 18:00 h XXIX Subida al Picu Benzúa. 20:30 h espicha gratuita, rifa y entrega de premios. 22:30 h verbena.
-*Según la programación del año pasado.`},
+/* --- Deporte --- */
+{id:"tribu", t:"4ª Marcha Solidaria + 2º Vermú «La Tribu»", l:"Frente al Ayuntamiento de Llanes", c:"deporte", d:[18], h:"Desde las 12:00 h", img:"4_carrera_solidaria_la_tribu.png?itok=pdoaDC3K",
+ x:"Día Mundial Contra el Cáncer de Mama: una «marea de muyerinas» para recorrer Llanes en familia, corriendo o paseando, y recaudar fondos para investigación. Después, 2º Vermú Torero-Astur en la Plaza Garelli (12 €, aperitivo incluido, bebida no incluida).",
+ more:["Camisetas a la venta: Peluquería Pelayo y Blanca, Confeti y caseta de El Puente","Organiza: Asociación de afectados/as de Cáncer de Mama y/o Ginecológico de Llanes","Vermú desde las 14:00 h en Plaza Garelli"]},
+{id:"enduro", t:"XI Enduro «Villa de Llanes»", l:"Posada de Llanes", c:"deporte", d:[18], h:"Salida 9:00 h · Trofeos 15:00 h", img:"xi_enduro.png?itok=bZUAMkmx",
+ x:"Organizado por el Moto Club Llanes con el apoyo de la Federación de Motociclismo del Principado de Asturias. Salida a las 9:00 h en la plaza de Parres Piñera, final hacia las 14:00 h y entrega de trofeos a las 15:00 h. Un centenar de inscritos.",
+ more:["Inscripciones: www.fmpa.es"]},
+{id:"bolos", t:"XVIII Torneo de Bolos «Concejo de Llanes»", l:"Bolera de La Venta · Puente Nuevo", c:"deporte", d:[17,18,19,20,21,22,23,24,25], h:"Desde las 16:00 h", img:"torneo_de_bolos_concejo_de_llanes.jpg?itok=FuobuMdh",
+ x:"Individual de cuatreada con categorías absoluta y femenina. Tiradas clasificatorias del 17 al 23 de octubre; semifinales y finales el 24 y 25.",
+ more:["1º absoluta: 500 € y trofeo · 2º: 350 € · 3º: 200 €","1º femenina: 200 € y trofeo","Semifinales y finales: 24 y 25 de octubre"]},
 
-{start:"2026-08-02", end:"2026-08-02", place:"Llanes · Plaza de Santa Ana", title:"XXXVII Certamen de Quesos del Oriente", cat:"Gastronomía",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/certamen_quesos_llanes.jpg?itok=Xv5dHBqU",
- desc:`Domingo 2 de agosto, de 10:00 a 21:00 h en la plaza de Santa Ana, casco antiguo de Llanes. Los quesos deben elaborarse en la propia explotación que los comercializa. Participan productores de Cabrales, Peñamellera, Gamonéu y Los Beyos, entre otras variedades de la comarca.
-La muestra se centra en quesos, con un puesto de anchoas artesanas, otro de panes tradicionales y un bar de la Asociación Cultural San Patricio de Pancar. La Cofradía de Pescadores abrirá la capilla de Santa Ana con visitas guiadas mañana y tarde. Música tradicional asturiana en dos sesiones.`},
-
-{start:"2026-08-02", end:"2026-08-02", place:"Villahormes", title:"Fiesta de Santolaya", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/santa_olaya_villahormes.jpg?itok=e692nyB_",
- desc:`11:30 h pasacalles con el Grupo de Gaitas L'Alloru. 12:30 h misa y procesión, bailes regionales. 19:00 h Danza Prima. 20:00 h parrillada (hasta fin de existencias). Gran verbena con las orquestas La Huella y Nebraska. Fin de fiesta con sopas de aju y borona preñada.
-Descargas de pirotecnia: 29, 30 y 31 de julio a las 19:30 h (novena); 1 de agosto (víspera) 12:00 y 19:45 h; 2 de agosto (día grande) 8:00, 12:00, 13:00, 19:00 y 22:00 h.`},
-
-{start:"2026-08-02", end:"2026-08-02", place:"La Pereda · Llanes", title:"Fiesta de Ntra. Sra. de Guadalupe", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/guadalupe_la_pereda.jpg?itok=nPdAq10M",
- desc:`13:00 h Misa Asturiana con gaita cantada por el Coro Parroquial. Procesión, ofrecimiento de ramos, reverencia y bailes regionales, finalizando con la Danza Prima.
-Romería y verbena con Grupo Picos de Europa y Macrodisco Impacto.`},
-
-{start:"2026-07-16", end:"2026-09-16", place:"Posada de Llanes · Centro Cívico", title:"Exposición: Pozos y lavaderos de carbón en Asturias", cat:"Exposición",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/expo_posada_0.jpg?itok=nnvSsTF2",
- desc:`Grabados a la punta seca del artista mierense Inocencio Urbina (ya fallecido), retratando pozos y lavaderos emblemáticos de la cuenca minera asturiana. Del 16 de julio al 16 de septiembre.
-Horario: lunes a jueves de 9:30 a 13:00 h y de 16:00 a 19:30 h; viernes de 9:00 a 14:00 h. Entrada libre y gratuita.`},
-
-{start:"2026-08-03", end:"2026-08-08", place:"Llanes", title:"Campus Itinerante «Escuela de Fútbol de Mareo»", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/campus_itinerante_de_mareo.jpg?itok=u0macNK2",
- desc:`Del 3 al 8 de agosto, en la línea de trabajo de la cantera del Real Sporting de Gijón. Modalidad intensiva de 10:00 a 14:00 h, entrenamientos técnico-tácticos adaptados a cada jugador/a. Equipación oficial, visita a El Molinón y Mareo, torneo 3x3.
-Inscripciones: thefootballdream.com/campus/llanes.`},
-
-{start:"2026-06-29", end:"2026-09-04", place:"Llanes", title:"Campamento de Verano de Ocio Activo", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/campamento_de_ocio_activo.jpg?itok=WjoZziML",
- desc:`Del 29 de junio al 4 de septiembre, de lunes a viernes, de 10:00 a 14:00 h. Para niños y niñas nacidos entre 2014 y 2022. Talleres, deportes variados, actividades al aire libre y gymkanas. No es un campamento de voleibol, sino de ocio activo.
-Precios: quincena 135 €, mes 250 €, verano completo 470 €. Inscripción: forms.gle/f2SRrVKzyjv8ia289 · WhatsApp 684 64 69 70 / 612 246 039 · info.adplayasdellanes@gmail.com. Organiza AD Playas de Llanes.`},
-
-{start:"2026-06-29", end:"2026-08-07", place:"Llanes · Campo de la Encarnación", title:"X Campus de Fútbol C.D. Llanes 2026", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/campus_de_verano_futbol_cd_llanes.jpg?itok=4_hjc05L",
- desc:`Del 29 de junio al 7 de agosto. Horario de actividades de 10:00 a 14:00 h (9:30 h recepción de jugadores). Para niñ@s de 4 a 14 años, entrega de equipación.
-Más información: gdcdllanes@gmail.com · 677 42 99 94 (Iván).`},
-
-{start:"2026-08-05", end:"2026-08-05", place:"Poo", title:"Fiesta de Las Nieves", cat:"Fiesta",
- img:"", desc:`Solemne misa en honor a la Virgen de Las Nieves, seguida de procesión. Comida popular en el prau de Las Nieves amenizada por música.`},
-
-{start:"2026-08-05", end:"2026-08-05", place:"Nueva de Llanes", title:"Fiesta de Ntra. Sra. del Henar", cat:"Fiesta",
- img:"", desc:`12:00 h misa solemne, seguida de procesión y sesión vermut. 18:30 h gran sardinada amenizada por DJ.
-Organiza: Comisión de Fiestas de La Blanca. *Según la programación del año pasado.`},
-
-{start:"2026-08-01", end:"2026-08-31", place:"Posada de Llanes · Plaza Parres Piñera", title:"Mercados del Estío 2026", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/mercados_del_estio_posada.jpg?itok=DXEFD4nY",
- desc:`Todos los miércoles de agosto, de 18:00 a 23:00 h. Artesanía, alimentación, bisutería, ropa, castillo hinchable, pintacaras y música en directo.
-Organiza ASEPO (Asociación de Empresarios de Posada), colabora el Ayuntamiento de Llanes. Expositores: 669 09 25 85.`},
-
-{start:"2026-07-23", end:"2026-09-20", place:"Casino de Llanes", title:"Exposición: Meninas en el Casino", cat:"Exposición",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/expo_meninas_en_el_casino.jpg?itok=z8-p0w9U",
- desc:`«Meninas en el Casino», de Ángeles Iglesias: la artista reinterpreta la figura de la menina con color y personalidad propia, entre tradición y creación contemporánea.
-Del 23 de julio al 20 de septiembre, de miércoles a domingo de 17:00 a 21:00 h. Entrada libre.`},
-
-{start:"2026-08-07", end:"2026-08-08", place:"Cue", title:"Fiesta de San Román", cat:"Fiesta",
- img:"", desc:`Viernes 7 — 21:00 h IV Campeonato de Futbolín «San Román» (modalidad movimiento, Futbolín LNF).
-Sábado 8 — 13:00 h sesión vermouth. 15:00 h paella. Salida a cortar la hoguera de San Román y plantación. 17:00 h hinchable infantil. 20:00 h partido solteros vs. casados, gran parrillada, romería y verbena. Bar de la comisión.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-08", end:"2026-08-08", place:"Golf Municipal de Llanes", title:"XIII Torneo Joyería Cuende", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/cartel_torneo.png?itok=fOe-CMXt",
- desc:`Sábado 8 de agosto de 2026. Parejas Fourball — Stableford.
-Apertura de inscripciones: viernes 31 de julio. Cierre: viernes 7 de agosto a las 10 h.`},
-
-{start:"2026-08-08", end:"2026-08-08", place:"Meré", title:"La Espicha de Meré", cat:"Gastronomía",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/lardinal_3.jpg?itok=dSAeSCV3",
- desc:`13:00 h sesión vermut. 20:00 h comienzo de la espicha. 22:00 h sesión amenizada por DJ.
-Organiza: Asociación L'Ardinal. *Según la programación del año pasado.`},
-
-{start:"2026-08-08", end:"2026-08-09", place:"Porrúa", title:"Fiesta de San Justo y San Pastor", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/san_justo_y_san_pastor_porrua_4.jpg?itok=FwqIuQ8O",
- desc:`Sábado 8 — Víspera: 10:00 h salida de la Bolera a buscar la hoguera. 18:00 h plantación en el prau del Llacín. 23:00 h gran verbena con la orquesta Pasito Show y Disco Móvil Puzzle.
-Domingo 9 — Día Grande: 12:00 h salida de los Ramos. 13:00 h misa solemne, procesión y ofrecimiento de los ramos. 14:00 y 20:00 h bailes regionales, con actuación del mariachi Estampas de México. 23:00 h gran verbena con la orquesta Waykas y Disco Móvil Puzzle.`},
-
-{start:"2026-08-12", end:"2026-08-13", place:"Villahormes", title:"Fiesta de San Antoniu", cat:"Fiesta",
- img:"", desc:`12 de agosto — 18:30 h recibimiento de la Banda Gaites en el prau de la fiesta, recogida y plantación de la hoguera, reparto del bollu y botella de vino, romería y verbena.
-13 de agosto — 12:30 h misa solemne cantada, procesión y ofrecimiento de ramos, sesión vermouth. 21:00 h Danza Prima desde el Barrio de Arriba hasta el prau, gran verbena y chocolatada final.
-*Según la programación del año pasado.`},
-
-{start:"2026-04-02", end:"2026-08-22", place:"Porrúa · Museo del Oriente de Asturias", title:"Exposición: Retrato y Sociedad", cat:"Exposición",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/expo_retrato_y_sociedad_porrua.jpg?itok=DHr2e_-z",
- desc:`Obra fotográfica de Daniel Álvarez Fervienza (Llanes, 1885-1899), comisariada por Antonio Diego Llaca: 44 fotografías recuperadas de placas de vidrio originales, 30 de ellas inéditas. Retratos íntimos, celebraciones y eventos sociales.
-Abierta hasta el 22 de agosto. Acceso gratuito. Horario habitual (18 mar-30 jun y 9 sep-15 dic): martes a domingo 11:00-13:30 h, viernes y sábados también 17:00-19:00 h. Del 1 de julio al 8 de septiembre: martes a domingo 11:00-13:30 h y 17:00-20:00 h (segundo domingo de agosto cerrado por fiesta local).`},
-
-{start:"2026-08-12", end:"2026-08-12", place:"Llanes", title:"Eclipse Solar 2026", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/eclipse1.jpg?itok=mOlC0iMF",
- desc:`Un fenómeno que no ocurre en Llanes desde 1905 y no se repetirá hasta 2180. Inicio del eclipse: 19:30 h aprox. Totalidad: 20:27-20:29 h (1 min 48 s). Fin: 21:21 h.
-Consejos: usa gafas homologadas CE + ISO 12312-2:2015, nunca mires al Sol sin protección, no uses radiografías, CDs ni negativos, busca horizonte oeste despejado. Durante la totalidad puedes quitarte las gafas para ver la corona solar.`},
-
-{start:"2026-08-14", end:"2026-08-15", place:"Poo de Llanes", title:"Fiestas de Nuestra Señora", cat:"Fiesta",
- img:"", desc:`Viernes 14 — 18:00 h juegos infantiles, hinchables gratuitos y fiesta de la espuma. 20:00 h inauguración de las fiestas y venta del bollu preñau con botella de sidra. 22:00 h verbena.
-Sábado 15 — 12:30 h procesión y función religiosa, ofrecimiento y subasta del ramo, bailes regionales. 20:00 h bailes regionales en el prau de la iglesia. 21:00 h Danza Prima. 22:00 h verbena. Gran chocolatada final.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-14", end:"2026-08-16", place:"Llanes", title:"Fiestas de San Roque — Declaradas de Interés Turístico", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/san_roque.jpg?itok=ChOj9Ah-",
- desc:`Viernes 14 — 23:00 h primera gran verbena en el aparcamiento de El Sablón.
-Sábado 15 — 19:30 h ensayo general de la Danza Peregrina y pasacalles con la Banda de Música de San Martín del Rey Aurelio. 20:30 h traslado procesional de San Roque hasta la Basílica, fin del Solemne Novenario. 23:00 h segunda verbena en El Sablón.
-Domingo 16 (Día Grande) — 10:45 h pasacalles. 11:30 h solemne función religiosa en la Basílica, procesión hasta la Plaza de Parres Sobrino con ofrenda de los ramos y Danza Peregrina. Festival folclórico del Oriente de Asturias (Fandango de Pendueles, Danza del Señor San Pedro, Jota del Cuera, Xiringüelu de Naves, Trepeletré del valle de Ardisana, Corri-corri de Cabrales y Pericote de Llanes). 18:00 h encuentro regional de gaiteros y desfile de bandas por la Villa. 21:00 h monumental Danza Prima hasta la Playa de El Sablón, seguida de descarga de fuegos artificiales y acuáticos con el Himno de Asturias. 22:45 h tercera verbena en El Sablón.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-14", end:"2026-08-14", place:"Oviu", title:"La Folixa de Oviu", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/la_folixa_oviu_0.jpg?itok=Bo4HmEno",
- desc:`A partir de las 19:30 h: hinchables para los niños, gran parrillada, romería y verbena.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-14", end:"2026-08-15", place:"Andrín", title:"Fiestas de Nuestra Señora", cat:"Fiesta",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/fit_nuestra_senora_de_andrin._llanes.jpg?itok=fSr7SIbE",
- desc:`Jueves 6 — novena en la Capilla de Nuestra Señora.
-Viernes 14 — 17:00 h partido solteros contra casados (en El Llosetu). 21:00 h espicha en La Bolera. 22:30 h verbena.
-Sábado 15 (Día de Nuestra Señora) — 12:30 h misa solemne y procesión hasta la capilla con bailes regionales del grupo de Andrín, barra de bar abierta. 19:00 h bailes regionales.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-15", end:"2026-08-16", place:"San Roque del Acebal", title:"Fiestas de San Roque", cat:"Fiesta",
- img:"", desc:`15 de agosto — 18:00 h hoguera. 20:00 h merienda y verbena.
-16 de agosto — 12:00 h salida del ramu. 12:30 h misa y ramu, baile del Pericote. 18:00 h romería, reparto gratuito de chocolate y bizcochos.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-16", end:"2026-08-16", place:"Nueva", title:"XXIII Rastrillo Popular «Brocante»", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/xxiii_rastrillo_brocante_nueva.jpg?itok=Xewy6NMC",
- desc:`De 10:00 a 21:00 h en las inmediaciones de la pista polideportiva de Nueva. Mercadillo solidario de artesanía y segunda mano; los beneficios se destinan al Carnaval de Nueva.
-Organiza: Nueva se mueve.`},
-
-{start:"2026-08-17", end:"2026-08-19", place:"Pendueles", title:"Fiesta de la Sacramental", cat:"Fiesta",
- img:"", desc:`17 de agosto (La Hoguera) — 20:00 h pasacalles con el Grupo de Gaitas Principado. 21:00 h plantación de la hoguera infantil. 22:00 h plantación de la hoguera tradicional y gran verbena.
-18 de agosto (Día Grande) — 11:00 h pasacalles. 12:30 h misa solemne y procesión. 20:00 h subasta del ramo y bailes regionales con el Grupo Folclórico del Valle de Pendueles. 23:00 h verbena.
-19 de agosto (Día Infantil) — 16:00 h carrera de cintas, hinchables y talleres gratuitos para niños. Chocolatada final.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-18", end:"2026-08-18", place:"Vega La Portilla", title:"Fiesta de la Velada", cat:"Fiesta",
- img:"", desc:`23:30 h, en el campo de La Vega de La Portilla: la monumental verbena de La Vega de La Portilla, considerada la más famosa de Asturias.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-21", end:"2026-08-23", place:"Vidiago", title:"Fiesta de la Sacramental", cat:"Fiesta",
- img:"", desc:`Viernes 21 — 21:30 h plantación de la hoguera en la bolera del pueblo, verbena.
-Sábado 22 — 12:00 h salida del ramu. 12:30 h misa solemne, procesión y ofrecimiento del ramu, bailes regionales y sesión vermú. 18:00 h visita al camping de Vidiago. 20:00 h remate del ramu y bailes regionales. 23:00 h verbena. 00:00 h fuegos artificiales.
-Domingo 23 — 17:00 h carrera popular, juegos infantiles y chocolatada.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-21", end:"2026-08-21", place:"Casino de Llanes", title:"Éxitos de Queen, Coldplay, The Beatles y Hans Zimmer a la luz de las velas", cat:"Concierto",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/concierto_velas_y_candelas.png?itok=CU-E_L7u",
- desc:`21 de agosto a las 20:00 h (apertura de puertas 19:40 h). Cuarteto de cuerda rodeado de velas interpretando temas de Queen, Coldplay, The Beatles y bandas sonoras de Hans Zimmer, en el histórico Casino de Llanes (1910).
-Intérpretes: Cuarteto Lírice, José Muñoz. Duración aprox. 60 min. Edad recomendada a partir de 8 años; menores de 16 acompañados de un adulto. Entradas: giglon.com. Contacto: 610 68 60 01 · info@velasycandelas.com.`},
-
-{start:"2026-08-22", end:"2026-08-23", place:"Barro", title:"Fiesta de las Bruxas y San Roque", cat:"Fiesta",
- img:"", desc:`Sábado 22 — 22:30 h quema de «Bruxas», seguida de verbena.
-Domingo 23 — 12:30 h procesión y misa solemne con ofrecimiento del Ramo y bailes regionales. 20:00 h bailes regionales, romería y verbena.`},
-
-{start:"2026-08-22", end:"2026-08-29", place:"Garaña de Pría", title:"Día del Bollu y Fiesta de San Ramón", cat:"Fiesta",
- img:"", desc:`22 de agosto — Día del Bollu: 17:30 h V Mercáu Gastronómico y de Artesanía, parrillada de costillas y criollos, reparto de bollu y vinu a los socios. 22:00 h verbena.
-29 de agosto — San Ramón (Día Grande): 12:00 h salida del Ramu hacia la capilla con pasacalles de los gaiteros de Cuerres. 12:30 h misa solemne, procesión, subasta del ramu y danza prima, sesión vermut. 23:00 h verbena.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-22", end:"2026-08-22", place:"Turanzas", title:"Fiesta de San Joaquín", cat:"Fiesta",
- img:"", desc:`11:30 h pasacalles con Grupo Gaitas. 12:30 h procesión hasta la capilla. 13:00 h misa cantada por Marta Elola, subasta del ramu y bailes regionales. 15:00 h sesión vermú. 17:00-20:00 h hinchables gratuitos. 17:30 h bingo. 20:30 h bailes regionales. 22:00 h verbena y gran chocolatada final.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-22", end:"2026-08-23", place:"Porrúa", title:"El Mercáu de Porrúa", cat:"Cultural",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/mercau_porrua_1.jpg?itok=PpTcNdE2",
- desc:`XXXII edición de una de las grandes citas del calendario festivo del Oriente de Asturias: música, bailes, productos ecológicos y artesanías locales en un escenario de fantasía poblado de seres imaginarios.
-Organiza la Asociación Cultural Llacín, pionera de este tipo de celebraciones en Asturias.`},
-
-{start:"2026-08-24", end:"2026-08-29", place:"Polideportivo Municipal de Llanes", title:"V Campus de Tecnificación The Basket Dream", cat:"Deportivo",
- img:"https://www.llanes.es/sites/llanes/files/styles/agenda_mensual/public/campus_de_tecnificacion_basket.jpg?itok=s5SOD6d9",
- desc:`Del 24 al 29 de agosto, de 10:00 a 14:00 h, en el Polideportivo Municipal «José Andrés Cabrero Junco Chili». Programa intensivo centrado en la mejora individual del jugador, con entrenamientos específicos y atención personalizada.
-Información e inscripciones: thebasketdream.com · 617 135 488.`},
-
-{start:"2026-08-29", end:"2026-08-29", place:"Puertas de Vidiago", title:"Fiesta del Segador", cat:"Fiesta",
- img:"", desc:`13:30 h misa en «el palu», seguida de comida campestre en «Los Bufones de Arenillas». 23:00 h verbena.
-*Según la programación del año pasado.`},
-
-{start:"2026-08-30", end:"2026-08-30", place:"Llanes", title:"Día de El Bollu — Fiestas de La Guía", cat:"Fiesta",
- img:"", desc:`Primeras horas — visita tradicional al pueblo de Cué con banda de gaitas. 12:00 h pasacalles por las calles de Llanes. 13:00 h desfile folclórico y de carrozas desde el colegio Peña Tú, con reparto de sidra. 14:30 h reparto del «bollu preñau» y botella de vino, y el «bollín», con comida campestre amenizada por gaitas. 18:00 h comienzo de la romería; al finalizar la novena, bailes típicos de participación libre. La fiesta continúa por la tarde en el campo de La Guía.
-*Según la programación del año pasado.`},
+/* --- Exposiciones --- */
+{id:"maestros", t:"Maestros de la pintura del s. XX en Asturias", l:"Casa de Cultura · 2ª planta", c:"expo", perma:true, r:[1,31,[2,3,4,5,6]], h:"Mar-sáb 11:00–13:00 / 17:30–20:00", img:"expo_maestros_de_la_pintura.jpg?itok=G9BGu7-4",
+ x:"Muestra dedicada a Javier del Río y Pelayo Ortega, dos nombres fundamentales de la pintura asturiana del siglo XX: paisajes naturales y urbanos, lugares vividos, espacios íntimos y escenas donde la memoria, la emoción y la imaginación se mezclan.",
+ more:["Entrada libre","De martes a sábado"]},
+{id:"indumentaria", t:"«Por la pinta son de Llanes» · Indumentaria tradicional", l:"Casa de Cultura de Llanes", c:"expo", perma:true, r:[1,31,[2,3,4,5,6]], h:"Mar-sáb 11:00–13:00 / 17:30–20:00", img:"por_la_pinta_son_de_llanes__0.jpg?itok=2tp8_wKW",
+ x:"Indumentaria tradicional del Oriente de Asturias: trajes para el ramu, de uso cotidiano, de cristianar y de labor, complementos y joyería, además de material gráfico. Fruto de la colaboración entre la Asociación de Amigos de la Indumentaria Tradicional, la colección Javier Emperador y el Ayuntamiento de Llanes.",
+ more:["La mayoría de las piezas son de finales del s. XIX y comienzos del s. XX"]},
+{id:"retrato", t:"«Retrato y sociedad» · Daniel Á. Fervienza", l:"Museo del Oriente de Asturias · Porrúa", c:"expo", perma:true, r:[1,31,[0,2,3,4,5,6]], h:"Mar-dom desde las 11:00 h · Gratis", img:"expo_retrato_y_sociedad_porrua_1.jpg?itok=BT9KSInM",
+ x:"La exposición más visitada de la historia del museo (más de 5.500 visitantes) se prorroga hasta el 1 de noviembre: 44 fotografías de Daniel Á. Fervienza (Llanes 1885–1899), dos terceras partes inéditas, más una vitrina con libros, agendas y elementos de su laboratorio. Comisario: Antonio Diego Llaca, bisnieto del fotógrafo.",
+ more:["Acceso gratuito · Horarios en museoriente.com","En 2027 llegará una segunda muestra sobre retrato infantil"]},
+{id:"meninas", t:"«Meninas en el Casino» · Ángeles Iglesias", l:"Casino de Llanes", c:"expo", perma:true, r:[1,12,[0,3,4,5,6]], h:"Mié-dom 17:00–21:00 · Hasta el 12 oct", img:"expo_meninas_en_el_casino.jpg?itok=z8-p0w9U",
+ x:"Ángeles Iglesias reinterpreta la figura de la menina con un lenguaje lleno de color y personalidad: una colección que dialoga entre la tradición y la creación contemporánea. Últimos días para visitarla.",
+ more:["Entrada libre","Prorrogada hasta el 12 de octubre"]},
+{id:"life-inaug", t:"Inauguración · «Life Lately»", l:"Casa de Cultura · Planta baja", c:"expo", d:[3], h:"12:30 h · Conexión con México 13:00", img:"expo_life-lately_page-0001.jpg?itok=pk4cLwH_",
+ x:"Inauguración de la exposición de Carleti López Traviesa, comisariada por Ainhoa Janices, con conexión online con el artista desde México a las 13:00 h.",
+ more:["Sábado 3 de octubre, 12:30 h"]},
+{id:"life", t:"Exposición · «Life Lately»", l:"Casa de Cultura · Planta baja", c:"expo", perma:true, r:[3,31,[2,3,4,5,6]], h:"Mar-sáb 11:00–13:00 / 17:30–20:00", img:"expo_life-lately_page-0001_0.jpg?itok=h0RaGx3B",
+ x:"Carleti López Traviesa (Asturias, 1979), artista multidisciplinar entre Ciudad de México y Asturias, utiliza el proceso pictórico como nexo entre la realidad y el mundo digital. La cultura callejera e internet son referencias clave de un trabajo marcado por once años de residencia en México.",
+ more:["Comisariada por Ainhoa Janices","Actualmente realiza un doctorado en artes visuales en la UNAM"]},
+{id:"fierro", t:"Exposición · «Fierro» de Tania Blanco", l:"Casa Cultura del Valle de San Jorge · Nueva", c:"expo", perma:true, r:[17,31,[2,3,4,5,6]], h:"Inauguración sáb 17, 19:00 h", img:"expo_nueva_8.jpg?itok=3P0HtNtW",
+ x:"Escultura, fotografía y pintura que investigan los materiales de la periferia metalúrgica asturiana —El Musel, la ría de Avilés, Arcelor Mittal—: el óxido que se escapa de la industria y tiñe de rojo el paisaje. Cultura en Rede.",
+ more:["Del 17 al 31 de octubre","Mar-vie 10:00–14:30 / 16:30–20:00 · Sáb 10:30–13:30"]}
 ];
 
-/* ============ CONFIG ============ */
-const CAT_COLORS = {
-  "Fiesta":"var(--magenta)", "Deportivo":"var(--cyan)", "Cultural":"var(--violet)",
-  "Exposición":"var(--amber)", "Gastronomía":"#ff7a45", "Concierto":"var(--green)"
-};
-const DAYS = ['DOMINGO','LUNES','MARTES','MIÉRCOLES','JUEVES','VIERNES','SÁBADO'];
-const OLD_LIMIT_DAYS = 2; // ocultar eventos con más de 2 días de antigüedad
+/* días calculados */
+function rango(desde,hasta,dows){const out=[];for(let n=desde;n<=hasta;n++){if(dows.includes(new Date(2026,9,n).getDay()))out.push(n);}return out;}
+EVENTOS.forEach(e=>{ if(!e.d) e.d = rango(e.r[0],e.r[1],e.r[2]); });
 
-function parseISO(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y, m-1, d); }
-function fmtDate(d){
-  const dd=String(d.getDate()).padStart(2,'0'), mm=String(d.getMonth()+1).padStart(2,'0'), yy=d.getFullYear();
-  return `${DAYS[d.getDay()]} ${dd}/${mm}/${yy}`;
+/* =========================================================
+   ESTADO Y UTILIDADES
+========================================================= */
+const HOY = 17;
+const state = {cat:"todo", q:"", dia:HOY};
+const DIAS_N = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+const dow = n => DIAS_N[new Date(2026,9,n).getDay()];
+const $ = s => document.querySelector(s);
+
+function visibles(){
+  return EVENTOS.filter(e=>{
+    const okCat = state.cat==="todo" || e.c===state.cat;
+    const txt = (e.t+" "+e.l+" "+e.x).toLowerCase();
+    const okQ = !state.q || txt.includes(state.q.toLowerCase());
+    return okCat && okQ;
+  });
 }
-function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+function prioridad(e){ return ORDEN.indexOf(e.c); }
+function ordenar(arr){ return arr.slice().sort((a,b)=> (a.perma?1:0)-(b.perma?1:0) || prioridad(a)-prioridad(b) || a.t.localeCompare(b.t)); }
 
-const today = new Date(); today.setHours(0,0,0,0);
-const cutoff = new Date(today); cutoff.setDate(cutoff.getDate()-OLD_LIMIT_DAYS);
-
-const events = SEED
-  .map(e=>({...e, sD:parseISO(e.start), eD:parseISO(e.end)}))
-  .filter(e=> e.eD >= cutoff)
-  .sort((a,b)=> a.sD-b.sD);
-
-/* ============ RENDER ============ */
-const feed = document.getElementById('feed');
-const filtersEl = document.getElementById('filters');
-const counterEl = document.getElementById('counter');
-const progressBar = document.getElementById('progressBar');
-
-function noPhotoSVG(){
-  return `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-    <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10.5" r="1.7"/>
-    <path d="M21 16.5 15.5 12 6 19"/></svg>`;
-}
-
-function cardHTML(e){
-  const isRange = e.start !== e.end;
-  const isToday = today >= e.sD && today <= e.eD;
-  const dateLabel = isRange
-    ? `${fmtDate(e.sD)} → ${fmtDate(e.eD)}`
-    : fmtDate(e.sD);
-  const badgeClass = isRange ? 'date-badge range' : 'date-badge';
-  const color = CAT_COLORS[e.cat] || 'var(--cyan)';
-  const photo = e.img
-    ? `<img src="${e.img}" alt="${e.title}" loading="lazy">`
-    : `<div class="no-photo">${noPhotoSVG()}<span>SIN IMAGEN</span></div>`;
-  return `
-  <section class="card${isToday?' today':''}" data-cat="${e.cat}">
-    <div class="date-row">
-      <span class="${badgeClass}">${dateLabel}</span>
-      ${isToday?'<span class="today-tag">▶ HOY</span>':''}
-    </div>
-    <div class="photo-wrap">
-      ${photo}
-      <span class="cat-tag" style="background:${color}">${e.cat.toUpperCase()}</span>
-    </div>
-    <h2>${e.title}</h2>
-    <div class="place">${e.place}</div>
-    <div class="desc">${e.desc.split('\n').map(p=>`<p>${p.trim()}</p>`).join('')}</div>
-  </section>`;
-}
-
-function renderFeed(list){
-  if(!list.length){
-    feed.innerHTML = `<div id="empty"><b>NO HAY EVENTOS</b><span>No quedan fiestas o eventos activos para este filtro en este momento.</span></div>`;
-    counterEl.textContent = '0 / 0';
-    progressBar.style.height='0%';
-    return;
+/* =========================================================
+   HERO: confeti + stats
+========================================================= */
+(function(){
+  const holder = document.getElementById("confetti");
+  const colores = ["#e11d33","#1f56d6","#ffffff","#8e1230","#7fa3ff"];
+  for(let i=0;i<22;i++){
+    const s=document.createElement("i");
+    s.className="cf";
+    const sz=6+Math.random()*10;
+    s.style.cssText=`left:${Math.random()*96}%;top:${Math.random()*92}%;width:${sz}px;height:${sz}px;background:${colores[i%colores.length]};animation-duration:${3+Math.random()*4}s;animation-delay:${Math.random()*3}s;border-radius:${Math.random()>.5?"50%":"3px"}`;
+    holder.appendChild(s);
   }
-  feed.innerHTML = list.map(cardHTML).join('') +
-    `<div class="swipe-hint" style="position:fixed;">DESLIZA<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>`;
-  updateCounter(list.length);
-}
+  const total=EVENTOS.length;
+  const festivas=EVENTOS.filter(e=>e.c==="fiesta"||e.c==="tradicion").length;
+  const lugares=new Set(EVENTOS.map(e=>e.l.split("·")[0].trim())).size;
+  $("#heroStats").innerHTML=`
+    <div class="stat"><b>${total}</b><span>citas</span></div>
+    <div class="stat"><b>${festivas}</b><span>fiestas y ferias</span></div>
+    <div class="stat"><b>${lugares}</b><span>escenarios</span></div>
+    <div class="stat"><b>31</b><span>días sin pausa</span></div>`;
+})();
 
-function buildFilters(){
-  const cats = ['Todas', ...new Set(events.map(e=>e.cat))];
-  filtersEl.innerHTML = cats.map((c,i)=>`<div class="chip${i===0?' active':''}" data-cat="${c}">${c}</div>`).join('');
-  filtersEl.addEventListener('click', ev=>{
-    const chip = ev.target.closest('.chip'); if(!chip) return;
-    filtersEl.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
-    chip.classList.add('active');
-    const cat = chip.dataset.cat;
-    const list = cat==='Todas' ? events : events.filter(e=>e.cat===cat);
-    renderFeed(list);
+/* =========================================================
+   CHIPS DE FILTRO + LEYENDA
+========================================================= */
+(function(){
+  const cont=$("#chips");
+  let html=`<button class="chip act" data-cat="todo" style="background:var(--azul-noche)">✦ Todo <span class="cnt">${EVENTOS.length}</span></button>`;
+  ORDEN.forEach(c=>{
+    const n=EVENTOS.filter(e=>e.c===c).length;
+    html+=`<button class="chip" data-cat="${c}" data-color="${CATS[c].color}"><span class="dot" style="background:${CATS[c].color}"></span>${CATS[c].icon} ${CATS[c].n} <span class="cnt">${n}</span></button>`;
+  });
+  cont.innerHTML=html;
+  cont.addEventListener("click",ev=>{
+    const b=ev.target.closest(".chip"); if(!b) return;
+    state.cat=b.dataset.cat;
+    document.querySelectorAll(".chip").forEach(x=>{x.classList.remove("act");x.style.background="";});
+    b.classList.add("act");
+    b.style.background = b.dataset.cat==="todo" ? "var(--azul-noche)" : b.dataset.color;
+    renderTodo();
+  });
+  $("#leyenda").innerHTML = ORDEN.map(c=>`<i><b style="background:${CATS[c].color}"></b>${CATS[c].icon}</i>`).join("");
+})();
+
+$("#buscador").addEventListener("input",e=>{state.q=e.target.value.trim();renderTodo();});
+
+/* =========================================================
+   CALENDARIO
+========================================================= */
+function renderCalendario(){
+  const cont=$("#days"); cont.innerHTML="";
+  const primero=new Date(2026,9,1).getDay();
+  const offset=(primero+6)%7;
+  const vis=visibles();
+  const mapCats={}; // día -> set de categorías
+  for(let n=1;n<=31;n++) mapCats[n]=new Set();
+  vis.forEach(e=>e.d.forEach(n=>mapCats[n].add(e.c)));
+
+  // septiembre (relleno)
+  const sepDias=[28,29,30];
+  for(let i=offset-1;i>=0;i--){
+    cont.insertAdjacentHTML("beforeend",`<div class="day oth"><span class="n">${sepDias[sepDias.length-1-i]||""}</span></div>`);
+  }
+  for(let n=1;n<=31;n++){
+    const cats=[...mapCats[n]].sort((a,b)=>ORDEN.indexOf(a)-ORDEN.indexOf(b));
+    const dots=cats.slice(0,5).map(c=>`<i style="background:${CATS[c].color}"></i>`).join("");
+    const cls=["day", n===HOY?"today":"", n===state.dia?"sel":""].join(" ");
+    cont.insertAdjacentHTML("beforeend",
+      `<div class="${cls}" data-d="${n}" role="button" tabindex="0" aria-label="${dow(n)} ${n} de octubre"><span class="n">${n}</span><span class="dots">${dots}</span></div>`);
+  }
+  // relleno final hasta completar semanas
+  const total=offset+31, resto=(7-total%7)%7;
+  for(let i=1;i<=resto;i++) cont.insertAdjacentHTML("beforeend",`<div class="day oth"><span class="n">${i}</span></div>`);
+
+  cont.querySelectorAll(".day:not(.oth)").forEach(el=>{
+    const f=()=>{state.dia=+el.dataset.d;renderCalendario();renderPanel();};
+    el.addEventListener("click",f);
+    el.addEventListener("keydown",e=>{if(e.key==="Enter")f();});
   });
 }
 
-let currentList = events;
-function updateCounter(total){
-  const cards = feed.querySelectorAll('.card');
-  let idx = 1;
-  const scrollTop = feed.scrollTop, h = feed.clientHeight;
-  cards.forEach((c,i)=>{ if(c.offsetTop <= scrollTop + h/2) idx = i+1; });
-  counterEl.textContent = `${idx} / ${total}`;
-  progressBar.style.height = `${(idx/total)*100}%`;
+/* =========================================================
+   PANEL DEL DÍA
+========================================================= */
+function renderPanel(){
+  const n=state.dia;
+  const evs=visibles().filter(e=>e.d.includes(n));
+  const puntuales=ordenar(evs.filter(e=>!e.perma));
+  const perma=ordenar(evs.filter(e=>e.perma));
+  const item=e=>`
+    <button class="mini" data-id="${e.id}">
+      <img src="${IMG+e.img}" alt="" onerror="this.src='${FALLBACK}'">
+      <div><strong>${e.t}</strong><small>${CATS[e.c].icon} ${e.l.split("·")[0]}</small></div>
+    </button>`;
+  let html=`
+    <div class="pd-head">
+      <div class="pd-num">${n}</div>
+      <div class="pd-txt"><b>${dow(n)}</b><span>Octubre 2026 · ${evs.length} ${evs.length===1?"plan":"planes"}</span></div>
+    </div>`;
+  if(!evs.length){
+    html+=`<div class="pd-vacio">Nada por aquí con este filtro…<br>Prueba con otra categoría o con el «Todo» 😉</div>`;
+  }else{
+    if(puntuales.length) html+=`<div class="pd-lbl">🎯 Citas del día</div>`+puntuales.map(item).join("");
+    if(perma.length) html+=`<div class="pd-lbl">🖼️ Abierto ese día</div>`+perma.map(item).join("");
+  }
+  const panel=$("#panel"); panel.innerHTML=html;
+  panel.querySelectorAll(".mini").forEach(b=>b.addEventListener("click",()=>abrir(b.dataset.id)));
 }
-feed.addEventListener('scroll', ()=>{
-  const total = feed.querySelectorAll('.card').length;
-  if(total) updateCounter(total);
-}, {passive:true});
 
-buildFilters();
-renderFeed(events);
+/* =========================================================
+   HOY (17 de octubre)
+========================================================= */
+function renderHoy(){
+  const evs=ordenar(visibles().filter(e=>e.d.includes(HOY)&&!e.perma));
+  const extra=ordenar(visibles().filter(e=>e.d.includes(HOY)&&e.perma)).slice(0,2);
+  const todos=[...evs,...extra].slice(0,8);
+  $("#hoyScroll").innerHTML = todos.length ? todos.map(e=>`
+    <div class="hoy-card reveal" data-id="${e.id}">
+      <img src="${IMG+e.img}" alt="${e.t}" onerror="this.src='${FALLBACK}'">
+      <div class="hc-b">
+        <h4>${e.t}</h4>
+        <small>${CATS[e.c].icon} ${e.l.split("·")[0]} · ${e.h.split("·")[0]}</small>
+      </div>
+    </div>`).join("") : `<div class="pd-vacio" style="color:var(--gris)">Hoy no hay eventos de esta categoría.</div>`;
+  document.querySelectorAll("#hoyScroll .hoy-card").forEach(c=>c.addEventListener("click",()=>abrir(c.dataset.id)));
+}
+
+/* =========================================================
+   AGENDA
+========================================================= */
+function renderAgenda(){
+  const vis=visibles();
+  const porDia={};
+  vis.forEach(e=>{const k=e.d[0];(porDia[k]=porDia[k]||[]).push(e);});
+  const dias=Object.keys(porDia).map(Number).sort((a,b)=>a-b);
+  const cont=$("#lista");
+  if(!dias.length){cont.innerHTML=`<div class="vacio-global">Sin resultados para <b>${state.q??"":state.q}</b> este filtro. 🤔<br>Prueba con otra búsqueda o categoría.</div>`;return;}
+  let html="";
+  dias.forEach(n=>{
+    const evs=ordenar(porDia[n]);
+    html+=`<div class="dia-bloque">
+      <div class="dia-header">
+        <div class="dia-num">${n}</div>
+        <div class="dia-info"><b>${dow(n)}</b><span>Octubre 2026</span></div>
+        <div class="raya"></div>
+      </div>
+      <div class="cards">${evs.map(card).join("")}</div>
+    </div>`;
+  });
+  cont.innerHTML=html;
+  cont.querySelectorAll(".card").forEach(c=>c.addEventListener("click",()=>abrir(c.dataset.id)));
+  observar();
+}
+function card(e){
+  const rango = e.d.length>1 ? `<span class="tag-dias">${e.d[0]}–${e.d[e.d.length-1]} OCT</span>` : `<span class="tag-dias">${e.d[0]} OCT</span>`;
+  return `<article class="card reveal" data-id="${e.id}">
+    <div class="card-img">
+      <img loading="lazy" src="${IMG+e.img}" alt="${e.t}" onerror="this.src='${FALLBACK}'">
+      <span class="tag" style="color:${CATS[e.c].color}">${CATS[e.c].icon} ${CATS[e.c].n}</span>
+      ${rango}
+    </div>
+    <div class="card-body">
+      <h3>${e.t}</h3>
+      <div class="meta"><span>📍 ${e.l}</span><span>🕐 ${e.h}</span></div>
+      <p class="extracto">${e.x}</p>
+      <span class="btn-mas">Ver detalles →</span>
+    </div>
+  </article>`;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+function textoFecha(e){
+  const d=e.d;
+  if(d.length===1) return `${dow(d[0])} ${d[0]} de octubre`;
+  const contig=d.every((v,i)=>i===0||v===d[i-1]+1);
+  if(contig) return `Del ${d[0]} al ${d[d.length-1]} de octubre`;
+  return `Días ${d.join(", ")} de octubre`;
+}
+function abrir(id){
+  const e=EVENTOS.find(x=>x.id===id); if(!e)return;
+  const c=CATS[e.c];
+  $("#mImg").src=IMG+e.img; $("#mImg").alt=e.t;
+  $("#mCat").textContent=`${c.icon} ${c.n}`;
+  $("#mCat").style.color=c.color; $("#mCat").style.borderColor=c.color;
+  $("#mTitulo").textContent=e.t;
+  $("#mLugar").textContent="📍 "+e.l;
+  $("#mMeta").innerHTML=`<span>📅 ${textoFecha(e)}</span><span>🕐 ${e.h}</span>`;
+  $("#mDesc").textContent=e.x;
+  $("#mMas").innerHTML=e.more.map(m=>`<li>${m}</li>`).join("");
+  $("#modal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function cerrar(){$("#modal").classList.remove("open");document.body.style.overflow="";}
+$("#mCerrar").addEventListener("click",cerrar);
+$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")cerrar();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrar();});
+
+/* =========================================================
+   REVEAL + BOTÓN ARRIBA + RENDER GENERAL
+========================================================= */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}}),{threshold:.08});
+function observar(){document.querySelectorAll(".reveal:not(.in)").forEach(el=>io.observe(el));}
+
+function renderTodo(){renderCalendario();renderPanel();renderHoy();renderAgenda();}
+renderTodo();
+
+window.addEventListener("scroll",()=>{ $("#arriba").classList.toggle("vis",window.scrollY>600); });
+$("#arriba").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
 </script>
 </body>
 </html>
